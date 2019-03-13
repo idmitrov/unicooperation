@@ -19,8 +19,8 @@ export default (store) => (next) => (action) => {
             action.api.endpoint += `?${action.api.query}`;
         }
 
-        if (state.user.account.isLoggedin) {
-            options.headers['Authorization'] = `Bearer ${state.user.account.token}`;
+        if (state.account.authenticated) {
+            options.headers['Authorization'] = `Bearer ${state.account.token}`;
         }
 
         return new Promise((resolve, reject) => {
