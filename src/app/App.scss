@@ -1,0 +1,19 @@
+header {
+    background: #fff;
+    padding: 16px;
+    position: sticky;
+    top: 0;
+
+    [class*="col"] {
+        position: static;
+    }
+}
+
+.logo {
+    max-width: 64px;
+    position: absolute;
+    left: 50%;
+    top: 16px;
+    transform: translateX(-50%);
+    white-space: nowrap;
+}
