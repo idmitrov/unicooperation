@@ -11,7 +11,7 @@ class Main extends Component {
             <Provider store={store}>
                 <Router history={history}>
                     <Fragment>
-                        <header>
+                        <header className="container">
                             Unicooperation
                         </header>
 
