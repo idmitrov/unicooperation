@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { Provider } from 'react-redux';
-import { Router } from 'react-router-dom';
 
+import Router, { Routes } from '../shared/router';
 import store from '../shared/store';
 import history from '../shared/history';
 
@@ -16,7 +16,7 @@ class Main extends Component {
                         </header>
 
                         <main>
-                            {this.props.children}
+                            <Routes />
                         </main>
                     </Fragment>
                 </Router>
