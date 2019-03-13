@@ -3,7 +3,7 @@ import { Router } from 'react-router-dom';
 
 import history from '../shared/history';
 
-class App extends Component {
+class Main extends Component {
     render() {
         return (
             <Router history={history}>
@@ -21,4 +21,4 @@ class App extends Component {
     }
 }
 
-export default App;
+export default Main;
