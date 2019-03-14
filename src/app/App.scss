@@ -7,6 +7,12 @@ header {
     [class*="col"] {
         position: static;
     }
+
+    ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+    }
 }
 
 .logo {
@@ -26,9 +32,25 @@ header {
     outline: none;
     cursor: pointer;
     font-size: 0;
-    color: #000;
+    color: #333;
+    transition: all .5s 0s;
 
     &.header-button-primary {
         background-color: #eee;
+    }
+
+    &:hover {
+        color: #000;
+        transition: all .5s 0s;
+    }
+}
+
+#drawer {
+    position: fixed;
+    top: 64px;
+    right: -100%;
+
+    @media screen and (min-width: 767px) {
+        position: static;
     }
 }
