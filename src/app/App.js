@@ -13,6 +13,8 @@ import history from '../utils/history';
 import './App.scss';
 import logo from './Logo.svg';
 
+import { authenticateAccount, setAccount } from '../account/Account.actions';
+
 class App extends Component {
     render() {
         const { authenticated } = this.props;
@@ -85,8 +87,11 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        login() {
-
+        login(email, password) {
+            return dispatch(authenticateAccount(email, password))
+                .then((data) => {
+                    return dispatch(setAccount(data))
+                });
         },
         register() {
 

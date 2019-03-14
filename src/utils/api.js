@@ -3,6 +3,7 @@ import appConfig from '../app/App.config';
 export default (store) => (next) => (action) => {
     if (action.api) {
         const state = store.getState();
+
         let options = {
             method: action.api.method,
             headers: {
@@ -11,7 +12,7 @@ export default (store) => (next) => (action) => {
             }
         };
 
-        if ((options.method.test(/^POST$|^PUT$|^PATCH$/)) && action.payload) {
+        if (/^POST$|^PUT$|^PATCH$/.test(options.method) && action.payload) {
             options.body = JSON.stringify(action.payload);
         }
 
@@ -33,12 +34,8 @@ export default (store) => (next) => (action) => {
                     return response.text();
                 })
                 .then((response) => {
-                    if (response.errors.length) {
-                        response.errors.forEach((error) => {
-                            console.error(error);
-                        });
-
-                        reject(response.errors);
+                    if (response.error) {
+                        throw response;
                     } else {
                         if (action.api.successMessage) {
                             console.log(action.api.successMessage);
@@ -48,11 +45,9 @@ export default (store) => (next) => (action) => {
                     }
                 })
                 .catch((response) => {
-                    console.error('Error', 'Something went wrong');
+                    const error = response.error || 'Something went wrong';
 
-                    if (appConfig.NODE_ENV !== 'production') {
-                        console.error(response);
-                    }
+                    reject(error);
                 })
         });
     }
