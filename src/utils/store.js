@@ -8,7 +8,7 @@ import accountReducer from '../account/Account.reducer';
 import appReducer from '../app/App.reducer';
 import feedReducer from '../feed/Feed.reducer';
 
-import api from '../shared/api';
+import api from './api';
 
 const store = createStore(
     combineReducers({

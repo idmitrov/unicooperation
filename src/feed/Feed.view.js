@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { connect } from '../shared/store';
+import { connect } from '../utils/store';
 
 class Feed extends Component {
     render() {

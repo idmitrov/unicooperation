@@ -7,12 +7,11 @@ import Magnify from 'mdi-react/MagnifyIcon';
 import Power from 'mdi-react/PowerIcon';
 import Menu from 'mdi-react/MenuIcon';
 
-import Router, { Routes } from '../shared/router';
-import history from '../shared/history';
+import Router, { Routes, Link } from '../utils/router';
+import history from '../utils/history';
 
 import './App.scss';
 import logo from './Logo.svg';
-import { Link } from '../shared/router';
 
 class App extends Component {
     render() {
