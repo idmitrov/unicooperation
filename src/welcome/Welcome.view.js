@@ -1,6 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import {
+    Grid,
+    TextField,
+    Button
+} from '@material-ui/core';
+
 import { authenticateAccount, setAccount } from '../account/Account.actions';
 
 class Welcome extends Component {
@@ -34,25 +40,33 @@ class Welcome extends Component {
 
                     login(this.state.email, this.state.password);
                 }}>
-                    <input
-                        type="email"
-                        name="email"
-                        value={this.state.email}
-                        placeholder="Email"
-                        required
-                        onChange={this.handleAccountInputChange}
-                    />
+                    <Grid container>
+                        <Grid item>
+                            <TextField
+                                type="email"
+                                name="email"
+                                value={this.state.email}
+                                label="Email"
+                                required
+                                onChange={this.handleAccountInputChange}
+                            />
+                        </Grid>
 
-                    <input
-                        type="password"
-                        name="password"
-                        value={this.state.password}
-                        placeholder="Password"
-                        required
-                        onChange={this.handleAccountInputChange}
-                    />
+                        <Grid item>
+                            <TextField
+                                type="password"
+                                name="password"
+                                value={this.state.password}
+                                label="Password"
+                                required
+                                onChange={this.handleAccountInputChange}
+                            />
+                        </Grid>
 
-                    <button type="submit">Login</button>
+                        <Grid item>
+                            <Button type="submit" variant="contained" color="primary">Login</Button>
+                        </Grid>
+                    </Grid>
                 </form>
             </div>
         );
