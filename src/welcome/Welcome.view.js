@@ -4,14 +4,56 @@ import { connect } from 'react-redux';
 import { authenticateAccount, setAccount } from '../account/Account.actions';
 
 class Welcome extends Component {
+    constructor() {
+        super();
+
+        this.state = {
+            email: '',
+            password: ''
+        }
+
+        this.handleAccountInputChange = this.handleAccountInputChange.bind(this);
+    }
+
+    handleAccountInputChange(e) {
+        const { name, value } = e.target;
+
+        this.setState({
+            ...this.satte,
+            [name]: value
+        });
+    }
+
     render() {
         const { login } = this.props;
 
         return (
             <div>
-                WELCOME
+                <form onSubmit={(e) => {
+                    e.preventDefault();
 
-                <button onClick={() => login('admin@unicooperation.com', 'AdmiN1')}>Login</button>
+                    login(this.state.email, this.state.password);
+                }}>
+                    <input
+                        type="email"
+                        name="email"
+                        value={this.state.email}
+                        placeholder="Email"
+                        required
+                        onChange={this.handleAccountInputChange}
+                    />
+
+                    <input
+                        type="password"
+                        name="password"
+                        value={this.state.password}
+                        placeholder="Password"
+                        required
+                        onChange={this.handleAccountInputChange}
+                    />
+
+                    <button type="submit">Login</button>
+                </form>
             </div>
         );
     }
