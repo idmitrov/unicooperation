@@ -17,6 +17,8 @@ export const authenticateAccount = (email, password) => (dispatch) => {
 }
 
 export const setAccount = (account) => (dispatch) => {
+    localStorage.setItem('uniaccount', JSON.stringify(account));
+
     return dispatch({
         type: accountActionTypes.setAccount,
         payload: account

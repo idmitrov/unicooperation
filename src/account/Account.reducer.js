@@ -1,9 +1,11 @@
 import { accountActionTypes } from './Account.actions';
 
+const __cachedAccount = JSON.parse(localStorage.getItem('uniaccount'));
+
 const accountDefaults = {
-    authenticated: false,
-    token: null,
-    email: null
+    authenticated: __cachedAccount !== null,
+    token: __cachedAccount ? __cachedAccount.token : null,
+    email: __cachedAccount ? __cachedAccount.email : null
 };
 
 export default (state = accountDefaults, action) => {
