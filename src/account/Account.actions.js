@@ -7,10 +7,10 @@ export const accountActionTypes = {
     unsetAccount: 'ACCOUNT_UNSET'
 };
 
-export const createAccount = (email, password, accountType) => (dispatch) => {
+export const createAccount = (email, password, name, type) => (dispatch) => {
     return dispatch({
         type: accountActionTypes.createAccount,
-        payload: { email, password, accountType },
+        payload: { email, name, password, type },
         api: {
             endpoint: accountEndpoints.create.endpoint,
             method: accountEndpoints.create.method

@@ -25,7 +25,8 @@ class Welcome extends Component {
             email: '',
             password: '',
             mode: 'login',
-            accountType: 'university'
+            type: 'University',
+            name: ''
         }
 
         this.handleAccountInputChange = this.handleAccountInputChange.bind(this);
@@ -65,7 +66,7 @@ class Welcome extends Component {
                 </AppBar>
 
                 <Grid container justify="center">
-                    <Grid item sm={4}>
+                    <Grid item sm={8} md={4}>
                         {
                             this.state.mode === 'login' ? (
                                 <form onSubmit={(e) => {
@@ -107,7 +108,7 @@ class Welcome extends Component {
                                 <form onSubmit={(e) => {
                                     e.preventDefault();
 
-                                    register(this.state.email, this.state.password, this.state.accountType);
+                                    register(this.state.email, this.state.password, this.state.name, this.state.type);
                                 }}>
                                     <Grid container>
                                         <Grid item xs={12}>
@@ -139,24 +140,24 @@ class Welcome extends Component {
                                                 <FormLabel>Account type</FormLabel>
 
                                                 <RadioGroup
-                                                    name="accountType"
-                                                    value={this.state.accountType}
+                                                    name="type"
+                                                    value={this.state.type}
                                                     row
                                                     onChange={this.handleAccountInputChange}>
                                                     <FormControlLabel
-                                                        value="university"
+                                                        value="University"
                                                         control={<Radio color="primary" />}
                                                         label="University"
                                                     />
 
                                                     <FormControlLabel
-                                                        value="company"
+                                                        value="Company"
                                                         control={<Radio color="primary" />}
                                                         label="Company"
                                                     />
 
                                                     <FormControlLabel
-                                                        value="student"
+                                                        value="Student"
                                                         control={<Radio color="primary" />}
                                                         label="Student"
                                                     />
@@ -164,8 +165,25 @@ class Welcome extends Component {
                                             </FormControl>
                                         </Grid>
 
+                                        <Grid item>
+                                             <TextField
+                                                type="text"
+                                                name='name'
+                                                value={this.state.name}
+                                                label={`${this.state.type} name`}
+                                                required
+                                                fullWidth
+                                                onChange={this.handleAccountInputChange}
+                                            />
+                                        </Grid>
+
                                         <Grid item xs={12}>
-                                            <Button type="submit" variant="contained" color="primary">Register</Button>
+                                            <Button
+                                                type="submit"
+                                                variant="contained"
+                                                color="primary">
+                                                Register
+                                            </Button>
                                         </Grid>
                                     </Grid>
                                 </form>
@@ -192,8 +210,8 @@ const mapDispatchToProps = (dispatch) => {
                     return dispatch(setAccount(account));
                 });
         },
-        register(email, password, accountType) {
-            return dispatch(createAccount(email, password, accountType))
+        register(email, password, name, type) {
+            return dispatch(createAccount(email, password, name, type))
                 .then((account) => {
                     return dispatch(authenticateAccount(email, password))
                         .then((account) => {
