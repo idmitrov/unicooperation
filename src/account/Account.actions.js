@@ -1,10 +1,22 @@
 import accountEndpoints from '../account/Account.endpoints';
 
 export const accountActionTypes = {
+    createAccount: 'ACCOUNT_CREATE',
     authenticateAccount: 'ACCOUNT_AUTHENTICATED',
     setAccount: 'ACCOUNT_SET',
     unsetAccount: 'ACCOUNT_UNSET'
 };
+
+export const createAccount = (email, password, accountType) => (dispatch) => {
+    return dispatch({
+        type: accountActionTypes.createAccount,
+        payload: { email, password, accountType },
+        api: {
+            endpoint: accountEndpoints.create.endpoint,
+            method: accountEndpoints.create.method
+        }
+    });
+}
 
 export const authenticateAccount = (email, password) => (dispatch) => {
     return dispatch({

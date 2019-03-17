@@ -12,6 +12,14 @@ import './index.scss';
 import * as serviceWorker from './serviceWorker';
 
 const theme = createMuiTheme({
+    palette: {
+        primary: {
+            main: '#000'
+        },
+        secondary: {
+            main: '#FFF'
+        }
+    },
     typography: {
         useNextVariants: true,
     },
