@@ -15,9 +15,11 @@ header {
     }
 }
 
-.logo {
+#logo {
     max-width: 64px;
     position: absolute;
+    font-size: 64px;
+    color: #000;
     left: 50%;
     top: 32px;
     transform: translateX(-50%);
