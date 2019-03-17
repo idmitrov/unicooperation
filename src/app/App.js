@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import {
+    Tooltip
+} from '@material-ui/core';
+
+import {
     Home,
     Menu,
     Person,
@@ -31,9 +35,11 @@ class App extends Component {
                                     <div className="col">
                                         <div className="row no-gutters justify-content-between">
                                             <div className="col-auto">
-                                                <Link className="header-button" to="/" title="Home">
-                                                    <Home />
-                                                </Link>
+                                                <Tooltip title="Home">
+                                                    <Link className="header-button" to="/">
+                                                        <Home />
+                                                    </Link>
+                                                </Tooltip>
                                             </div>
                                             <div className="col-auto d-md-none">
                                                 <button className="header-button header-button-primary">
@@ -51,22 +57,27 @@ class App extends Component {
                                     <nav id="drawer" className="col-auto">
                                         <ul className="row flex-column flex-md-row no-gutters">
                                             <li className="col-auto">
-                                                <button className="header-button" title="Search">
-                                                    <Search />
-                                                </button>
+                                                <Tooltip title="Search">
+                                                    <button className="header-button">
+                                                        <Search />
+                                                    </button>
+                                                </Tooltip>
                                             </li>
                                             <li className="col-auto">
-                                                <Link className="header-button" to="/user/profile" title="Profile">
-                                                    <Person />
-                                                </Link>
+                                                <Tooltip title="Profile">
+                                                    <Link className="header-button" to="/user/profile">
+                                                        <Person />
+                                                    </Link>
+                                                </Tooltip>
                                             </li>
                                             <li className="col-auto">
-                                                <button
-                                                    className="header-button header-button-primary"
-                                                    title="Logout"
-                                                    onClick={logout}>
-                                                    <PowerSettingsNew />
-                                                </button>
+                                                <Tooltip title="Logout">
+                                                    <button
+                                                        className="header-button header-button-primary"
+                                                        onClick={logout}>
+                                                        <PowerSettingsNew />
+                                                    </button>
+                                                </Tooltip>
                                             </li>
                                         </ul>
                                     </nav>
