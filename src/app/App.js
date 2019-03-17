@@ -9,7 +9,6 @@ import {
 
 import {
     Home,
-    Menu,
     AccountCircle,
     Search,
     School,

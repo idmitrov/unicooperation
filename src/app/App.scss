@@ -29,13 +29,3 @@
         transition: all .5s 0s;
     }
 }
-
-#drawer {
-    position: fixed;
-    top: 64px;
-    right: -100%;
-
-    @media screen and (min-width: 768px) {
-        position: static;
-    }
-}
