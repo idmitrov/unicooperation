@@ -136,6 +136,18 @@ class Welcome extends Component {
                                         </Grid>
 
                                         <Grid item xs={12}>
+                                             <TextField
+                                                type="text"
+                                                name='name'
+                                                value={this.state.name}
+                                                label={`${this.state.type} name`}
+                                                required
+                                                fullWidth
+                                                onChange={this.handleAccountInputChange}
+                                            />
+                                        </Grid>
+
+                                        <Grid item xs={12}>
                                             <FormControl>
                                                 <FormLabel>Account type</FormLabel>
 
@@ -163,18 +175,6 @@ class Welcome extends Component {
                                                     />
                                                 </RadioGroup>
                                             </FormControl>
-                                        </Grid>
-
-                                        <Grid item>
-                                             <TextField
-                                                type="text"
-                                                name='name'
-                                                value={this.state.name}
-                                                label={`${this.state.type} name`}
-                                                required
-                                                fullWidth
-                                                onChange={this.handleAccountInputChange}
-                                            />
                                         </Grid>
 
                                         <Grid item xs={12}>
