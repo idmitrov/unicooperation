@@ -2,7 +2,8 @@ import accountEndpoints from '../account/Account.endpoints';
 
 export const accountActionTypes = {
     authenticateAccount: 'ACCOUNT_AUTHENTICATED',
-    setAccount: 'ACCOUNT_SET'
+    setAccount: 'ACCOUNT_SET',
+    unsetAccount: 'ACCOUNT_UNSET'
 };
 
 export const authenticateAccount = (email, password) => (dispatch) => {
@@ -23,4 +24,12 @@ export const setAccount = (account) => (dispatch) => {
         type: accountActionTypes.setAccount,
         payload: account
     });
+}
+
+export const unsetAccount = () => (dispatch) => {
+    localStorage.removeItem('uniaccount');
+
+    return dispatch({
+        type: accountActionTypes.unsetAccount
+    })
 }

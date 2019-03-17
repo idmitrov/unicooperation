@@ -13,11 +13,11 @@ import history from '../utils/history';
 import './App.scss';
 import logo from './Logo.svg';
 
-import { authenticateAccount, setAccount } from '../account/Account.actions';
+import { unsetAccount } from '../account/Account.actions';
 
 class App extends Component {
     render() {
-        const { authenticated } = this.props;
+        const { authenticated, logout } = this.props;
 
         return (
             <Router history={history}>
@@ -59,7 +59,10 @@ class App extends Component {
                                                 </Link>
                                             </li>
                                             <li className="col-auto">
-                                                <button className="header-button header-button-primary" title="Logout">
+                                                <button
+                                                    className="header-button header-button-primary"
+                                                    title="Logout"
+                                                    onClick={logout}>
                                                     <Power size={32} />
                                                 </button>
                                             </li>
@@ -87,14 +90,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        login(email, password) {
-            return dispatch(authenticateAccount(email, password))
-                .then((data) => {
-                    return dispatch(setAccount(data))
-                });
-        },
-        register() {
-
+        logout() {
+            return dispatch(unsetAccount());
         }
     };
 }
