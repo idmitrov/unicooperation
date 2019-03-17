@@ -8,7 +8,7 @@ import {
 import {
     Home,
     Menu,
-    Person,
+    AccountCircle,
     Search,
     School,
     PowerSettingsNew
@@ -66,7 +66,7 @@ class App extends Component {
                                             <li className="col-auto">
                                                 <Tooltip title="Profile">
                                                     <Link className="header-button" to="/user/profile">
-                                                        <Person />
+                                                        <AccountCircle />
                                                     </Link>
                                                 </Tooltip>
                                             </li>
