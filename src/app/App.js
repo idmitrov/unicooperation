@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import {
-    Tooltip
+    AppBar,
+    Tooltip,
+    Grid
 } from '@material-ui/core';
 
 import {
@@ -30,59 +32,47 @@ class App extends Component {
                 <React.Fragment>
                     {
                         authenticated ? (
-                            <header>
-                                <div className="row align-items-center no-gutters">
-                                    <div className="col">
-                                        <div className="row no-gutters justify-content-between">
-                                            <div className="col-auto">
-                                                <Tooltip title="Home">
-                                                    <Link className="header-button" to="/">
-                                                        <Home />
-                                                    </Link>
-                                                </Tooltip>
-                                            </div>
-                                            <div className="col-auto d-md-none">
-                                                <button className="header-button header-button-primary">
-                                                    <Menu />
-                                                </button>
-                                            </div>
-                                        </div>
+                            <AppBar position="sticky" color="inherit">
+                                <Grid container alignItems="center">
+                                    <Grid item sm={true}>
+                                        <Tooltip title="Home">
+                                            <Link className="header-button" to="/">
+                                                <Home />
+                                            </Link>
+                                        </Tooltip>
+                                    </Grid>
 
-                                        <a href="/" title="Unicooperation">
-                                            <School id="logo" />
-                                        </a>
-                                    </div>
+                                    <a href="/" title="Unicooperation">
+                                        <School id="logo" />
+                                    </a>
 
-                                    {/* NAV */}
-                                    <nav id="drawer" className="col-auto">
-                                        <ul className="row flex-column flex-md-row no-gutters">
-                                            <li className="col-auto">
-                                                <Tooltip title="Search">
-                                                    <button className="header-button">
-                                                        <Search />
-                                                    </button>
-                                                </Tooltip>
-                                            </li>
-                                            <li className="col-auto">
-                                                <Tooltip title="Profile">
-                                                    <Link className="header-button" to="/user/profile">
-                                                        <AccountCircle />
-                                                    </Link>
-                                                </Tooltip>
-                                            </li>
-                                            <li className="col-auto">
-                                                <Tooltip title="Logout">
-                                                    <button
-                                                        className="header-button header-button-primary"
-                                                        onClick={logout}>
-                                                        <PowerSettingsNew />
-                                                    </button>
-                                                </Tooltip>
-                                            </li>
-                                        </ul>
-                                    </nav>
-                                </div>
-                            </header>
+                                    <Grid item xs={true} sm="auto">
+                                        <Tooltip title="Search">
+                                            <button className="header-button">
+                                                <Search />
+                                            </button>
+                                        </Tooltip>
+                                    </Grid>
+
+                                    <Grid item>
+                                        <Tooltip title="Profile">
+                                            <Link className="header-button" to="/user/profile">
+                                                <AccountCircle />
+                                            </Link>
+                                        </Tooltip>
+                                    </Grid>
+
+                                    <Grid item>
+                                        <Tooltip title="Logout">
+                                            <button
+                                                className="header-button header-button-primary"
+                                                onClick={logout}>
+                                                <PowerSettingsNew />
+                                            </button>
+                                        </Tooltip>
+                                    </Grid>
+                                </Grid>
+                            </AppBar>
                         ) : (null)
                     }
 
