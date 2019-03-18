@@ -61,8 +61,8 @@ class Welcome extends Component {
                         variant="fullWidth"
                         value={this.state.mode}
                         onChange={this.handleTabChange}>
-                        <Tab value="login" label={<Trans>welcome.login.label</Trans>} />
-                        <Tab value="register" label={<Trans>welcome.register.label</Trans>} />
+                        <Tab value="login" label={<Trans>account.login.label</Trans>} />
+                        <Tab value="register" label={<Trans>account.register.label</Trans>} />
                     </Tabs>
                 </AppBar>
 
@@ -102,7 +102,7 @@ class Welcome extends Component {
 
                                         <Grid item xs={12}>
                                             <Button type="submit" variant="contained" color="primary">
-                                                <Trans>welcome.login.label</Trans>
+                                                <Trans>account.login.label</Trans>
                                             </Button>
                                         </Grid>
                                     </Grid>
@@ -193,7 +193,7 @@ class Welcome extends Component {
                                                 type="submit"
                                                 variant="contained"
                                                 color="primary">
-                                                <Trans>welcome.register.label</Trans>
+                                                <Trans>account.register.label</Trans>
                                             </Button>
                                         </Grid>
                                     </Grid>

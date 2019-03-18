@@ -15,6 +15,8 @@ import {
     PowerSettingsNew
 } from '@material-ui/icons';
 
+import { Trans } from 'react-i18next';
+
 import Router, { Routes, Link } from '../utils/router';
 import history from '../utils/history';
 
@@ -34,7 +36,7 @@ class App extends Component {
                             <AppBar position="sticky" color="inherit">
                                 <Grid container alignItems="center">
                                     <Grid item sm={true}>
-                                        <Tooltip title="Home">
+                                        <Tooltip title={<Trans>global.home.label</Trans>}>
                                             <Link className="header-button" to="/">
                                                 <Home />
                                             </Link>
@@ -46,7 +48,7 @@ class App extends Component {
                                     </a>
 
                                     <Grid item xs={true} sm="auto">
-                                        <Tooltip title="Search">
+                                        <Tooltip title={<Trans>global.search.label</Trans>}>
                                             <button className="header-button">
                                                 <Search />
                                             </button>
@@ -54,7 +56,7 @@ class App extends Component {
                                     </Grid>
 
                                     <Grid item>
-                                        <Tooltip title="Profile">
+                                        <Tooltip title={<Trans>global.profile.label</Trans>}>
                                             <Link className="header-button" to="/user/profile">
                                                 <AccountCircle />
                                             </Link>
@@ -62,7 +64,7 @@ class App extends Component {
                                     </Grid>
 
                                     <Grid item>
-                                        <Tooltip title="Logout">
+                                        <Tooltip title={<Trans>account.logout.label</Trans>}>
                                             <button
                                                 className="header-button header-button-primary"
                                                 onClick={logout}>
