@@ -15,7 +15,8 @@ import {
     RadioGroup
 } from '@material-ui/core';
 
-import { authenticateAccount, createAccount,setAccount } from '../account/Account.actions';
+import { Trans } from 'react-i18next';
+import { authenticateAccount, createAccount, setAccount } from '../account/Account.actions';
 
 class Welcome extends Component {
     constructor() {
@@ -23,10 +24,10 @@ class Welcome extends Component {
 
         this.state = {
             email: '',
-            password: '',
             mode: 'login',
-            type: 'University',
-            name: ''
+            name: '',
+            password: '',
+            type: 'University'
         }
 
         this.handleAccountInputChange = this.handleAccountInputChange.bind(this);
@@ -60,8 +61,8 @@ class Welcome extends Component {
                         variant="fullWidth"
                         value={this.state.mode}
                         onChange={this.handleTabChange}>
-                        <Tab value="login" label="Login" />
-                        <Tab value="register" label="Register" />
+                        <Tab value="login" label={<Trans>welcome.login.label</Trans>} />
+                        <Tab value="register" label={<Trans>welcome.register.label</Trans>} />
                     </Tabs>
                 </AppBar>
 
@@ -80,7 +81,7 @@ class Welcome extends Component {
                                                 type="email"
                                                 name="email"
                                                 value={this.state.email}
-                                                label="Email"
+                                                label={<Trans>account.email.label</Trans>}
                                                 required
                                                 fullWidth
                                                 onChange={this.handleAccountInputChange}
@@ -92,7 +93,7 @@ class Welcome extends Component {
                                                 type="password"
                                                 name="password"
                                                 value={this.state.password}
-                                                label="Password"
+                                                label={<Trans>account.password.label</Trans>}
                                                 required
                                                 fullWidth
                                                 onChange={this.handleAccountInputChange}
@@ -100,7 +101,9 @@ class Welcome extends Component {
                                         </Grid>
 
                                         <Grid item xs={12}>
-                                            <Button type="submit" variant="contained" color="primary">Login</Button>
+                                            <Button type="submit" variant="contained" color="primary">
+                                                <Trans>welcome.login.label</Trans>
+                                            </Button>
                                         </Grid>
                                     </Grid>
                                 </form>
@@ -116,7 +119,7 @@ class Welcome extends Component {
                                                 type="email"
                                                 name="email"
                                                 value={this.state.email}
-                                                label="Email"
+                                                label={<Trans>account.email.label</Trans>}
                                                 required
                                                 fullWidth
                                                 onChange={this.handleAccountInputChange}
@@ -128,7 +131,7 @@ class Welcome extends Component {
                                                 type="password"
                                                 name="password"
                                                 value={this.state.password}
-                                                label="Password"
+                                                label={<Trans>account.password.label</Trans>}
                                                 required
                                                 fullWidth
                                                 onChange={this.handleAccountInputChange}
@@ -140,7 +143,13 @@ class Welcome extends Component {
                                                 type="text"
                                                 name='name'
                                                 value={this.state.name}
-                                                label={`${this.state.type} name`}
+                                                label={
+                                                    this.state.type === 'Student'
+                                                        ? <Trans>student.name.label</Trans>
+                                                        : this.state.type === 'Company'
+                                                            ? <Trans>company.name.label</Trans>
+                                                            : <Trans>university.name.label</Trans>
+                                                }
                                                 required
                                                 fullWidth
                                                 onChange={this.handleAccountInputChange}
@@ -149,7 +158,9 @@ class Welcome extends Component {
 
                                         <Grid item xs={12}>
                                             <FormControl>
-                                                <FormLabel>Account type</FormLabel>
+                                                <FormLabel>
+                                                    <Trans>account.type.label</Trans>
+                                                </FormLabel>
 
                                                 <RadioGroup
                                                     name="type"
@@ -159,19 +170,19 @@ class Welcome extends Component {
                                                     <FormControlLabel
                                                         value="University"
                                                         control={<Radio color="primary" />}
-                                                        label="University"
+                                                        label={<Trans>university.label</Trans>}
                                                     />
 
                                                     <FormControlLabel
                                                         value="Company"
                                                         control={<Radio color="primary" />}
-                                                        label="Company"
+                                                        label={<Trans>company.label</Trans>}
                                                     />
 
                                                     <FormControlLabel
                                                         value="Student"
                                                         control={<Radio color="primary" />}
-                                                        label="Student"
+                                                        label={<Trans>student.label</Trans>}
                                                     />
                                                 </RadioGroup>
                                             </FormControl>
@@ -182,7 +193,7 @@ class Welcome extends Component {
                                                 type="submit"
                                                 variant="contained"
                                                 color="primary">
-                                                Register
+                                                <Trans>welcome.register.label</Trans>
                                             </Button>
                                         </Grid>
                                     </Grid>

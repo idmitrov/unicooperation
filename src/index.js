@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 
+import './utils/i18n';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
 import store from './utils/store';
