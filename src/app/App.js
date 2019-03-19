@@ -4,12 +4,12 @@ import { connect } from 'react-redux';
 import {
     AppBar,
     Tooltip,
-    Grid
+    Grid,
+    Avatar
 } from '@material-ui/core';
 
 import {
     Home,
-    AccountCircle,
     Search,
     School,
     PowerSettingsNew
@@ -26,13 +26,13 @@ import { unsetAccount } from '../account/Account.actions';
 
 class App extends Component {
     render() {
-        const { authenticated, logout } = this.props;
+        const { account, logout } = this.props;
 
         return (
             <Router history={history}>
                 <React.Fragment>
                     {
-                        authenticated ? (
+                        account.authenticated ? (
                             <AppBar position="sticky" color="inherit">
                                 <Grid container alignItems="center">
                                     <Grid item sm={true}>
@@ -58,7 +58,11 @@ class App extends Component {
                                     <Grid item>
                                         <Tooltip title={<Trans>global.profile.label</Trans>}>
                                             <Link className="header-button" to="/user/profile">
-                                                <AccountCircle />
+                                                <Avatar
+                                                    id="avatar"
+                                                    src={account.avatar || `${process.env.PUBLIC_URL}/avatar-default.png`}
+                                                    alt="User avatar"
+                                                />
                                             </Link>
                                         </Tooltip>
                                     </Grid>
@@ -78,7 +82,7 @@ class App extends Component {
                     }
 
                     <main>
-                        <Routes authenticated={authenticated} />
+                        <Routes authenticated={account.authenticated} />
                     </main>
                 </React.Fragment>
             </Router>
@@ -88,7 +92,7 @@ class App extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        authenticated: state.account.authenticated
+        account: state.account
     };
 }
 

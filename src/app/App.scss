@@ -8,6 +8,11 @@
     transform: translateX(-50%);
     white-space: nowrap;
 }
+#avatar {
+    width: 25px;
+    height: 25px;
+    font-size: 14px;
+}
 
 .header-button {
     display: inline-block;
@@ -19,6 +24,7 @@
     font-size: 0;
     color: #333;
     transition: all .5s 0s;
+    text-decoration: none;
 
     &.header-button-primary {
         background-color: #eee;
