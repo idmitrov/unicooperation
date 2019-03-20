@@ -57,7 +57,7 @@ class App extends Component {
 
                                     <Grid item>
                                         <Tooltip title={<Trans>global.profile.label</Trans>}>
-                                            <Link className="header-button" to="/user/profile">
+                                            <Link className="header-button" to="/profile">
                                                 <Avatar
                                                     id="avatar"
                                                     src={account.avatar || `${process.env.PUBLIC_URL}/avatar-default.png`}

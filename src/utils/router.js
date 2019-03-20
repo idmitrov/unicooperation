@@ -1,8 +1,9 @@
 import React from 'react';
 import { Router, Route, Switch, Link as _Link } from 'react-router-dom';
 
-import Feed from '../feed/Feed.view';
-import Welcome from '../welcome/Welcome.view';
+import FeedView from '../feed/Feed.view';
+import WelcomeView from '../welcome/Welcome.view';
+import ProfileView from '../profile/Profile.view';
 
 export const Link = _Link;
 
@@ -24,8 +25,26 @@ const PrivateRoute = ({ component: Component, fallbackComponent: FallBackCompone
 export const Routes = ({ authenticated }) => {
     return (
         <Switch>
-            <PrivateRoute path="/" component={Feed} fallbackComponent={Welcome} authenticated={authenticated} exact={true} />
-            <Route path="*" render={() => <div>The page was not found</div>} />
+            <PrivateRoute
+                path="/"
+                component={FeedView}
+                fallbackComponent={WelcomeView}
+                authenticated={authenticated}
+                exact={true}
+            />
+
+            <PrivateRoute
+                path="/profile"
+                component={ProfileView}
+                fallbackComponent={WelcomeView}
+                authenticated={authenticated}
+                exact={true}
+            />
+
+            <Route
+                path="*"
+                render={() => <div>The page was not found</div>}
+            />
         </Switch>
     );
 };

@@ -18,7 +18,7 @@ import {
 
 import './Feed.scss';
 
-class Feed extends Component {
+class FeedView extends Component {
     render() {
         const { data } = this.props;
 
@@ -96,4 +96,4 @@ const mapDispatchToProps = () => {
     };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Feed);
+export default connect(mapStateToProps, mapDispatchToProps)(FeedView);
