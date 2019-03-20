@@ -8,7 +8,8 @@ import {
     CardContent,
     CardActions,
     Grid,
-    IconButton
+    IconButton,
+    Tooltip
 } from '@material-ui/core';
 
 import {
@@ -36,14 +37,18 @@ class FeedView extends Component {
                                 position="sticky">
                                 <Grid container justify="space-between" alignItems="center">
                                     <Grid item>
-                                        <IconButton>
-                                            <Message />
-                                        </IconButton>
+                                        <Tooltip title="New post" placement="right-center">
+                                            <IconButton>
+                                                <Message />
+                                            </IconButton>
+                                        </Tooltip>
                                     </Grid>
                                     <Grid item>
-                                        <IconButton>
-                                            <Sort />
-                                        </IconButton>
+                                        <Tooltip title="Sort by" placement="left-center">
+                                            <IconButton>
+                                                <Sort />
+                                            </IconButton>
+                                        </Tooltip>
                                     </Grid>
                                 </Grid>
 
