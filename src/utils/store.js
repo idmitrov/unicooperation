@@ -7,6 +7,7 @@ import thunk from 'redux-thunk';
 import accountReducer from '../account/Account.reducer';
 import appReducer from '../app/App.reducer';
 import feedReducer from '../feed/Feed.reducer';
+import ProfileReducer from '../profile/Profile.reducer';
 
 import api from './api';
 
@@ -14,7 +15,8 @@ const store = createStore(
     combineReducers({
         account: accountReducer,
         app: appReducer,
-        feed: feedReducer
+        feed: feedReducer,
+        profile: ProfileReducer
     }),
     composeWithDevTools(
         applyMiddleware(
