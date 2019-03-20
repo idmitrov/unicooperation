@@ -6,7 +6,8 @@ const accountReset = {
     authenticated: false,
     token: null,
     email: null,
-    avatar: null
+    avatar: null,
+    profileId: null
 };
 
 const accountDefaults = {
@@ -14,6 +15,7 @@ const accountDefaults = {
     token: __cachedAccount ? __cachedAccount.token : accountReset.token,
     email: __cachedAccount ? __cachedAccount.email : accountReset.email,
     avatar: __cachedAccount ? __cachedAccount.avatar : accountReset.avatar,
+    profileId: __cachedAccount ? __cachedAccount.profileId : accountReset.profileId,
 };
 
 export default (state = accountDefaults, action) => {
