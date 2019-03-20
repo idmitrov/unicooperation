@@ -18,7 +18,7 @@ import {
 import { Trans } from 'react-i18next';
 import { authenticateAccount, createAccount, setAccount } from '../account/Account.actions';
 
-class WelcomeView extends Component {
+class AccountView extends Component {
     constructor() {
         super();
 
@@ -233,4 +233,4 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(WelcomeView);
+export default connect(mapStateToProps, mapDispatchToProps)(AccountView);

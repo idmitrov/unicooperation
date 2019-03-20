@@ -2,7 +2,7 @@ import React from 'react';
 import { Router, Route, Switch, Link as _Link } from 'react-router-dom';
 
 import FeedView from '../feed/Feed.view';
-import WelcomeView from '../welcome/Welcome.view';
+import AccountView from '../account/Account.view';
 import ProfileView from '../profile/Profile.view';
 
 export const Link = _Link;
@@ -28,7 +28,7 @@ export const Routes = ({ authenticated }) => {
             <PrivateRoute
                 path="/"
                 component={FeedView}
-                fallbackComponent={WelcomeView}
+                fallbackComponent={AccountView}
                 authenticated={authenticated}
                 exact={true}
             />
@@ -36,7 +36,7 @@ export const Routes = ({ authenticated }) => {
             <PrivateRoute
                 path="/profile"
                 component={ProfileView}
-                fallbackComponent={WelcomeView}
+                fallbackComponent={AccountView}
                 authenticated={authenticated}
                 exact={true}
             />
