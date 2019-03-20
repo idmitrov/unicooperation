@@ -81,17 +81,23 @@ class FeedView extends Component {
                                                     </Grid> */}
 
                                                     <Grid item>
-                                                        <IconButton>
-                                                            <AddComment />
-                                                        </IconButton>
+                                                        <Tooltip title="Add comment" placement="top">
+                                                            <IconButton>
+                                                                <AddComment />
+                                                            </IconButton>
+                                                        </Tooltip>
 
-                                                        <IconButton>
-                                                            <Share />
-                                                        </IconButton>
+                                                        <Tooltip title="Share" placement="top">
+                                                            <IconButton>
+                                                                <Share />
+                                                            </IconButton>
+                                                        </Tooltip>
 
-                                                        <IconButton>
-                                                            <ThumbUp />
-                                                        </IconButton>
+                                                        <Tooltip title="Like" placement="top">
+                                                            <IconButton>
+                                                                <ThumbUp />
+                                                            </IconButton>
+                                                        </Tooltip>
                                                     </Grid>
                                                 </Grid>
                                             </CardActions>
