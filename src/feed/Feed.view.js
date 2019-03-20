@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from '../utils/store';
 
 import {
+    AppBar,
     Card,
     CardHeader,
     CardContent,
@@ -13,7 +14,9 @@ import {
 import {
     AddComment,
     ThumbUp,
-    Share
+    Share,
+    Message,
+    Sort
 } from '@material-ui/icons';
 
 import './Feed.scss';
@@ -25,18 +28,33 @@ class FeedView extends Component {
         return (
             <div className="feed">
                 <Grid container justify="center" alignItems="flex-start">
-                    <Grid item xs={12} md={6} className="feed-bar">
-                        <Grid container justify="space-between">
-                            <Grid item>
-                                Newest
-                            </Grid>
-                        </Grid>
-                    </Grid>
-                </Grid>
-
-                <Grid container justify="center" alignItems="flex-start">
                     <Grid item xs={12} md={6} className="feed-content">
                         <div>
+                            <AppBar
+                                id="feed-bar"
+                                color="secondary"
+                                position="sticky">
+                                <Grid container justify="space-between" alignItems="center">
+                                    <Grid item>
+                                        <IconButton>
+                                            <Message />
+                                        </IconButton>
+                                    </Grid>
+                                    <Grid item>
+                                        <IconButton>
+                                            <Sort />
+                                        </IconButton>
+                                    </Grid>
+                                </Grid>
+
+                                {/* TODO: Input */}
+                                {/* <Grid container>
+                                    <Grid item>
+                                       TEXTAREA
+                                    </Grid>
+                                </Grid> */}
+                            </AppBar>
+
                             {
                                 data.map((item, index) => {
                                     return (

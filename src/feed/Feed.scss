@@ -1,15 +1,16 @@
 .feed {
-    padding: 16px;
-}
-
-.feed-bar {
-    // padding: 16px;
+    position: relative;
+    padding: 0 16px;
 }
 
 .feed-item {
     margin-top: 16px;
+}
 
-    // &:first-of-type {
-    //     margin-top: 0;
-    // }
+#feed-bar {
+    top: 56px;
+    z-index: 100;
+    background-color: #eee;
+    padding: 8px;
+    box-shadow: 0 0 5px #000;
 }
