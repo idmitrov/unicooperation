@@ -1,7 +1,20 @@
+import profileEndpoints from './Profile.endpoints';
+
 export const profileActionTypes = {
-    getProfile: 'PROFILE_GET'
+    fetchProfile: 'PROFILE_FETCH',
+    fetchMyProfile: 'PROFILE_MINE_FETCH',
 };
 
-export const get = () => (dispatch) => {
+export const fetchProfile = (type, id) => (dispatch) => {
     // TODO: METHOD NOT IMPLEMENTED
+}
+
+export const fetchMyProfile = () => (dispatch) => {
+    return dispatch({
+        type: profileActionTypes.fetchMyProfile,
+        api: {
+            endpoint: profileEndpoints.myProfile.endpoint,
+            method: profileEndpoints.myProfile.method
+        }
+    });
 }
