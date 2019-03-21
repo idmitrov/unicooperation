@@ -37,14 +37,14 @@ class FeedView extends Component {
                                 position="sticky">
                                 <Grid container justify="space-between" alignItems="center">
                                     <Grid item>
-                                        <Tooltip title="New post" placement="right-center">
+                                        <Tooltip title="New post" placement="right">
                                             <IconButton>
                                                 <Message />
                                             </IconButton>
                                         </Tooltip>
                                     </Grid>
                                     <Grid item>
-                                        <Tooltip title="Sort by" placement="left-center">
+                                        <Tooltip title="Sort by" placement="left">
                                             <IconButton>
                                                 <Sort />
                                             </IconButton>
