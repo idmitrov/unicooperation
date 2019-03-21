@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { fetchMyProfile } from './Profile.actions';
+import { fetchMyProfile, setMyProfile } from './Profile.actions';
 
 class ProfileView extends Component {
     constructor(props) {
@@ -11,8 +11,13 @@ class ProfileView extends Component {
     }
 
     render() {
+        const { profile } = this.props;
+
         return (
-            <h2>Profile</h2>
+            <div>
+                <h2>Profile</h2>
+                <p>{`Welcome ${profile.name}`}</p>
+            </div>
         );
     }
 }
@@ -28,7 +33,7 @@ const mapDispatchToProps = (dispatch) => {
         fetchMyProfile() {
             return dispatch(fetchMyProfile())
                 .then((profileData) => {
-                    console.log(profileData);
+                    return dispatch(setMyProfile(profileData));
                 });
         }
     };
