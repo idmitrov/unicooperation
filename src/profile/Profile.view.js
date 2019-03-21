@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import {
+    Grid
+} from '@material-ui/core';
+
 import { fetchMyProfile, setMyProfile } from './Profile.actions';
+import './Profile.scss';
 
 class ProfileView extends Component {
     constructor(props) {
@@ -11,20 +16,34 @@ class ProfileView extends Component {
     }
 
     render() {
-        const { profile } = this.props;
+        const { profile, account } = this.props;
 
         return (
-            <div>
-                <h2>Profile</h2>
-                <p>{`Welcome ${profile.name}`}</p>
-            </div>
+            <Grid container justify="center" alignItems="flex-start">
+                <Grid item xs={12} md={6} className="feed-content">
+                    <div className="profile-welcome">
+                        <div className="profile-avatar">
+                            <img
+                                className="profile-avatar-image"
+                                src={account.avatar || `${process.env.PUBLIC_URL}/avatar-default.png`}
+                                alt="User avatar"
+                            />
+
+                            <p className="profile-avatar-text">
+                                {`${profile.name}`}
+                            </p>
+                        </div>
+                    </div>
+                </Grid>
+            </Grid>
         );
     }
 }
 
 const mapStateToProps = (state) => {
     return {
-        profile: state.profile
+        profile: state.profile,
+        account: state.account
     };
 }
 

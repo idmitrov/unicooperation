@@ -1,0 +1,18 @@
+.profile-welcome {
+    background-color: #fff;
+    padding: 16px;
+    display: flex;
+}
+
+.profile-avatar {
+    max-width: 96px;
+
+    &-image {
+        max-width: 100%;
+    }
+
+    &-text {
+        text-align: center;
+        margin: 8px 0 0;
+    }
+}
