@@ -82,7 +82,10 @@ class App extends Component {
                     }
 
                     <main>
-                        <Routes authenticated={account.authenticated} />
+                        <Routes
+                            accountType={account.type}
+                            authenticated={account.authenticated}
+                        />
                     </main>
                 </React.Fragment>
             </Router>

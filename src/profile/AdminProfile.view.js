@@ -8,7 +8,7 @@ import {
 import { fetchMyProfile, setMyProfile } from './Profile.actions';
 import './Profile.scss';
 
-class ProfileView extends Component {
+class AdminProfileView extends Component {
     constructor(props) {
         super(props);
 
@@ -30,7 +30,7 @@ class ProfileView extends Component {
                             />
 
                             <p className="profile-avatar-text">
-                                {`${profile.name}`}
+                                {profile.name}
                             </p>
                         </div>
                     </div>
@@ -61,4 +61,4 @@ const mapDispatchToProps = (dispatch) => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(ProfileView);
+)(AdminProfileView);

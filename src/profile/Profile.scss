@@ -1,18 +1,34 @@
 .profile-welcome {
-    background-color: #fff;
-    padding: 16px;
     display: flex;
+    padding: 16px;
+    background-color: #fff;
+    box-shadow: 0 0 2px #000;
 }
 
 .profile-avatar {
     max-width: 96px;
+    position: relative;
+    z-index: 1;
 
     &-image {
         max-width: 100%;
+        border-radius: 50%;
     }
 
     &-text {
         text-align: center;
         margin: 8px 0 0;
+    }
+
+    .profile-status {
+        position: absolute;
+        top: 76px;
+        left: 0;
+        z-index: 99;
+        color: #e0e0e0;
+
+        &.profile-status-verified {
+            color: #76ff03;
+        }
     }
 }
