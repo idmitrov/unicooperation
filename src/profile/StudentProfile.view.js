@@ -25,26 +25,34 @@ class StudentProfileView extends Component {
         return (
             <Grid container justify="center" alignItems="flex-start">
                 <Grid item xs={12} md={6} className="feed-content">
-                    <div className="profile-welcome">
-                        <div className="profile-avatar">
-                            <div className={`profile-status ${profile.verified ? 'profile-status-verified' : ''}`}>
-                                <Tooltip
-                                    placement="right"
-                                    title={profile.verified ? 'Verified' : 'Unverified'}>
-                                    <VerifiedUser/>
-                                </Tooltip>
-                            </div>
+                    <div className="profile-header">
+                        <Grid container spacing={16} alignItems="center">
+                            <Grid item>
+                                <div className="profile-avatar">
+                                    <div className={`profile-status ${profile.verified ? 'profile-status-verified' : ''}`}>
+                                        <Tooltip
+                                            placement="right"
+                                            title={profile.verified ? 'Verified' : 'Unverified'}>
+                                            <VerifiedUser />
+                                        </Tooltip>
+                                    </div>
 
-                            <img
-                                className="profile-avatar-image"
-                                src={account.avatar || `${process.env.PUBLIC_URL}/avatar-default.png`}
-                                alt="User avatar"
-                            />
+                                    <img
+                                        className="profile-avatar-image"
+                                        src={account.avatar || `${process.env.PUBLIC_URL}/avatar-default.png`}
+                                        alt="User avatar"
+                                    />
 
-                            <p className="profile-avatar-text">
-                                {profile.name}
-                            </p>
-                        </div>
+                                    <p className="profile-avatar-text">
+                                        {profile.name}
+                                    </p>
+                                </div>
+                            </Grid>
+
+                            <Grid item>
+                                {profile.summary}
+                            </Grid>
+                        </Grid>
                     </div>
                 </Grid>
             </Grid>
