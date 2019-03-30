@@ -17,6 +17,7 @@ import {
 
 import { Trans } from 'react-i18next';
 import { authenticateAccount, createAccount, setAccount } from '../account/Account.actions';
+import { accountType } from './account.constants';
 
 class AccountView extends Component {
     constructor() {
@@ -25,9 +26,8 @@ class AccountView extends Component {
         this.state = {
             email: '',
             mode: 'login',
-            name: '',
             password: '',
-            type: 'University'
+            type: accountType.university
         }
 
         this.handleAccountInputChange = this.handleAccountInputChange.bind(this);
@@ -108,97 +108,74 @@ class AccountView extends Component {
                                     </Grid>
                                 </form>
                             ) : (
-                                <form onSubmit={(e) => {
-                                    e.preventDefault();
+                                    <form onSubmit={(e) => {
+                                        e.preventDefault();
 
-                                    register(this.state.email, this.state.password, this.state.name, this.state.type);
-                                }}>
-                                    <Grid container>
-                                        <Grid item xs={12}>
-                                            <TextField
-                                                type="email"
-                                                name="email"
-                                                value={this.state.email}
-                                                label={<Trans>account.email.label</Trans>}
-                                                required
-                                                fullWidth
-                                                onChange={this.handleAccountInputChange}
-                                            />
+                                        register(this.state.email, this.state.password, this.state.name, this.state.type);
+                                    }}>
+                                        <Grid container>
+                                            <Grid item xs={12}>
+                                                <FormControl>
+                                                    <FormLabel>
+                                                        <Trans>account.type.label</Trans>
+                                                    </FormLabel>
+
+                                                    <RadioGroup
+                                                        name="type"
+                                                        value={this.state.type}
+                                                        row
+                                                        onChange={this.handleAccountInputChange}>
+                                                        {
+                                                            Object
+                                                                .keys(accountType)
+                                                                .map((accountTypeKey) => {
+                                                                    return (<FormControlLabel
+                                                                        key={accountTypeKey}
+                                                                        value={accountType[accountTypeKey]}
+                                                                        control={<Radio color="primary" />}
+                                                                        label={<Trans>{`${accountTypeKey}.label`}</Trans>}
+                                                                    />);
+                                                                })
+                                                        }
+                                                    </RadioGroup>
+                                                </FormControl>
+                                            </Grid>
+
+                                            <Grid item xs={12}>
+                                                <TextField
+                                                    type="email"
+                                                    name="email"
+                                                    value={this.state.email}
+                                                    label={<Trans>account.email.label</Trans>}
+                                                    required
+                                                    fullWidth
+                                                    onChange={this.handleAccountInputChange}
+                                                />
+                                            </Grid>
+
+                                            <Grid item xs={12}>
+                                                <TextField
+                                                    type="password"
+                                                    name="password"
+                                                    value={this.state.password}
+                                                    label={<Trans>account.password.label</Trans>}
+                                                    required
+                                                    fullWidth
+                                                    onChange={this.handleAccountInputChange}
+                                                />
+                                            </Grid>
+
+                                            <Grid item xs={12}>
+                                                <Button
+                                                    type="submit"
+                                                    variant="contained"
+                                                    color="primary">
+                                                    <Trans>account.register.label</Trans>
+                                                </Button>
+                                            </Grid>
                                         </Grid>
-
-                                        <Grid item xs={12}>
-                                            <TextField
-                                                type="password"
-                                                name="password"
-                                                value={this.state.password}
-                                                label={<Trans>account.password.label</Trans>}
-                                                required
-                                                fullWidth
-                                                onChange={this.handleAccountInputChange}
-                                            />
-                                        </Grid>
-
-                                        <Grid item xs={12}>
-                                             <TextField
-                                                type="text"
-                                                name='name'
-                                                value={this.state.name}
-                                                label={
-                                                    this.state.type === 'Student'
-                                                        ? <Trans>student.name.label</Trans>
-                                                        : this.state.type === 'Company'
-                                                            ? <Trans>company.name.label</Trans>
-                                                            : <Trans>university.name.label</Trans>
-                                                }
-                                                required
-                                                fullWidth
-                                                onChange={this.handleAccountInputChange}
-                                            />
-                                        </Grid>
-
-                                        <Grid item xs={12}>
-                                            <FormControl>
-                                                <FormLabel>
-                                                    <Trans>account.type.label</Trans>
-                                                </FormLabel>
-
-                                                <RadioGroup
-                                                    name="type"
-                                                    value={this.state.type}
-                                                    row
-                                                    onChange={this.handleAccountInputChange}>
-                                                    <FormControlLabel
-                                                        value="University"
-                                                        control={<Radio color="primary" />}
-                                                        label={<Trans>university.label</Trans>}
-                                                    />
-
-                                                    <FormControlLabel
-                                                        value="Company"
-                                                        control={<Radio color="primary" />}
-                                                        label={<Trans>company.label</Trans>}
-                                                    />
-
-                                                    <FormControlLabel
-                                                        value="Student"
-                                                        control={<Radio color="primary" />}
-                                                        label={<Trans>student.label</Trans>}
-                                                    />
-                                                </RadioGroup>
-                                            </FormControl>
-                                        </Grid>
-
-                                        <Grid item xs={12}>
-                                            <Button
-                                                type="submit"
-                                                variant="contained"
-                                                color="primary">
-                                                <Trans>account.register.label</Trans>
-                                            </Button>
-                                        </Grid>
-                                    </Grid>
-                                </form>
-                            )
+                                    </form>
+                                )
                         }
                     </Grid>
                 </Grid>
