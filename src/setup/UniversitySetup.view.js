@@ -16,6 +16,7 @@ import {
 import { Trans } from 'react-i18next';
 
 import { fetchCountries, setCountries } from '../nomenclatures/nom.actions';
+import { createUniversitySetup } from './setup.actions.js';
 
 class UniversitySetupView extends Component {
     constructor(props) {
@@ -25,9 +26,9 @@ class UniversitySetupView extends Component {
 
         this.state = {
             name: '',
-            countryId: null,
+            countryCode: null,
             isNameDirty: true,
-            isCountryIdDirty: true
+            isCountryCodeDirty: true
         };
 
         this.handleSetupInputChange = this.handleSetupInputChange.bind(this);
@@ -40,14 +41,14 @@ class UniversitySetupView extends Component {
     }
 
     render() {
-        const { countries } = this.props;
+        const { countries, createUniversitySetup } = this.props;
 
         return (
             <div>
                 <form onSubmit={(e) => {
                     e.preventDefault();
 
-                    console.log(this.state);
+                    createUniversitySetup(this.state.name, this.state.countryCode);
                 }}>
                     <Grid container justify="center">
                         <Grid item sm={8} md={4}>
@@ -69,7 +70,7 @@ class UniversitySetupView extends Component {
                                         fullWidth
                                         onFocus={() => {
                                             if (this.state.isNameDirty) {
-                                                this.setState({...this.state, isNameDirty: false});
+                                                this.setState({ ...this.state, isNameDirty: false });
                                             }
                                         }}
                                         onChange={this.handleSetupInputChange}
@@ -78,12 +79,12 @@ class UniversitySetupView extends Component {
 
                                 <Grid item xs={12}>
                                     <FormControl
-                                        error={!this.state.isCountryIdDirty && !this.state.countryId}
+                                        error={!this.state.isCountryCodeDirty && !this.state.countryCode}
                                         required
                                         fullWidth
                                         onClick={() => {
-                                            if (this.state.isCountryIdDirty) {
-                                                this.setState({...this.state, isCountryIdDirty: false});
+                                            if (this.state.isCountryCodeDirty) {
+                                                this.setState({ ...this.state, isCountryCodeDirty: false });
                                             }
                                         }}>
                                         <InputLabel htmlFor="name-error">
@@ -91,8 +92,8 @@ class UniversitySetupView extends Component {
                                         </InputLabel>
 
                                         <Select
-                                            name="countryId"
-                                            value={this.state.countryId || ''}
+                                            name="countryCode"
+                                            value={this.state.countryCode || ''}
                                             onChange={this.handleSetupInputChange}
                                             input={<Input id="name-error" />}
                                         >
@@ -116,7 +117,7 @@ class UniversitySetupView extends Component {
                                         type="submit"
                                         variant="contained"
                                         color="primary"
-                                        disabled={!this.state.countryId || !this.state.name}>
+                                        disabled={!this.state.countryCode || !this.state.name}>
                                         Proceed
                                     </Button>
                                 </Grid>
@@ -137,6 +138,13 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
+        createUniversitySetup(name, countryCode) {
+            return dispatch(createUniversitySetup(name, countryCode))
+                .then((university) => {
+                    console.log(university);
+                    // return dispatch(setCountries(countries));
+                });
+        },
         fetchCountries() {
             return dispatch(fetchCountries())
                 .then((countries) => {
