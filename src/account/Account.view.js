@@ -129,12 +129,14 @@ class AccountView extends Component {
                                                             Object
                                                                 .keys(accountType)
                                                                 .map((accountTypeKey) => {
-                                                                    return (<FormControlLabel
-                                                                        key={accountTypeKey}
-                                                                        value={accountType[accountTypeKey]}
-                                                                        control={<Radio color="primary" />}
-                                                                        label={<Trans>{`${accountTypeKey}.label`}</Trans>}
-                                                                    />);
+                                                                    if (accountType[accountTypeKey] !== accountType.admin) {
+                                                                        return (<FormControlLabel
+                                                                            key={accountTypeKey}
+                                                                            value={accountType[accountTypeKey]}
+                                                                            control={<Radio color="primary" />}
+                                                                            label={<Trans>{`${accountTypeKey}.label`}</Trans>}
+                                                                        />);
+                                                                    }
                                                                 })
                                                         }
                                                     </RadioGroup>
