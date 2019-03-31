@@ -16,7 +16,8 @@
             "student.label": "Student",
             "student.name.label": "Student name",
             "university.label": "University",
-            "university.name.label": "University name"
+            "university.name.label": "University name",
+            "setup.university.title": "Quick university setup"
         }
     },
     "bg": {
