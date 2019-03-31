@@ -17,7 +17,7 @@ import {
 
 import { Trans } from 'react-i18next';
 import { authenticateAccount, createAccount, setAccount } from '../account/Account.actions';
-import { accountType } from './account.constants';
+import { accountType } from './Account.constants';
 
 class AccountView extends Component {
     constructor() {

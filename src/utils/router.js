@@ -1,10 +1,12 @@
 import React from 'react';
 import { Router, Route, Switch, Link as _Link } from 'react-router-dom';
 
-import { accountType } from '../account/account.constants';
+import { accountType } from '../account/Account.constants';
 
 import AccountView from '../account/Account.view';
 import FeedView from '../feed/Feed.view';
+
+import UniversitySetupView from '../setup/UniversitySetup.view';
 
 import AdminProfileView from '../profile/AdminProfile.view';
 import CompanyProfileView from '../profile/CompanyProfile.view';
@@ -21,8 +23,8 @@ const PrivateRoute = ({ component: Component, fallbackComponent: FallBackCompone
                 (props) => authenticated ? (
                     <Component {...rest} {...props} />
                 ) : (
-                    <FallBackComponent {...rest} {...props} />
-                )
+                        <FallBackComponent {...rest} {...props} />
+                    )
             }
         />
     );
@@ -31,6 +33,18 @@ const PrivateRoute = ({ component: Component, fallbackComponent: FallBackCompone
 export const Routes = ({ account }) => {
     return (
         <Switch>
+            {
+                account.authenticated && !account.profileId ? (
+                    <PrivateRoute
+                        path="*"
+                        component={UniversitySetupView}
+                        fallbackComponent={AccountView}
+                        authenticated={account.authenticated}
+                        exact={true}
+                    />
+                ) : (null)
+            }
+
             <PrivateRoute
                 path="/"
                 component={FeedView}
