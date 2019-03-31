@@ -1,12 +1,15 @@
 import React from 'react';
 import { Router, Route, Switch, Link as _Link } from 'react-router-dom';
 
-import FeedView from '../feed/Feed.view';
+import { accountType } from '../account/account.constants';
+
 import AccountView from '../account/Account.view';
+import FeedView from '../feed/Feed.view';
+
+import AdminProfileView from '../profile/AdminProfile.view';
+import CompanyProfileView from '../profile/CompanyProfile.view';
 import StudentProfileView from '../profile/StudentProfile.view';
 import UniversityProfileView from '../profile/UniversityProfile.view';
-import CompanyProfileView from '../profile/CompanyProfile.view';
-import AdminProfileView from '../profile/AdminProfile.view';
 
 export const Link = _Link;
 
@@ -25,28 +28,30 @@ const PrivateRoute = ({ component: Component, fallbackComponent: FallBackCompone
     );
 }
 
-export const Routes = ({ authenticated, accountType }) => {
+export const Routes = ({ account }) => {
     return (
         <Switch>
             <PrivateRoute
                 path="/"
                 component={FeedView}
                 fallbackComponent={AccountView}
-                authenticated={authenticated}
+                authenticated={account.authenticated}
                 exact={true}
             />
 
             <PrivateRoute
                 path="/profile"
                 component={
-                    accountType === "Admin"
+                    account.type === accountType.admin
                         ? AdminProfileView
-                        : accountType === 'University'
-                            ? UniversityProfileView : accountType === 'Company'
-                                ? CompanyProfileView : StudentProfileView
+                        : account.type === accountType.university
+                            ? UniversityProfileView
+                            : account.type === accountType.partner
+                                ? CompanyProfileView
+                                : StudentProfileView
                 }
                 fallbackComponent={AccountView}
-                authenticated={authenticated}
+                authenticated={account.authenticated}
                 exact={true}
             />
 
