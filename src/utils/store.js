@@ -7,6 +7,7 @@ import thunk from 'redux-thunk';
 import accountReducer from '../account/Account.reducer';
 import appReducer from '../app/App.reducer';
 import feedReducer from '../feed/Feed.reducer';
+import nomReducer from '../nomenclatures/nom.reducer';
 import ProfileReducer from '../profile/Profile.reducer';
 
 import api from './api';
@@ -16,6 +17,7 @@ const store = createStore(
         account: accountReducer,
         app: appReducer,
         feed: feedReducer,
+        nomenclatures: nomReducer,
         profile: ProfileReducer
     }),
     composeWithDevTools(
