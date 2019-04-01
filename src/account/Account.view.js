@@ -205,6 +205,8 @@ const mapDispatchToProps = (dispatch) => {
                 .then((account) => {
                     return dispatch(authenticateAccount(email, password))
                         .then((account) => {
+                            // TODO: Create VerifyAccount view
+                            // and logic for account verification process
                             return dispatch(setAccount(account));
                         });
                 });
