@@ -8,7 +8,8 @@ import accountReducer from '../account/Account.reducer';
 import appReducer from '../app/App.reducer';
 import feedReducer from '../feed/Feed.reducer';
 import nomReducer from '../nomenclatures/nom.reducer';
-import ProfileReducer from '../profile/Profile.reducer';
+import profileReducer from '../profile/Profile.reducer';
+import sharedReducer from '../shared/shared.reducer';
 
 import api from './api';
 
@@ -18,7 +19,8 @@ const store = createStore(
         app: appReducer,
         feed: feedReducer,
         nomenclatures: nomReducer,
-        profile: ProfileReducer
+        profile: profileReducer,
+        shared: sharedReducer
     }),
     composeWithDevTools(
         applyMiddleware(

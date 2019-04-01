@@ -6,5 +6,9 @@ export default {
     createPartnerSetup: {
         endpoint: 'partner',
         method: 'POST'
+    },
+    createStudentSetup: {
+        endpoint: 'student',
+        method: 'POST'
     }
 };

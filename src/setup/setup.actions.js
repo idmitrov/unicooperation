@@ -2,7 +2,8 @@ import setupEndpoints from './Setup.endpoints';
 
 export const setupActionTypes = {
     createUniversitySetup: 'SETUP_UNIVERSITY_CREATE',
-    createPartnerSetup: 'SETUP_PARTNER_CREATE'
+    createPartnerSetup: 'SETUP_PARTNER_CREATE',
+    createStudentSetup: 'SETUP_STUDENT_CREATE'
 };
 
 export const createUniversitySetup = (name, countryCode) => (dispatch) => {
@@ -23,6 +24,17 @@ export const createPartnerSetup = (name, countryCode) => (dispatch) => {
         api: {
             endpoint: setupEndpoints.createPartnerSetup.endpoint,
             method: setupEndpoints.createPartnerSetup.method
+        }
+    });
+}
+
+export const createStudentSetup = (firstName, facultyId, universityId) => (dispatch) => {
+    return dispatch({
+        type: setupActionTypes.createStudentSetup,
+        payload: { firstName, facultyId, universityId },
+        api: {
+            endpoint: setupEndpoints.createStudentSetup.endpoint,
+            method: setupEndpoints.createStudentSetup.method
         }
     });
 }

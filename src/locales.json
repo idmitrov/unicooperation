@@ -15,30 +15,16 @@
             "partner.name.label": "Partner name",
             "student.label": "Student",
             "student.name.label": "Student name",
+            "student.facultyId.label": "Faculty ID",
+            "student.university.label": "University name",
             "university.label": "University",
             "university.name.label": "University name",
             "setup.university.title": "Quick university setup",
-            "setup.partner.title": "Quick partner setup"
+            "setup.partner.title": "Quick partner setup",
+            "setup.student.title": "Quick student setup"
         }
     },
     "bg": {
-        "translation": {
-            "account.type.label": "Тип акаунт",
-            "account.email.label": "Имейл",
-            "account.password.label": "Парола",
-            "account.name.label": "Име",
-            "account.login.label": "Вход",
-            "account.register.label": "Регисртация",
-            "account.logout.label": "Изход",
-            "partner.label": "Компания",
-            "partner.name.label": "Име на компания",
-            "global.search.label": "Търсене",
-            "global.profile.label": "Профил",
-            "global.home.label": "Начало",
-            "student.label": "Студент",
-            "student.name.label": "Име на студент",
-            "university.label": "Университет",
-            "university.name.label": "Име на университет"
-        }
+        "translation": { }
     }
 }

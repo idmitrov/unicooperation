@@ -6,6 +6,8 @@ import { accountType } from '../account/Account.constants';
 import AccountView from '../account/Account.view';
 import FeedView from '../feed/Feed.view';
 
+import PartnerSetupView from '../setup/PartnerSetup.view';
+import StudentSetupView from '../setup/StudentSetup.view';
 import UniversitySetupView from '../setup/UniversitySetup.view';
 
 import AdminProfileView from '../profile/AdminProfile.view';
@@ -37,7 +39,13 @@ export const Routes = ({ account }) => {
                 account.authenticated && !account.profileId ? (
                     <PrivateRoute
                         path="*"
-                        component={UniversitySetupView}
+                        component={
+                            account.type === accountType.university
+                                    ? UniversitySetupView
+                                    : account.type === accountType.partner
+                                        ? PartnerSetupView
+                                        : StudentSetupView
+                        }
                         fallbackComponent={AccountView}
                         authenticated={account.authenticated}
                         exact={true}
