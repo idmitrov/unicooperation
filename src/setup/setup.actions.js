@@ -1,4 +1,4 @@
-import setupEndpoints from './setup.endpoints';
+import setupEndpoints from './Setup.endpoints';
 
 export const setupActionTypes = {
     createUniversitySetup: 'SETUP_UNIVERSITY_CREATE'

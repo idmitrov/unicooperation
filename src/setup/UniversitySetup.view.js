@@ -16,7 +16,7 @@ import {
 import { Trans } from 'react-i18next';
 
 import { fetchCountries, setCountries } from '../nomenclatures/nom.actions';
-import { createUniversitySetup } from './setup.actions.js';
+import { createUniversitySetup } from './Setup.actions.js';
 
 class UniversitySetupView extends Component {
     constructor(props) {
