@@ -8,16 +8,17 @@
             "account.login.label": "Login",
             "account.register.label": "Register",
             "account.logout.label": "Logout",
-            "partner.label": "Partner",
-            "partner.name.label": "Partner name",
             "global.search.label": "Search",
             "global.profile.label": "Profile",
             "global.home.label": "Home",
+            "partner.label": "Partner",
+            "partner.name.label": "Partner name",
             "student.label": "Student",
             "student.name.label": "Student name",
             "university.label": "University",
             "university.name.label": "University name",
-            "setup.university.title": "Quick university setup"
+            "setup.university.title": "Quick university setup",
+            "setup.partner.title": "Quick partner setup"
         }
     },
     "bg": {
