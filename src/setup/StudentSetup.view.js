@@ -6,7 +6,6 @@ import {
     TextField,
     Typography,
     Button,
-    Menu,
     MenuItem
 } from '@material-ui/core';
 
@@ -18,7 +17,6 @@ import { filterUniversity, setUniversityFilter } from '../shared/shared.actions'
 class StudentSetupView extends Component {
     constructor(props) {
         super(props);
-
 
         this.state = {
             firstName: null,
