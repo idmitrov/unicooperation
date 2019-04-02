@@ -1,4 +1,5 @@
 import appConfig from '../app/App.config';
+import { unsetAccount } from '../account/Account.actions';
 
 export default (store) => (next) => (action) => {
     if (action.api) {
@@ -27,6 +28,10 @@ export default (store) => (next) => (action) => {
         return new Promise((resolve, reject) => {
             fetch(`//${appConfig.REACT_APP_API_URL}/${action.api.endpoint}`, options)
                 .then((response) => {
+                    if (!response.ok) {
+                        throw response;
+                    }
+
                     if (/application\/json/.test(response.headers.get('Content-Type'))) {
                         return response.json();
                     }
@@ -45,6 +50,12 @@ export default (store) => (next) => (action) => {
                     }
                 })
                 .catch((response) => {
+                    if (response.status) {
+                        store.dispatch(unsetAccount());
+
+                        reject(response.statusText);
+                    }
+
                     const error = response.error || 'Something went wrong';
 
                     reject(error);
