@@ -17,6 +17,7 @@ import { Trans } from 'react-i18next';
 
 import { fetchCountries, setCountries } from '../nomenclatures/nom.actions';
 import { createUniversitySetup } from './Setup.actions.js';
+import { setAccount } from '../account/Account.actions';
 
 class UniversitySetupView extends Component {
     constructor(props) {
@@ -140,9 +141,8 @@ const mapDispatchToProps = (dispatch) => {
     return {
         createUniversitySetup(name, countryCode) {
             return dispatch(createUniversitySetup(name, countryCode))
-                .then((university) => {
-                    console.log(university);
-                    // return dispatch(setCountries(countries));
+                .then((data) => {
+                    return dispatch(setAccount(data.account));
                 });
         },
         fetchCountries() {
