@@ -51,7 +51,9 @@ export default (store) => (next) => (action) => {
                 })
                 .catch((response) => {
                     if (response.status) {
-                        store.dispatch(unsetAccount());
+                        if (response.status == 401) {
+                            store.dispatch(unsetAccount());
+                        }
 
                         reject(response.statusText);
                     }
