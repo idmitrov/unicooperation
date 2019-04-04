@@ -51,16 +51,16 @@ export default (store) => (next) => (action) => {
                 })
                 .catch((response) => {
                     if (response.status) {
-                        if (response.status == 401) {
+                        if (response.status === 401) {
                             store.dispatch(unsetAccount());
                         }
 
-                        reject(response.statusText);
+                        return reject(response.statusText);
                     }
 
                     const error = response.error || 'Something went wrong';
 
-                    reject(error);
+                    return reject(error);
                 })
         });
     }
