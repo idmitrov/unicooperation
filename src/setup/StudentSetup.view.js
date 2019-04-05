@@ -13,6 +13,7 @@ import { Trans } from 'react-i18next';
 
 import { createStudentSetup } from './Setup.actions.js';
 import { filterUniversity, setUniversityFilter } from '../shared/shared.actions';
+import { setAccount } from '../account/Account.actions';
 
 class StudentSetupView extends Component {
     constructor(props) {
@@ -153,8 +154,7 @@ const mapDispatchToProps = (dispatch) => {
         createStudentSetup(name, facultyId, universityId) {
             return dispatch(createStudentSetup(name, facultyId, universityId))
                 .then((data) => {
-                    console.log(data);
-                    // return dispatch(setCountries(countries));
+                    return dispatch(setAccount(data.account));
                 });
         },
         filterUniversity(name) {

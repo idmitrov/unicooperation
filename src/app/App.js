@@ -99,6 +99,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         logout() {
+            history.push('/');
+
             return dispatch(unsetAccount());
         }
     };

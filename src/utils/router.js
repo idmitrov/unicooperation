@@ -1,5 +1,5 @@
 import React from 'react';
-import { Router, Route, Switch, Link as _Link } from 'react-router-dom';
+import { Router, Route, Switch, Redirect, Link as _Link } from 'react-router-dom';
 
 import { accountType } from '../account/Account.constants';
 
@@ -17,15 +17,15 @@ import UniversityProfileView from '../profile/UniversityProfile.view';
 
 export const Link = _Link;
 
-const PrivateRoute = ({ component: Component, fallbackComponent: FallBackComponent, authenticated, ...rest }) => {
+const PrivateRoute = ({ component: Component, fallbackComponent: FallBackComponent, redirect = '/', allowed, ...rest }) => {
     return (
         <Route
             {...rest}
             render={
-                (props) => authenticated ? (
+                (props) => allowed ? (
                     <Component {...rest} {...props} />
                 ) : (
-                        <FallBackComponent {...rest} {...props} />
+                        FallBackComponent ? (<FallBackComponent />) : (<Redirect path="*" to={redirect} />)
                     )
             }
         />
@@ -35,51 +35,50 @@ const PrivateRoute = ({ component: Component, fallbackComponent: FallBackCompone
 export const Routes = ({ account }) => {
     return (
         <Switch>
+            <PrivateRoute
+                path="/"
+                component={FeedView}
+                allowed={account.authenticated}
+                fallbackComponent={AccountView}
+                exact
+                strict
+            />
+
             {
                 account.authenticated && !account.profileId ? (
                     <PrivateRoute
                         path="*"
+                        allowed={account.authenticated}
                         component={
                             account.type === accountType.university
-                                    ? UniversitySetupView
-                                    : account.type === accountType.partner
-                                        ? PartnerSetupView
-                                        : StudentSetupView
+                                ? UniversitySetupView
+                                : account.type === accountType.partner
+                                    ? PartnerSetupView
+                                    : StudentSetupView
                         }
-                        fallbackComponent={AccountView}
-                        authenticated={account.authenticated}
-                        exact={true}
                     />
-                ) : (null)
+                ) : (
+                    <PrivateRoute
+                        path="/profile"
+                        component={
+                            account.type === accountType.admin
+                                ? AdminProfileView
+                                : account.type === accountType.university
+                                    ? UniversityProfileView
+                                    : account.type === accountType.partner
+                                        ? CompanyProfileView
+                                        : StudentProfileView
+                        }
+                        allowed={account.authenticated}
+                        exact
+                        strict
+                    />
+                )
             }
-
-            <PrivateRoute
-                path="/"
-                component={FeedView}
-                fallbackComponent={AccountView}
-                authenticated={account.authenticated}
-                exact={true}
-            />
-
-            <PrivateRoute
-                path="/profile"
-                component={
-                    account.type === accountType.admin
-                        ? AdminProfileView
-                        : account.type === accountType.university
-                            ? UniversityProfileView
-                            : account.type === accountType.partner
-                                ? CompanyProfileView
-                                : StudentProfileView
-                }
-                fallbackComponent={AccountView}
-                authenticated={account.authenticated}
-                exact={true}
-            />
 
             <Route
                 path="*"
-                render={() => <div>The page was not found</div>}
+                component={() => <div>Page not found!</div>}
             />
         </Switch>
     );

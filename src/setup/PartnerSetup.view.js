@@ -17,6 +17,7 @@ import { Trans } from 'react-i18next';
 
 import { fetchCountries, setCountries } from '../nomenclatures/nom.actions';
 import { createPartnerSetup } from './Setup.actions.js';
+import { setAccount } from '../account/Account.actions';
 
 class PartnerSetupView extends Component {
     constructor(props) {
@@ -140,9 +141,8 @@ const mapDispatchToProps = (dispatch) => {
     return {
         createPartnerSetup(name, countryCode) {
             return dispatch(createPartnerSetup(name, countryCode))
-                .then((partner) => {
-                    console.log(partner);
-                    // return dispatch(setCountries(countries));
+                .then((data) => {
+                    return dispatch(setAccount(data.account));
                 });
         },
         fetchCountries() {
