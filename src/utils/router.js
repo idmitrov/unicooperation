@@ -33,48 +33,40 @@ const PrivateRoute = ({ component: Component, fallbackComponent: FallBackCompone
 }
 
 export const Routes = ({ account }) => {
+    const authenticated = account.authenticated && account.profileId;
+
     return (
         <Switch>
             <PrivateRoute
                 path="/"
                 component={FeedView}
-                allowed={account.authenticated}
-                fallbackComponent={AccountView}
+                allowed={authenticated}
+                fallbackComponent={
+                    !account.authenticated ? (AccountView) : (
+                        account.type === accountType.university ? UniversitySetupView :
+                        account.type === accountType.student ? StudentSetupView :
+                        account.type === accountType.partner ? PartnerSetupView : (null)
+                    )
+                }
                 exact
                 strict
             />
 
-            {
-                account.authenticated && !account.profileId ? (
-                    <PrivateRoute
-                        path="*"
-                        allowed={account.authenticated}
-                        component={
-                            account.type === accountType.university
-                                ? UniversitySetupView
-                                : account.type === accountType.partner
-                                    ? PartnerSetupView
-                                    : StudentSetupView
-                        }
-                    />
-                ) : (
-                    <PrivateRoute
-                        path="/profile"
-                        component={
-                            account.type === accountType.admin
-                                ? AdminProfileView
-                                : account.type === accountType.university
-                                    ? UniversityProfileView
-                                    : account.type === accountType.partner
-                                        ? CompanyProfileView
-                                        : StudentProfileView
-                        }
-                        allowed={account.authenticated}
-                        exact
-                        strict
-                    />
-                )
-            }
+            <PrivateRoute
+                path="/profile"
+                allowed={authenticated}
+                component={
+                    account.type === accountType.admin
+                        ? AdminProfileView
+                        : account.type === accountType.university
+                            ? UniversityProfileView
+                            : account.type === accountType.partner
+                                ? CompanyProfileView
+                                : StudentProfileView
+                }
+                exact
+                strict
+            />
 
             <Route
                 path="*"
