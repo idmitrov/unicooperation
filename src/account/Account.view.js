@@ -83,6 +83,7 @@ class AccountView extends Component {
                                                 name="email"
                                                 value={this.state.email}
                                                 label={<Trans>account.email.label</Trans>}
+                                                autoComplete="email"
                                                 required
                                                 fullWidth
                                                 onChange={this.handleAccountInputChange}
@@ -94,6 +95,7 @@ class AccountView extends Component {
                                                 type="password"
                                                 name="password"
                                                 value={this.state.password}
+                                                autoComplete="current-password"
                                                 label={<Trans>account.password.label</Trans>}
                                                 required
                                                 fullWidth
@@ -150,6 +152,7 @@ class AccountView extends Component {
                                                     name="email"
                                                     value={this.state.email}
                                                     label={<Trans>account.email.label</Trans>}
+                                                    autoComplete="email"
                                                     required
                                                     fullWidth
                                                     onChange={this.handleAccountInputChange}
@@ -162,6 +165,7 @@ class AccountView extends Component {
                                                     name="password"
                                                     value={this.state.password}
                                                     label={<Trans>account.password.label</Trans>}
+                                                    autoComplete="new-password"
                                                     required
                                                     fullWidth
                                                     onChange={this.handleAccountInputChange}
