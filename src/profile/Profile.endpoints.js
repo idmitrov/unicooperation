@@ -1,6 +1,6 @@
 export default {
     myProfile: {
-        endpoint: 'profile/me',
+        endpoint: '{profileType}/me',
         method: 'GET'
     }
 }

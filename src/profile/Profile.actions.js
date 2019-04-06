@@ -10,12 +10,14 @@ export const fetchProfile = (type, id) => (dispatch) => {
     // TODO: METHOD NOT IMPLEMENTED
 }
 
-export const fetchMyProfile = () => (dispatch) => {
+export const fetchMyProfile = () => (dispatch, getState) => {
+    const profileType = getState().account.type;
+
     return dispatch({
         type: profileActionTypes.fetchMyProfile,
         api: {
-            endpoint: profileEndpoints.myProfile.endpoint,
-            method: profileEndpoints.myProfile.method
+            endpoint: profileEndpoints.myProfile.endpoint.replace('{profileType}', profileType),
+            method: profileEndpoints.myProfile.method.replace('{profileType}', profileType)
         }
     });
 }
