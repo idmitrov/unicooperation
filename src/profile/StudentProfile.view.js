@@ -84,7 +84,7 @@ class StudentProfileView extends Component {
                                             multiline
                                             fullWidth
                                             rowsMax="2"
-                                            // onChange={handleProfileUpdate}
+                                        // onChange={handleProfileUpdate}
                                         />
                                     </Grid>
                                 </Grid>
@@ -93,7 +93,7 @@ class StudentProfileView extends Component {
                     </div>
 
                     <div className="profile-row">
-                        <Grid container>
+                        <Grid container spacing={16}>
                             <Grid item xs={12}>
                                 <TextField
                                     label={<Trans>student.facultyId.label</Trans>}
@@ -114,7 +114,7 @@ class StudentProfileView extends Component {
                                     name="firstName"
                                     value={profile.firstName || ''}
                                     fullWidth
-                                    // onChange={handleProfileUpdate}
+                                // onChange={handleProfileUpdate}
                                 />
                             </Grid>
 
@@ -124,7 +124,7 @@ class StudentProfileView extends Component {
                                     name="middleName"
                                     value={profile.middleName || ''}
                                     fullWidth
-                                    // onChange={handleProfileUpdate}
+                                // onChange={handleProfileUpdate}
                                 />
                             </Grid>
 
@@ -134,7 +134,7 @@ class StudentProfileView extends Component {
                                     name="lastName"
                                     value={profile.lastName || ''}
                                     fullWidth
-                                    // onChange={handleProfileUpdate}
+                                // onChange={handleProfileUpdate}
                                 />
                             </Grid>
                         </Grid>
