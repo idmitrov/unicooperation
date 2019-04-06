@@ -11,7 +11,7 @@ import StudentSetupView from '../setup/StudentSetup.view';
 import UniversitySetupView from '../setup/UniversitySetup.view';
 
 import AdminProfileView from '../profile/AdminProfile.view';
-import CompanyProfileView from '../profile/CompanyProfile.view';
+import PartnerProfileView from '../profile/PartnerProfile.view';
 import StudentProfileView from '../profile/StudentProfile.view';
 import UniversityProfileView from '../profile/UniversityProfile.view';
 
@@ -61,7 +61,7 @@ export const Routes = ({ account }) => {
                         : account.type === accountType.university
                             ? UniversityProfileView
                             : account.type === accountType.partner
-                                ? CompanyProfileView
+                                ? PartnerProfileView
                                 : StudentProfileView
                 }
                 exact

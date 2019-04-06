@@ -9,7 +9,7 @@ import {
 import { fetchMyProfile, setMyProfile } from './Profile.actions';
 import './Profile.scss';
 
-class CompanyProfileView extends Component {
+class PartnerProfile extends Component {
     constructor(props) {
         super(props);
 
@@ -63,5 +63,5 @@ export default withRouter(
     connect(
         mapStateToProps,
         mapDispatchToProps
-    )(CompanyProfileView)
+    )(PartnerProfile)
 );
