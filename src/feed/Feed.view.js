@@ -20,9 +20,21 @@ import {
     Sort
 } from '@material-ui/icons';
 
+import io from 'socket.io-client';
+
 import './Feed.scss';
 
 class FeedView extends Component {
+    constructor() {
+        super();
+
+        this.socket = io.connect('http://127.0.0.1:5000');
+    }
+
+    componentWillMount() {
+        this.socket.disconnect();
+    }
+
     render() {
         const { data } = this.props;
 
