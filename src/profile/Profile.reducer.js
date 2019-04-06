@@ -1,7 +1,7 @@
 import { profileActionTypes } from './Profile.actions';
 
 const profileDefaults = {
-    name: ''
+    firstName: ''
 };
 
 export default (state = profileDefaults, action) => {

@@ -45,7 +45,7 @@ class StudentProfileView extends Component {
                                     />
 
                                     <p className="profile-avatar-text">
-                                        {profile.name}
+                                        {profile.firstName}
                                     </p>
                                 </div>
                             </Grid>
