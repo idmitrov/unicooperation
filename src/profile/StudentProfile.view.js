@@ -6,21 +6,15 @@ import {
     Grid,
     TextField,
     Tooltip,
-    Card,
-    CardContent,
-    Paper,
     IconButton
 } from '@material-ui/core';
 
 import {
     VerifiedUser,
-    ImportExport,
-    Publish,
-    MoreHoriz,
-    InsertLink,
-    Share,
-    MoreVert
+    MoreHoriz
 } from '@material-ui/icons';
+
+import { Trans } from 'react-i18next';
 
 import {
     fetchMyProfile,
@@ -47,9 +41,13 @@ class StudentProfileView extends Component {
                         <div className="profile-header-actions">
                             <Grid container justify="flex-end">
                                 <Grid item>
-                                    <IconButton>
-                                        <MoreHoriz />
-                                    </IconButton>
+                                    <Tooltip
+                                        title={<Trans>global.more</Trans>}
+                                        placement="left">
+                                        <IconButton>
+                                            <MoreHoriz />
+                                        </IconButton>
+                                    </Tooltip>
                                 </Grid>
                             </Grid>
                         </div>
@@ -98,7 +96,7 @@ class StudentProfileView extends Component {
                         <Grid container>
                             <Grid item xs={true}>
                                 <TextField
-                                    label="Faculty ID"
+                                    label={<Trans>student.facultyId.label</Trans>}
                                     name="facultyId"
                                     value={profile.facultyId || ''}
                                     fullWidth
