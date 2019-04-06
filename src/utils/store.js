@@ -10,18 +10,27 @@ import feedReducer from '../feed/Feed.reducer';
 import nomReducer from '../nomenclatures/nom.reducer';
 import profileReducer from '../profile/Profile.reducer';
 import sharedReducer from '../shared/shared.reducer';
+import { accountActionTypes } from '../account/Account.actions';
 
 import api from './api';
 
+const allReducers = combineReducers({
+    account: accountReducer,
+    app: appReducer,
+    feed: feedReducer,
+    nomenclatures: nomReducer,
+    profile: profileReducer,
+    shared: sharedReducer
+});
+
 const store = createStore(
-    combineReducers({
-        account: accountReducer,
-        app: appReducer,
-        feed: feedReducer,
-        nomenclatures: nomReducer,
-        profile: profileReducer,
-        shared: sharedReducer
-    }),
+    (state, action) => {
+        if (action.type === accountActionTypes.unsetAccount) {
+            state = undefined;
+        }
+
+        return allReducers(state, action);
+    },
     composeWithDevTools(
         applyMiddleware(
             thunk,
