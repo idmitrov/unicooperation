@@ -80,7 +80,7 @@ class StudentProfileView extends Component {
                                     <Grid item xs={true}>
                                         <TextField
                                             name="summary"
-                                            value={`Lorem ipsum dolor amet sit, Lorem ipsum dolor amet sit, Lorem ipsum dolor amet sit, Lorem ipsum dolor amet sit, Lorem ipsum dolor amet sit, Lorem ipsum dolor amet sit, Lorem ipsum dolor amet sit, Lorem ipsum dolor amet sit`}
+                                            value={profile.summary || ''}
                                             multiline
                                             fullWidth
                                             rowsMax="2"
@@ -94,11 +94,45 @@ class StudentProfileView extends Component {
 
                     <div className="profile-row">
                         <Grid container>
-                            <Grid item xs={true}>
+                            <Grid item xs={12}>
                                 <TextField
                                     label={<Trans>student.facultyId.label</Trans>}
                                     name="facultyId"
                                     value={profile.facultyId || ''}
+                                    fullWidth
+                                    // onChange={handleProfileUpdate}
+                                />
+                            </Grid>
+                        </Grid>
+                    </div>
+
+                    <div className="profile-row">
+                        <Grid container spacing={16}>
+                            <Grid item xs={12} md={4}>
+                                <TextField
+                                    label={<Trans>student.firstName.label</Trans>}
+                                    name="firstName"
+                                    value={profile.firstName || ''}
+                                    fullWidth
+                                    // onChange={handleProfileUpdate}
+                                />
+                            </Grid>
+
+                            <Grid item xs={12} md={4}>
+                                <TextField
+                                    label={<Trans>student.middleName.label</Trans>}
+                                    name="middleName"
+                                    value={profile.middleName || ''}
+                                    fullWidth
+                                    // onChange={handleProfileUpdate}
+                                />
+                            </Grid>
+
+                            <Grid item xs={12} md={4}>
+                                <TextField
+                                    label={<Trans>student.lastName.label</Trans>}
+                                    name="lastName"
+                                    value={profile.lastName || ''}
                                     fullWidth
                                     // onChange={handleProfileUpdate}
                                 />
