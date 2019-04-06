@@ -3,30 +3,57 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
 import {
-    Grid, Tooltip,
+    Grid,
+    TextField,
+    Tooltip,
+    Card,
+    CardContent,
+    Paper,
+    IconButton
 } from '@material-ui/core';
 
 import {
-    VerifiedUser
+    VerifiedUser,
+    ImportExport,
+    Publish,
+    MoreHoriz,
+    InsertLink,
+    Share,
+    MoreVert
 } from '@material-ui/icons';
 
-import { fetchMyProfile, setMyProfile } from './Profile.actions';
+import {
+    fetchMyProfile,
+    setMyProfile,
+    // updateMyProfile
+} from './Profile.actions';
+
 import './Profile.scss';
 
 class StudentProfileView extends Component {
     constructor(props) {
         super(props);
 
-        this.props.fetchMyProfile();
+        this.props.getMyProfile();
     }
 
     render() {
-        const { profile, account } = this.props;
+        const { profile, account, /*handleProfileUpdate*/ } = this.props;
 
         return (
             <Grid container justify="center" alignItems="flex-start">
                 <Grid item xs={12} md={6} className="feed-content">
                     <div className="profile-header">
+                        <div className="profile-header-actions">
+                            <Grid container justify="flex-end">
+                                <Grid item>
+                                    <IconButton>
+                                        <MoreHoriz />
+                                    </IconButton>
+                                </Grid>
+                            </Grid>
+                        </div>
+
                         <Grid container spacing={16} alignItems="center">
                             <Grid item>
                                 <div className="profile-avatar">
@@ -50,8 +77,33 @@ class StudentProfileView extends Component {
                                 </div>
                             </Grid>
 
-                            <Grid item>
-                                {profile.summary}
+                            <Grid item xs={true}>
+                                <Grid container alignItems="center" wrap="">
+                                    <Grid item xs={true}>
+                                        <TextField
+                                            name="summary"
+                                            value={`Lorem ipsum dolor amet sit, Lorem ipsum dolor amet sit, Lorem ipsum dolor amet sit, Lorem ipsum dolor amet sit, Lorem ipsum dolor amet sit, Lorem ipsum dolor amet sit, Lorem ipsum dolor amet sit, Lorem ipsum dolor amet sit`}
+                                            multiline
+                                            fullWidth
+                                            rowsMax="2"
+                                            // onChange={handleProfileUpdate}
+                                        />
+                                    </Grid>
+                                </Grid>
+                            </Grid>
+                        </Grid>
+                    </div>
+
+                    <div className="profile-row">
+                        <Grid container>
+                            <Grid item xs={true}>
+                                <TextField
+                                    label="Faculty ID"
+                                    name="facultyId"
+                                    value={profile.facultyId || ''}
+                                    fullWidth
+                                    // onChange={handleProfileUpdate}
+                                />
                             </Grid>
                         </Grid>
                     </div>
@@ -70,7 +122,12 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        fetchMyProfile() {
+        // handleProfileUpdate(e) {
+        //     const { name, value } = e.target;
+
+        //     return dispatch(updateMyProfile(name, value));
+        // },
+        getMyProfile() {
             return dispatch(fetchMyProfile())
                 .then((profileData) => {
                     return dispatch(setMyProfile(profileData));
