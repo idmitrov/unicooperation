@@ -36,7 +36,7 @@ class StudentProfileView extends Component {
 
         return (
             <Grid container justify="center" alignItems="flex-start">
-                <Grid item xs={12} md={6} className="feed-content">
+                <Grid item xs={12} md={6}>
                     <div className="profile-header">
                         <div className="profile-header-actions">
                             <Grid container justify="flex-end">
