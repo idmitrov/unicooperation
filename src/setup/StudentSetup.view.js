@@ -62,7 +62,7 @@ class StudentSetupView extends Component {
                                         type="text"
                                         name="firstName"
                                         value={this.state.firstName || ''}
-                                        label={<Trans>student.name.label</Trans>}
+                                        label={<Trans>student.firstName.label</Trans>}
                                         error={!this.state.isFirstNameDirty && !this.state.firstName}
                                         required
                                         fullWidth
