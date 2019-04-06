@@ -80,6 +80,7 @@ class StudentProfileView extends Component {
                                     <Grid item xs={true}>
                                         <TextField
                                             name="summary"
+                                            label={<Trans>student.summary.label</Trans>}
                                             value={profile.summary || ''}
                                             multiline
                                             fullWidth
