@@ -76,7 +76,7 @@ class StudentProfileView extends Component {
                             </Grid>
 
                             <Grid item xs={true}>
-                                <Grid container alignItems="center" wrap="">
+                                <Grid container alignItems="center">
                                     <Grid item xs={true}>
                                         <TextField
                                             name="summary"
