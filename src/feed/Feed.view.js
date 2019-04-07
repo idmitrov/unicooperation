@@ -9,7 +9,8 @@ import {
     CardActions,
     Grid,
     IconButton,
-    Tooltip
+    Tooltip,
+    TextField
 } from '@material-ui/core';
 
 import {
@@ -17,7 +18,8 @@ import {
     ThumbUp,
     Share,
     Message,
-    Sort
+    Sort,
+    Send
 } from '@material-ui/icons';
 
 import io from 'socket.io-client';
@@ -27,6 +29,10 @@ import './Feed.scss';
 class FeedView extends Component {
     constructor() {
         super();
+
+        this.state = {
+            isInputExpanded: false
+        };
 
         this.socket = io.connect('http://127.0.0.1:5000');
     }
@@ -47,29 +53,59 @@ class FeedView extends Component {
                                 id="feed-bar"
                                 color="secondary"
                                 position="sticky">
-                                <Grid container justify="space-between" alignItems="center">
-                                    <Grid item>
-                                        <Tooltip title="New post" placement="right">
-                                            <IconButton>
-                                                <Message />
-                                            </IconButton>
-                                        </Tooltip>
-                                    </Grid>
-                                    <Grid item>
-                                        <Tooltip title="Sort by" placement="left">
-                                            <IconButton>
-                                                <Sort />
-                                            </IconButton>
-                                        </Tooltip>
-                                    </Grid>
-                                </Grid>
+                                <form onSubmit={(e) => {
+                                    e.preventDefault();
+                                    this.setState({...this.state, isInputExpanded: !this.state.isInputExpanded});
 
-                                {/* TODO: Input */}
-                                {/* <Grid container>
-                                    <Grid item>
-                                       TEXTAREA
+                                    console.log('SUBMIT FORM!');
+                                }}>
+                                    <div className={`bar-input ${this.state.isInputExpanded ? 'expanded' : ''}`}>
+                                        <div className="bar-input-inner">
+                                            <Grid container alignItems="center">
+                                                <Grid item xs={12}>
+                                                    <TextField
+                                                        label="Enter your message"
+                                                        required
+                                                        multiline
+                                                        fullWidth
+                                                    />
+                                                </Grid>
+                                            </Grid>
+                                        </div>
+                                    </div>
+
+                                    <Grid container justify="space-between" alignItems="center">
+                                        <Grid item>
+                                            {
+                                                this.state.isInputExpanded ? (
+                                                    <div>
+                                                        <Tooltip title="Submit post" placement="right">
+                                                            <IconButton type="submit">
+                                                                <Send />
+                                                            </IconButton>
+                                                        </Tooltip>
+                                                    </div>
+                                                ) : (
+                                                    <Tooltip title="New post" placement="right">
+                                                        <IconButton
+                                                            type="button"
+                                                            onClick={() => this.setState({...this.state, isInputExpanded: !this.state.isInputExpanded})}>
+                                                            <Message />
+                                                        </IconButton>
+                                                    </Tooltip>
+                                                )
+                                            }
+                                        </Grid>
+
+                                        <Grid item>
+                                            <Tooltip title="Sort by" placement="left">
+                                                <IconButton type="button">
+                                                    <Sort />
+                                                </IconButton>
+                                            </Tooltip>
+                                        </Grid>
                                     </Grid>
-                                </Grid> */}
+                                </form>
                             </AppBar>
 
                             {
