@@ -35,9 +35,12 @@ class FeedView extends Component {
         };
 
         this.socket = io.connect('http://127.0.0.1:5000');
+        this.socket.on('connect', () => {
+            console.log('connected to socket!')
+        });
     }
 
-    componentWillMount() {
+    componentWillUnmount() {
         this.socket.disconnect();
     }
 
