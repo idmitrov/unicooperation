@@ -27,16 +27,21 @@ import io from 'socket.io-client';
 import './Feed.scss';
 
 class FeedView extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
 
         this.state = {
             isInputExpanded: false
         };
 
-        this.socket = io.connect('http://127.0.0.1:5000');
+        this.socket = io.connect('http://127.0.0.1:5000/publications', {
+            query: {
+                token: this.props.account.token
+            }
+        });
+
         this.socket.on('connect', () => {
-            console.log('connected to socket!')
+            this.socket.emit('join', this.props.account.token);
         });
     }
 
@@ -166,6 +171,7 @@ class FeedView extends Component {
 
 const mapStateToProps = (state) => {
     return {
+        account: state.account,
         data: state.feed.data
     };
 }
