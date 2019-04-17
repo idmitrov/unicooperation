@@ -33,7 +33,7 @@ const PrivateRoute = ({ component: Component, fallbackComponent: FallBackCompone
 }
 
 export const Routes = ({ account }) => {
-    const authenticated = account.authenticated && account.profileId;
+    const authenticated = account.authenticated && account.profile;
 
     return (
         <Switch>
