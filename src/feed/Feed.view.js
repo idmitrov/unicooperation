@@ -19,7 +19,8 @@ import {
     Share,
     Message,
     Sort,
-    Send
+    Send,
+    Close
 } from '@material-ui/icons';
 
 import io from 'socket.io-client';
@@ -33,7 +34,8 @@ class FeedView extends Component {
         super(props);
 
         this.state = {
-            isInputExpanded: false
+            isInputExpanded: false,
+            inputMessage: ''
         };
 
         // TODO: Extract consts and interfaces
@@ -67,7 +69,11 @@ class FeedView extends Component {
                                 position="sticky">
                                 <form onSubmit={(e) => {
                                     e.preventDefault();
-                                    this.setState({...this.state, isInputExpanded: !this.state.isInputExpanded});
+
+                                    this.setState({
+                                        ...this.state,
+                                        isInputExpanded: !this.state.isInputExpanded,
+                                    });
 
                                     console.log('SUBMIT FORM!');
                                 }}>
@@ -77,9 +83,11 @@ class FeedView extends Component {
                                                 <Grid item xs={12}>
                                                     <TextField
                                                         label="Enter your message"
+                                                        value={this.state.inputMessage}
                                                         required
                                                         multiline
                                                         fullWidth
+                                                        onChange={(e) => this.setState({ ...this.state, inputMessage: e.target.value })}
                                                     />
                                                 </Grid>
                                             </Grid>
@@ -91,21 +99,33 @@ class FeedView extends Component {
                                             {
                                                 this.state.isInputExpanded ? (
                                                     <div>
-                                                        <Tooltip title="Submit post" placement="right">
-                                                            <IconButton type="submit">
-                                                                <Send />
-                                                            </IconButton>
-                                                        </Tooltip>
+                                                        {
+                                                            this.state.inputMessage && this.state.inputMessage ? (
+                                                                <Tooltip title="Submit post" placement="right">
+                                                                    <IconButton type="submit">
+                                                                        <Send />
+                                                                    </IconButton>
+                                                                </Tooltip>
+                                                            ) : (
+                                                                <Tooltip title="Cancel" placement="right">
+                                                                    <IconButton
+                                                                        type="button"
+                                                                        onClick={() => this.setState({ ...this.state, isInputExpanded: false })}>
+                                                                        <Close />
+                                                                    </IconButton>
+                                                                </Tooltip>
+                                                            )
+                                                        }
                                                     </div>
                                                 ) : (
-                                                    <Tooltip title="New post" placement="right">
-                                                        <IconButton
-                                                            type="button"
-                                                            onClick={() => this.setState({...this.state, isInputExpanded: !this.state.isInputExpanded})}>
-                                                            <Message />
-                                                        </IconButton>
-                                                    </Tooltip>
-                                                )
+                                                        <Tooltip title="New post" placement="right">
+                                                            <IconButton
+                                                                type="button"
+                                                                onClick={() => this.setState({ ...this.state, isInputExpanded: true, inputMessage: '' })}>
+                                                                <Message />
+                                                            </IconButton>
+                                                        </Tooltip>
+                                                    )
                                             }
                                         </Grid>
 
