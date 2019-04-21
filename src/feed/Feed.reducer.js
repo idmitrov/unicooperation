@@ -7,8 +7,6 @@ const feedDefaults = {
 export default (state = feedDefaults, action) => {
     switch (action.type) {
         case feedActionTypes.setPublicationsList: {
-            console.log(action);
-
             return {
                 ...state,
                 list: action.payload
