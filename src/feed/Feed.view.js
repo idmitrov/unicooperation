@@ -26,6 +26,8 @@ import io from 'socket.io-client';
 
 import './Feed.scss';
 
+import { fetchPublicationsList, setPublicationsList } from './Feed.actions';
+
 class FeedView extends Component {
     constructor(props) {
         super(props);
@@ -34,15 +36,17 @@ class FeedView extends Component {
             isInputExpanded: false
         };
 
+        // TODO: Extract consts and interfaces
         this.socket = io.connect('http://127.0.0.1:5000/publications', {
             query: {
                 token: this.props.account.token
             }
         });
-
         this.socket.on('connect', () => {
-            this.socket.emit('join', this.props.account.token);
+            this.socket.emit('join');
         });
+
+        this.props.fetchPublications();
     }
 
     componentWillUnmount() {
@@ -50,7 +54,7 @@ class FeedView extends Component {
     }
 
     render() {
-        const { data } = this.props;
+        const { list } = this.props;
 
         return (
             <div className="feed">
@@ -117,7 +121,7 @@ class FeedView extends Component {
                             </AppBar>
 
                             {
-                                data.map((item, index) => {
+                                list.map((item, index) => {
                                     return (
                                         <Card key={index} className="feed-item">
                                             <CardHeader
@@ -172,13 +176,18 @@ class FeedView extends Component {
 const mapStateToProps = (state) => {
     return {
         account: state.account,
-        data: state.feed.data
+        list: state.feed.list
     };
 }
 
-const mapDispatchToProps = () => {
+const mapDispatchToProps = (dispatch) => {
     return {
-
+        fetchPublications() {
+            return dispatch(fetchPublicationsList())
+                .then((publications) => {
+                    return dispatch(setPublicationsList(publications));
+                });
+        }
     };
 }
 
