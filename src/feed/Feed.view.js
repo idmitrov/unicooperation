@@ -216,8 +216,8 @@ const mapDispatchToProps = (dispatch) => {
         },
         createPublication(publication) {
             return dispatch(createPublication(publication))
-                .then((createdPublication) => {
-                    console.log(createdPublication);
+                .then((publicationsUpdated) => {
+                    return dispatch(setPublicationsList(publicationsUpdated));
                 });
         }
     };
