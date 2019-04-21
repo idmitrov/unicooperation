@@ -27,7 +27,11 @@ import io from 'socket.io-client';
 
 import './Feed.scss';
 
-import { fetchPublicationsList, setPublicationsList } from './Feed.actions';
+import {
+    createPublication,
+    fetchPublicationsList,
+    setPublicationsList
+} from './Feed.actions';
 
 class FeedView extends Component {
     constructor(props) {
@@ -56,7 +60,7 @@ class FeedView extends Component {
     }
 
     render() {
-        const { list } = this.props;
+        const { list, createPublication } = this.props;
 
         return (
             <div className="feed">
@@ -70,12 +74,14 @@ class FeedView extends Component {
                                 <form onSubmit={(e) => {
                                     e.preventDefault();
 
+                                    createPublication({
+                                        content: this.state.inputMessage
+                                    });
+
                                     this.setState({
                                         ...this.state,
                                         isInputExpanded: !this.state.isInputExpanded,
                                     });
-
-                                    console.log('SUBMIT FORM!');
                                 }}>
                                     <div className={`bar-input ${this.state.isInputExpanded ? 'expanded' : ''}`}>
                                         <div className="bar-input-inner">
@@ -118,14 +124,14 @@ class FeedView extends Component {
                                                         }
                                                     </div>
                                                 ) : (
-                                                        <Tooltip title="New post" placement="right">
-                                                            <IconButton
-                                                                type="button"
-                                                                onClick={() => this.setState({ ...this.state, isInputExpanded: true, inputMessage: '' })}>
-                                                                <Message />
-                                                            </IconButton>
-                                                        </Tooltip>
-                                                    )
+                                                    <Tooltip title="New post" placement="right">
+                                                        <IconButton
+                                                            type="button"
+                                                            onClick={() => this.setState({ ...this.state, isInputExpanded: true, inputMessage: '' })}>
+                                                            <Message />
+                                                        </IconButton>
+                                                    </Tooltip>
+                                                )
                                             }
                                         </Grid>
 
@@ -206,6 +212,12 @@ const mapDispatchToProps = (dispatch) => {
             return dispatch(fetchPublicationsList())
                 .then((publications) => {
                     return dispatch(setPublicationsList(publications));
+                });
+        },
+        createPublication(publication) {
+            return dispatch(createPublication(publication))
+                .then((createdPublication) => {
+                    console.log(createdPublication);
                 });
         }
     };
