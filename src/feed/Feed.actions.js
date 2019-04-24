@@ -3,7 +3,8 @@ import feedEndpoints from './Feed.endpoints';
 export const feedActionTypes = {
     fetchPublicationsList: 'PUBLICATIONS_LIST_FETCH',
     setPublicationsList: 'PUBLICATIONS_LIST_SET',
-    createPublication: 'PUBLICATION_CREATE'
+    createPublication: 'PUBLICATION_CREATE',
+    setIsUpToDatePublicationsList: 'PUBLICATIONS_LIST_IS_UP_TO_DATE_SET'
 };
 
 export const fetchPublicationsList = () => (dispatch) => {
@@ -31,5 +32,12 @@ export const createPublication = (publication) => (dispatch) => {
             endpoint: feedEndpoints.createPublication.endpoint,
             method: feedEndpoints.createPublication.method
         }
+    });
+}
+
+export const setIsUpToDatePublicationsList = (isUpToDate) => (dispatch) => {
+    return dispatch({
+        type:  feedActionTypes.setIsUpToDatePublicationsList,
+        payload: isUpToDate
     });
 }

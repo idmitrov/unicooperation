@@ -20,7 +20,8 @@ import {
     Message,
     Sort,
     Send,
-    Close
+    Close,
+    Update
 } from '@material-ui/icons';
 
 import io from 'socket.io-client';
@@ -30,7 +31,8 @@ import './Feed.scss';
 import {
     createPublication,
     fetchPublicationsList,
-    setPublicationsList
+    setPublicationsList,
+    setIsUpToDatePublicationsList
 } from './Feed.actions';
 
 class FeedView extends Component {
@@ -52,8 +54,7 @@ class FeedView extends Component {
             this.socket.emit('join');
         });
         this.socket.on('update', () => {
-            // TODO: Ask for permissions
-            this.props.fetchPublications();
+            this.props.notifyForAvailableUpdate();
         });
 
         this.props.fetchPublications();
@@ -64,7 +65,7 @@ class FeedView extends Component {
     }
 
     render() {
-        const { list, createPublication } = this.props;
+        const { list, updateAvailable, createPublication, fetchPublications } = this.props;
 
         return (
             <div className="feed">
@@ -139,7 +140,18 @@ class FeedView extends Component {
                                             }
                                         </Grid>
 
+
                                         <Grid item>
+                                            {
+                                                updateAvailable ? (
+                                                    <Tooltip title="Get latest publications">
+                                                        <IconButton onClick={fetchPublications}>
+                                                            <Update />
+                                                        </IconButton>
+                                                    </Tooltip>
+                                                ) : (null)
+                                            }
+
                                             <Tooltip title="Sort by" placement="left">
                                                 <IconButton type="button">
                                                     <Sort />
@@ -206,7 +218,8 @@ class FeedView extends Component {
 const mapStateToProps = (state) => {
     return {
         account: state.account,
-        list: state.feed.list
+        list: state.feed.list,
+        updateAvailable: !state.feed.isUpToDate
     };
 }
 
@@ -223,6 +236,9 @@ const mapDispatchToProps = (dispatch) => {
                 .then((publicationsUpdated) => {
                     return dispatch(setPublicationsList(publicationsUpdated));
                 });
+        },
+        notifyForAvailableUpdate() {
+            return dispatch(setIsUpToDatePublicationsList(false));
         }
     };
 }
