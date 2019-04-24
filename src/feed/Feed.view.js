@@ -51,6 +51,10 @@ class FeedView extends Component {
         this.socket.on('connect', () => {
             this.socket.emit('join');
         });
+        this.socket.on('update', () => {
+            // TODO: Ask for permissions
+            this.props.fetchPublications();
+        });
 
         this.props.fetchPublications();
     }
