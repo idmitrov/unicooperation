@@ -2,7 +2,11 @@ import { feedActionTypes } from './Feed.actions';
 
 const feedDefaults = {
     list: [],
-    isUpToDate: true
+    isUpToDate: true,
+    sortBy: 'createdAt',
+    skip: 0,
+    limit: 10,
+    hasMore: true
 };
 
 export default (state = feedDefaults, action) => {
@@ -13,11 +17,14 @@ export default (state = feedDefaults, action) => {
                 isUpToDate: action.payload
             }
         }
-        case feedActionTypes.setPublicationsList: {
+        case feedActionTypes.setPublicationsList:
+        case feedActionTypes.setRecentPublicationsList: {
             return {
                 ...state,
-                list: action.payload,
-                isUpToDate: true
+                list: action.payload.list,
+                hasMore: action.payload.hasMore,
+                isUpToDate: true,
+                skip: state.skip + state.limit
             }
         }
         default: return state;

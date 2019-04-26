@@ -6,7 +6,9 @@ import feedEndpoints from './Feed.endpoints';
  */
 export const feedActionTypes = {
     fetchPublicationsList: 'PUBLICATIONS_LIST_FETCH',
+    fetchRecentPublicationsList: 'PUBLICATIONS_RECENT_LIST_FETCH',
     setPublicationsList: 'PUBLICATIONS_LIST_SET',
+    setRecentPublicationsList: 'PUBLICATIONS_RECENT_LIST_SET',
     createPublication: 'PUBLICATION_CREATE',
     setIsUpToDatePublicationsList: 'PUBLICATIONS_LIST_IS_UP_TO_DATE_SET'
 };
@@ -15,9 +17,49 @@ export const feedActionTypes = {
  * Call the API to fetch the publications list
  * @name fetchPublicationsList
  */
-export const fetchPublicationsList = () => (dispatch) => {
+export const fetchPublicationsList = () => (dispatch, getState) => {
+    const publicationsState = getState().feed;
+    const { skip, limit, sortBy } = publicationsState;
+
     return dispatch({
         type: feedActionTypes.fetchPublicationsList,
+        api: {
+            endpoint: feedEndpoints.getPublicationsList.endpoint,
+            method: feedEndpoints.getPublicationsList.method,
+            query: `sort=${sortBy}&skip=${skip}&limit=${limit}`
+        }
+    });
+}
+
+/**
+ *  Receive publications list and set it into the store
+ *  along with the previously loaded publications
+ *  @name setPublicationsList
+ */
+export const setPublicationsList = (publications) => (dispatch, getState) => {
+    const state = getState();
+    const previouslyLoadedPublications = state.feed.list;
+    const allLoadedPublications = [
+        ...previouslyLoadedPublications,
+        ...publications.list
+    ];
+
+    return dispatch({
+        type: feedActionTypes.setPublicationsList,
+        payload: {
+            list: allLoadedPublications,
+            hasMore: publications.hasMore
+        }
+    });
+}
+
+/**
+ * Call the API to fetch the publications list by getting only the recent publications
+ * @name fetchRecentPublicationsList
+ */
+export const fetchRecentPublicationsList = () => (dispatch) => {
+    return dispatch({
+        type: feedActionTypes.fetchRecentPublicationsList,
         api: {
             endpoint: feedEndpoints.getPublicationsList.endpoint,
             method: feedEndpoints.getPublicationsList.method
@@ -26,13 +68,17 @@ export const fetchPublicationsList = () => (dispatch) => {
 }
 
 /**
- *  Receive publications list and set it into the store
- *  @name setPublicationsList
+ *  Receive the recent publications list and set it to the store
+ *  without to keep the previously loaded publications
+ *  @name setRecentPublicationsList
  */
-export const setPublicationsList = (publications) => (dispatch) => {
+export const setRecentPublicationsList = (publications) => (dispatch) => {
     return dispatch({
-        type: feedActionTypes.setPublicationsList,
-        payload: publications
+        type: feedActionTypes.setRecentPublicationsList,
+        payload: {
+            list: publications,
+            hasMore: true
+        }
     });
 }
 
