@@ -37,8 +37,8 @@ export const fetchPublicationsList = () => (dispatch, getState) => {
  *  @name setPublicationsList
  */
 export const setPublicationsList = (publications) => (dispatch, getState) => {
-    const state = getState();
-    const previouslyLoadedPublications = state.feed.list;
+    const publicationsState = getState().feed;
+    const previouslyLoadedPublications = publicationsState.list;
     const allLoadedPublications = [
         ...previouslyLoadedPublications,
         ...publications.list
@@ -49,7 +49,7 @@ export const setPublicationsList = (publications) => (dispatch, getState) => {
         payload: {
             list: allLoadedPublications,
             hasMore: publications.hasMore,
-            skip: state.feed.skip + state.feed.limit
+            skip: publicationsState.skip + publicationsState.limit
         }
     });
 }
