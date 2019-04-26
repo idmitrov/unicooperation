@@ -1,5 +1,9 @@
 import feedEndpoints from './Feed.endpoints';
 
+/**
+ * All action types related to FEED/PUBLICATIONS
+ * @name feedActionTypes
+ */
 export const feedActionTypes = {
     fetchPublicationsList: 'PUBLICATIONS_LIST_FETCH',
     setPublicationsList: 'PUBLICATIONS_LIST_SET',
@@ -7,6 +11,10 @@ export const feedActionTypes = {
     setIsUpToDatePublicationsList: 'PUBLICATIONS_LIST_IS_UP_TO_DATE_SET'
 };
 
+/**
+ * Call the API to fetch the publications list
+ * @name fetchPublicationsList
+ */
 export const fetchPublicationsList = () => (dispatch) => {
     return dispatch({
         type: feedActionTypes.fetchPublicationsList,
@@ -17,6 +25,10 @@ export const fetchPublicationsList = () => (dispatch) => {
     });
 }
 
+/**
+ *  Receive publications list and set it into the store
+ *  @name setPublicationsList
+ */
 export const setPublicationsList = (publications) => (dispatch) => {
     return dispatch({
         type: feedActionTypes.setPublicationsList,
@@ -24,6 +36,10 @@ export const setPublicationsList = (publications) => (dispatch) => {
     });
 }
 
+/**
+ *  Create a new publication
+ *  @name createPublication
+ */
 export const createPublication = (publication) => (dispatch) => {
     return dispatch({
         type: feedActionTypes.createPublication,
@@ -35,6 +51,10 @@ export const createPublication = (publication) => (dispatch) => {
     });
 }
 
+/**
+ *  Set the store propert isUpToDate of the publications list
+ *  @name setIsUpToDatePublicationsList
+ */
 export const setIsUpToDatePublicationsList = (isUpToDate) => (dispatch) => {
     return dispatch({
         type:  feedActionTypes.setIsUpToDatePublicationsList,
