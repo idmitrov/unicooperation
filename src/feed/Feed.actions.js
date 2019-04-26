@@ -48,7 +48,8 @@ export const setPublicationsList = (publications) => (dispatch, getState) => {
         type: feedActionTypes.setPublicationsList,
         payload: {
             list: allLoadedPublications,
-            hasMore: publications.hasMore
+            hasMore: publications.hasMore,
+            skip: state.feed.skip + state.feed.skip.limit
         }
     });
 }
@@ -72,12 +73,15 @@ export const fetchRecentPublicationsList = () => (dispatch) => {
  *  without to keep the previously loaded publications
  *  @name setRecentPublicationsList
  */
-export const setRecentPublicationsList = (publications) => (dispatch) => {
+export const setRecentPublicationsList = (publications) => (dispatch, getState) => {
+    const publicationsState = getState().feed;
+
     return dispatch({
         type: feedActionTypes.setRecentPublicationsList,
         payload: {
-            list: publications,
-            hasMore: true
+            list: publications.list,
+            hasMore: publications.hasMore,
+            skip: publicationsState.limit
         }
     });
 }

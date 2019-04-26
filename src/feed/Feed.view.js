@@ -33,6 +33,7 @@ import './Feed.scss';
 import {
     createPublication,
     fetchPublicationsList,
+    fetchRecentPublicationsList,
     setPublicationsList,
     setIsUpToDatePublicationsList,
     setRecentPublicationsList
@@ -73,7 +74,7 @@ class FeedView extends Component {
             isUpdateAvailable,
             createPublication,
             fetchPublications,
-            fetchPublicationsListUpdate,
+            fetchRecentPublicationsList,
         } = this.props;
 
         return (
@@ -154,7 +155,7 @@ class FeedView extends Component {
                                             {
                                                 isUpdateAvailable ? (
                                                     <Tooltip title="Get latest publications">
-                                                        <IconButton onClick={fetchPublicationsListUpdate}>
+                                                        <IconButton onClick={fetchRecentPublicationsList}>
                                                             <Update />
                                                         </IconButton>
                                                     </Tooltip>
@@ -241,8 +242,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        fetchPublicationsListUpdate() {
-            return dispatch(fetchPublicationsList())
+        fetchRecentPublicationsList() {
+            return dispatch(fetchRecentPublicationsList())
                 .then((publications) => {
                     return dispatch(setRecentPublicationsList(publications));
                 });
@@ -256,7 +257,7 @@ const mapDispatchToProps = (dispatch) => {
         createPublication(publication) {
             return dispatch(createPublication(publication))
                 .then((publicationsUpdated) => {
-                    return dispatch(setPublicationsList(publicationsUpdated));
+                    return dispatch(setRecentPublicationsList(publicationsUpdated));
                 });
         },
         notifyForAvailableUpdate() {

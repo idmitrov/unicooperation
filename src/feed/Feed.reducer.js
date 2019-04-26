@@ -24,7 +24,7 @@ export default (state = feedDefaults, action) => {
                 list: action.payload.list,
                 hasMore: action.payload.hasMore,
                 isUpToDate: true,
-                skip: state.skip + state.limit
+                skip: action.payload.skip
             }
         }
         default: return state;
