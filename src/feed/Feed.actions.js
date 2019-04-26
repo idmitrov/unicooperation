@@ -49,7 +49,7 @@ export const setPublicationsList = (publications) => (dispatch, getState) => {
         payload: {
             list: allLoadedPublications,
             hasMore: publications.hasMore,
-            skip: state.feed.skip + state.feed.skip.limit
+            skip: state.feed.skip + state.feed.limit
         }
     });
 }
