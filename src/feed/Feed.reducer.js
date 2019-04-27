@@ -6,7 +6,7 @@ const feedDefaults = {
     sortBy: 'createdAt',
     skip: 0,
     limit: 10,
-    hasMore: true
+    hasMore: false
 };
 
 export default (state = feedDefaults, action) => {

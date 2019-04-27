@@ -60,6 +60,8 @@ class FeedView extends Component {
         this.socket.on('update', () => {
             this.props.notifyForAvailableUpdate();
         });
+
+        this.props.fetchRecentPublicationsList();
     }
 
     componentWillUnmount() {
