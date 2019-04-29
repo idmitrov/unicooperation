@@ -6,8 +6,7 @@ import {
     Grid,
     TextField,
     Tooltip,
-    IconButton,
-    Avatar
+    IconButton
 } from '@material-ui/core';
 
 import {
@@ -78,10 +77,6 @@ class StudentProfileView extends Component {
                                             }
                                         }
                                     </Translation>
-
-                                    {/* <p className="profile-avatar-text">
-                                        {profile.facultyId}
-                                    </p> */}
                                 </div>
                             </Grid>
 
