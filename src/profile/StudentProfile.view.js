@@ -79,9 +79,9 @@ class StudentProfileView extends Component {
                                         }
                                     </Translation>
 
-                                    <p className="profile-avatar-text">
-                                        {profile.firstName}
-                                    </p>
+                                    {/* <p className="profile-avatar-text">
+                                        {profile.facultyId}
+                                    </p> */}
                                 </div>
                             </Grid>
 
