@@ -1,8 +1,6 @@
 import { profileActionTypes } from './Profile.actions';
 
-const profileDefaults = {
-    firstName: ''
-};
+const profileDefaults = {};
 
 export default (state = profileDefaults, action) => {
     switch (action.type) {
