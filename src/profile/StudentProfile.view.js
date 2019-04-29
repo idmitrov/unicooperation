@@ -6,7 +6,8 @@ import {
     Grid,
     TextField,
     Tooltip,
-    IconButton
+    IconButton,
+    Avatar
 } from '@material-ui/core';
 
 import {
@@ -14,12 +15,12 @@ import {
     MoreHoriz
 } from '@material-ui/icons';
 
-import { Trans } from 'react-i18next';
+import { Trans, Translation } from 'react-i18next';
 
 import {
     fetchMyProfile,
     setMyProfile,
-    // updateMyProfile
+    updateMyProfile
 } from './Profile.actions';
 
 import './Profile.scss';
@@ -32,7 +33,7 @@ class StudentProfileView extends Component {
     }
 
     render() {
-        const { profile, account, /*handleProfileUpdate*/ } = this.props;
+        const { profile, account, handleProfileUpdate } = this.props;
 
         return (
             <Grid container justify="center" alignItems="flex-start">
@@ -63,11 +64,20 @@ class StudentProfileView extends Component {
                                         </Tooltip>
                                     </div>
 
-                                    <img
-                                        className="profile-avatar-image"
-                                        src={account.avatar || `${process.env.PUBLIC_URL}/avatar-default.png`}
-                                        alt="User avatar"
-                                    />
+                                    <Translation>
+                                        {
+                                            (t) => {
+                                                return(
+                                                    <div className="profile-avatar-image" data-hover-text={t('global.edit')}>
+                                                        <img
+                                                            src={account.avatar || `${process.env.PUBLIC_URL}/avatar-default.png`}
+                                                            alt="User avatar"
+                                                        />
+                                                    </div>
+                                                )
+                                            }
+                                        }
+                                    </Translation>
 
                                     <p className="profile-avatar-text">
                                         {profile.firstName}
@@ -85,7 +95,7 @@ class StudentProfileView extends Component {
                                             multiline
                                             fullWidth
                                             rowsMax="2"
-                                        // onChange={handleProfileUpdate}
+                                            onChange={handleProfileUpdate}
                                         />
                                     </Grid>
                                 </Grid>
@@ -101,7 +111,7 @@ class StudentProfileView extends Component {
                                     name="facultyId"
                                     value={profile.facultyId || ''}
                                     fullWidth
-                                    // onChange={handleProfileUpdate}
+                                    onChange={handleProfileUpdate}
                                 />
                             </Grid>
                         </Grid>
@@ -115,7 +125,7 @@ class StudentProfileView extends Component {
                                     name="firstName"
                                     value={profile.firstName || ''}
                                     fullWidth
-                                // onChange={handleProfileUpdate}
+                                    onChange={handleProfileUpdate}
                                 />
                             </Grid>
 
@@ -125,7 +135,7 @@ class StudentProfileView extends Component {
                                     name="middleName"
                                     value={profile.middleName || ''}
                                     fullWidth
-                                // onChange={handleProfileUpdate}
+                                    onChange={handleProfileUpdate}
                                 />
                             </Grid>
 
@@ -135,7 +145,7 @@ class StudentProfileView extends Component {
                                     name="lastName"
                                     value={profile.lastName || ''}
                                     fullWidth
-                                // onChange={handleProfileUpdate}
+                                    onChange={handleProfileUpdate}
                                 />
                             </Grid>
                         </Grid>
@@ -155,11 +165,11 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        // handleProfileUpdate(e) {
-        //     const { name, value } = e.target;
+        handleProfileUpdate(e) {
+            const { name, value } = e.target;
 
-        //     return dispatch(updateMyProfile(name, value));
-        // },
+            return dispatch(updateMyProfile(name, value));
+        },
         getMyProfile() {
             return dispatch(fetchMyProfile())
                 .then((profileData) => {
