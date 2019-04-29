@@ -20,7 +20,7 @@ import { Trans, Translation } from 'react-i18next';
 import {
     fetchMyProfile,
     setMyProfile,
-    updateMyProfile
+    updateMyProfileData
 } from './Profile.actions';
 
 import './Profile.scss';
@@ -168,7 +168,7 @@ const mapDispatchToProps = (dispatch) => {
         handleProfileUpdate(e) {
             const { name, value } = e.target;
 
-            return dispatch(updateMyProfile(name, value));
+            return dispatch(updateMyProfileData(name, value));
         },
         getMyProfile() {
             return dispatch(fetchMyProfile())

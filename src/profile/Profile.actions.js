@@ -29,6 +29,6 @@ export const setMyProfile = (profile) => (dispatch) => {
     });
 }
 
-export const updateMyProfile = (updatePath, updateValue) => (dispatch) => {
+export const updateMyProfileData = (updatePath, updateValue) => (dispatch) => {
     console.log(updatePath, updateValue);
 }
