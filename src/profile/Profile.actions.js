@@ -37,6 +37,7 @@ export const updateMyProfile = (updates) => (dispatch, getState) => {
 
     if (updates.avatar) {
         let formData = new FormData();
+
         formData.append('avatar', updates.avatar);
         action.file = formData;
         action.payload = null;

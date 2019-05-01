@@ -169,7 +169,10 @@ const mapDispatchToProps = (dispatch) => {
             const { name, files } = e.target;
             const updates = { [name]: files[0] };
 
-            return dispatch(updateMyProfile(updates));
+            return dispatch(updateMyProfile(updates))
+                .then((updatedProfile) => {
+                    return dispatch(setMyProfile(updatedProfile));
+                });
         },
         handleProfileChange(e) {
             const { name, value } = e.target;
