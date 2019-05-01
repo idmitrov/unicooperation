@@ -8,13 +8,23 @@ export default (store) => (next) => (action) => {
         let options = {
             method: action.api.method,
             headers: {
-                'Accept': 'application/json, text/plain, */*',
-                'Content-Type': 'application/json'
+                'Accept': 'application/json, text/plain, */*'
             }
         };
 
-        if (/^POST$|^PUT$|^PATCH$/.test(options.method) && action.payload) {
-            options.body = JSON.stringify(action.payload);
+        if (action.headers) {
+            for (let key in action.headers) {
+                options.headers[key] = action.headers[key];
+            }
+        }
+
+        if (/^POST$|^PUT$|^PATCH$/.test(options.method)) {
+            if (action.payload) {
+                options.body = JSON.stringify(action.payload);
+                options.headers['Content-Type'] = 'application/json';
+            } else if (action.file || action.files) {
+                options.body = action.file;
+            }
         }
 
         if (action.api.query) {

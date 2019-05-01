@@ -14,12 +14,14 @@ import {
     MoreHoriz
 } from '@material-ui/icons';
 
-import { Trans, Translation } from 'react-i18next';
+import { Trans } from 'react-i18next';
 
 import {
     fetchMyProfile,
     setMyProfile,
-    updateMyProfileData
+    changeProfileData,
+    updateMyProfile
+
 } from './Profile.actions';
 
 import './Profile.scss';
@@ -32,7 +34,7 @@ class StudentProfileView extends Component {
     }
 
     render() {
-        const { profile, account, handleProfileUpdate } = this.props;
+        const { profile, handleProfileChange, handleProfileAvatarChange } = this.props;
 
         return (
             <Grid container justify="center" alignItems="flex-start">
@@ -63,20 +65,24 @@ class StudentProfileView extends Component {
                                         </Tooltip>
                                     </div>
 
-                                    <Translation>
-                                        {
-                                            (t) => {
-                                                return(
-                                                    <div className="profile-avatar-image" data-hover-text={t('global.edit')}>
-                                                        <img
-                                                            src={account.avatar || `${process.env.PUBLIC_URL}/avatar-default.png`}
-                                                            alt="User avatar"
-                                                        />
-                                                    </div>
-                                                )
-                                            }
-                                        }
-                                    </Translation>
+                                    <div className="profile-avatar-image">
+                                        <label htmlFor="profile-avatar-input" className="profile-avatar-label">
+                                            <Trans>global.edit</Trans>
+                                        </label>
+
+                                        <input
+                                            type="file"
+                                            name="avatar"
+                                            id="profile-avatar-input"
+                                            className="profile-avatar-input"
+                                            onChange={handleProfileAvatarChange}
+                                        />
+
+                                        <img
+                                            src={profile.avatar || `${process.env.PUBLIC_URL}/avatar-default.png`}
+                                            alt="User avatar"
+                                        />
+                                    </div>
                                 </div>
                             </Grid>
 
@@ -90,7 +96,7 @@ class StudentProfileView extends Component {
                                             multiline
                                             fullWidth
                                             rowsMax="2"
-                                            onChange={handleProfileUpdate}
+                                            onChange={handleProfileChange}
                                         />
                                     </Grid>
                                 </Grid>
@@ -106,7 +112,7 @@ class StudentProfileView extends Component {
                                     name="facultyId"
                                     value={profile.facultyId || ''}
                                     fullWidth
-                                    onChange={handleProfileUpdate}
+                                    onChange={handleProfileChange}
                                 />
                             </Grid>
                         </Grid>
@@ -120,7 +126,7 @@ class StudentProfileView extends Component {
                                     name="firstName"
                                     value={profile.firstName || ''}
                                     fullWidth
-                                    onChange={handleProfileUpdate}
+                                    onChange={handleProfileChange}
                                 />
                             </Grid>
 
@@ -130,7 +136,7 @@ class StudentProfileView extends Component {
                                     name="middleName"
                                     value={profile.middleName || ''}
                                     fullWidth
-                                    onChange={handleProfileUpdate}
+                                    onChange={handleProfileChange}
                                 />
                             </Grid>
 
@@ -140,7 +146,7 @@ class StudentProfileView extends Component {
                                     name="lastName"
                                     value={profile.lastName || ''}
                                     fullWidth
-                                    onChange={handleProfileUpdate}
+                                    onChange={handleProfileChange}
                                 />
                             </Grid>
                         </Grid>
@@ -153,17 +159,26 @@ class StudentProfileView extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        profile: state.profile,
-        account: state.account
+        profile: state.profile
     };
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        handleProfileUpdate(e) {
+        handleProfileAvatarChange(e) {
+            const { name, files } = e.target;
+            const updates = { [name]: files[0] };
+
+            return dispatch(updateMyProfile(updates));
+        },
+        handleProfileChange(e) {
             const { name, value } = e.target;
 
-            return dispatch(updateMyProfileData(name, value));
+            // TODO: Handle avatar here
+            return dispatch(changeProfileData(name, value));
+        },
+        updateProfile() {
+
         },
         getMyProfile() {
             return dispatch(fetchMyProfile())
