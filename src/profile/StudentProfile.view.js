@@ -108,13 +108,13 @@ class StudentProfileView extends Component {
                         </Grid>
                     </div>
 
-                    <div className="profile-row">
+                    <div className="page-row">
                         <Typography className="profile-title" variant="h6">
                             <Trans>student.personal.label</Trans>
                         </Typography>
                     </div>
 
-                    {/* <div className="profile-row">
+                    {/* <div className="page-row">
                         <Grid container spacing={16}>
                             <Grid item xs={12}>
                                 <TextField
@@ -129,7 +129,7 @@ class StudentProfileView extends Component {
                         </Grid>
                     </div> */}
 
-                    <div className="profile-row">
+                    <div className="page-row">
                         <Grid container spacing={16}>
                             <Grid item xs={12} md={4}>
                                 <TextField
@@ -166,13 +166,13 @@ class StudentProfileView extends Component {
                         </Grid>
                     </div>
 
-                    <div className="profile-row">
+                    <div className="page-row">
                         <Typography className="profile-title" variant="h6">
                             <Trans>student.socials.label</Trans>
                         </Typography>
                     </div>
 
-                    <div className="profile-row">
+                    <div className="page-row">
                         <Grid container>
                             <Grid item xs={true}>
                                  <TextField
@@ -194,7 +194,7 @@ class StudentProfileView extends Component {
                         </Grid>
                     </div>
 
-                    <div className="profile-row">
+                    <div className="page-row">
                         <Grid container>
                             <Grid item xs={true}>
                                  <TextField
@@ -216,7 +216,7 @@ class StudentProfileView extends Component {
                         </Grid>
                     </div>
 
-                    <div className="profile-row">
+                    <div className="page-row">
                         <Grid container>
                             <Grid item xs={true}>
                                  <TextField
