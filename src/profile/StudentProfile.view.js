@@ -6,7 +6,9 @@ import {
     Grid,
     TextField,
     Tooltip,
-    IconButton
+    IconButton,
+    InputAdornment,
+    Typography
 } from '@material-ui/core';
 
 import {
@@ -15,6 +17,8 @@ import {
 } from '@material-ui/icons';
 
 import { Trans } from 'react-i18next';
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import {
     fetchMyProfile,
@@ -38,7 +42,7 @@ class StudentProfileView extends Component {
 
         return (
             <Grid container justify="center" alignItems="flex-start">
-                <Grid item xs={12} md={6}>
+                <Grid item xs={12} md={5}>
                     <div className="profile-header">
                         <div className="profile-header-actions">
                             <Grid container justify="flex-end">
@@ -105,18 +109,23 @@ class StudentProfileView extends Component {
                     </div>
 
                     <div className="profile-row">
+                        <Typography className="profile-title" variant="h6">Personal</Typography>
+                    </div>
+
+                    {/* <div className="profile-row">
                         <Grid container spacing={16}>
                             <Grid item xs={12}>
                                 <TextField
                                     label={<Trans>student.facultyId.label</Trans>}
                                     name="facultyId"
+                                    variant="outlined"
                                     value={profile.facultyId || ''}
                                     fullWidth
                                     onChange={handleProfileChange}
                                 />
                             </Grid>
                         </Grid>
-                    </div>
+                    </div> */}
 
                     <div className="profile-row">
                         <Grid container spacing={16}>
@@ -125,6 +134,7 @@ class StudentProfileView extends Component {
                                     label={<Trans>student.firstName.label</Trans>}
                                     name="firstName"
                                     value={profile.firstName || ''}
+                                    variant="standard"
                                     fullWidth
                                     onChange={handleProfileChange}
                                 />
@@ -135,6 +145,7 @@ class StudentProfileView extends Component {
                                     label={<Trans>student.middleName.label</Trans>}
                                     name="middleName"
                                     value={profile.middleName || ''}
+                                    variant="standard"
                                     fullWidth
                                     onChange={handleProfileChange}
                                 />
@@ -145,9 +156,81 @@ class StudentProfileView extends Component {
                                     label={<Trans>student.lastName.label</Trans>}
                                     name="lastName"
                                     value={profile.lastName || ''}
+                                    variant="standard"
                                     fullWidth
                                     onChange={handleProfileChange}
                                 />
+                            </Grid>
+                        </Grid>
+                    </div>
+
+                    <div className="profile-row">
+                        <Typography className="profile-title" variant="h6">Socials</Typography>
+                    </div>
+
+                    <div className="profile-row">
+                        <Grid container>
+                            <Grid item xs={true}>
+                                 <TextField
+                                    label={<Trans>student.linkedin.label</Trans>}
+                                    name="linkedinUrl"
+                                    variant="outlined"
+                                    value={profile.linkedinUrl || ''}
+                                    InputProps={{
+                                        startAdornment: (
+                                            <InputAdornment position="start">
+                                                <FontAwesomeIcon color="#0077b5" size="2x" icon={['fab', 'linkedin']}></FontAwesomeIcon>
+                                            </InputAdornment>
+                                        )
+                                    }}
+                                    fullWidth
+                                    onChange={handleProfileChange}
+                                />
+                            </Grid>
+                        </Grid>
+                    </div>
+
+                    <div className="profile-row">
+                        <Grid container>
+                            <Grid item xs={true}>
+                                 <TextField
+                                    label={<Trans>student.facebook.label</Trans>}
+                                    name="facebookUrl"
+                                    variant="outlined"
+                                    value={profile.facebookUrl || ''}
+                                    InputProps={{
+                                        startAdornment: (
+                                            <InputAdornment position="start">
+                                                <FontAwesomeIcon color="#3b5998" size="2x" icon={['fab', 'facebook']}></FontAwesomeIcon>
+                                            </InputAdornment>
+                                        )
+                                    }}
+                                    fullWidth
+                                    onChange={handleProfileChange}
+                                />
+                            </Grid>
+                        </Grid>
+                    </div>
+
+                    <div className="profile-row">
+                        <Grid container>
+                            <Grid item xs={true}>
+                                 <TextField
+                                    label={<Trans>student.instagram.label</Trans>}
+                                    name="instagramUrl"
+                                    variant="outlined"
+                                    value={profile.instagramUrl || ''}
+                                    InputProps={{
+                                        startAdornment: (
+                                            <InputAdornment position="start">
+                                                <FontAwesomeIcon color="#405DE6" size="2x" icon={['fab', 'instagram']}></FontAwesomeIcon>
+                                            </InputAdornment>
+                                        )
+                                    }}
+                                    fullWidth
+                                    onChange={handleProfileChange}
+                                />
+
                             </Grid>
                         </Grid>
                     </div>
