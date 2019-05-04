@@ -100,6 +100,9 @@ class StudentProfileView extends Component {
                                             multiline
                                             fullWidth
                                             rowsMax="2"
+                                            InputProps={{
+                                                readOnly: !profile.isEditable
+                                            }}
                                             onChange={handleProfileChange}
                                         />
                                     </Grid>

@@ -1,6 +1,8 @@
 import { profileActionTypes } from './Profile.actions';
 
-const profileDefaults = {};
+const profileDefaults = {
+    isEditable: false
+};
 
 export default (state = profileDefaults, action) => {
     switch (action.type) {
