@@ -44,12 +44,21 @@
     position: sticky;
     top: 56px;
     z-index: 1000;
+    max-height: 1000px;
+    transition: all 1s 0s;
+    overflow: hidden;
+
+    &.readonly {
+        max-height: 132px;
+        transition: all 1s 0s;
+    }
 }
 
 .profile-header-actions {
     position: absolute;
     top: 0;
     right: 0;
+    z-index: 9999;
 }
 
 .profile-avatar {
@@ -90,14 +99,16 @@
             height: 100%;
         }
 
-        &:hover {
-            transform: rotateY(180deg);
-            transition: all 1s 0s;
+        &:not(.readonly) {
+            &:hover {
+                transform: rotateY(180deg);
+                transition: all 1s 0s;
 
-            .profile-avatar-label {
-                opacity: 1;
-                visibility: visible;
-                transition: all 1s .2s;
+                .profile-avatar-label {
+                    opacity: 1;
+                    visibility: visible;
+                    transition: all 1s .2s;
+                }
             }
         }
     }

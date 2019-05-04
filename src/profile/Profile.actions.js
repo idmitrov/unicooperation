@@ -6,6 +6,7 @@ export const profileActionTypes = {
     setMyProfile: 'PROFILE_MINE_SET',
     setMyProfileData: 'PROFILE_MINE_DATA_SET',
     updateMyProfile: 'PROFILE_MINE_UPDATE',
+    toggleMyProfileReadonly: 'PROFILE_MINE_READONLY_TOGGLE'
 };
 
 export const fetchProfile = (type, id) => (dispatch) => {
@@ -58,5 +59,14 @@ export const setMyProfileData = (key, value) => (dispatch) => {
     return dispatch({
         type: profileActionTypes.setMyProfileData,
         payload: { key, value }
+    });
+}
+
+export const toggleMyProfileReadonly = () => (dispatch, getState) => {
+    const profileState = getState().profile;
+
+    return dispatch({
+        type: profileActionTypes.toggleMyProfileReadonly,
+        payload: !profileState.isReadonly
     });
 }

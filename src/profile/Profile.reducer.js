@@ -1,11 +1,17 @@
 import { profileActionTypes } from './Profile.actions';
 
 const profileDefaults = {
-    isEditable: false
+    isReadonly: true
 };
 
 export default (state = profileDefaults, action) => {
     switch (action.type) {
+        case profileActionTypes.toggleMyProfileReadonly: {
+            return {
+                ...state,
+                isReadonly: action.payload
+            }
+        }
         case profileActionTypes.setMyProfileData: {
             return {
                 ...state,
