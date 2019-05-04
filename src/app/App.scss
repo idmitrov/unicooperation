@@ -38,12 +38,6 @@
 }
 
 .page-row {
-    max-width: calc(100% - 32px);
+    // max-width: calc(100% - 32px);
     margin: 16px auto auto;
-}
-
-@media screen and (min-width: 960px) {
-    .page-row {
-        max-width: 100%;
-    }
 }
