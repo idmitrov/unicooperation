@@ -26,6 +26,7 @@ import {
     fetchMyProfile,
     setMyProfile,
     updateMyProfile,
+    updateMyProfileAvatar,
     setMyProfileData,
     toggleMyProfileReadonly
 } from './Profile.actions';
@@ -40,7 +41,13 @@ class StudentProfileView extends Component {
     }
 
     render() {
-        const { profile, changeProfileReadonly, handleProfileChange, handleProfileAvatarChange } = this.props;
+        const {
+            profile,
+            changeProfileReadonly,
+            handleProfileChange,
+            handleProfileAvatarChange,
+            updateMyProfile
+        } = this.props;
 
         return (
             <Grid container justify="center" alignItems="flex-start">
@@ -58,24 +65,24 @@ class StudentProfileView extends Component {
                                             </Tooltip>
                                         </Grid>
                                     ) : (
-                                            <React.Fragment>
-                                                <Grid item>
-                                                    <Tooltip title={<Trans>global.cancel</Trans>} placement="left">
-                                                        <IconButton onClick={changeProfileReadonly}>
-                                                            <Cancel />
-                                                        </IconButton>
-                                                    </Tooltip>
-                                                </Grid>
+                                        <React.Fragment>
+                                            <Grid item>
+                                                <Tooltip title={<Trans>global.cancel</Trans>} placement="left">
+                                                    <IconButton onClick={changeProfileReadonly}>
+                                                        <Cancel />
+                                                    </IconButton>
+                                                </Tooltip>
+                                            </Grid>
 
-                                                <Grid item>
-                                                    <Tooltip title={<Trans>global.save</Trans>} placement="left">
-                                                        <IconButton>
-                                                            <Save />
-                                                        </IconButton>
-                                                    </Tooltip>
-                                                </Grid>
-                                            </React.Fragment>
-                                        )
+                                            <Grid item>
+                                                <Tooltip title={<Trans>global.save</Trans>} placement="left">
+                                                    <IconButton onClick={() => updateMyProfile(profile)}>
+                                                        <Save />
+                                                    </IconButton>
+                                                </Tooltip>
+                                            </Grid>
+                                        </React.Fragment>
+                                    )
                                 }
                             </Grid>
                         </div>
@@ -268,10 +275,9 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         handleProfileAvatarChange(e) {
-            const { name, files } = e.target;
-            const updates = { [name]: files[0] };
+            const { files } = e.target;
 
-            return dispatch(updateMyProfile(updates))
+            return dispatch(updateMyProfileAvatar(files[0]))
                 .then((updatedProfile) => {
                     return dispatch(setMyProfile(updatedProfile));
                 });
@@ -285,8 +291,8 @@ const mapDispatchToProps = (dispatch) => {
         changeProfileReadonly() {
             return dispatch(toggleMyProfileReadonly());
         },
-        updateProfile() {
-
+        updateMyProfile(updates) {
+            return dispatch(updateMyProfile(updates));
         },
         getMyProfile() {
             return dispatch(fetchMyProfile())

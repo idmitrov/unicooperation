@@ -25,6 +25,24 @@ export const fetchMyProfile = () => (dispatch, getState) => {
     });
 }
 
+export const updateMyProfileAvatar = (avatar) => (dispatch, getState) => {
+    const profileType = getState().account.type;
+
+    let formData = new FormData();
+    formData.append('avatar', avatar);
+
+    let action = {
+        type: profileActionTypes.updateMyProfile,
+        file: formData,
+        api: {
+            endpoint: profileEndpoints.updateMyProfile.endpoint.replace('{profileType}', profileType),
+            method: profileEndpoints.updateMyProfile.method.replace('{profileType}', profileType)
+        }
+    };
+
+    return dispatch(action);
+}
+
 export const updateMyProfile = (updates) => (dispatch, getState) => {
     const profileType = getState().account.type;
 
@@ -36,14 +54,6 @@ export const updateMyProfile = (updates) => (dispatch, getState) => {
             method: profileEndpoints.updateMyProfile.method.replace('{profileType}', profileType)
         }
     };
-
-    if (updates.avatar) {
-        let formData = new FormData();
-
-        formData.append('avatar', updates.avatar);
-        action.file = formData;
-        action.payload = null;
-    }
 
     return dispatch(action);
 }

@@ -45,12 +45,12 @@
     top: 56px;
     z-index: 1000;
     max-height: 1000px;
-    transition: all 1s 0s;
+    transition: all 1s cubic-bezier(0, 0, 0, 0);
     overflow: hidden;
 
     &.readonly {
         max-height: 132px;
-        transition: all 1s 0s;
+        transition: all 1s cubic-bezier(0, 0, 0, 0);
     }
 }
 
