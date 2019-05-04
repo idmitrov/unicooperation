@@ -24,6 +24,19 @@ import './App.scss';
 
 import { unsetAccount } from '../account/Account.actions';
 
+import { library } from '@fortawesome/fontawesome-svg-core';
+import {
+    faLinkedin,
+    faFacebook,
+    faInstagram
+} from '@fortawesome/free-brands-svg-icons';
+
+library.add([
+    faLinkedin,
+    faFacebook,
+    faInstagram
+]);
+
 class App extends Component {
     render() {
         const { account, logout } = this.props;
