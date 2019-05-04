@@ -109,7 +109,9 @@ class StudentProfileView extends Component {
                     </div>
 
                     <div className="profile-row">
-                        <Typography className="profile-title" variant="h6">Personal</Typography>
+                        <Typography className="profile-title" variant="h6">
+                            <Trans>student.personal.label</Trans>
+                        </Typography>
                     </div>
 
                     {/* <div className="profile-row">
@@ -165,7 +167,9 @@ class StudentProfileView extends Component {
                     </div>
 
                     <div className="profile-row">
-                        <Typography className="profile-title" variant="h6">Socials</Typography>
+                        <Typography className="profile-title" variant="h6">
+                            <Trans>student.socials.label</Trans>
+                        </Typography>
                     </div>
 
                     <div className="profile-row">

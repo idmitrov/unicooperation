@@ -23,6 +23,8 @@
             "student.lastName.label": "Last name",
             "student.linkedin.label": "Linkedin",
             "student.middleName.label": "Middle name",
+            "student.personal.label": "Personal",
+            "student.socials.label": "Socials",
             "student.summary.label": "Summary",
             "student.university.label": "University name",
             "university.label": "University",
