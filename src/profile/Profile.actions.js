@@ -4,7 +4,8 @@ export const profileActionTypes = {
     fetchProfile: 'PROFILE_FETCH',
     fetchMyProfile: 'PROFILE_MINE_FETCH',
     setMyProfile: 'PROFILE_MINE_SET',
-    updateProfile: 'PROFILE_UPDATE'
+    setMyProfileData: 'PROFILE_MINE_DATA_SET',
+    updateMyProfile: 'PROFILE_MINE_UPDATE',
 };
 
 export const fetchProfile = (type, id) => (dispatch) => {
@@ -27,7 +28,7 @@ export const updateMyProfile = (updates) => (dispatch, getState) => {
     const profileType = getState().account.type;
 
     let action = {
-        type: profileActionTypes.updateProfile,
+        type: profileActionTypes.updateMyProfile,
         payload: updates,
         api: {
             endpoint: profileEndpoints.updateMyProfile.endpoint.replace('{profileType}', profileType),
@@ -53,6 +54,9 @@ export const setMyProfile = (profile) => (dispatch) => {
     });
 }
 
-export const changeProfileData = (updatePath, updateValue) => (dispatch) => {
-    console.log(updatePath, updateValue);
+export const setMyProfileData = (key, value) => (dispatch) => {
+    return dispatch({
+        type: profileActionTypes.setMyProfileData,
+        payload: { key, value }
+    });
 }

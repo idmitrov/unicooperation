@@ -23,8 +23,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
     fetchMyProfile,
     setMyProfile,
-    changeProfileData,
-    updateMyProfile
+    updateMyProfile,
+    setMyProfileData
 
 } from './Profile.actions';
 
@@ -230,7 +230,6 @@ class StudentProfileView extends Component {
                                     fullWidth
                                     onChange={handleProfileChange}
                                 />
-
                             </Grid>
                         </Grid>
                     </div>
@@ -261,7 +260,7 @@ const mapDispatchToProps = (dispatch) => {
             const { name, value } = e.target;
 
             // TODO: Handle avatar here
-            return dispatch(changeProfileData(name, value));
+            return dispatch(setMyProfileData(name, value));
         },
         updateProfile() {
 
