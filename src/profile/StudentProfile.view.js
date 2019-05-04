@@ -58,24 +58,24 @@ class StudentProfileView extends Component {
                                             </Tooltip>
                                         </Grid>
                                     ) : (
-                                        <React.Fragment>
-                                            <Grid item>
-                                                <Tooltip title={<Trans>global.cancel</Trans>} placement="left">
-                                                    <IconButton onClick={changeProfileReadonly}>
-                                                        <Cancel />
-                                                    </IconButton>
-                                                </Tooltip>
-                                            </Grid>
+                                            <React.Fragment>
+                                                <Grid item>
+                                                    <Tooltip title={<Trans>global.cancel</Trans>} placement="left">
+                                                        <IconButton onClick={changeProfileReadonly}>
+                                                            <Cancel />
+                                                        </IconButton>
+                                                    </Tooltip>
+                                                </Grid>
 
-                                            <Grid item>
-                                                <Tooltip title={<Trans>global.save</Trans>} placement="left">
-                                                    <IconButton>
-                                                        <Save />
-                                                    </IconButton>
-                                                </Tooltip>
-                                            </Grid>
-                                        </React.Fragment>
-                                    )
+                                                <Grid item>
+                                                    <Tooltip title={<Trans>global.save</Trans>} placement="left">
+                                                        <IconButton>
+                                                            <Save />
+                                                        </IconButton>
+                                                    </Tooltip>
+                                                </Grid>
+                                            </React.Fragment>
+                                        )
                                 }
                             </Grid>
                         </div>
@@ -116,22 +116,16 @@ class StudentProfileView extends Component {
                             <Grid item xs={true}>
                                 <Grid container alignItems="center">
                                     <Grid item xs={true}>
-                                        {
-                                            profile.isReadonly ? (
-                                                <p>{profile.summary}</p>
-                                            ) : (
-                                                <TextField
-                                                    name="summary"
-                                                    label={<Trans>student.summary.label</Trans>}
-                                                    value={profile.summary || ''}
-                                                    multiline
-                                                    fullWidth
-                                                    rowsMax="2"
-                                                    InputProps={{ readOnly: profile.isReadonly }}
-                                                    onChange={handleProfileChange}
-                                                />
-                                            )
-                                        }
+                                        <TextField
+                                            name="summary"
+                                            label={<Trans>student.summary.label</Trans>}
+                                            value={profile.summary || ''}
+                                            multiline
+                                            fullWidth
+                                            rowsMax="2"
+                                            InputProps={{ readOnly: profile.isReadonly }}
+                                            onChange={handleProfileChange}
+                                        />
                                     </Grid>
                                 </Grid>
                             </Grid>
