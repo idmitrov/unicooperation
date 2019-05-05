@@ -48,9 +48,21 @@
     transition: all .5s cubic-bezier(0, 0, 0, 0);
     overflow: hidden;
 
+    &-content {
+        visibility: visible;
+        opacity: 1;
+        transition: all .5s 0s;
+    }
+
     &.readonly {
         max-height: 80px;
         transition: all .5s cubic-bezier(0, 0, 0, 0);
+
+        .profile-header-content {
+            visibility: hidden;
+            opacity: 0;
+            transition: all .5s 0s;
+        }
     }
 }
 
