@@ -53,6 +53,7 @@ class StudentProfileView extends Component {
         return (
             <Grid container justify="center" alignItems="flex-start">
                 <Grid item xs={12} md={5}>
+                    {/* PROFILE EDITABLE */}
                     <div className={`profile-header ${profile.isReadonly ? 'readonly' : ''}`}>
                         {/* PROFILE HEADER ACTIONS */}
                         <div className="profile-header-actions">
@@ -67,24 +68,24 @@ class StudentProfileView extends Component {
                                             </Tooltip>
                                         </Grid>
                                     ) : (
-                                        <React.Fragment>
-                                            <Grid item>
-                                                <Tooltip title={<Trans>global.save</Trans>} placement="left">
-                                                    <IconButton onClick={() => updateMyProfile(profile)}>
-                                                        <Save />
-                                                    </IconButton>
-                                                </Tooltip>
-                                            </Grid>
+                                            <React.Fragment>
+                                                <Grid item>
+                                                    <Tooltip title={<Trans>global.save</Trans>} placement="left">
+                                                        <IconButton onClick={() => updateMyProfile(profile)}>
+                                                            <Save />
+                                                        </IconButton>
+                                                    </Tooltip>
+                                                </Grid>
 
-                                            <Grid item>
-                                                <Tooltip title={<Trans>global.cancel</Trans>} placement="left">
-                                                    <IconButton onClick={changeProfileReadonly}>
-                                                        <Cancel />
-                                                    </IconButton>
-                                                </Tooltip>
-                                            </Grid>
-                                        </React.Fragment>
-                                    )
+                                                <Grid item>
+                                                    <Tooltip title={<Trans>global.cancel</Trans>} placement="left">
+                                                        <IconButton onClick={changeProfileReadonly}>
+                                                            <Cancel />
+                                                        </IconButton>
+                                                    </Tooltip>
+                                                </Grid>
+                                            </React.Fragment>
+                                        )
                                 }
                             </Grid>
                         </div>
@@ -141,134 +142,205 @@ class StudentProfileView extends Component {
                             </Grid>
                         </Grid>
 
-                        {/* PERSONAL SECTION */}
-                        <div className="page-row">
-                            <Typography className="profile-title" variant="h6">
-                                <Trans>student.personal.label</Trans>
-                            </Typography>
+                        <div className="profile-header-content">
+                            {/* PERSONAL SECTION */}
+                            <div className="page-row">
+                                <Typography className="profile-title" variant="h6">
+                                    <Trans>student.personal.label</Trans>
+                                </Typography>
+                            </div>
+
+                            <div className="page-row">
+                                <Grid container spacing={16}>
+                                    {/* FIRST NAME */}
+                                    <Grid item xs={12} md={4}>
+                                        <TextField
+                                            label={<Trans>student.firstName.label</Trans>}
+                                            name="firstName"
+                                            value={profile.firstName || ''}
+                                            variant="standard"
+                                            InputProps={{ readOnly: profile.isReadonly }}
+                                            fullWidth
+                                            onChange={handleProfileChange}
+                                        />
+                                    </Grid>
+
+                                    {/* MIDDLE NAME */}
+                                    <Grid item xs={12} md={4}>
+                                        <TextField
+                                            label={<Trans>student.middleName.label</Trans>}
+                                            name="middleName"
+                                            value={profile.middleName || ''}
+                                            variant="standard"
+                                            fullWidth
+                                            InputProps={{ readOnly: profile.isReadonly }}
+                                            onChange={handleProfileChange}
+                                        />
+                                    </Grid>
+
+                                    {/* LAST NAME */}
+                                    <Grid item xs={12} md={4}>
+                                        <TextField
+                                            label={<Trans>student.lastName.label</Trans>}
+                                            name="lastName"
+                                            value={profile.lastName || ''}
+                                            variant="standard"
+                                            InputProps={{ readOnly: profile.isReadonly }}
+                                            fullWidth
+                                            onChange={handleProfileChange}
+                                        />
+                                    </Grid>
+                                </Grid>
+                            </div>
+
+                            {/* SOCIALS SECTION */}
+                            <div className="page-row">
+                                <Typography className="profile-title" variant="h6">
+                                    <Trans>student.socials.label</Trans>
+                                </Typography>
+                            </div>
+
+                            <div className="page-row">
+                                <Grid container>
+                                    {/* LINKEDIN */}
+                                    <Grid item xs={true}>
+                                        <TextField
+                                            label={<Trans>student.linkedin.label</Trans>}
+                                            name="linkedinUrl"
+                                            variant="outlined"
+                                            value={profile.linkedinUrl || ''}
+                                            InputProps={{
+                                                readOnly: profile.isReadonly,
+                                                startAdornment: (
+                                                    <InputAdornment position="start">
+                                                        <FontAwesomeIcon color="#0077b5" size="2x" icon={['fab', 'linkedin']}></FontAwesomeIcon>
+                                                    </InputAdornment>
+                                                )
+                                            }}
+                                            fullWidth
+                                            onChange={handleProfileChange}
+                                        />
+                                    </Grid>
+                                </Grid>
+                            </div>
+
+                            {/* FACEBOOK */}
+                            <div className="page-row">
+                                <Grid container>
+                                    <Grid item xs={true}>
+                                        <TextField
+                                            label={<Trans>student.facebook.label</Trans>}
+                                            name="facebookUrl"
+                                            variant="outlined"
+                                            value={profile.facebookUrl || ''}
+                                            InputProps={{
+                                                readOnly: profile.isReadonly,
+                                                startAdornment: (
+                                                    <InputAdornment position="start">
+                                                        <FontAwesomeIcon color="#3b5998" size="2x" icon={['fab', 'facebook']}></FontAwesomeIcon>
+                                                    </InputAdornment>
+                                                )
+                                            }}
+                                            fullWidth
+                                            onChange={handleProfileChange}
+                                        />
+                                    </Grid>
+                                </Grid>
+                            </div>
+
+                            {/* INSTAGRAM */}
+                            <div className="page-row">
+                                <Grid container>
+                                    <Grid item xs={true}>
+                                        <TextField
+                                            label={<Trans>student.instagram.label</Trans>}
+                                            name="instagramUrl"
+                                            variant="outlined"
+                                            value={profile.instagramUrl || ''}
+                                            InputProps={{
+                                                readOnly: profile.isReadonly,
+                                                startAdornment: (
+                                                    <InputAdornment position="start">
+                                                        <FontAwesomeIcon color="#405DE6" size="2x" icon={['fab', 'instagram']}></FontAwesomeIcon>
+                                                    </InputAdornment>
+                                                )
+                                            }}
+                                            fullWidth
+                                            onChange={handleProfileChange}
+                                        />
+                                    </Grid>
+                                </Grid>
+                            </div>
                         </div>
+                    </div>
 
-                        <div className="page-row">
-                            <Grid container spacing={16}>
-                                {/* FIRST NAME */}
-                                <Grid item xs={12} md={4}>
-                                    <TextField
-                                        label={<Trans>student.firstName.label</Trans>}
-                                        name="firstName"
-                                        value={profile.firstName || ''}
-                                        variant="standard"
-                                        InputProps={{ readOnly: profile.isReadonly }}
-                                        fullWidth
-                                        onChange={handleProfileChange}
-                                    />
-                                </Grid>
-
-                                {/* MIDDLE NAME */}
-                                <Grid item xs={12} md={4}>
-                                    <TextField
-                                        label={<Trans>student.middleName.label</Trans>}
-                                        name="middleName"
-                                        value={profile.middleName || ''}
-                                        variant="standard"
-                                        fullWidth
-                                        InputProps={{ readOnly: profile.isReadonly }}
-                                        onChange={handleProfileChange}
-                                    />
-                                </Grid>
-
-                                {/* LAST NAME */}
-                                <Grid item xs={12} md={4}>
-                                    <TextField
-                                        label={<Trans>student.lastName.label</Trans>}
-                                        name="lastName"
-                                        value={profile.lastName || ''}
-                                        variant="standard"
-                                        InputProps={{ readOnly: profile.isReadonly }}
-                                        fullWidth
-                                        onChange={handleProfileChange}
-                                    />
-                                </Grid>
+                    {/* PROFILE READONLY */}
+                    <div className="page-row">
+                        <Grid container>
+                            <Grid item>
+                                <Typography variant="h5">
+                                    {profile.firstName} {profile.middleName} {profile.lastName}
+                                </Typography>
                             </Grid>
-                        </div>
+                        </Grid>
+                    </div>
 
-                        {/* SOCIALS SECTION */}
-                        <div className="page-row">
-                            <Typography className="profile-title" variant="h6">
-                                <Trans>student.socials.label</Trans>
-                            </Typography>
-                        </div>
-
-                        <div className="page-row">
-                            <Grid container>
-                                {/* LINKEDIN */}
-                                <Grid item xs={true}>
-                                    <TextField
-                                        label={<Trans>student.linkedin.label</Trans>}
-                                        name="linkedinUrl"
-                                        variant="outlined"
-                                        value={profile.linkedinUrl || ''}
-                                        InputProps={{
-                                            readOnly: profile.isReadonly,
-                                            startAdornment: (
-                                                <InputAdornment position="start">
-                                                    <FontAwesomeIcon color="#0077b5" size="2x" icon={['fab', 'linkedin']}></FontAwesomeIcon>
-                                                </InputAdornment>
-                                            )
-                                        }}
-                                        fullWidth
-                                        onChange={handleProfileChange}
-                                    />
-                                </Grid>
+                    <div className="page-row">
+                        <Grid container>
+                            <Grid item>
+                                <Tooltip title={profile.linkedinUrl ? 'Visit' : 'Unavailable'} placement="top">
+                                    <div>
+                                        <IconButton
+                                            href={`https://www.linkedin.com/in/${profile.linkedinUrl}/`}
+                                            rel="noopener noreferrer"
+                                            target="_blank"
+                                            disabled={!profile.linkedinUrl}>
+                                            <FontAwesomeIcon
+                                                color={profile.linkedinUrl ? '#0077b5': '#ccc'}
+                                                size="1x"
+                                                icon={['fab', 'linkedin']}>
+                                            </FontAwesomeIcon>
+                                        </IconButton>
+                                    </div>
+                                </Tooltip>
                             </Grid>
-                        </div>
 
-                        {/* FACEBOOK */}
-                        <div className="page-row">
-                            <Grid container>
-                                <Grid item xs={true}>
-                                    <TextField
-                                        label={<Trans>student.facebook.label</Trans>}
-                                        name="facebookUrl"
-                                        variant="outlined"
-                                        value={profile.facebookUrl || ''}
-                                        InputProps={{
-                                            readOnly: profile.isReadonly,
-                                            startAdornment: (
-                                                <InputAdornment position="start">
-                                                    <FontAwesomeIcon color="#3b5998" size="2x" icon={['fab', 'facebook']}></FontAwesomeIcon>
-                                                </InputAdornment>
-                                            )
-                                        }}
-                                        fullWidth
-                                        onChange={handleProfileChange}
-                                    />
-                                </Grid>
+                            <Grid item>
+                                <Tooltip title={profile.facebookUrl ? 'Visit' : 'Unavailable'} placement="top">
+                                    <div>
+                                        <IconButton
+                                            href={`https://www.facebook.com/${profile.facebookUrl}/`}
+                                            rel="noopener noreferrer"
+                                            target="_blank"
+                                            disabled={!profile.facebookUrl}>
+                                            <FontAwesomeIcon
+                                                color={profile.facebookUrl ? '#3b5998': '#ccc'}
+                                                size="1x"
+                                                icon={['fab', 'facebook']}>
+                                            </FontAwesomeIcon>
+                                        </IconButton>
+                                    </div>
+                                </Tooltip>
                             </Grid>
-                        </div>
 
-                        {/* INSTAGRAM */}
-                        <div className="page-row">
-                            <Grid container>
-                                <Grid item xs={true}>
-                                    <TextField
-                                        label={<Trans>student.instagram.label</Trans>}
-                                        name="instagramUrl"
-                                        variant="outlined"
-                                        value={profile.instagramUrl || ''}
-                                        InputProps={{
-                                            readOnly: profile.isReadonly,
-                                            startAdornment: (
-                                                <InputAdornment position="start">
-                                                    <FontAwesomeIcon color="#405DE6" size="2x" icon={['fab', 'instagram']}></FontAwesomeIcon>
-                                                </InputAdornment>
-                                            )
-                                        }}
-                                        fullWidth
-                                        onChange={handleProfileChange}
-                                    />
-                                </Grid>
+                            <Grid item>
+                                <Tooltip title={profile.instagramUrl ? 'Visit' : 'Unavailable'} placement="top">
+                                    <div>
+                                        <IconButton
+                                            href={`https://www.instagram.com/${profile.instagramUrl}/`}
+                                            rel="noopener noreferrer"
+                                            target="_blank"
+                                            disabled={!profile.instagramUrl}>
+                                            <FontAwesomeIcon
+                                                color={profile.instagramUrl ? '#405DE6': '#ccc'}
+                                                size="1x"
+                                                icon={['fab', 'instagram']}>
+                                            </FontAwesomeIcon>
+                                        </IconButton>
+                                    </div>
+                                </Tooltip>
                             </Grid>
-                        </div>
+                        </Grid>
                     </div>
                 </Grid>
             </Grid>
@@ -285,7 +357,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         handleProfileAvatarChange(e) {
-            return dispatch(updateMyProfileAvatar( e.target.files[0]))
+            return dispatch(updateMyProfileAvatar(e.target.files[0]))
                 .then((updatedProfile) => {
                     return dispatch(setMyProfile(updatedProfile));
                 });
