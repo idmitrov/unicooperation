@@ -44,13 +44,13 @@
     position: sticky;
     top: 56px;
     z-index: 1000;
-    max-height: 1000px;
-    transition: all 1s cubic-bezier(0, 0, 0, 0);
+    max-height: 600px;
+    transition: all .5s cubic-bezier(0, 0, 0, 0);
     overflow: hidden;
 
     &.readonly {
         max-height: 80px;
-        transition: all 1s cubic-bezier(0, 0, 0, 0);
+        transition: all .5s cubic-bezier(0, 0, 0, 0);
     }
 }
 

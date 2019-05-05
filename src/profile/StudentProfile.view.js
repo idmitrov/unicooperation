@@ -67,17 +67,17 @@ class StudentProfileView extends Component {
                                     ) : (
                                         <React.Fragment>
                                             <Grid item>
-                                                <Tooltip title={<Trans>global.cancel</Trans>} placement="left">
-                                                    <IconButton onClick={changeProfileReadonly}>
-                                                        <Cancel />
+                                                <Tooltip title={<Trans>global.save</Trans>} placement="left">
+                                                    <IconButton onClick={() => updateMyProfile(profile)}>
+                                                        <Save />
                                                     </IconButton>
                                                 </Tooltip>
                                             </Grid>
 
                                             <Grid item>
-                                                <Tooltip title={<Trans>global.save</Trans>} placement="left">
-                                                    <IconButton onClick={() => updateMyProfile(profile)}>
-                                                        <Save />
+                                                <Tooltip title={<Trans>global.cancel</Trans>} placement="left">
+                                                    <IconButton onClick={changeProfileReadonly}>
+                                                        <Cancel />
                                                     </IconButton>
                                                 </Tooltip>
                                             </Grid>
