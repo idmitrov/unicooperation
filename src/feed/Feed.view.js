@@ -40,6 +40,8 @@ import {
     setRecentPublicationsList
 } from './Feed.actions';
 
+import { selectFeedList, selectFeedSkip, selectFeedHasMore, selectFeedIsUpToDate } from './Feed.selector';
+
 class FeedView extends Component {
     constructor(props) {
         super(props);
@@ -237,10 +239,10 @@ class FeedView extends Component {
 const mapStateToProps = (state) => {
     return {
         account: state.account,
-        list: state.feed.list,
-        skip: state.feed.skip,
-        hasMorePublicationsToLoad: state.feed.hasMore,
-        isUpdateAvailable: !state.feed.isUpToDate
+        list: selectFeedList(state),
+        skip: selectFeedSkip(state),
+        hasMorePublicationsToLoad: selectFeedHasMore(state),
+        isUpdateAvailable: !selectFeedIsUpToDate(state)
     };
 }
 
