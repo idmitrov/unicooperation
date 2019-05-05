@@ -32,6 +32,7 @@ import {
 } from './Profile.actions';
 
 import './Profile.scss';
+import { selectProfile } from './Profile.selector';
 
 class StudentProfileView extends Component {
     constructor(props) {
@@ -277,7 +278,7 @@ class StudentProfileView extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        profile: state.profile
+        profile: selectProfile(state)
     };
 }
 
