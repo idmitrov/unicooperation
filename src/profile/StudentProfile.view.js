@@ -53,6 +53,7 @@ class StudentProfileView extends Component {
             <Grid container justify="center" alignItems="flex-start">
                 <Grid item xs={12} md={5}>
                     <div className={`profile-header ${profile.isReadonly ? 'readonly' : ''}`}>
+                        {/* PROFILE HEADER ACTIONS */}
                         <div className="profile-header-actions">
                             <Grid container justify="flex-end">
                                 {
@@ -87,6 +88,7 @@ class StudentProfileView extends Component {
                             </Grid>
                         </div>
 
+                        {/* PROFILE HEADER AVATAR */}
                         <Grid container spacing={16} alignItems="center">
                             <Grid item>
                                 <div className="profile-avatar">
@@ -138,6 +140,7 @@ class StudentProfileView extends Component {
                             </Grid>
                         </Grid>
 
+                        {/* PERSONAL SECTION */}
                         <div className="page-row">
                             <Typography className="profile-title" variant="h6">
                                 <Trans>student.personal.label</Trans>
@@ -146,6 +149,7 @@ class StudentProfileView extends Component {
 
                         <div className="page-row">
                             <Grid container spacing={16}>
+                                {/* FIRST NAME */}
                                 <Grid item xs={12} md={4}>
                                     <TextField
                                         label={<Trans>student.firstName.label</Trans>}
@@ -158,19 +162,20 @@ class StudentProfileView extends Component {
                                     />
                                 </Grid>
 
+                                {/* MIDDLE NAME */}
                                 <Grid item xs={12} md={4}>
                                     <TextField
                                         label={<Trans>student.middleName.label</Trans>}
                                         name="middleName"
                                         value={profile.middleName || ''}
                                         variant="standard"
-                                        InputProps={{ readOnly: profile.isReadonly }}
                                         fullWidth
                                         InputProps={{ readOnly: profile.isReadonly }}
                                         onChange={handleProfileChange}
                                     />
                                 </Grid>
 
+                                {/* LAST NAME */}
                                 <Grid item xs={12} md={4}>
                                     <TextField
                                         label={<Trans>student.lastName.label</Trans>}
@@ -185,6 +190,7 @@ class StudentProfileView extends Component {
                             </Grid>
                         </div>
 
+                        {/* SOCIALS SECTION */}
                         <div className="page-row">
                             <Typography className="profile-title" variant="h6">
                                 <Trans>student.socials.label</Trans>
@@ -193,6 +199,7 @@ class StudentProfileView extends Component {
 
                         <div className="page-row">
                             <Grid container>
+                                {/* LINKEDIN */}
                                 <Grid item xs={true}>
                                     <TextField
                                         label={<Trans>student.linkedin.label</Trans>}
@@ -214,6 +221,7 @@ class StudentProfileView extends Component {
                             </Grid>
                         </div>
 
+                        {/* FACEBOOK */}
                         <div className="page-row">
                             <Grid container>
                                 <Grid item xs={true}>
@@ -237,6 +245,7 @@ class StudentProfileView extends Component {
                             </Grid>
                         </div>
 
+                        {/* INSTAGRAM */}
                         <div className="page-row">
                             <Grid container>
                                 <Grid item xs={true}>
@@ -275,24 +284,22 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         handleProfileAvatarChange(e) {
-            const { files } = e.target;
-
-            return dispatch(updateMyProfileAvatar(files[0]))
+            return dispatch(updateMyProfileAvatar( e.target.files[0]))
                 .then((updatedProfile) => {
                     return dispatch(setMyProfile(updatedProfile));
                 });
         },
         handleProfileChange(e) {
-            const { name, value } = e.target;
-
-            // TODO: Handle avatar here
-            return dispatch(setMyProfileData(name, value));
+            return dispatch(setMyProfileData(e.target.name, e.target.value));
         },
         changeProfileReadonly() {
             return dispatch(toggleMyProfileReadonly());
         },
         updateMyProfile(updates) {
-            return dispatch(updateMyProfile(updates));
+            return dispatch(updateMyProfile(updates))
+                .then((updatedProfile) => {
+                    return dispatch(setMyProfile(updatedProfile));
+                });
         },
         getMyProfile() {
             return dispatch(fetchMyProfile())
