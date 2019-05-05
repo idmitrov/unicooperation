@@ -40,7 +40,14 @@ import {
     setRecentPublicationsList
 } from './Feed.actions';
 
-import { selectFeedList, selectFeedSkip, selectFeedHasMore, selectFeedIsUpToDate } from './Feed.selector';
+import {
+    selectFeedList,
+    selectFeedSkip,
+    selectFeedHasMore,
+    selectFeedIsUpToDate
+} from './Feed.selector';
+
+import { selectAccountToken } from '../account/Account.selector';
 
 class FeedView extends Component {
     constructor(props) {
@@ -54,7 +61,7 @@ class FeedView extends Component {
         // TODO: Extract consts and interfaces
         this.socket = io.connect('http://127.0.0.1:5000/publications', {
             query: {
-                token: this.props.account.token
+                token: this.props.accountToken
             }
         });
         this.socket.on('connect', () => {
@@ -238,7 +245,7 @@ class FeedView extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        account: state.account,
+        accountToken: selectAccountToken(state),
         list: selectFeedList(state),
         skip: selectFeedSkip(state),
         hasMorePublicationsToLoad: selectFeedHasMore(state),
