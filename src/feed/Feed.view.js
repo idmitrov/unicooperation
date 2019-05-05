@@ -205,11 +205,7 @@ class FeedView extends Component {
 
                                                 <CardActions>
                                                     <Grid container alignItems="center">
-                                                        {/* <Grid item xs={true}>
-                                                            Likes 1 / comments 10
-                                                        </Grid> */}
-
-                                                        <Grid item>
+                                                        <Grid item xs={true}>
                                                             <Tooltip title="Add comment" placement="top">
                                                                 <IconButton>
                                                                     <AddComment />
@@ -228,6 +224,10 @@ class FeedView extends Component {
                                                                 </IconButton>
                                                             </Tooltip>
                                                         </Grid>
+
+                                                         {/* <Grid item>
+                                                            Likes 1 / comments 10
+                                                        </Grid> */}
                                                     </Grid>
                                                 </CardActions>
                                             </Card>
