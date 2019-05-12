@@ -48,6 +48,7 @@ import {
 } from './Feed.selector';
 
 import { selectAccountToken } from '../account/Account.selector';
+import appConfig from '../app/App.config';
 
 class FeedView extends Component {
     constructor(props) {
@@ -59,7 +60,7 @@ class FeedView extends Component {
         };
 
         // TODO: Extract consts and interfaces
-        this.socket = io.connect('http://127.0.0.1:5000/publications', {
+        this.socket = io.connect(`${appConfig.REACT_APP_API_URL}:${appConfig.REACT_APP_API_PORT}/publications`, {
             query: {
                 token: this.props.accountToken
             }
