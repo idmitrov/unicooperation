@@ -25,8 +25,8 @@ const PrivateRoute = ({ component: Component, fallbackComponent: FallBackCompone
                 (props) => allowed ? (
                     <Component {...rest} {...props} />
                 ) : (
-                        FallBackComponent ? (<FallBackComponent />) : (<Redirect path="*" to={redirect} />)
-                    )
+                    FallBackComponent ? (<FallBackComponent />) : (<Redirect path="*" to={redirect} />)
+                )
             }
         />
     );
@@ -39,7 +39,9 @@ export const Routes = ({ account }) => {
         <Switch>
             <PrivateRoute
                 path="/"
-                component={FeedView}
+                component={
+                    account.type === accountType.partner ? (PartnerProfileView) : (FeedView)
+                }
                 allowed={authenticated}
                 fallbackComponent={
                     !account.authenticated ? (AccountView) : (
