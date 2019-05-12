@@ -60,7 +60,7 @@ class FeedView extends Component {
         };
 
         // TODO: Extract consts and interfaces
-        this.socket = io.connect(`${appConfig.REACT_APP_API_URL}:${appConfig.REACT_APP_API_PORT}/publications`, {
+        this.socket = io.connect(`${appConfig.REACT_APP_API_URL}/publications`, {
             query: {
                 token: this.props.accountToken
             }
