@@ -5,7 +5,9 @@ import {
     AppBar,
     Tooltip,
     Grid,
-    Avatar
+    Avatar,
+    Drawer,
+    TextField
 } from '@material-ui/core';
 
 import {
@@ -30,6 +32,7 @@ import {
     faFacebook,
     faInstagram
 } from '@fortawesome/free-brands-svg-icons';
+import { toggleSearchVisiblity } from './App.actions';
 
 library.add([
     faLinkedin,
@@ -39,7 +42,7 @@ library.add([
 
 class App extends Component {
     render() {
-        const { account, logout } = this.props;
+        const { isSearchVisible, account, logout, toggleSearchVisiblity } = this.props;
 
         return (
             <Router history={history}>
@@ -64,7 +67,7 @@ class App extends Component {
 
                                             <Grid item xs={true} sm="auto">
                                                 <Tooltip title={<Trans>global.search.label</Trans>}>
-                                                    <button className="header-button">
+                                                    <button className="header-button" onClick={toggleSearchVisiblity}>
                                                         <Search />
                                                     </button>
                                                 </Tooltip>
@@ -101,6 +104,16 @@ class App extends Component {
                     <main>
                         <Routes account={account} />
                     </main>
+
+                    <Drawer anchor="top"  open={isSearchVisible} onClose={toggleSearchVisiblity}>
+                        <div id="search">
+                            <TextField
+                                type="search"
+                                label="Search"
+                                fullWidth
+                            />
+                        </div>
+                    </Drawer>
                 </React.Fragment>
             </Router>
         );
@@ -109,12 +122,16 @@ class App extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        account: state.account
+        account: state.account,
+        isSearchVisible: state.app.layout.isSearchVisible
     };
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
+        toggleSearchVisiblity() {
+            return dispatch(toggleSearchVisiblity());
+        },
         logout() {
             history.push('/');
 
