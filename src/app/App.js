@@ -32,7 +32,7 @@ import {
     faFacebook,
     faInstagram
 } from '@fortawesome/free-brands-svg-icons';
-import { toggleSearchVisiblity } from './App.actions';
+import { searchProfile, toggleSearchVisiblity } from './App.actions';
 import { selectAppSearch } from './App.selector';
 import { selectAccount } from '../account/Account.selector';
 
@@ -44,7 +44,7 @@ library.add([
 
 class App extends Component {
     render() {
-        const { account, search, toggleSearchVisiblity, logout } = this.props;
+        const { account, search, toggleSearchVisiblity, searchProfile, logout } = this.props;
 
         return (
             <Router history={history}>
@@ -112,6 +112,7 @@ class App extends Component {
                             <TextField
                                 type="search"
                                 label="Search"
+                                onChange={searchProfile}
                                 fullWidth
                             />
                         </div>
@@ -133,6 +134,11 @@ const mapDispatchToProps = (dispatch) => {
     return {
         toggleSearchVisiblity() {
             return dispatch(toggleSearchVisiblity());
+        },
+        searchProfile(e) {
+            const { value } = e.target;
+
+            return dispatch(searchProfile(value));
         },
         logout() {
             history.push('/');
