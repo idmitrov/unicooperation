@@ -112,8 +112,9 @@ class App extends Component {
                             <TextField
                                 type="search"
                                 label="Search"
-                                onChange={searchProfile}
+                                autoFocus
                                 fullWidth
+                                onChange={searchProfile}
                             />
                         </div>
                     </Drawer>
