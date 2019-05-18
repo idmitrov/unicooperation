@@ -7,8 +7,8 @@ export const searchProfile = (query) => (dispatch) => {
 }
 
 /**
- * Toggles app.layout.isSearchVisible if forceVisibility is not provided
- * if you provide forceVisibility the it will be set as value of app.layout.isSearchVisible
+ * Toggles isVisible, if forceVisibility is not provided
+ * if you provide forceVisibility then it will be set as value of isVisible
  * @name toggleSearchVisiblity
  * @param {Boolean} forceVisibility
  */
