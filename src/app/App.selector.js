@@ -1,10 +1,10 @@
 import { createSelector } from 'reselect';
 
-const getAppLayout = (state) => state.app.layout;
+const getAppSearch = (state) => state.app.search;
 
-export const selectAppLayout = createSelector(
-    [getAppLayout],
-    (appLayout) => {
-        return appLayout
+export const selectAppSearch = createSelector(
+    [getAppSearch],
+    (search) => {
+        return search
     }
 );

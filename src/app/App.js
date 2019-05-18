@@ -33,7 +33,7 @@ import {
     faInstagram
 } from '@fortawesome/free-brands-svg-icons';
 import { toggleSearchVisiblity } from './App.actions';
-import { selectAppLayout } from './App.selector';
+import { selectAppSearch } from './App.selector';
 import { selectAccount } from '../account/Account.selector';
 
 library.add([
@@ -44,7 +44,7 @@ library.add([
 
 class App extends Component {
     render() {
-        const { appLayout, account, logout, toggleSearchVisiblity } = this.props;
+        const { account, search, toggleSearchVisiblity, logout } = this.props;
 
         return (
             <Router history={history}>
@@ -107,7 +107,7 @@ class App extends Component {
                         <Routes account={account} />
                     </main>
 
-                    <Drawer anchor="top"  open={appLayout.isSearchVisible} onClose={toggleSearchVisiblity}>
+                    <Drawer anchor="top"  open={search.isVisible} onClose={toggleSearchVisiblity}>
                         <div id="search">
                             <TextField
                                 type="search"
@@ -125,7 +125,7 @@ class App extends Component {
 const mapStateToProps = (state) => {
     return {
         account: selectAccount(state),
-        appLayout: selectAppLayout(state)
+        search: selectAppSearch(state)
     };
 }
 

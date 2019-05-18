@@ -13,6 +13,6 @@ export const toggleSearchVisiblity = (forceVisibility) => (dispatch, getState) =
 
     return dispatch({
         type: appActionTypes.toggleSearchVisibility,
-        payload: forceVisibility || !appState.layout.isSearchVisible
+        payload: forceVisibility || !appState.search.isVisible
     })
 }
