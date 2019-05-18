@@ -33,6 +33,8 @@ import {
     faInstagram
 } from '@fortawesome/free-brands-svg-icons';
 import { toggleSearchVisiblity } from './App.actions';
+import { selectAppLayout } from './App.selector';
+import { selectAccount } from '../account/Account.selector';
 
 library.add([
     faLinkedin,
@@ -42,7 +44,7 @@ library.add([
 
 class App extends Component {
     render() {
-        const { isSearchVisible, account, logout, toggleSearchVisiblity } = this.props;
+        const { appLayout, account, logout, toggleSearchVisiblity } = this.props;
 
         return (
             <Router history={history}>
@@ -78,8 +80,8 @@ class App extends Component {
                                                     <Link className="header-button" to="/profile">
                                                         <Avatar
                                                             id="avatar"
-                                                            src={account.avatar || `${process.env.PUBLIC_URL}/avatar-default.png`}
-                                                            alt="User avatar"
+                                                            src={`${process.env.PUBLIC_URL}/avatar-default.png`}
+                                                            alt="profile avatar"
                                                         />
                                                     </Link>
                                                 </Tooltip>
@@ -105,7 +107,7 @@ class App extends Component {
                         <Routes account={account} />
                     </main>
 
-                    <Drawer anchor="top"  open={isSearchVisible} onClose={toggleSearchVisiblity}>
+                    <Drawer anchor="top"  open={appLayout.isSearchVisible} onClose={toggleSearchVisiblity}>
                         <div id="search">
                             <TextField
                                 type="search"
@@ -122,8 +124,8 @@ class App extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        account: state.account,
-        isSearchVisible: state.app.layout.isSearchVisible
+        account: selectAccount(state),
+        appLayout: selectAppLayout(state)
     };
 }
 
