@@ -4,7 +4,7 @@ const searchDefaults = {
     isBarVisible: false,
     results: [],
     resultsTotal: 0,
-    skip: 0,
+    page: 1,
     limit: 10,
     filterBy: null,
     sortBy: 'asc'

@@ -154,7 +154,13 @@ class App extends Component {
                                         );
                                     })
                                 }
-
+                                {
+                                    search.resultsTotal ? (
+                                        <ListItem>
+                                            {search.results.length + ((search.page - 1) * search.limit)} of {search.resultsTotal}
+                                        </ListItem>
+                                    ) : (null)
+                                }
                                 {
                                     search.resultsTotal > search.limit ? (
                                         null
