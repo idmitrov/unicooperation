@@ -9,6 +9,7 @@ import appReducer from '../app/App.reducer';
 import feedReducer from '../feed/Feed.reducer';
 import nomReducer from '../nomenclatures/nom.reducer';
 import profileReducer from '../profile/Profile.reducer';
+import searchReducer from '../search/Search.reducer';
 import sharedReducer from '../shared/shared.reducer';
 import { accountActionTypes } from '../account/Account.actions';
 
@@ -20,6 +21,7 @@ const allReducers = combineReducers({
     feed: feedReducer,
     nomenclatures: nomReducer,
     profile: profileReducer,
+    search: searchReducer,
     shared: sharedReducer
 });
 

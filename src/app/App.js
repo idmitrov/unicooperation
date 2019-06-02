@@ -32,9 +32,9 @@ import {
     faFacebook,
     faInstagram
 } from '@fortawesome/free-brands-svg-icons';
-import { searchProfile, toggleSearchVisiblity } from './App.actions';
-import { selectAppSearch } from './App.selector';
+
 import { selectAccount } from '../account/Account.selector';
+import { fetchSearchList, toggleSearchVisiblity } from '../search/Search.actions';
 
 library.add([
     faLinkedin,
@@ -44,7 +44,7 @@ library.add([
 
 class App extends Component {
     render() {
-        const { account, search, toggleSearchVisiblity, searchProfile, logout } = this.props;
+        const { account, isBarVisible, toggleSearchVisiblity, searchProfile, logout } = this.props;
 
         return (
             <Router history={history}>
@@ -107,7 +107,7 @@ class App extends Component {
                         <Routes account={account} />
                     </main>
 
-                    <Drawer anchor="top"  open={search.isVisible} onClose={toggleSearchVisiblity}>
+                    <Drawer anchor="top"  open={isBarVisible} onClose={toggleSearchVisiblity}>
                         <div id="search">
                             <TextField
                                 type="search"
@@ -127,7 +127,7 @@ class App extends Component {
 const mapStateToProps = (state) => {
     return {
         account: selectAccount(state),
-        search: selectAppSearch(state)
+        isBarVisible: state.search.isBarVisible
     };
 }
 
@@ -139,7 +139,10 @@ const mapDispatchToProps = (dispatch) => {
         searchProfile(e) {
             const { value } = e.target;
 
-            return dispatch(searchProfile(value));
+            return dispatch(fetchSearchList(value))
+                .then((foundUniversities) => {
+                    console.log(foundUniversities);
+                });
         },
         logout() {
             history.push('/');
