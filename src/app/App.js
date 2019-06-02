@@ -139,13 +139,19 @@ class App extends Component {
                             <List dense>
                                 {
                                     searchResults.map((result, index) => {
+                                        const title = result.name || result.firstName;
+
                                         return (
                                             <ListItem key={index} button>
                                                 <ListItemAvatar>
-                                                    <Avatar alt="profile image" src={result.avatar} />
+                                                    {
+                                                        result.avatar ? (
+                                                            <Avatar alt="profile image" src={result.avatar}></Avatar>
+                                                        ) : (<Avatar>{title[0].toUpperCase()}</Avatar>)
+                                                    }
                                                 </ListItemAvatar>
 
-                                                <ListItemText primary={result.name} />
+                                                <ListItemText primary={title} />
                                             </ListItem>
                                         );
                                     })
