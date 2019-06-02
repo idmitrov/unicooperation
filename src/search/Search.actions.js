@@ -71,7 +71,12 @@ export const toggleSearchVisiblity = () => (dispatch, getState) => {
     const searchState = getState().search;
 
     if (searchState.isBarVisible) {
-        dispatch(setSearchListResults([]));
+        dispatch(
+            setSearchListResults({
+                list: [],
+                total: 0
+            })
+        );
     }
 
     return dispatch({
