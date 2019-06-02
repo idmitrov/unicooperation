@@ -18,8 +18,7 @@ import {
     Home,
     Search,
     School,
-    PowerSettingsNew,
-    Image
+    PowerSettingsNew
 } from '@material-ui/icons';
 
 import { Trans } from 'react-i18next';
