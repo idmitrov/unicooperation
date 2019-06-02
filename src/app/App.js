@@ -3,18 +3,23 @@ import { connect } from 'react-redux';
 
 import {
     AppBar,
-    Tooltip,
-    Grid,
     Avatar,
     Drawer,
-    TextField
+    Grid,
+    List,
+    ListItem,
+    ListItemAvatar,
+    ListItemText,
+    Tooltip,
+    TextField,
 } from '@material-ui/core';
 
 import {
     Home,
     Search,
     School,
-    PowerSettingsNew
+    PowerSettingsNew,
+    Image
 } from '@material-ui/icons';
 
 import { Trans } from 'react-i18next';
@@ -34,7 +39,12 @@ import {
 } from '@fortawesome/free-brands-svg-icons';
 
 import { selectAccount } from '../account/Account.selector';
-import { fetchSearchList, toggleSearchVisiblity } from '../search/Search.actions';
+
+import {
+    fetchSearchList,
+    toggleSearchVisiblity,
+    setSearchListResults
+} from '../search/Search.actions';
 
 library.add([
     faLinkedin,
@@ -44,7 +54,14 @@ library.add([
 
 class App extends Component {
     render() {
-        const { account, isBarVisible, toggleSearchVisiblity, searchProfile, logout } = this.props;
+        const {
+            account,
+            searchResults,
+            isBarVisible,
+            toggleSearchVisiblity,
+            searchProfile,
+            logout
+        } = this.props;
 
         return (
             <Router history={history}>
@@ -108,7 +125,7 @@ class App extends Component {
                     </main>
 
                     <Drawer anchor="top"  open={isBarVisible} onClose={toggleSearchVisiblity}>
-                        <div id="search">
+                        <div id="search-input">
                             <TextField
                                 type="search"
                                 label="Search"
@@ -116,6 +133,24 @@ class App extends Component {
                                 fullWidth
                                 onChange={searchProfile}
                             />
+                        </div>
+
+                        <div id="search-body">
+                            <List dense>
+                                {
+                                    searchResults.map((result, index) => {
+                                        return (
+                                            <ListItem key={index} button>
+                                                <ListItemAvatar>
+                                                    <Avatar alt="profile image" src={result.avatar} />
+                                                </ListItemAvatar>
+
+                                                <ListItemText primary={result.name} />
+                                            </ListItem>
+                                        );
+                                    })
+                                }
+                            </List>
                         </div>
                     </Drawer>
                 </React.Fragment>
@@ -127,7 +162,8 @@ class App extends Component {
 const mapStateToProps = (state) => {
     return {
         account: selectAccount(state),
-        isBarVisible: state.search.isBarVisible
+        isBarVisible: state.search.isBarVisible,
+        searchResults: state.search.results
     };
 }
 
@@ -140,8 +176,8 @@ const mapDispatchToProps = (dispatch) => {
             const { value } = e.target;
 
             return dispatch(fetchSearchList(value))
-                .then((foundUniversities) => {
-                    console.log(foundUniversities);
+                .then((foundProfiles) => {
+                    return dispatch(setSearchListResults(foundProfiles))
                 });
         },
         logout() {

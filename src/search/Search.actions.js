@@ -3,7 +3,8 @@ import { accountType } from '../account/Account.constants';
 
 export const searchActionTypes = {
     toggleSearchVisibility: 'SEARCH_VISIBILITY_TOGGLE',
-    fetchSearchList: 'SEARCH_LIST_FETCH'
+    fetchSearchList: 'SEARCH_LIST_FETCH',
+    setSearchListResults: 'SEARCH_LIST_RESULTS_SET'
 };
 
 /**
@@ -35,7 +36,7 @@ export const fetchSearchList = (nameQuery) => (dispatch, getState) => {
             default: return reject('Search -> Invalid account type');
         }
 
-        return dispatch({
+        return resolve(dispatch({
             type: searchActionTypes.fetchSearchList,
             payload: nameQuery,
             api: {
@@ -43,21 +44,38 @@ export const fetchSearchList = (nameQuery) => (dispatch, getState) => {
                 method:  searchEndpoints.searchList.method,
                 query: `name=${nameQuery}`
             }
-        });
+        }));
     });
 }
 
 /**
- * Toggle true/false search bar visibility, if force provided the value of force will be set
+ * Set search state results property by received API data
+ * @name setSearchListResults
+ * @desc Set search state results property
+ * @param {Array} results
+ */
+export const setSearchListResults = (results) => (dispatch) => {
+    return dispatch({
+        type: searchActionTypes.setSearchListResults,
+        payload: results
+    });
+}
+
+/**
+ * Toggle true/false search bar visibility
  * @name toggleSearchVisiblity
  * @desc Toggle true/false search bar visibility
  * @param {Boolean} forceVisibility
  */
-export const toggleSearchVisiblity = (forceVisibility) => (dispatch, getState) => {
+export const toggleSearchVisiblity = () => (dispatch, getState) => {
     const searchState = getState().search;
+
+    if (searchState.isBarVisible) {
+        dispatch(setSearchListResults([]));
+    }
 
     return dispatch({
         type: searchActionTypes.toggleSearchVisibility,
-        payload: forceVisibility || !searchState.isBarVisible
+        payload: !searchState.isBarVisible
     })
 }

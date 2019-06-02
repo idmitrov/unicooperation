@@ -11,6 +11,12 @@ const searchDefaults = {
 
 export default (state = searchDefaults, action = {}) => {
     switch(action.type) {
+        case searchActionTypes.setSearchListResults: {
+            return {
+                ...state,
+                results: action.payload
+            }
+        }
         case searchActionTypes.toggleSearchVisibility: {
             return {
                 ...state,
