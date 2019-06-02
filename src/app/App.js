@@ -55,8 +55,7 @@ class App extends Component {
     render() {
         const {
             account,
-            searchResults,
-            isBarVisible,
+            search,
             toggleSearchVisiblity,
             searchProfile,
             logout
@@ -123,7 +122,7 @@ class App extends Component {
                         <Routes account={account} />
                     </main>
 
-                    <Drawer anchor="top"  open={isBarVisible} onClose={toggleSearchVisiblity}>
+                    <Drawer anchor="top"  open={search.isBarVisible} onClose={toggleSearchVisiblity}>
                         <div id="search-input">
                             <TextField
                                 type="search"
@@ -137,7 +136,7 @@ class App extends Component {
                         <div id="search-body">
                             <List dense>
                                 {
-                                    searchResults.map((result, index) => {
+                                    search.results.map((result, index) => {
                                         const title = result.name || result.firstName;
 
                                         return (
@@ -155,6 +154,13 @@ class App extends Component {
                                         );
                                     })
                                 }
+
+                                {
+                                    search.resultsTotal > search.limit ? (
+                                        null
+                                        // TODO: Render pagination
+                                    ) : (null)
+                                }
                             </List>
                         </div>
                     </Drawer>
@@ -167,8 +173,7 @@ class App extends Component {
 const mapStateToProps = (state) => {
     return {
         account: selectAccount(state),
-        isBarVisible: state.search.isBarVisible,
-        searchResults: state.search.results
+        search: state.search
     };
 }
 

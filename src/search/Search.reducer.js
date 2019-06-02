@@ -3,8 +3,9 @@ import { searchActionTypes } from './Search.actions';
 const searchDefaults = {
     isBarVisible: false,
     results: [],
+    resultsTotal: 0,
     skip: 0,
-    take: 10,
+    limit: 10,
     filterBy: null,
     sortBy: 'asc'
 };
@@ -14,7 +15,8 @@ export default (state = searchDefaults, action = {}) => {
         case searchActionTypes.setSearchListResults: {
             return {
                 ...state,
-                results: action.payload
+                results: action.payload.list,
+                resultsTotal: action.payload.total
             }
         }
         case searchActionTypes.toggleSearchVisibility: {
