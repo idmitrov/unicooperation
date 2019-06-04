@@ -52,8 +52,6 @@ export const fetchSearchList = (nameQuery) => (dispatch, getState) => {
             }
         })
             .then((searchResult) => {
-                console.log(searchResult);
-
                 return resolve(searchResult);
             });
     });
