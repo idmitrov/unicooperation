@@ -4,7 +4,8 @@ const searchDefaults = {
     isBarVisible: false,
     results: [],
     resultsTotal: 0,
-    page: 1,
+    query: '',
+    skip: 0,
     limit: 10,
     filterBy: null,
     sortBy: 'asc'
@@ -12,6 +13,12 @@ const searchDefaults = {
 
 export default (state = searchDefaults, action = {}) => {
     switch(action.type) {
+        case searchActionTypes.setSearchParams: {
+                return {
+                    ...state,
+                    ...action.payload
+                }
+        }
         case searchActionTypes.setSearchListResults: {
             return {
                 ...state,

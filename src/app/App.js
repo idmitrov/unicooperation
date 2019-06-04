@@ -157,7 +157,7 @@ class App extends Component {
                                 {
                                     search.resultsTotal ? (
                                         <ListItem>
-                                            {search.results.length + ((search.page - 1) * search.limit)} of {search.resultsTotal}
+                                            {search.results.length + ((search.skip) * search.limit)} of {search.resultsTotal}
                                         </ListItem>
                                     ) : (null)
                                 }

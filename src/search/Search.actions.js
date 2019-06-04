@@ -4,7 +4,8 @@ import { accountType } from '../account/Account.constants';
 export const searchActionTypes = {
     toggleSearchVisibility: 'SEARCH_VISIBILITY_TOGGLE',
     fetchSearchList: 'SEARCH_LIST_FETCH',
-    setSearchListResults: 'SEARCH_LIST_RESULTS_SET'
+    setSearchListResults: 'SEARCH_LIST_RESULTS_SET',
+    setSearchParams: 'SEARCH_PARAMS_SET'
 };
 
 /**
@@ -17,10 +18,10 @@ export const searchActionTypes = {
  */
 export const fetchSearchList = (nameQuery) => (dispatch, getState) => {
     return new Promise((resolve, reject) => {
-        const account = getState().account;
+        const state = getState();
         let searchingFor = '';
 
-        switch (account.type) {
+        switch (state.account.type) {
             case accountType.student: {
                 searchingFor = 'student';
                 break;
@@ -36,15 +37,25 @@ export const fetchSearchList = (nameQuery) => (dispatch, getState) => {
             default: return reject('Search -> Invalid account type');
         }
 
-        return resolve(dispatch({
+        dispatch({
+            type: searchActionTypes.setSearchParams,
+            payload: { query: nameQuery }
+        });
+
+        return dispatch({
             type: searchActionTypes.fetchSearchList,
             payload: nameQuery,
             api: {
                 endpoint: searchEndpoints.searchList.endpoint.replace('{searchType}', searchingFor),
                 method:  searchEndpoints.searchList.method,
-                query: `name=${nameQuery}`
+                query: `name=${nameQuery}&skip=${state.search.skip}&limit=${state.search.limit}`
             }
-        }));
+        })
+            .then((searchResult) => {
+                console.log(searchResult);
+
+                return resolve(searchResult);
+            });
     });
 }
 
