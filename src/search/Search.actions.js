@@ -42,18 +42,17 @@ export const fetchSearchList = (nameQuery) => (dispatch, getState) => {
             default: return reject('Search -> Invalid account type');
         }
 
-        return dispatch({
-            type: searchActionTypes.fetchSearchList,
-            payload: nameQuery,
-            api: {
-                endpoint: searchEndpoints.searchList.endpoint.replace('{searchType}', searchingFor),
-                method:  searchEndpoints.searchList.method,
-                query: `name=${state.search.query}&skip=${state.search.skip}&limit=${state.search.limit}`
-            }
-        })
-            .then((searchResult) => {
-                return resolve(searchResult);
-            });
+        return resolve(
+            dispatch({
+                type: searchActionTypes.fetchSearchList,
+                payload: nameQuery,
+                api: {
+                    endpoint: searchEndpoints.searchList.endpoint.replace('{searchType}', searchingFor),
+                    method: searchEndpoints.searchList.method,
+                    query: `name=${state.search.query}&skip=${state.search.skip}&limit=${state.search.limit}`
+                }
+            })
+        )
     });
 }
 
