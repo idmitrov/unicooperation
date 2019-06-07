@@ -133,42 +133,48 @@ class App extends Component {
                             />
                         </div>
 
-                        <div id="search-body">
-                            <List dense>
-                                {
-                                    search.results.map((result, index) => {
-                                        const title = result.name || result.firstName;
+                        {
+                            search.results.length ? (
+                                <div id="search-content">
+                                    <List dense>
+                                        <Grid container>
+                                            {
+                                                search.results.map((result, index) => {
+                                                    const title = result.name || result.firstName;
 
-                                        return (
-                                            <ListItem key={index} button>
-                                                <ListItemAvatar>
-                                                    {
-                                                        result.avatar ? (
-                                                            <Avatar alt="profile image" src={result.avatar}></Avatar>
-                                                        ) : (<Avatar>{title[0].toUpperCase()}</Avatar>)
-                                                    }
-                                                </ListItemAvatar>
+                                                    return (
+                                                        <Grid item key={index} xs={6} md={4} lg={2}>
+                                                            <ListItem button>
+                                                                <ListItemAvatar>
+                                                                    {
+                                                                        result.avatar ? (
+                                                                            <Avatar alt="profile image" src={result.avatar}></Avatar>
+                                                                        ) : (<Avatar>{title[0].toUpperCase()}</Avatar>)
+                                                                    }
+                                                                </ListItemAvatar>
 
-                                                <ListItemText primary={title} />
-                                            </ListItem>
-                                        );
-                                    })
-                                }
-                                {
-                                    search.resultsTotal ? (
-                                        <ListItem>
-                                            {search.results.length + ((search.skip) * search.limit)} of {search.resultsTotal}
-                                        </ListItem>
-                                    ) : (null)
-                                }
-                                {
-                                    search.resultsTotal > search.limit ? (
-                                        null
-                                        // TODO: Render pagination
-                                    ) : (null)
-                                }
-                            </List>
-                        </div>
+                                                                <ListItemText primary={title} />
+                                                            </ListItem>
+                                                        </Grid>
+                                                    );
+                                                })
+                                            }
+                                        </Grid>
+                                    </List>
+
+                                    <div id="search-meta">
+                                        {search.results.length + ((search.skip) * search.limit)} of {search.resultsTotal}
+
+                                        {
+                                            search.resultsTotal > search.limit ? (
+                                                null
+                                                // TODO: Render pagination
+                                            ) : (null)
+                                        }
+                                    </div>
+                                </div>
+                            ) : (null)
+                        }
                     </Drawer>
                 </React.Fragment>
             </Router>
