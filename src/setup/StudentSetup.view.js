@@ -160,7 +160,7 @@ const mapDispatchToProps = (dispatch) => {
         filterUniversity(name) {
             return dispatch(filterUniversity(name))
                 .then((universities) => {
-                    return dispatch(setUniversityFilter(universities));
+                    return dispatch(setUniversityFilter(universities.list));
                 });
         }
     };
