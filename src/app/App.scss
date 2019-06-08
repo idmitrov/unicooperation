@@ -64,6 +64,10 @@
 }
 
 .page-row {
-    // max-width: calc(100% - 32px);
+    max-width: calc(100vw - 32px);
     margin: 16px auto auto;
+}
+
+.link-no-underline {
+    text-decoration: none;
 }
