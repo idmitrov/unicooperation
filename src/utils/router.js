@@ -70,20 +70,22 @@ export const Routes = ({ account }) => {
                 strict
             />
 
-            <PrivateRoute
-                path="/profile/:publicId"
-                allowed={authenticated}
-                component={
-                    account.type === accountType.admin
-                        ? AdminProfileView
-                        : account.type === accountType.university
-                            ? UniversityProfileView
-                            : account.type === accountType.partner
-                                ? PartnerProfileView
-                                : StudentProfileView
+            <Route
+                path="/profile/:type/:profileId"
+                render={
+                    (props) => {
+                        if (authenticated) {
+                            switch (props.match.params.type) {
+                                case accountType.partner: return <PartnerProfileView />
+                                case accountType.university: return <UniversityProfileView />
+                                case accountType.student: return <StudentProfileView />
+                                default: return <Redirect path="*" to="/" />;
+                            }
+                        } else {
+                            return <Redirect path="*" to="/" />;
+                        }
+                    }
                 }
-                exact
-                strict
             />
 
             <Route

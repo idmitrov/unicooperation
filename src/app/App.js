@@ -45,6 +45,9 @@ import {
     setSearchListResults
 } from '../search/Search.actions';
 
+
+import { accountType } from '../account/Account.constants';
+
 library.add([
     faLinkedin,
     faFacebook,
@@ -141,10 +144,11 @@ class App extends Component {
                                             {
                                                 search.results.map((result, index) => {
                                                     const title = result.name || result.firstName;
+                                                    const searchCriteria = result.account.type === accountType.student ? result.facultyId : result.name;
+
                                                     return (
                                                         <Grid item key={index} xs={6} md={4} lg={2}>
-                                                            {/* TODO: implement unique publicId on server side and use it */}
-                                                            <Link to={`/profile/${result.name}`} className="link-no-underline" onClick={toggleSearchVisiblity}>
+                                                            <Link to={`/profile/${result.account.type}/${searchCriteria}`} className="link-no-underline" onClick={toggleSearchVisiblity}>
                                                                 <ListItem button>
                                                                     <ListItemAvatar>
                                                                         {

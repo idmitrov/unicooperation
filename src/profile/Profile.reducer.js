@@ -18,7 +18,8 @@ export default (state = profileDefaults, action) => {
                 [action.payload.key]: action.payload.value
             }
         }
-        case profileActionTypes.setMyProfile: {
+        case profileActionTypes.setMyProfile:
+        case profileActionTypes.setProfile: {
             return {
                 ...state,
                 ...action.payload
