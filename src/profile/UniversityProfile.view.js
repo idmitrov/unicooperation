@@ -41,10 +41,20 @@ class UniversityProfile extends Component {
 
         const { type, profileId } = props.match.params;
 
-        if (type && profileId) {
+        if (profileId) {
             this.props.getProfile(type, profileId);
         } else {
             this.props.getMyProfile();
+        }
+    }
+
+    componentDidUpdate(prevProps) {
+        const { profileId } = prevProps.match.params;
+
+        if (profileId && profileId !== this.props.match.params.profileId) {
+            const { type, profileId } = this.props.match.params;
+
+            this.props.getProfile(type, profileId);
         }
     }
 

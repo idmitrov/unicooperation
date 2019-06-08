@@ -72,6 +72,8 @@ export const Routes = ({ account }) => {
 
             <Route
                 path="/profile/:type/:profileId"
+                exact
+                strict
                 render={
                     (props) => {
                         if (authenticated) {
