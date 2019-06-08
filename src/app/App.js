@@ -92,7 +92,7 @@ class App extends Component {
 
                                             <Grid item>
                                                 <Tooltip title={<Trans>global.profile.label</Trans>}>
-                                                    <Link className="header-button" to="/profile">
+                                                    <Link className="header-button" to="/profile/me">
                                                         <Avatar
                                                             id="avatar"
                                                             src={`${process.env.PUBLIC_URL}/avatar-default.png`}
@@ -141,20 +141,22 @@ class App extends Component {
                                             {
                                                 search.results.map((result, index) => {
                                                     const title = result.name || result.firstName;
-
                                                     return (
                                                         <Grid item key={index} xs={6} md={4} lg={2}>
-                                                            <ListItem button>
-                                                                <ListItemAvatar>
-                                                                    {
-                                                                        result.avatar ? (
-                                                                            <Avatar alt="profile image" src={result.avatar}></Avatar>
-                                                                        ) : (<Avatar>{title[0].toUpperCase()}</Avatar>)
-                                                                    }
-                                                                </ListItemAvatar>
+                                                            {/* TODO: implement unique publicId on server side and use it */}
+                                                            <Link to={`/profile/${result.name}`} className="link-no-underline" onClick={toggleSearchVisiblity}>
+                                                                <ListItem button>
+                                                                    <ListItemAvatar>
+                                                                        {
+                                                                            result.avatar ? (
+                                                                                <Avatar alt="profile image" src={result.avatar}></Avatar>
+                                                                            ) : (<Avatar>{title[0].toUpperCase()}</Avatar>)
+                                                                        }
+                                                                    </ListItemAvatar>
 
-                                                                <ListItemText primary={title} />
-                                                            </ListItem>
+                                                                    <ListItemText primary={title} />
+                                                                </ListItem>
+                                                            </Link>
                                                         </Grid>
                                                     );
                                                 })
@@ -163,7 +165,7 @@ class App extends Component {
                                     </List>
 
                                     <div id="search-meta">
-                                        {search.results.length + ((search.skip) * search.limit)} of {search.resultsTotal}
+                                        <Trans>global.shown</Trans> {search.results.length + ((search.skip) * search.limit)} / {search.resultsTotal}
 
                                         {
                                             search.resultsTotal > search.limit ? (

@@ -55,7 +55,23 @@ export const Routes = ({ account }) => {
             />
 
             <PrivateRoute
-                path="/profile"
+                path="/profile/me"
+                allowed={authenticated}
+                component={
+                    account.type === accountType.admin
+                        ? AdminProfileView
+                        : account.type === accountType.university
+                            ? UniversityProfileView
+                            : account.type === accountType.partner
+                                ? PartnerProfileView
+                                : StudentProfileView
+                }
+                exact
+                strict
+            />
+
+            <PrivateRoute
+                path="/profile/:publicId"
                 allowed={authenticated}
                 component={
                     account.type === accountType.admin
