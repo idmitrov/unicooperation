@@ -14,11 +14,11 @@ export const searchActionTypes = {
  * student for students
  * @name fetchSearchList
  * @desc Search for a given profile
- * @param {String} nameQuery
+ * @param {String} searchquery
  */
-export const fetchSearchList = (nameQuery) => (dispatch, getState) => {
+export const fetchSearchList = (searchquery) => (dispatch, getState) => {
     return new Promise((resolve, reject) => {
-        if (!nameQuery) {
+        if (!searchquery) {
             return resolve({
                 list: [],
                 total: 0
@@ -47,7 +47,7 @@ export const fetchSearchList = (nameQuery) => (dispatch, getState) => {
         return resolve(
             dispatch({
                 type: searchActionTypes.fetchSearchList,
-                payload: nameQuery,
+                payload: searchquery,
                 api: {
                     endpoint: searchEndpoints.searchList.endpoint.replace('{searchType}', searchingFor),
                     method: searchEndpoints.searchList.method,
