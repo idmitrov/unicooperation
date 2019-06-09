@@ -17,12 +17,14 @@ export const searchActionTypes = {
  * @param {String} nameQuery
  */
 export const fetchSearchList = (nameQuery) => (dispatch, getState) => {
-    dispatch({
-        type: searchActionTypes.setSearchParams,
-        payload: { query: nameQuery }
-    });
-
     return new Promise((resolve, reject) => {
+        if (!nameQuery) {
+            return resolve({
+                list: [],
+                total: 0
+            });
+        }
+
         const state = getState();
         let searchingFor = '';
 
@@ -53,6 +55,13 @@ export const fetchSearchList = (nameQuery) => (dispatch, getState) => {
                 }
             })
         )
+    });
+}
+
+export const setSearchListQuery = (searchQuery) => (dispatch) => {
+    dispatch({
+        type: searchActionTypes.setSearchParams,
+        payload: { query: searchQuery }
     });
 }
 

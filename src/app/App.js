@@ -42,7 +42,8 @@ import { selectAccount } from '../account/Account.selector';
 import {
     fetchSearchList,
     toggleSearchVisiblity,
-    setSearchListResults
+    setSearchListResults,
+    setSearchListQuery
 } from '../search/Search.actions';
 
 
@@ -202,6 +203,8 @@ const mapDispatchToProps = (dispatch) => {
         },
         searchProfile(e) {
             const { value } = e.target;
+
+            dispatch(setSearchListQuery(value));
 
             return dispatch(fetchSearchList(value))
                 .then((foundProfiles) => {
