@@ -21,7 +21,7 @@ import {
     PowerSettingsNew
 } from '@material-ui/icons';
 
-import { Trans } from 'react-i18next';
+import { Trans, withTranslation } from 'react-i18next';
 
 import Router, { Routes, Link } from '../utils/router';
 import history from '../utils/history';
@@ -62,7 +62,8 @@ class App extends Component {
             search,
             toggleSearchVisiblity,
             searchProfile,
-            logout
+            logout,
+            t
         } = this.props;
 
         return (
@@ -170,7 +171,13 @@ class App extends Component {
                                     </List>
 
                                     <div id="search-meta">
-                                        <Trans>global.shown</Trans> {search.results.length + ((search.skip) * search.limit)} / {search.resultsTotal}
+                                        {
+                                            t('global.shownFromToOfTotal', {
+                                                from: (search.skip - search.limit) + 1,
+                                                to: search.skip + search.limit > search.resultsTotal ? search.skip : search.resultsTotal,
+                                                total: search.resultsTotal
+                                            })
+                                        }
 
                                         {
                                             search.resultsTotal > search.limit ? (
@@ -219,4 +226,4 @@ const mapDispatchToProps = (dispatch) => {
     };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(withTranslation()(App))
