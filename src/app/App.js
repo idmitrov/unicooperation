@@ -21,7 +21,7 @@ import {
     PowerSettingsNew
 } from '@material-ui/icons';
 
-import { Trans, withTranslation } from 'react-i18next';
+import { Trans } from 'react-i18next';
 
 import Router, { Routes, Link } from '../utils/router';
 import history from '../utils/history';
@@ -62,8 +62,7 @@ class App extends Component {
             search,
             toggleSearchVisiblity,
             searchProfile,
-            logout,
-            t
+            logout
         } = this.props;
 
         return (
@@ -171,13 +170,13 @@ class App extends Component {
                                     </List>
 
                                     <div id="search-meta">
-                                        {
-                                            t('global.shownFromToOfTotal', {
-                                                from: (search.skip - search.limit) + 1,
-                                                to: search.skip + search.limit > search.resultsTotal ? search.skip : search.resultsTotal,
-                                                total: search.resultsTotal
-                                            })
-                                        }
+                                        <Trans values={{
+                                            from: (search.skip - search.limit) + 1,
+                                            to: search.skip + search.limit > search.resultsTotal ? search.skip : search.resultsTotal,
+                                            total: search.resultsTotal
+                                        }}>
+                                            global.shownFromToOfTotal
+                                        </Trans>
 
                                         {
                                             search.resultsTotal > search.limit ? (
@@ -226,4 +225,4 @@ const mapDispatchToProps = (dispatch) => {
     };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(withTranslation()(App))
+export default connect(mapStateToProps, mapDispatchToProps)(App);
