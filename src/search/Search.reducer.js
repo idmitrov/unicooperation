@@ -13,7 +13,7 @@ const searchDefaults = {
 
 export default (state = searchDefaults, action = {}) => {
     switch(action.type) {
-        case searchActionTypes.setSearchParams: {
+        case searchActionTypes.setSearchQuery: {
                 return {
                     ...state,
                     ...action.payload
