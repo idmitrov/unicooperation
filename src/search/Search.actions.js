@@ -71,10 +71,16 @@ export const setSearchListQuery = (searchQuery) => (dispatch) => {
  * @desc Set search state results property
  * @param {Array} results
  */
-export const setSearchListResults = (results) => (dispatch) => {
+export const setSearchListResults = (results) => (dispatch, getState) => {
+    const searchState = getState().search;
+
     return dispatch({
         type: searchActionTypes.setSearchListResults,
-        payload: results
+        payload: {
+            results: results.list,
+            resultsTotal: results.total,
+            skip: results.list && results.list.length ? searchState.skip + searchState.limit : 0
+        }
     });
 }
 

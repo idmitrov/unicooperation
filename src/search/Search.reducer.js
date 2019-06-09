@@ -22,8 +22,7 @@ export default (state = searchDefaults, action = {}) => {
         case searchActionTypes.setSearchListResults: {
             return {
                 ...state,
-                results: action.payload.list,
-                resultsTotal: action.payload.total
+                ...action.payload
             }
         }
         case searchActionTypes.toggleSearchVisibility: {
