@@ -5,7 +5,7 @@ export const searchActionTypes = {
     toggleSearchVisibility: 'SEARCH_VISIBILITY_TOGGLE',
     fetchSearchList: 'SEARCH_LIST_FETCH',
     setSearchListResults: 'SEARCH_LIST_RESULTS_SET',
-    setSearchParams: 'SEARCH_PARAMS_SET'
+    setSearchQuery: 'SEARCH__QUERY_SET'
 };
 
 /**
@@ -58,9 +58,9 @@ export const fetchSearchList = (searchquery) => (dispatch, getState) => {
     });
 }
 
-export const setSearchListQuery = (searchQuery) => (dispatch) => {
+export const setSearchQuery = (searchQuery) => (dispatch) => {
     dispatch({
-        type: searchActionTypes.setSearchParams,
+        type: searchActionTypes.setSearchQuery,
         payload: { query: searchQuery }
     });
 }

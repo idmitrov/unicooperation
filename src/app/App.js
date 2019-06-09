@@ -43,7 +43,7 @@ import {
     fetchSearchList,
     toggleSearchVisiblity,
     setSearchListResults,
-    setSearchListQuery
+    setSearchQuery
 } from '../search/Search.actions';
 
 
@@ -204,7 +204,7 @@ const mapDispatchToProps = (dispatch) => {
         searchProfile(e) {
             const { value } = e.target;
 
-            dispatch(setSearchListQuery(value));
+            dispatch(setSearchQuery(value));
 
             return dispatch(fetchSearchList(value))
                 .then((foundProfiles) => {
