@@ -5,7 +5,8 @@ export const searchActionTypes = {
     toggleSearchVisibility: 'SEARCH_VISIBILITY_TOGGLE',
     fetchSearchList: 'SEARCH_LIST_FETCH',
     setSearchListResults: 'SEARCH_LIST_RESULTS_SET',
-    setSearchQuery: 'SEARCH__QUERY_SET'
+    setSearchQuery: 'SEARCH_QUERY_SET',
+    setSearchPage: 'SEARCH_PAGE_SET'
 };
 
 /**
@@ -14,19 +15,18 @@ export const searchActionTypes = {
  * student for students
  * @name fetchSearchList
  * @desc Search for a given profile
- * @param {String} searchquery
  */
-export const fetchSearchList = (searchquery) => (dispatch, getState) => {
+export const fetchSearchList = () => (dispatch, getState) => {
     return new Promise((resolve, reject) => {
-        if (!searchquery) {
+        const state = getState();
+        let searchingFor = '';
+
+        if (!state.search.query) {
             return resolve({
                 list: [],
                 total: 0
             });
         }
-
-        const state = getState();
-        let searchingFor = '';
 
         switch (state.account.type) {
             case accountType.student: {
@@ -47,14 +47,22 @@ export const fetchSearchList = (searchquery) => (dispatch, getState) => {
         return resolve(
             dispatch({
                 type: searchActionTypes.fetchSearchList,
-                payload: searchquery,
                 api: {
                     endpoint: searchEndpoints.searchList.endpoint.replace('{searchType}', searchingFor),
                     method: searchEndpoints.searchList.method,
-                    query: `name=${state.search.query}&skip=${state.search.skip}&limit=${state.search.limit}`
+                    query: `name=${state.search.query}&page=${state.search.currentPage}&limit=${state.search.limit}`
                 }
             })
         )
+    });
+}
+
+export const setSearchPage = (page) => (dispatch) => {
+    return dispatch({
+        type: searchActionTypes.setSearchPage,
+        payload: {
+            currentPage: page
+        }
     });
 }
 
@@ -69,19 +77,22 @@ export const setSearchQuery = (searchQuery) => (dispatch) => {
  * Set search state results property by received API data
  * @name setSearchListResults
  * @desc Set search state results property
- * @param {Array} results
+ * @param {Object} results
  */
-export const setSearchListResults = (results) => (dispatch, getState) => {
-    const searchState = getState().search;
-
-    return dispatch({
+export const setSearchListResults = (results) => (dispatch) => {
+    const action = {
         type: searchActionTypes.setSearchListResults,
         payload: {
             results: results.list,
             resultsTotal: results.total,
-            skip: results.list && results.list.length ? searchState.skip + searchState.limit : 0
         }
-    });
+    }
+
+    if (!results.list.length) {
+        action.payload.currentPage = 1;
+    }
+
+    return dispatch(action);
 }
 
 /**

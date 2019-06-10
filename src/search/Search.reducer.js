@@ -5,14 +5,20 @@ const searchDefaults = {
     results: [],
     resultsTotal: 0,
     query: '',
-    skip: 0,
     limit: 10,
     filterBy: null,
-    sortBy: 'asc'
+    sortBy: 'asc',
+    currentPage: 1
 };
 
 export default (state = searchDefaults, action = {}) => {
     switch(action.type) {
+        case searchActionTypes.setSearchPage: {
+            return {
+                ...state,
+                ...action.payload
+            }
+        }
         case searchActionTypes.setSearchQuery: {
                 return {
                     ...state,

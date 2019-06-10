@@ -15,7 +15,7 @@
             "global.profile.label": "Profile",
             "global.search.label": "Search",
             "global.save": "Save",
-            "global.shownFromToOfTotal": "Shown {{from}} - {{to}} of total {{total}}",
+            "global.shownFromToOfTotal": "Shown from {{from}} to {{to}} of total {{total}}",
             "partner.label": "Partner",
             "partner.name.label": "Display name",
             "student.label": "Student",

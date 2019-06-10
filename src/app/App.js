@@ -43,11 +43,13 @@ import {
     fetchSearchList,
     toggleSearchVisiblity,
     setSearchListResults,
-    setSearchQuery
+    setSearchQuery,
+    setSearchPage
 } from '../search/Search.actions';
 
 
 import { accountType } from '../account/Account.constants';
+import { selectPages, selectSearch, selectTotalPages } from '../search/Search.selector';
 
 library.add([
     faLinkedin,
@@ -62,7 +64,10 @@ class App extends Component {
             search,
             toggleSearchVisiblity,
             searchProfile,
-            logout
+            searchProfileOnGivenPage,
+            logout,
+            pages,
+            totalPages
         } = this.props;
 
         return (
@@ -170,20 +175,46 @@ class App extends Component {
                                     </List>
 
                                     <div id="search-meta">
-                                        <Trans values={{
-                                            from: (search.skip - search.limit) + 1,
-                                            to: search.skip + search.limit > search.resultsTotal ? search.skip : search.resultsTotal,
-                                            total: search.resultsTotal
-                                        }}>
-                                            global.shownFromToOfTotal
-                                        </Trans>
+                                        <Grid container justify="center">
+                                            <Grid item>
+                                                <button
+                                                    disabled={search.currentPage <= 1}
+                                                    onClick={() => searchProfileOnGivenPage(search.currentPage - 1)}>
+                                                    &lt;
+                                                </button>
 
-                                        {
-                                            search.resultsTotal > search.limit ? (
-                                                null
-                                                // TODO: Render pagination
-                                            ) : (null)
-                                        }
+                                                {
+                                                    pages.map((page) => {
+                                                        return (
+                                                            <button
+                                                                key={page}
+                                                                disabled={page == search.currentPage}
+                                                                onClick={() => searchProfileOnGivenPage(page)}>
+                                                                {page}
+                                                            </button>
+                                                        )
+                                                    })
+                                                }
+
+                                                <button
+                                                    disabled={search.currentPage >= totalPages}
+                                                    onClick={() => searchProfileOnGivenPage(search.currentPage + 1)}
+                                                    >&gt;
+                                                </button>
+                                            </Grid>
+                                        </Grid>
+
+                                        <Grid container justify="center">
+                                            <Grid item>
+                                                <Trans values={{
+                                                    from: (search.currentPage * search.limit) - search.limit + 1,
+                                                    to: search.currentPage * search.limit > search.resultsTotal ? search.resultsTotal : (search.currentPage * search.limit),
+                                                    total: search.resultsTotal
+                                                }}>
+                                                    global.shownFromToOfTotal
+                                                </Trans>
+                                            </Grid>
+                                        </Grid>
                                     </div>
                                 </div>
                             ) : (null)
@@ -198,7 +229,9 @@ class App extends Component {
 const mapStateToProps = (state) => {
     return {
         account: selectAccount(state),
-        search: state.search
+        pages: selectPages(state),
+        totalPages: selectTotalPages(state),
+        search: selectSearch(state)
     };
 }
 
@@ -208,11 +241,17 @@ const mapDispatchToProps = (dispatch) => {
             return dispatch(toggleSearchVisiblity());
         },
         searchProfile(e) {
-            const { value } = e.target;
+            dispatch(setSearchQuery(e.target.value));
 
-            dispatch(setSearchQuery(value));
+            return dispatch(fetchSearchList())
+                .then((foundProfiles) => {
+                    return dispatch(setSearchListResults(foundProfiles))
+                });
+        },
+        searchProfileOnGivenPage(pageNumber) {
+            dispatch(setSearchPage(pageNumber));
 
-            return dispatch(fetchSearchList(value))
+            return dispatch(fetchSearchList())
                 .then((foundProfiles) => {
                     return dispatch(setSearchListResults(foundProfiles))
                 });
