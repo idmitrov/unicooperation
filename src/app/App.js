@@ -202,7 +202,7 @@ class App extends Component {
                                                 })
                                             }
 
-                                            <Grid>
+                                            <Grid item>
                                                 <IconButton
                                                     disabled={search.currentPage >= totalPages}
                                                     onClick={() => searchProfileOnGivenPage(search.currentPage + 1)}
