@@ -13,13 +13,14 @@ export const selectPages = createSelector(
         const pages = [];
         const { currentPage } = search;
         const totalPages = Math.ceil(search.resultsTotal / search.limit);
-        const maxAllowedPages = totalPages < currentPage + 4 ? totalPages : 5;
+        const maxAllowedPages = totalPages <= currentPage + 4 ? totalPages : 5;
 
         for (let i = currentPage; i <= maxAllowedPages; i += 1) {
+            console.log(i)
             pages.push(i);
         }
 
-        if (pages.length < maxAllowedPages) {
+        if (pages.length <= maxAllowedPages) {
             const firstPages = pages[0] - 1;
 
             for (let i = firstPages; i > 1; i -= 1) {
