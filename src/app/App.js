@@ -12,13 +12,16 @@ import {
     ListItemText,
     Tooltip,
     TextField,
+    IconButton
 } from '@material-ui/core';
 
 import {
     Home,
     Search,
     School,
-    PowerSettingsNew
+    PowerSettingsNew,
+    ChevronLeft,
+    ChevronRight
 } from '@material-ui/icons';
 
 import { Trans } from 'react-i18next';
@@ -175,32 +178,37 @@ class App extends Component {
                                     </List>
 
                                     <div id="search-meta">
-                                        <Grid container justify="center">
+                                        <Grid container justify="center" alignItems="center" spacing={16}>
                                             <Grid item>
-                                                <button
+                                                <IconButton
                                                     disabled={search.currentPage <= 1}
                                                     onClick={() => searchProfileOnGivenPage(search.currentPage - 1)}>
-                                                    &lt;
-                                                </button>
+                                                    <ChevronLeft />
+                                                </IconButton>
+                                            </Grid>
 
-                                                {
-                                                    pages.map((page) => {
-                                                        return (
+                                            {
+                                                pages.map((page) => {
+                                                    return (
+                                                        <Grid item key={page}>
                                                             <button
-                                                                key={page}
-                                                                disabled={page == search.currentPage}
+                                                                variant="text"
+                                                                disabled={page === search.currentPage}
                                                                 onClick={() => searchProfileOnGivenPage(page)}>
                                                                 {page}
                                                             </button>
-                                                        )
-                                                    })
-                                                }
+                                                        </Grid>
+                                                    )
+                                                })
+                                            }
 
-                                                <button
+                                            <Grid>
+                                                <IconButton
                                                     disabled={search.currentPage >= totalPages}
                                                     onClick={() => searchProfileOnGivenPage(search.currentPage + 1)}
-                                                    >&gt;
-                                                </button>
+                                                    >
+                                                    <ChevronRight />
+                                                </IconButton>
                                             </Grid>
                                         </Grid>
 
