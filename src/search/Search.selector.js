@@ -11,15 +11,20 @@ export const selectPages = createSelector(
     [getSearch],
     (search) => {
         const pages = [];
+        const { currentPage } = search;
         const totalPages = Math.ceil(search.resultsTotal / search.limit);
-        const pagesLimit = totalPages > 5 ? 5 : totalPages;
+        const maxAllowedPages = totalPages < currentPage + 4 ? totalPages : 5;
 
-        for (let i = search.currentPage; i <= pagesLimit; i += 1) {
+        for (let i = currentPage; i <= maxAllowedPages; i += 1) {
             pages.push(i);
         }
 
-        if (search.currentPage === totalPages) {
-            pages.unshift(search.currentPage - 1);
+        if (pages.length < maxAllowedPages) {
+            const firstPages = pages[0] - 1;
+
+            for (let i = firstPages; i > 1; i -= 1) {
+                pages.unshift(i);
+            }
         }
 
         return pages;
