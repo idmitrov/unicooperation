@@ -1,4 +1,8 @@
 export default {
+    followProfile: {
+        endpoint: '{profileType}/follow',
+        method: 'POST'
+    },
     getProfile: {
         endpoint: '{profileType}/preview/{profileId}',
         method: 'GET'

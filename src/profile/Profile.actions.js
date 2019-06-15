@@ -4,11 +4,23 @@ export const profileActionTypes = {
     fetchProfile: 'PROFILE_FETCH',
     setProfile: 'PROFILE_SET',
     fetchMyProfile: 'PROFILE_MINE_FETCH',
+    followProfile: 'PROFILE_FOLLOW',
     setMyProfile: 'PROFILE_MINE_SET',
     setMyProfileData: 'PROFILE_MINE_DATA_SET',
     updateMyProfile: 'PROFILE_MINE_UPDATE',
     toggleMyProfileReadonly: 'PROFILE_MINE_READONLY_TOGGLE'
 };
+
+export const followProfile = (followerProfileType, followingId) => (dispatch) => {
+    return dispatch({
+        type: profileActionTypes.followProfile,
+        payload: {followingId},
+        api: {
+            endpoint: profileEndpoints.followProfile.endpoint.replace('{profileType}', followerProfileType),
+            method: profileEndpoints.followProfile.method
+        }
+    });
+}
 
 /**
  *  Request API to get profile data

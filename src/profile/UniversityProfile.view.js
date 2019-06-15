@@ -14,7 +14,9 @@ import {
 import {
     Edit,
     Save,
-    Cancel
+    Cancel,
+    PersonAdd,
+    HowToReg
 } from '@material-ui/icons';
 
 import { Trans } from 'react-i18next';
@@ -29,7 +31,8 @@ import {
     updateMyProfile,
     updateMyProfileAvatar,
     setMyProfileData,
-    toggleMyProfileReadonly
+    toggleMyProfileReadonly,
+    followProfile
 } from './Profile.actions';
 
 import './Profile.scss';
@@ -65,7 +68,8 @@ class UniversityProfile extends Component {
             changeProfileReadonly,
             handleProfileChange,
             handleProfileAvatarChange,
-            updateMyProfile
+            updateMyProfile,
+            followProfile
         } = this.props;
 
         return (
@@ -77,8 +81,25 @@ class UniversityProfile extends Component {
                         <div className="profile-header-actions">
                         {
                             match.params.profileId ? (
-                                // TODO: IMPLEMENT FOLLOW LOGIC
-                                <button>Follow</button>
+                                <Grid container justify="flex-end">
+                                    <Grid item>
+                                        {
+                                            profile.isFollowed === true ? (
+                                                <Tooltip title={<Trans>global.Followed</Trans>}>
+                                                    <IconButton>
+                                                        <HowToReg />
+                                                    </IconButton>
+                                                </Tooltip>
+                                            ) : (
+                                                <Tooltip title={<Trans>global.follow</Trans>}>
+                                                    <IconButton onClick={() => followProfile(profile._id)}>
+                                                        <PersonAdd />
+                                                    </IconButton>
+                                                </Tooltip>
+                                            )
+                                        }
+                                    </Grid>
+                                </Grid>
                             ) : (
                                 <Grid container justify="flex-end">
                                     {
@@ -379,6 +400,12 @@ const mapDispatchToProps = (dispatch) => {
             return dispatch(fetchProfile(profileType, profileId))
                 .then((foundProfile) => {
                     return dispatch(setProfile(foundProfile));
+                });
+        },
+        followProfile(followingId) {
+            return dispatch(followProfile('university', followingId))
+                .then((followedProfile) => {
+                    return dispatch(setProfile(followedProfile));
                 });
         }
     };
