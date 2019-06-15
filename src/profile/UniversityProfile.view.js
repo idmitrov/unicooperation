@@ -78,7 +78,7 @@ class UniversityProfile extends Component {
                         {
                             match.params.profileId ? (
                                 // TODO: IMPLEMENT FOLLOW LOGIC
-                                null
+                                <button>Follow</button>
                             ) : (
                                 <Grid container justify="flex-end">
                                     {
