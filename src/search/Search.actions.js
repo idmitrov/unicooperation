@@ -57,6 +57,11 @@ export const fetchSearchList = () => (dispatch, getState) => {
     });
 }
 
+/**
+ * Sets the current page number of the search functionality
+ * @name setSearchPage
+ * @param {String|Number} page
+ */
 export const setSearchPage = (page) => (dispatch) => {
     return dispatch({
         type: searchActionTypes.setSearchPage,
@@ -66,6 +71,11 @@ export const setSearchPage = (page) => (dispatch) => {
     });
 }
 
+/**
+ * Sets the current query of the search functionality
+ * @name setSearchQuery
+ * @param {String} searchQuery
+ */
 export const setSearchQuery = (searchQuery) => (dispatch) => {
     dispatch({
         type: searchActionTypes.setSearchQuery,
