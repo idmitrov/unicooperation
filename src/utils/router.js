@@ -14,6 +14,7 @@ import AdminProfileView from '../profile/AdminProfile.view';
 import PartnerProfileView from '../profile/PartnerProfile.view';
 import StudentProfileView from '../profile/StudentProfile.view';
 import UniversityProfileView from '../profile/UniversityProfile.view';
+import MatcherView from '../matcher/Matcher.view';
 
 export const Link = _Link;
 
@@ -40,7 +41,7 @@ export const Routes = ({ account }) => {
             <PrivateRoute
                 path="/"
                 component={
-                    account.type === accountType.partner ? (PartnerProfileView) : (FeedView)
+                    account.type === accountType.partner ? (MatcherView) : (FeedView)
                 }
                 allowed={authenticated}
                 fallbackComponent={
