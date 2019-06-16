@@ -409,6 +409,7 @@ const mapDispatchToProps = (dispatch) => {
                     return dispatch(setProfile(followedProfile));
                 });
         }
+        // TODO: Implement unfollowProfile
     };
 }
 
