@@ -11,7 +11,7 @@
             "global.cancel": "Cancel",
             "global.edit": "Edit",
             "global.follow": "Follow",
-            "global.Followed": "Followed",
+            "global.unfollow": "Stop following",
             "global.more": "More",
             "global.home.label": "Home",
             "global.profile.label": "Profile",

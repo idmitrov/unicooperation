@@ -16,7 +16,8 @@ import {
     Save,
     Cancel,
     PersonAdd,
-    HowToReg
+    HowToReg,
+    PersonAddDisabled
 } from '@material-ui/icons';
 
 import { Trans } from 'react-i18next';
@@ -87,9 +88,9 @@ class UniversityProfile extends Component {
                                         <Grid item>
                                             {
                                                 profile.isFollowed ? (
-                                                    <Tooltip title={<Trans>global.Followed</Trans>}>
+                                                    <Tooltip title={<Trans>global.unfollow</Trans>}>
                                                         <IconButton>
-                                                            <HowToReg />
+                                                            <PersonAddDisabled />
                                                         </IconButton>
                                                     </Tooltip>
                                                 ) : (
