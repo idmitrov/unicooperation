@@ -8,7 +8,7 @@ import accountReducer from '../account/Account.reducer';
 import appReducer from '../app/App.reducer';
 import feedReducer from '../feed/Feed.reducer';
 import matcherReducer from '../matcher/Matcher.reducer';
-import nomReducer from '../nomenclatures/nom.reducer';
+import nomReducer from '../nomenclatures/Nom.reducer';
 import profileReducer from '../profile/Profile.reducer';
 import searchReducer from '../search/Search.reducer';
 import sharedReducer from '../shared/shared.reducer';

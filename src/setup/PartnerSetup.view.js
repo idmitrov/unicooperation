@@ -15,7 +15,7 @@ import {
 
 import { Trans } from 'react-i18next';
 
-import { fetchCountries, setCountries } from '../nomenclatures/nom.actions';
+import { fetchCountries, setCountries } from '../nomenclatures/Nom.actions';
 import { createPartnerSetup } from './Setup.actions.js';
 import { setAccount } from '../account/Account.actions';
 

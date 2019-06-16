@@ -1,4 +1,4 @@
-import { nomActionTypes } from './nom.actions';
+import { nomActionTypes } from './Nom.actions';
 
 const nomDefaults = {
     countries: []

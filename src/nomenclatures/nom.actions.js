@@ -1,4 +1,4 @@
-import nomEndpoints from './nom.endpoints';
+import nomEndpoints from './Nom.endpoints';
 
 export const nomActionTypes = {
     fetchCountriesNom: 'NOM_COUNTRIES_FETCH',
