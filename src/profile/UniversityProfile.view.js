@@ -37,6 +37,7 @@ import {
 
 import './Profile.scss';
 import { selectProfile } from './Profile.selector';
+import { accountType } from '../account/Account.constants';
 
 class UniversityProfile extends Component {
     constructor(props) {
@@ -92,7 +93,7 @@ class UniversityProfile extends Component {
                                                 </Tooltip>
                                             ) : (
                                                 <Tooltip title={<Trans>global.follow</Trans>}>
-                                                    <IconButton onClick={() => followProfile(profile._id)}>
+                                                    <IconButton onClick={() => followProfile(accountType.university, profile._id)}>
                                                         <PersonAdd />
                                                     </IconButton>
                                                 </Tooltip>
@@ -402,8 +403,8 @@ const mapDispatchToProps = (dispatch) => {
                     return dispatch(setProfile(foundProfile));
                 });
         },
-        followProfile(followingId) {
-            return dispatch(followProfile('university', followingId))
+        followProfile(followerType, followingId) {
+            return dispatch(followProfile(followerType, followingId))
                 .then((followedProfile) => {
                     return dispatch(setProfile(followedProfile));
                 });
