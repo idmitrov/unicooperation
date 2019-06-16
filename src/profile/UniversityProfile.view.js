@@ -82,25 +82,27 @@ class UniversityProfile extends Component {
                         <div className="profile-header-actions">
                         {
                             match.params.profileId ? (
-                                <Grid container justify="flex-end">
-                                    <Grid item>
-                                        {
-                                            profile.isFollowed === true ? (
-                                                <Tooltip title={<Trans>global.Followed</Trans>}>
-                                                    <IconButton>
-                                                        <HowToReg />
-                                                    </IconButton>
-                                                </Tooltip>
-                                            ) : (
-                                                <Tooltip title={<Trans>global.follow</Trans>}>
-                                                    <IconButton onClick={() => followProfile(accountType.university, profile._id)}>
-                                                        <PersonAdd />
-                                                    </IconButton>
-                                                </Tooltip>
-                                            )
-                                        }
+                                profile.hasOwnProperty('isFollowed') ? (
+                                    <Grid container justify="flex-end">
+                                        <Grid item>
+                                            {
+                                                profile.isFollowed ? (
+                                                    <Tooltip title={<Trans>global.Followed</Trans>}>
+                                                        <IconButton>
+                                                            <HowToReg />
+                                                        </IconButton>
+                                                    </Tooltip>
+                                                ) : (
+                                                    <Tooltip title={<Trans>global.follow</Trans>}>
+                                                        <IconButton onClick={() => followProfile(accountType.university, profile._id)}>
+                                                            <PersonAdd />
+                                                        </IconButton>
+                                                    </Tooltip>
+                                                )
+                                            }
+                                        </Grid>
                                     </Grid>
-                                </Grid>
+                                ) : (null)
                             ) : (
                                 <Grid container justify="flex-end">
                                     {
