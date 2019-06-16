@@ -16,7 +16,6 @@ import {
     Save,
     Cancel,
     PersonAdd,
-    HowToReg,
     PersonAddDisabled
 } from '@material-ui/icons';
 
