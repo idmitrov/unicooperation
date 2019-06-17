@@ -64,7 +64,6 @@ class PartnerSetupView extends Component {
 
                                 <Grid item xs={12}>
                                     <div className="page-row">
-
                                         <TextField
                                             type="text"
                                             name="name"
