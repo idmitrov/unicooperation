@@ -85,7 +85,6 @@ class PartnerSetupView extends Component {
 
                                 <Grid item xs={12}>
                                     <div className="page-row">
-
                                         <FormControl
                                             error={!this.state.isCountryCodeDirty && !this.state.countryCode}
                                             required
