@@ -96,8 +96,7 @@ class FeedView extends Component {
                     <Grid item xs={12} md={6} lg={4} className="feed-content">
                         <div>
                             <AppBar
-                                id="feed-bar"
-                                color="secondary"
+                                className="top-bar"
                                 position="sticky">
                                 <form onSubmit={(e) => {
                                     e.preventDefault();
