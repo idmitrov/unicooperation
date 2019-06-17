@@ -93,7 +93,7 @@ class FeedView extends Component {
         return (
             <div>
                 <Grid container justify="center" alignItems="flex-start">
-                    <Grid item xs={12} md={5} className="feed-content">
+                    <Grid item xs={12} md={6} lg={4} className="feed-content">
                         <div>
                             <AppBar
                                 id="feed-bar"

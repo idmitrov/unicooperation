@@ -7,8 +7,10 @@ class MatcherView extends Component {
     render() {
         return (
             <Grid container justify="center" alignItems="flex-start">
-                <Grid item xs={12} md={5}>
-                    <div>Matcher view</div>
+                <Grid item xs={12} md={6} lg={4}>
+                    <div className="page-row">
+                        <div>Matcher view</div>
+                    </div>
                 </Grid>
             </Grid>
         )

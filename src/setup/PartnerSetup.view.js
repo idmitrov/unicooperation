@@ -52,75 +52,85 @@ class PartnerSetupView extends Component {
                     createPartnerSetup(this.state.name, this.state.countryCode);
                 }}>
                     <Grid container justify="center">
-                        <Grid item sm={8} md={4}>
+                        <Grid item xs={12} md={6} lg={4}>
                             <Grid container>
                                 <Grid item xs={12}>
-                                    <Typography variant="h5">
-                                        <Trans>setup.partner.title</Trans>
-                                    </Typography>
+                                    <div className="page-row">
+                                        <Typography variant="h5">
+                                            <Trans>setup.partner.title</Trans>
+                                        </Typography>
+                                    </div>
                                 </Grid>
 
                                 <Grid item xs={12}>
-                                    <TextField
-                                        type="text"
-                                        name="name"
-                                        value={this.state.name}
-                                        label={<Trans>partner.name.label</Trans>}
-                                        error={!this.state.isNameDirty && !this.state.name}
-                                        required
-                                        fullWidth
-                                        onFocus={() => {
-                                            if (this.state.isNameDirty) {
-                                                this.setState({ ...this.state, isNameDirty: false });
-                                            }
-                                        }}
-                                        onChange={this.handleSetupInputChange}
-                                    />
-                                </Grid>
+                                    <div className="page-row">
 
-                                <Grid item xs={12}>
-                                    <FormControl
-                                        error={!this.state.isCountryCodeDirty && !this.state.countryCode}
-                                        required
-                                        fullWidth
-                                        onClick={() => {
-                                            if (this.state.isCountryCodeDirty) {
-                                                this.setState({ ...this.state, isCountryCodeDirty: false });
-                                            }
-                                        }}>
-                                        <InputLabel htmlFor="name-error">
-                                            Country
-                                        </InputLabel>
-
-                                        <Select
-                                            name="countryCode"
-                                            value={this.state.countryCode || ''}
+                                        <TextField
+                                            type="text"
+                                            name="name"
+                                            value={this.state.name}
+                                            label={<Trans>partner.name.label</Trans>}
+                                            error={!this.state.isNameDirty && !this.state.name}
+                                            required
+                                            fullWidth
+                                            onFocus={() => {
+                                                if (this.state.isNameDirty) {
+                                                    this.setState({ ...this.state, isNameDirty: false });
+                                                }
+                                            }}
                                             onChange={this.handleSetupInputChange}
-                                            input={<Input id="name-error" />}
-                                        >
-                                            {
-                                                countries.map((country) => {
-                                                    return (
-                                                        <MenuItem
-                                                            key={country.code}
-                                                            value={country.code}>
-                                                            {country.name}
-                                                        </MenuItem>
-                                                    );
-                                                })
-                                            }
-                                        </Select>
-                                    </FormControl>
+                                        />
+                                    </div>
                                 </Grid>
 
                                 <Grid item xs={12}>
-                                    <Button
-                                        type="submit"
-                                        variant="contained"
-                                        color="primary"
-                                        disabled={!this.state.countryCode || !this.state.name}>
-                                        Proceed
-                                    </Button>
+                                    <div className="page-row">
+
+                                        <FormControl
+                                            error={!this.state.isCountryCodeDirty && !this.state.countryCode}
+                                            required
+                                            fullWidth
+                                            onClick={() => {
+                                                if (this.state.isCountryCodeDirty) {
+                                                    this.setState({ ...this.state, isCountryCodeDirty: false });
+                                                }
+                                            }}>
+                                            <InputLabel htmlFor="name-error">
+                                                Country
+                                            </InputLabel>
+
+                                            <Select
+                                                name="countryCode"
+                                                value={this.state.countryCode || ''}
+                                                onChange={this.handleSetupInputChange}
+                                                input={<Input id="name-error" />}
+                                            >
+                                                {
+                                                    countries.map((country) => {
+                                                        return (
+                                                            <MenuItem
+                                                                key={country.code}
+                                                                value={country.code}>
+                                                                {country.name}
+                                                            </MenuItem>
+                                                        );
+                                                    })
+                                                }
+                                            </Select>
+                                        </FormControl>
+                                    </div>
+                                </Grid>
+
+                                <Grid item xs={12}>
+                                    <div className="page-row">
+                                        <Button
+                                            type="submit"
+                                            variant="contained"
+                                            color="primary"
+                                            disabled={!this.state.countryCode || !this.state.name}>
+                                            Proceed
+                                        </Button>
+                                    </div>
                                 </Grid>
                             </Grid>
                         </Grid>

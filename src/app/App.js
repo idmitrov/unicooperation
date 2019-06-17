@@ -80,7 +80,7 @@ class App extends Component {
                         account.authenticated ? (
                             <AppBar position="sticky" color="inherit">
                                 <Grid container justify="center" alignItems="center">
-                                    <Grid item xs={12} md={5}>
+                                    <Grid item xs={12} md={6} lg={4}>
                                         <Grid container alignItems="center">
                                             <Grid item sm={true}>
                                                 <Tooltip title={<Trans>global.home.label</Trans>}>

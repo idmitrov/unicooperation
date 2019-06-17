@@ -49,47 +49,54 @@ class StudentSetupView extends Component {
                     createStudentSetup(this.state.firstName, this.state.facultyId, this.state.universityId);
                 }}>
                     <Grid container justify="center">
-                        <Grid item sm={8} md={4}>
+                        <Grid item xs={12} md={6} lg={4}>
                             <Grid container>
                                 <Grid item xs={12}>
-                                    <Typography variant="h5">
-                                        <Trans>setup.student.title</Trans>
-                                    </Typography>
+                                    <div className="page-row">
+                                        <Typography variant="h5">
+                                            <Trans>setup.student.title</Trans>
+                                        </Typography>
+                                    </div>
                                 </Grid>
 
                                 <Grid item xs={12}>
-                                    <TextField
-                                        type="text"
-                                        name="firstName"
-                                        value={this.state.firstName || ''}
-                                        label={<Trans>student.firstName.label</Trans>}
-                                        error={!this.state.isFirstNameDirty && !this.state.firstName}
-                                        required
-                                        fullWidth
-                                        onFocus={() => {
-                                            if (this.state.isFirstNameDirty) {
-                                                this.setState({ ...this.state, isFirstNameDirty: false });
-                                            }
-                                        }}
-                                        onChange={this.handleSetupInputChange}
-                                    />
+                                    <div className="page-row">
+
+                                        <TextField
+                                            type="text"
+                                            name="firstName"
+                                            value={this.state.firstName || ''}
+                                            label={<Trans>student.firstName.label</Trans>}
+                                            error={!this.state.isFirstNameDirty && !this.state.firstName}
+                                            required
+                                            fullWidth
+                                            onFocus={() => {
+                                                if (this.state.isFirstNameDirty) {
+                                                    this.setState({ ...this.state, isFirstNameDirty: false });
+                                                }
+                                            }}
+                                            onChange={this.handleSetupInputChange}
+                                        />
+                                    </div>
                                 </Grid>
 
                                 <Grid item xs={12}>
-                                    <TextField
-                                        type="search"
-                                        name="universityName"
-                                        value={this.state.universityName || ''}
-                                        label={<Trans>student.university.label</Trans>}
-                                        required
-                                        fullWidth
-                                        onFocus={() => {
-                                            if (this.state.isFirstNameDirty) {
-                                                this.setState({ ...this.state, isUniversityNameDirty: false });
-                                            }
-                                        }}
-                                        onChange={(e) => this.handleSetupInputChange(e, () => filterUniversity(this.state.universityName))}
-                                    />
+                                    <div className="page-row">
+                                        <TextField
+                                            type="search"
+                                            name="universityName"
+                                            value={this.state.universityName || ''}
+                                            label={<Trans>student.university.label</Trans>}
+                                            required
+                                            fullWidth
+                                            onFocus={() => {
+                                                if (this.state.isFirstNameDirty) {
+                                                    this.setState({ ...this.state, isUniversityNameDirty: false });
+                                                }
+                                            }}
+                                            onChange={(e) => this.handleSetupInputChange(e, () => filterUniversity(this.state.universityName))}
+                                        />
+
                                         {
                                             universities.map((university) => {
                                                 return (
@@ -105,34 +112,39 @@ class StudentSetupView extends Component {
                                                 )
                                             })
                                         }
+                                    </div>
                                 </Grid>
 
                                 <Grid item xs={12}>
-                                    <TextField
-                                        type="text"
-                                        name="facultyId"
-                                        value={this.state.facultyId || ''}
-                                        label={<Trans>student.facultyId.label</Trans>}
-                                        error={!this.state.isFacultyIdDirty && !this.state.facultyId}
-                                        required
-                                        fullWidth
-                                        onFocus={() => {
-                                            if (this.state.isFacultyIdDirty) {
-                                                this.setState({ ...this.state, isFacultyIdDirty: false });
-                                            }
-                                        }}
-                                        onChange={this.handleSetupInputChange}
-                                    />
+                                    <div className="page-row">
+                                        <TextField
+                                            type="text"
+                                            name="facultyId"
+                                            value={this.state.facultyId || ''}
+                                            label={<Trans>student.facultyId.label</Trans>}
+                                            error={!this.state.isFacultyIdDirty && !this.state.facultyId}
+                                            required
+                                            fullWidth
+                                            onFocus={() => {
+                                                if (this.state.isFacultyIdDirty) {
+                                                    this.setState({ ...this.state, isFacultyIdDirty: false });
+                                                }
+                                            }}
+                                            onChange={this.handleSetupInputChange}
+                                        />
+                                    </div>
                                 </Grid>
 
                                 <Grid item xs={12}>
-                                    <Button
-                                        type="submit"
-                                        variant="contained"
-                                        color="primary"
-                                        disabled={!this.state.facultyId || !this.state.firstName || !this.state.universityId}>
-                                        Proceed
-                                    </Button>
+                                    <div className="page-row">
+                                        <Button
+                                            type="submit"
+                                            variant="contained"
+                                            color="primary"
+                                            disabled={!this.state.facultyId || !this.state.firstName || !this.state.universityId}>
+                                            Proceed
+                                        </Button>
+                                    </div>
                                 </Grid>
                             </Grid>
                         </Grid>
