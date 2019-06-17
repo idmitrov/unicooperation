@@ -81,24 +81,24 @@ class PartnerProfile extends Component {
                                                     </Tooltip>
                                                 </Grid>
                                             ) : (
-                                                    <React.Fragment>
-                                                        <Grid item>
-                                                            <Tooltip title={<Trans>global.save</Trans>} placement="left">
-                                                                <IconButton onClick={() => updateMyProfile(profile)}>
-                                                                    <Save />
-                                                                </IconButton>
-                                                            </Tooltip>
-                                                        </Grid>
+                                                <React.Fragment>
+                                                    <Grid item>
+                                                        <Tooltip title={<Trans>global.save</Trans>} placement="left">
+                                                            <IconButton onClick={() => updateMyProfile(profile)}>
+                                                                <Save />
+                                                            </IconButton>
+                                                        </Tooltip>
+                                                    </Grid>
 
-                                                        <Grid item>
-                                                            <Tooltip title={<Trans>global.cancel</Trans>} placement="left">
-                                                                <IconButton onClick={changeProfileReadonly}>
-                                                                    <Cancel />
-                                                                </IconButton>
-                                                            </Tooltip>
-                                                        </Grid>
-                                                    </React.Fragment>
-                                                )
+                                                    <Grid item>
+                                                        <Tooltip title={<Trans>global.cancel</Trans>} placement="left">
+                                                            <IconButton onClick={changeProfileReadonly}>
+                                                                <Cancel />
+                                                            </IconButton>
+                                                        </Tooltip>
+                                                    </Grid>
+                                                </React.Fragment>
+                                            )
                                         }
                                     </Grid>
                                 )
