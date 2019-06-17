@@ -128,7 +128,7 @@ class PartnerSetupView extends Component {
                                             variant="contained"
                                             color="primary"
                                             disabled={!this.state.countryCode || !this.state.name}>
-                                            Proceed
+                                            <Trans>global.proceed</Trans>
                                         </Button>
                                     </div>
                                 </Grid>

@@ -15,6 +15,7 @@
             "global.more": "More",
             "global.home.label": "Home",
             "global.profile.label": "Profile",
+            "global.proceed": "Proceed",
             "global.search.label": "Search",
             "global.save": "Save",
             "global.shownFromToOfTotal": "Shown from {{from}} to {{to}} of total {{total}}",

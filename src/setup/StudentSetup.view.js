@@ -142,7 +142,7 @@ class StudentSetupView extends Component {
                                             variant="contained"
                                             color="primary"
                                             disabled={!this.state.facultyId || !this.state.firstName || !this.state.universityId}>
-                                            Proceed
+                                            <Trans>global.proceed</Trans>
                                         </Button>
                                     </div>
                                 </Grid>
