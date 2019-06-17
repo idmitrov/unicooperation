@@ -96,7 +96,7 @@ class PartnerSetupView extends Component {
                                                 }
                                             }}>
                                             <InputLabel htmlFor="name-error">
-                                                Country
+                                                <Trans>global.country</Trans>
                                             </InputLabel>
 
                                             <Select

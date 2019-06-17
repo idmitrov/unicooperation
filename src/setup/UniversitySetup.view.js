@@ -94,7 +94,7 @@ class UniversitySetupView extends Component {
                                                 }
                                             }}>
                                             <InputLabel htmlFor="name-error">
-                                                Country
+                                                <Trans>global.country</Trans>
                                             </InputLabel>
 
                                             <Select

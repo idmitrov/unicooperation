@@ -9,6 +9,7 @@
             "account.register.label": "Register",
             "account.logout.label": "Logout",
             "global.cancel": "Cancel",
+            "global.country": "Country",
             "global.edit": "Edit",
             "global.follow": "Follow",
             "global.unfollow": "Stop following",
