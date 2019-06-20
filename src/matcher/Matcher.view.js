@@ -3,9 +3,13 @@ import { connect } from 'react-redux';
 
 import {
     AppBar,
+    FormControl,
     Grid,
-    TextField,
+    InputLabel,
     IconButton,
+    MenuItem,
+    Select,
+    TextField,
     Tooltip
 } from '@material-ui/core';
 
@@ -49,9 +53,46 @@ class MatcherView extends Component {
                             }}>
                                 <div className={`bar-input ${this.state.isInputExpanded ? 'expanded' : ''}`}>
                                     <div className="bar-input-inner">
-                                        <Grid container alignItems="center">
-                                            <Grid item xs={12}>
-                                                Search filter inputs
+                                        <Grid container alignItems="center" spacing={16}>
+                                            <Grid item xs={4}>
+                                                <TextField
+                                                    type="number"
+                                                    label="Experience"
+                                                />
+                                            </Grid>
+
+                                            <Grid item xs={4}>
+                                                <FormControl fullWidth>
+                                                    <InputLabel htmlFor="availability">Availability</InputLabel>
+
+                                                    <Select
+                                                        value='any'
+                                                        inputProps={{
+                                                            name: 'availability',
+                                                            id: 'availability',
+                                                        }}>
+                                                        <MenuItem value={'any'}>Any</MenuItem>
+                                                        <MenuItem value={'remote'}>Remote</MenuItem>
+                                                        <MenuItem value={'office'}>Office</MenuItem>
+                                                    </Select>
+                                                </FormControl>
+                                            </Grid>
+
+                                            <Grid item xs={4}>
+                                                <FormControl fullWidth>
+                                                    <InputLabel htmlFor="availability">Status</InputLabel>
+
+                                                    <Select
+                                                        multiple
+                                                        value={['unemployed']}
+                                                        inputProps={{
+                                                            name: 'availability',
+                                                            id: 'availability',
+                                                        }}>
+                                                        <MenuItem value={'unemployed'}>Unemployed</MenuItem>
+                                                        <MenuItem value={'interested'}>Interested</MenuItem>
+                                                    </Select>
+                                                </FormControl>
                                             </Grid>
                                         </Grid>
                                     </div>
