@@ -21,6 +21,7 @@ import {
 } from '@material-ui/icons';
 
 import '../app/App.scss';
+import './Matcher.scss';
 
 import {
     getMatches,
@@ -125,38 +126,44 @@ class MatcherView extends Component {
                             </form>
                         </AppBar>
 
-                        <Grid container className="page-row" spacing={16}>
-                            {
-                                matches.map((match, index) => {
-                                    return(
-                                        <Grid item key={index} xs={12} sm={4}>
-                                            <Card>
-                                                <CardContent>
-                                                    <Grid container justify="center">
-                                                        <Grid item>
-                                                            {
-                                                                match.avatar ? (
-                                                                    <Avatar src={match.avatar} />
-                                                                ) : (
-                                                                    <Avatar>{match.firstName[0]}</Avatar>
-                                                                )
-                                                            }
-                                                        </Grid>
-                                                    </Grid>
-                                                </CardContent>
+                        {
+                            matches && matches.length ? (
+                                <div className="matches-grid page-row">
+                                    <Grid container spacing={16}>
+                                        {
+                                            matches.map((match, index) => {
+                                                return(
+                                                    <Grid item key={index} xs={12} sm={4}>
+                                                        <Card>
+                                                            <CardContent>
+                                                                <Grid container justify="center">
+                                                                    <Grid item>
+                                                                        {
+                                                                            match.avatar ? (
+                                                                                <Avatar src={match.avatar} />
+                                                                            ) : (
+                                                                                <Avatar>{match.firstName[0]}</Avatar>
+                                                                            )
+                                                                        }
+                                                                    </Grid>
+                                                                </Grid>
+                                                            </CardContent>
 
-                                                <CardHeader
-                                                    title={match.firstName}
-                                                    subheader={match.title}
-                                                    titleTypographyProps={{align: 'center'}}
-                                                    subheaderTypographyProps={{align: 'center'}}
-                                                />
-                                            </Card>
-                                        </Grid>
-                                    );
-                                })
-                            }
-                        </Grid>
+                                                            <CardHeader
+                                                                title={match.firstName}
+                                                                subheader={match.title}
+                                                                titleTypographyProps={{align: 'center'}}
+                                                                subheaderTypographyProps={{align: 'center'}}
+                                                            />
+                                                        </Card>
+                                                    </Grid>
+                                                );
+                                            })
+                                        }
+                                    </Grid>
+                                </div>
+                            ) : (null)
+                        }
                     </div>
                 </Grid>
             </Grid>
