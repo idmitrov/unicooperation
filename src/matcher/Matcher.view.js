@@ -1,14 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Trans } from 'react-i18next';
 
 import {
     AppBar,
-    FormControl,
     Grid,
-    InputLabel,
     IconButton,
-    MenuItem,
-    Select,
     TextField,
     Tooltip
 } from '@material-ui/core';
@@ -19,21 +16,33 @@ import {
     Done
 } from '@material-ui/icons';
 
-import { Trans } from 'react-i18next';
-
 import '../app/App.scss';
 
+import {
+    getMatches,
+    setMatches,
+    setMatcherTitle
+} from './Matcher.actions';
+
 class MatcherView extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
 
         this.state = {
             isInputExpanded: false,
             searchQuery: ''
         };
+
+        this.props.getMatches();
     }
 
     render() {
+        const {
+            title,
+            setTitle,
+            getMatches
+        } = this.props;
+
         return (
             <Grid container justify="center" alignItems="flex-start">
                 <Grid item xs={12} md={6} lg={4}>
@@ -60,40 +69,6 @@ class MatcherView extends Component {
                                                     label="Experience"
                                                 />
                                             </Grid>
-
-                                            <Grid item xs={4}>
-                                                <FormControl fullWidth>
-                                                    <InputLabel htmlFor="availability">Availability</InputLabel>
-
-                                                    <Select
-                                                        value='any'
-                                                        inputProps={{
-                                                            name: 'availability',
-                                                            id: 'availability',
-                                                        }}>
-                                                        <MenuItem value={'any'}>Any</MenuItem>
-                                                        <MenuItem value={'remote'}>Remote</MenuItem>
-                                                        <MenuItem value={'office'}>Office</MenuItem>
-                                                    </Select>
-                                                </FormControl>
-                                            </Grid>
-
-                                            <Grid item xs={4}>
-                                                <FormControl fullWidth>
-                                                    <InputLabel htmlFor="availability">Status</InputLabel>
-
-                                                    <Select
-                                                        multiple
-                                                        value={['unemployed']}
-                                                        inputProps={{
-                                                            name: 'availability',
-                                                            id: 'availability',
-                                                        }}>
-                                                        <MenuItem value={'unemployed'}>Unemployed</MenuItem>
-                                                        <MenuItem value={'interested'}>Interested</MenuItem>
-                                                    </Select>
-                                                </FormControl>
-                                            </Grid>
                                         </Grid>
                                     </div>
                                 </div>
@@ -114,9 +89,12 @@ class MatcherView extends Component {
                                             ) : (
                                                 <TextField
                                                     label="Title"
-                                                    value={this.state.searchQuery}
+                                                    value={title}
                                                     fullWidth
-                                                    onChange={(e) => this.setState({ ...this.state, searchQuery: e.target.value })}
+                                                    onChange={(e) => {
+                                                        setTitle(e.target.value);
+                                                        getMatches();
+                                                    }}
                                                 />
                                             )
                                         }
@@ -149,12 +127,24 @@ class MatcherView extends Component {
     }
 }
 
-const mapStateToProps = () => {
-    return {};
+const mapStateToProps = (state) => {
+    return {
+        title: state.matcher.title
+    };
 }
 
-const mapDispatchToProps = () => {
-    return {};
+const mapDispatchToProps = (dispatch) => {
+    return {
+        setTitle(titleValue) {
+            return dispatch(setMatcherTitle(titleValue));
+        },
+        getMatches() {
+            return dispatch(getMatches())
+                .then((matches) => {
+                    return dispatch(setMatches(matches.list));
+                });
+        }
+    };
 }
 
 export default connect(

@@ -1,13 +1,27 @@
+import { matcherActionTypes } from './Matcher.actions';
+
 const matcherDefaults = {
-    salary: null,
     experience: null,
+    matches: [],
+    salary: null,
     skills: [],
-    suggestedMatches: [],
-    filteredMatches: []
+    title: ''
 };
 
 export default (state = matcherDefaults, action = {}) => {
     switch (action.type) {
+        case matcherActionTypes.setMatcherTitle: {
+            return {
+                ...state,
+                title: action.payload
+            };
+        }
+        case matcherActionTypes.setMatches: {
+            return {
+                ...state,
+                matches: action.payload
+            };
+        }
         default: return state;
     }
 }
