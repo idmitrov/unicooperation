@@ -131,12 +131,26 @@ class MatcherView extends Component {
                                     return(
                                         <Grid item key={index} xs={12} sm={4}>
                                             <Card>
-                                                <CardHeader title={match.title}></CardHeader>
-
                                                 <CardContent>
-                                                    <Avatar src={match.avatar} />
-                                                    {match.firstName}
+                                                    <Grid container justify="center">
+                                                        <Grid item>
+                                                            {
+                                                                match.avatar ? (
+                                                                    <Avatar src={match.avatar} />
+                                                                ) : (
+                                                                    <Avatar>{match.firstName[0]}</Avatar>
+                                                                )
+                                                            }
+                                                        </Grid>
+                                                    </Grid>
                                                 </CardContent>
+
+                                                <CardHeader
+                                                    title={match.firstName}
+                                                    subheader={match.title}
+                                                    titleTypographyProps={{align: 'center'}}
+                                                    subheaderTypographyProps={{align: 'center'}}
+                                                />
                                             </Card>
                                         </Grid>
                                     );
