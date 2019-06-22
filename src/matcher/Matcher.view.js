@@ -4,10 +4,14 @@ import { Trans } from 'react-i18next';
 
 import {
     AppBar,
+    Card,
+    CardHeader,
+    CardContent,
     Grid,
     IconButton,
     TextField,
-    Tooltip
+    Tooltip,
+    Avatar
 } from '@material-ui/core';
 
 import {
@@ -21,6 +25,7 @@ import '../app/App.scss';
 import {
     getMatches,
     setMatches,
+    setMatcherTotal,
     setMatcherTitle
 } from './Matcher.actions';
 
@@ -32,13 +37,12 @@ class MatcherView extends Component {
             isInputExpanded: false,
             searchQuery: ''
         };
-
-        this.props.getMatches();
     }
 
     render() {
         const {
             title,
+            matches,
             setTitle,
             getMatches
         } = this.props;
@@ -120,6 +124,25 @@ class MatcherView extends Component {
                                 </Grid>
                             </form>
                         </AppBar>
+
+                        <Grid container className="page-row" spacing={16}>
+                            {
+                                matches.map((match, index) => {
+                                    return(
+                                        <Grid item key={index} xs={12} sm={4}>
+                                            <Card>
+                                                <CardHeader title={match.title}></CardHeader>
+
+                                                <CardContent>
+                                                    <Avatar src={match.avatar} />
+                                                    {match.firstName}
+                                                </CardContent>
+                                            </Card>
+                                        </Grid>
+                                    );
+                                })
+                            }
+                        </Grid>
                     </div>
                 </Grid>
             </Grid>
@@ -129,7 +152,8 @@ class MatcherView extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        title: state.matcher.title
+        title: state.matcher.title,
+        matches: state.matcher.matches
     };
 }
 
@@ -141,6 +165,8 @@ const mapDispatchToProps = (dispatch) => {
         getMatches() {
             return dispatch(getMatches())
                 .then((matches) => {
+                    dispatch(setMatcherTotal(matches.total));
+
                     return dispatch(setMatches(matches.list));
                 });
         }

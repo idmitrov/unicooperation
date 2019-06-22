@@ -4,13 +4,21 @@ import { accountType } from '../account/Account.constants';
 export const matcherActionTypes = {
     getMatches: 'MATCHER_GET',
     setMatches: 'MATCHER_SET',
-    setMatcherTitle: 'MATCHER_TITLE_SET'
+    setMatcherTitle: 'MATCHER_TITLE_SET',
+    setMatcherTotal: 'MATCHER_TOTAL_SET'
 };
 
 export const setMatcherTitle = (title) => (dispatch) => {
     return dispatch( {
         type: matcherActionTypes.setMatcherTitle,
         payload: title
+    });
+}
+
+export const setMatcherTotal = (total) => (dispatch) => {
+    return dispatch( {
+        type: matcherActionTypes.setMatcherTotal,
+        payload: total
     });
 }
 

@@ -12,6 +12,12 @@ const matcherDefaults = {
 
 export default (state = matcherDefaults, action = {}) => {
     switch (action.type) {
+        case matcherActionTypes.setMatcherTotal: {
+            return {
+                ...state,
+                total: action.payload
+            }
+        }
         case matcherActionTypes.setMatcherTitle: {
             return {
                 ...state,
