@@ -35,8 +35,7 @@ class MatcherView extends Component {
         super(props);
 
         this.state = {
-            isInputExpanded: false,
-            searchQuery: ''
+            isInputExpanded: false
         };
     }
 
@@ -109,13 +108,13 @@ class MatcherView extends Component {
                                         {
                                             this.state.isInputExpanded ? (
                                                 <Tooltip title={<Trans>global.apply</Trans>} placement="left">
-                                                    <IconButton type="button" onClick={() => this.setState({ ...this.state, isInputExpanded: false, searchQuery: '' })}>
+                                                    <IconButton type="button" onClick={() => this.setState({ ...this.state, isInputExpanded: false })}>
                                                         <Done />
                                                     </IconButton>
                                                 </Tooltip>
                                             ) : (
                                                 <Tooltip title={<Trans>global.filter</Trans>} placement="left">
-                                                    <IconButton type="button" onClick={() => this.setState({ ...this.state, isInputExpanded: true, searchQuery: '' })}>
+                                                    <IconButton type="button" onClick={() => this.setState({ ...this.state, isInputExpanded: true })}>
                                                         <FilterList />
                                                     </IconButton>
                                                 </Tooltip>
