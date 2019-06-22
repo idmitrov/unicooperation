@@ -5,7 +5,9 @@ const matcherDefaults = {
     matches: [],
     salary: null,
     skills: [],
-    title: ''
+    title: '',
+    page: 1,
+    limit: 10
 };
 
 export default (state = matcherDefaults, action = {}) => {

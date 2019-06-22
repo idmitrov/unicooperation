@@ -34,8 +34,8 @@ export const getMatches = () => (dispatch, getState) => {
     }
 
     if (accType) {
-        const { title } = matcher;
-        const query = `title=${title}`;
+        const { title, page, limit } = matcher;
+        const query = `title=${title}&page=${page}&limit=${limit}`;
 
         return dispatch({
             type: matcherActionTypes.getMatches,
