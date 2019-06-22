@@ -6,7 +6,6 @@ import {
     AppBar,
     Card,
     CardHeader,
-    CardContent,
     Grid,
     IconButton,
     TextField,
@@ -37,6 +36,8 @@ class MatcherView extends Component {
         this.state = {
             isInputExpanded: false
         };
+
+        this.props.getMatches();
     }
 
     render() {
@@ -128,31 +129,22 @@ class MatcherView extends Component {
                         {
                             matches && matches.length ? (
                                 <div className="matches-grid page-row">
-                                    <Grid container spacing={16}>
+                                    <Grid container spacing={16} alignItems="stretch">
                                         {
                                             matches.map((match, index) => {
                                                 return(
-                                                    <Grid item key={index} xs={12} sm={4}>
-                                                        <Card>
-                                                            <CardContent>
-                                                                <Grid container justify="center">
-                                                                    <Grid item>
-                                                                        {
-                                                                            match.avatar ? (
-                                                                                <Avatar src={match.avatar} />
-                                                                            ) : (
-                                                                                <Avatar>{match.firstName[0]}</Avatar>
-                                                                            )
-                                                                        }
-                                                                    </Grid>
-                                                                </Grid>
-                                                            </CardContent>
-
+                                                    <Grid item key={index} xs={12} sm={6}>
+                                                        <Card style={{height: '100%'}}>
                                                             <CardHeader
                                                                 title={match.firstName}
                                                                 subheader={match.title}
-                                                                titleTypographyProps={{align: 'center'}}
-                                                                subheaderTypographyProps={{align: 'center'}}
+                                                                avatar={
+                                                                    match.avatar ? (
+                                                                        <Avatar src={match.avatar} />
+                                                                    ) : (
+                                                                        <Avatar>{match.firstName[0]}</Avatar>
+                                                                    )
+                                                                }
                                                             />
                                                         </Card>
                                                     </Grid>
