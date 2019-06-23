@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Trans } from 'react-i18next';
+import { Link } from 'react-router-dom';
 
 import {
     AppBar,
@@ -155,8 +156,10 @@ class MatcherView extends Component {
                                                                 <Grid container justify="flex-end">
                                                                     <Grid item>
                                                                         <Tooltip title={<Trans>match.profile.view</Trans>}>
-                                                                            <IconButton href={`profile/${accountType.student}/${match._id}`}>
-                                                                                <Visibility className="match-icon" />
+                                                                            <IconButton className="match-icon">
+                                                                                <Link to={`profile/${match.account.type}/${match._id}`}>
+                                                                                    <Visibility className="match-icon" />
+                                                                                </Link>
                                                                             </IconButton>
                                                                         </Tooltip>
                                                                     </Grid>
