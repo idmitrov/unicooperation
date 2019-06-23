@@ -20,7 +20,8 @@ import {
     Close,
     Done,
     Visibility,
-    EventSeat
+    EventSeat,
+    GroupWork
 } from '@material-ui/icons';
 
 import '../app/App.scss';
@@ -151,7 +152,11 @@ class MatcherView extends Component {
                                                                 }
                                                             />
                                                             <CardContent className="match-content">
-                                                                <Grid container justify="flex-end">
+                                                                <Grid container spacing={16} alignItems="center">
+                                                                    <Grid item xs={true}>
+                                                                        <Trans values={{profileName: match.firstName}}>match.profile.intro</Trans>
+                                                                    </Grid>
+
                                                                     <Grid item>
                                                                         <Link to={`profile/${match.account.type}/${match._id}`}>
                                                                             <Tooltip title={<Trans>match.profile.view</Trans>}>
@@ -160,12 +165,9 @@ class MatcherView extends Component {
                                                                                 </IconButton>
                                                                             </Tooltip>
                                                                         </Link>
-                                                                    </Grid>
-
-                                                                    <Grid item>
-                                                                        <Tooltip title={<Trans>match.profile.interview</Trans>}>
+                                                                        <Tooltip title={<Trans>match.profile.invite</Trans>}>
                                                                             <IconButton>
-                                                                                <EventSeat className="match-icon" />
+                                                                                <GroupWork className="match-icon" />
                                                                             </IconButton>
                                                                         </Tooltip>
                                                                     </Grid>
