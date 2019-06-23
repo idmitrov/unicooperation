@@ -51,6 +51,7 @@ class StudentProfileView extends Component {
 
     render() {
         const {
+            match,
             profile,
             changeProfileReadonly,
             handleProfileChange,
@@ -65,37 +66,44 @@ class StudentProfileView extends Component {
                     <div className={`profile-header ${profile.isReadonly ? 'readonly' : ''}`}>
                         {/* PROFILE HEADER ACTIONS */}
                         <div className="profile-header-actions">
-                            <Grid container justify="flex-end">
-                                {
-                                    profile.isReadonly ? (
-                                        <Grid item>
-                                            <Tooltip title={<Trans>global.edit</Trans>} placement="left">
-                                                <IconButton onClick={changeProfileReadonly}>
-                                                    <Edit />
-                                                </IconButton>
-                                            </Tooltip>
-                                        </Grid>
-                                    ) : (
-                                            <React.Fragment>
+                            {
+                                match.params.profileId ? (
+                                    // TODO: Preview actions
+                                    null
+                                ) : (
+                                    <Grid container justify="flex-end">
+                                        {
+                                            profile.isReadonly ? (
                                                 <Grid item>
-                                                    <Tooltip title={<Trans>global.save</Trans>} placement="left">
-                                                        <IconButton onClick={() => updateMyProfile(profile)}>
-                                                            <Save />
-                                                        </IconButton>
-                                                    </Tooltip>
-                                                </Grid>
-
-                                                <Grid item>
-                                                    <Tooltip title={<Trans>global.cancel</Trans>} placement="left">
+                                                    <Tooltip title={<Trans>global.edit</Trans>} placement="left">
                                                         <IconButton onClick={changeProfileReadonly}>
-                                                            <Cancel />
+                                                            <Edit />
                                                         </IconButton>
                                                     </Tooltip>
                                                 </Grid>
-                                            </React.Fragment>
-                                        )
-                                }
-                            </Grid>
+                                            ) : (
+                                                    <React.Fragment>
+                                                        <Grid item>
+                                                            <Tooltip title={<Trans>global.save</Trans>} placement="left">
+                                                                <IconButton onClick={() => updateMyProfile(profile)}>
+                                                                    <Save />
+                                                                </IconButton>
+                                                            </Tooltip>
+                                                        </Grid>
+
+                                                        <Grid item>
+                                                            <Tooltip title={<Trans>global.cancel</Trans>} placement="left">
+                                                                <IconButton onClick={changeProfileReadonly}>
+                                                                    <Cancel />
+                                                                </IconButton>
+                                                            </Tooltip>
+                                                        </Grid>
+                                                    </React.Fragment>
+                                                )
+                                        }
+                                    </Grid>
+                                )
+                            }
                         </div>
 
                         {/* PROFILE HEADER AVATAR */}
