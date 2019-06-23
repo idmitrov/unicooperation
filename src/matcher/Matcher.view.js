@@ -153,13 +153,13 @@ class MatcherView extends Component {
                                                             <CardContent className="match-content">
                                                                 <Grid container justify="flex-end">
                                                                     <Grid item>
-                                                                        <Tooltip title={<Trans>match.profile.view</Trans>}>
-                                                                            <IconButton className="match-icon">
-                                                                                <Link to={`profile/${match.account.type}/${match._id}`}>
+                                                                        <Link to={`profile/${match.account.type}/${match._id}`}>
+                                                                            <Tooltip title={<Trans>match.profile.view</Trans>}>
+                                                                                <IconButton className="match-icon">
                                                                                     <Visibility className="match-icon" />
-                                                                                </Link>
-                                                                            </IconButton>
-                                                                        </Tooltip>
+                                                                                </IconButton>
+                                                                            </Tooltip>
+                                                                        </Link>
                                                                     </Grid>
 
                                                                     <Grid item>
