@@ -33,8 +33,6 @@ import {
     setMatcherTitle
 } from './Matcher.actions';
 
-import { accountType } from '../account/Account.constants';
-
 class MatcherView extends Component {
     constructor(props) {
         super(props);
