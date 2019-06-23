@@ -6,6 +6,7 @@ import {
     AppBar,
     Card,
     CardHeader,
+    CardContent,
     Grid,
     IconButton,
     TextField,
@@ -16,7 +17,9 @@ import {
 import {
     FilterList,
     Close,
-    Done
+    Done,
+    Visibility,
+    EventSeat
 } from '@material-ui/icons';
 
 import '../app/App.scss';
@@ -134,7 +137,7 @@ class MatcherView extends Component {
                                             matches.map((match, index) => {
                                                 return(
                                                     <Grid item key={index} xs={12} sm={6}>
-                                                        <Card style={{height: '100%'}}>
+                                                        <Card className="match">
                                                             <CardHeader
                                                                 title={match.firstName}
                                                                 subheader={match.title}
@@ -146,6 +149,25 @@ class MatcherView extends Component {
                                                                     )
                                                                 }
                                                             />
+                                                            <CardContent className="match-content">
+                                                                <Grid container justify="flex-end">
+                                                                    <Grid item>
+                                                                        <Tooltip title={<Trans>match.profile.view</Trans>}>
+                                                                            <IconButton>
+                                                                                <Visibility className="match-icon" />
+                                                                            </IconButton>
+                                                                        </Tooltip>
+                                                                    </Grid>
+
+                                                                    <Grid item>
+                                                                        <Tooltip title={<Trans>match.profile.interview</Trans>}>
+                                                                            <IconButton>
+                                                                                <EventSeat className="match-icon" />
+                                                                            </IconButton>
+                                                                        </Tooltip>
+                                                                    </Grid>
+                                                                </Grid>
+                                                            </CardContent>
                                                         </Card>
                                                     </Grid>
                                                 );
