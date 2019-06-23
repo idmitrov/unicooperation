@@ -78,10 +78,10 @@ export const Routes = ({ account }) => {
                 render={
                     (props) => {
                         if (authenticated) {
-                            switch (props.match.params.type) {
-                                case accountType.partner: return <PartnerProfileView />
-                                case accountType.university: return <UniversityProfileView />
-                                case accountType.student: return <StudentProfileView />
+                            switch (props.match.params.type.toLowerCase()) {
+                                case accountType.partner.toLocaleLowerCase(): return <PartnerProfileView />
+                                case accountType.university.toLocaleLowerCase(): return <UniversityProfileView />
+                                case accountType.student.toLocaleLowerCase(): return <StudentProfileView />
                                 default: return <Redirect path="*" to="/" />;
                             }
                         } else {

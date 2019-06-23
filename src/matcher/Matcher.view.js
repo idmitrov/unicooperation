@@ -32,6 +32,8 @@ import {
     setMatcherTitle
 } from './Matcher.actions';
 
+import { accountType } from '../account/Account.constants';
+
 class MatcherView extends Component {
     constructor(props) {
         super(props);
@@ -153,7 +155,7 @@ class MatcherView extends Component {
                                                                 <Grid container justify="flex-end">
                                                                     <Grid item>
                                                                         <Tooltip title={<Trans>match.profile.view</Trans>}>
-                                                                            <IconButton>
+                                                                            <IconButton href={`profile/${accountType.student}/${match._id}`}>
                                                                                 <Visibility className="match-icon" />
                                                                             </IconButton>
                                                                         </Tooltip>

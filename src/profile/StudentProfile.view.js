@@ -25,6 +25,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
     fetchMyProfile,
     setMyProfile,
+    fetchProfile,
+    setProfile,
     updateMyProfile,
     updateMyProfileAvatar,
     setMyProfileData,
@@ -38,7 +40,13 @@ class StudentProfileView extends Component {
     constructor(props) {
         super(props);
 
-        this.props.getMyProfile();
+        const { type, profileId } = props.match.params;
+
+        if (profileId) {
+            this.props.getProfile(type, profileId);
+        } else {
+            this.props.getMyProfile();
+        }
     }
 
     render() {
@@ -378,6 +386,12 @@ const mapDispatchToProps = (dispatch) => {
             return dispatch(fetchMyProfile())
                 .then((profileData) => {
                     return dispatch(setMyProfile(profileData));
+                });
+        },
+        getProfile(profileType, profileId) {
+            return dispatch(fetchProfile(profileType, profileId))
+                .then((foundProfile) => {
+                    return dispatch(setProfile(foundProfile));
                 });
         }
     };
