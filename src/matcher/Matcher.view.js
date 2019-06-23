@@ -152,7 +152,7 @@ class MatcherView extends Component {
                                                                 }
                                                             />
                                                             <CardContent className="match-content">
-                                                                <Grid container spacing={16} alignItems="center">
+                                                                <Grid container alignItems="center">
                                                                     <Grid item xs={true}>
                                                                         <Trans values={{profileName: match.firstName}}>match.profile.intro</Trans>
                                                                     </Grid>
