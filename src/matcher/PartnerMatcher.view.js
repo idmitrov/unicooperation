@@ -28,7 +28,8 @@ import {
     setMatcherTotal,
     setMatcherTitle
 } from './Matcher.actions';
-import ProfileIntroCard from '../components/match-item/ProfileIntroCard.component';
+
+import ProfileIntroCard from '../components/profile-intro-card/ProfileIntroCard.component';
 
 class MatcherView extends Component {
     constructor(props) {

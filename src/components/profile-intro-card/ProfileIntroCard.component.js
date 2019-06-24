@@ -9,6 +9,8 @@ import {
     Zoom
 } from '@material-ui/core';
 
+import './ProfileIntroCard.scss';
+
 export default (props) => {
     const {
         actions,
@@ -20,7 +22,7 @@ export default (props) => {
 
     return (
         <Zoom in>
-            <Card elevation={4} className="match">
+            <Card elevation={4} className="intro-card">
                 <CardHeader
                     title={title}
                     subheader={subtitle}
@@ -35,7 +37,7 @@ export default (props) => {
 
                 {
                     actions ? (
-                        <CardContent className="match-content">
+                        <CardContent className="intro-card-content">
                             <Grid container alignItems="center" justify="space-between" wrap="nowrap">
                                 <Grid item xs={true}>
                                     {hoverText}
