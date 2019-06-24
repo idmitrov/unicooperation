@@ -5,15 +5,10 @@ import { Link } from 'react-router-dom';
 
 import {
     AppBar,
-    Card,
-    CardHeader,
-    CardContent,
     Grid,
     IconButton,
     TextField,
-    Tooltip,
-    Avatar,
-    Zoom
+    Tooltip
 } from '@material-ui/core';
 
 import {
@@ -33,6 +28,7 @@ import {
     setMatcherTotal,
     setMatcherTitle
 } from './Matcher.actions';
+import ProfileIntroCard from '../components/match-item/ProfileIntroCard.component';
 
 class MatcherView extends Component {
     constructor(props) {
@@ -139,49 +135,37 @@ class MatcherView extends Component {
                                             matches.map((match, index) => {
                                                 return(
                                                     <Grid item key={index} xs={12} sm={6}>
-                                                        <Zoom in>
-                                                            <Card elevation={4} className="match">
-                                                                <CardHeader
-                                                                    title={match.firstName}
-                                                                    subheader={match.title}
-                                                                    avatar={
-                                                                        match.avatar ? (
-                                                                            <Avatar src={match.avatar} />
-                                                                        ) : (
-                                                                            <Avatar>{match.firstName[0]}</Avatar>
-                                                                        )
-                                                                    }
-                                                                />
-                                                                <CardContent className="match-content">
-                                                                    <Grid container alignItems="center" justify="space-between" wrap="nowrap">
-                                                                        <Grid item xs={true}>
-                                                                            <Trans values={{
-                                                                                profileName: match.firstName.length < 15
-                                                                                    ? match.firstName
-                                                                                    : `${match.firstName.substring(0, 14)}...`
-                                                                            }}>
-                                                                                match.profile.intro
-                                                                            </Trans>
-                                                                        </Grid>
+                                                        <ProfileIntroCard
+                                                            avatar={match.avatar}
+                                                            title={match.firstName}
+                                                            subtitle={match.title}
+                                                            hoverText={
+                                                                <Trans values={{
+                                                                    profileName: match.firstName.length < 15
+                                                                        ? match.firstName
+                                                                        : `${match.firstName.substring(0, 14)}...`
+                                                                }}>
+                                                                    match.profile.intro
+                                                                </Trans>
+                                                            }
+                                                            actions={
+                                                                <React.Fragment>
+                                                                    <Tooltip title={<Trans>match.profile.view</Trans>}>
+                                                                        <Link to={`profile/${match.account.type}/${match._id}`}>
+                                                                            <IconButton className="match-icon-button">
+                                                                                <Visibility className="match-icon" />
+                                                                            </IconButton>
+                                                                        </Link>
+                                                                    </Tooltip>
 
-                                                                        <Grid item>
-                                                                            <Link to={`profile/${match.account.type}/${match._id}`}>
-                                                                                <Tooltip title={<Trans>match.profile.view</Trans>}>
-                                                                                    <IconButton className="match-icon-button">
-                                                                                        <Visibility className="match-icon" />
-                                                                                    </IconButton>
-                                                                                </Tooltip>
-                                                                            </Link>
-                                                                            <Tooltip title={<Trans>match.profile.invite</Trans>}>
-                                                                                <IconButton className="match-icon-button">
-                                                                                    <GroupWork className="match-icon" />
-                                                                                </IconButton>
-                                                                            </Tooltip>
-                                                                        </Grid>
-                                                                    </Grid>
-                                                                </CardContent>
-                                                            </Card>
-                                                        </Zoom>
+                                                                    <Tooltip title={<Trans>match.profile.invite</Trans>}>
+                                                                        <IconButton className="match-icon-button">
+                                                                            <GroupWork className="match-icon" />
+                                                                        </IconButton>
+                                                                    </Tooltip>
+                                                                </React.Fragment>
+                                                            }
+                                                        />
                                                     </Grid>
                                                 );
                                             })
