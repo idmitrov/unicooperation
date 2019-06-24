@@ -14,7 +14,8 @@ import AdminProfileView from '../profile/AdminProfile.view';
 import PartnerProfileView from '../profile/PartnerProfile.view';
 import StudentProfileView from '../profile/StudentProfile.view';
 import UniversityProfileView from '../profile/UniversityProfile.view';
-import MatcherView from '../matcher/Matcher.view';
+import PartnerMatcherView from '../matcher/PartnerMatcher.view';
+import PartnerDashboardView from '../dashboard/PartnerDashboard.view';
 
 export const Link = _Link;
 
@@ -41,7 +42,7 @@ export const Routes = ({ account }) => {
             <PrivateRoute
                 path="/"
                 component={
-                    account.type === accountType.partner ? (MatcherView) : (FeedView)
+                    account.type === accountType.partner ? (PartnerDashboardView) : (FeedView)
                 }
                 allowed={authenticated}
                 fallbackComponent={
@@ -69,6 +70,24 @@ export const Routes = ({ account }) => {
                 }
                 exact
                 strict
+            />
+
+            <Route
+                path="/matches"
+                exact
+                strict
+                render={
+                    () => {
+                        if (authenticated) {
+                            switch (account.type.toLowerCase()) {
+                                case accountType.partner.toLocaleLowerCase(): return <PartnerMatcherView />
+                                default: return <Redirect path="*" to="/" />;
+                            }
+                        } else {
+                            return <Redirect path="*" to="/" />;
+                        }
+                    }
+                }
             />
 
             <Route
