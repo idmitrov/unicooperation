@@ -28,21 +28,26 @@ export default (props) => {
                         avatar ? (
                             <Avatar src={avatar} />
                         ) : (
-                            <Avatar>{title[0]}</Avatar>
+                            <Avatar>{title ? title[0] : '?'}</Avatar>
                         )
                     }
                 />
-                <CardContent className="match-content">
-                    <Grid container alignItems="center" justify="space-between" wrap="nowrap">
-                        <Grid item xs={true}>
-                            {hoverText}
-                        </Grid>
 
-                        <Grid item>
-                            {actions}
-                        </Grid>
-                    </Grid>
-                </CardContent>
+                {
+                    actions ? (
+                        <CardContent className="match-content">
+                            <Grid container alignItems="center" justify="space-between" wrap="nowrap">
+                                <Grid item xs={true}>
+                                    {hoverText}
+                                </Grid>
+
+                                <Grid item>
+                                    {actions}
+                                </Grid>
+                            </Grid>
+                        </CardContent>
+                    ) : (null)
+                }
             </Card>
         </Zoom>
     );
