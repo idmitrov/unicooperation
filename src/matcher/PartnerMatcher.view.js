@@ -12,7 +12,8 @@ import {
     IconButton,
     TextField,
     Tooltip,
-    Avatar
+    Avatar,
+    Zoom
 } from '@material-ui/core';
 
 import {
@@ -138,47 +139,49 @@ class MatcherView extends Component {
                                             matches.map((match, index) => {
                                                 return(
                                                     <Grid item key={index} xs={12} sm={6}>
-                                                        <Card className="match">
-                                                            <CardHeader
-                                                                title={match.firstName}
-                                                                subheader={match.title}
-                                                                avatar={
-                                                                    match.avatar ? (
-                                                                        <Avatar src={match.avatar} />
-                                                                    ) : (
-                                                                        <Avatar>{match.firstName[0]}</Avatar>
-                                                                    )
-                                                                }
-                                                            />
-                                                            <CardContent className="match-content">
-                                                                <Grid container alignItems="center" justify="space-between" wrap="nowrap">
-                                                                    <Grid item xs={true}>
-                                                                        <Trans values={{
-                                                                            profileName: match.firstName.length < 15
-                                                                                ? match.firstName
-                                                                                : `${match.firstName.substring(0, 14)}...`
-                                                                        }}>
-                                                                            match.profile.intro
-                                                                        </Trans>
-                                                                    </Grid>
+                                                        <Zoom in>
+                                                            <Card elevation={4} className="match">
+                                                                <CardHeader
+                                                                    title={match.firstName}
+                                                                    subheader={match.title}
+                                                                    avatar={
+                                                                        match.avatar ? (
+                                                                            <Avatar src={match.avatar} />
+                                                                        ) : (
+                                                                            <Avatar>{match.firstName[0]}</Avatar>
+                                                                        )
+                                                                    }
+                                                                />
+                                                                <CardContent className="match-content">
+                                                                    <Grid container alignItems="center" justify="space-between" wrap="nowrap">
+                                                                        <Grid item xs={true}>
+                                                                            <Trans values={{
+                                                                                profileName: match.firstName.length < 15
+                                                                                    ? match.firstName
+                                                                                    : `${match.firstName.substring(0, 14)}...`
+                                                                            }}>
+                                                                                match.profile.intro
+                                                                            </Trans>
+                                                                        </Grid>
 
-                                                                    <Grid item>
-                                                                        <Link to={`profile/${match.account.type}/${match._id}`}>
-                                                                            <Tooltip title={<Trans>match.profile.view</Trans>}>
+                                                                        <Grid item>
+                                                                            <Link to={`profile/${match.account.type}/${match._id}`}>
+                                                                                <Tooltip title={<Trans>match.profile.view</Trans>}>
+                                                                                    <IconButton className="match-icon-button">
+                                                                                        <Visibility className="match-icon" />
+                                                                                    </IconButton>
+                                                                                </Tooltip>
+                                                                            </Link>
+                                                                            <Tooltip title={<Trans>match.profile.invite</Trans>}>
                                                                                 <IconButton className="match-icon-button">
-                                                                                    <Visibility className="match-icon" />
+                                                                                    <GroupWork className="match-icon" />
                                                                                 </IconButton>
                                                                             </Tooltip>
-                                                                        </Link>
-                                                                        <Tooltip title={<Trans>match.profile.invite</Trans>}>
-                                                                            <IconButton className="match-icon-button">
-                                                                                <GroupWork className="match-icon" />
-                                                                            </IconButton>
-                                                                        </Tooltip>
+                                                                        </Grid>
                                                                     </Grid>
-                                                                </Grid>
-                                                            </CardContent>
-                                                        </Card>
+                                                                </CardContent>
+                                                            </Card>
+                                                        </Zoom>
                                                     </Grid>
                                                 );
                                             })
