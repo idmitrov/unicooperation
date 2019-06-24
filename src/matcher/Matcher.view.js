@@ -20,7 +20,6 @@ import {
     Close,
     Done,
     Visibility,
-    EventSeat,
     GroupWork
 } from '@material-ui/icons';
 
