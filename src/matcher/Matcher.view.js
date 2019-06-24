@@ -151,21 +151,27 @@ class MatcherView extends Component {
                                                                 }
                                                             />
                                                             <CardContent className="match-content">
-                                                                <Grid container alignItems="center">
+                                                                <Grid container alignItems="center" justify="space-between" wrap="nowrap">
                                                                     <Grid item xs={true}>
-                                                                        <Trans values={{profileName: match.firstName}}>match.profile.intro</Trans>
+                                                                        <Trans values={{
+                                                                            profileName: match.firstName.length < 15
+                                                                                ? match.firstName
+                                                                                : `${match.firstName.substring(0, 14)}...`
+                                                                        }}>
+                                                                            match.profile.intro
+                                                                        </Trans>
                                                                     </Grid>
 
                                                                     <Grid item>
                                                                         <Link to={`profile/${match.account.type}/${match._id}`}>
                                                                             <Tooltip title={<Trans>match.profile.view</Trans>}>
-                                                                                <IconButton className="match-icon">
+                                                                                <IconButton className="match-icon-button">
                                                                                     <Visibility className="match-icon" />
                                                                                 </IconButton>
                                                                             </Tooltip>
                                                                         </Link>
                                                                         <Tooltip title={<Trans>match.profile.invite</Trans>}>
-                                                                            <IconButton>
+                                                                            <IconButton className="match-icon-button">
                                                                                 <GroupWork className="match-icon" />
                                                                             </IconButton>
                                                                         </Tooltip>
