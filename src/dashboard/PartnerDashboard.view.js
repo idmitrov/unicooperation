@@ -12,7 +12,8 @@ import {
 
 import {
     Visibility,
-    GroupWork
+    GroupWork,
+    AddCircle
 } from '@material-ui/icons';
 
 import './PartnerDashboard.scss';
@@ -94,9 +95,17 @@ class PartnerDashboardView extends Component {
                     <div className="page-row">
                         <Typography variant="h6">Projects</Typography>
 
-                        <Grid container>
+                        <Grid container alignItems="center" justify="space-between">
                             <Grid item>
                                 <Link to="/projects">All Projects</Link>
+                            </Grid>
+
+                            <Grid>
+                                <Tooltip title="Create">
+                                    <IconButton>
+                                        <AddCircle />
+                                    </IconButton>
+                                </Tooltip>
                             </Grid>
                         </Grid>
                     </div>
