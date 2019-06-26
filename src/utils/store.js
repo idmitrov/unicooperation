@@ -6,6 +6,7 @@ import thunk from 'redux-thunk';
 
 import accountReducer from '../account/Account.reducer';
 import appReducer from '../app/App.reducer';
+import addsReducer from '../adds/Adds.reducer';
 import feedReducer from '../feed/Feed.reducer';
 import matcherReducer from '../matcher/Matcher.reducer';
 import nomReducer from '../nomenclatures/Nom.reducer';
@@ -19,6 +20,7 @@ import api from './api';
 const allReducers = combineReducers({
     account: accountReducer,
     app: appReducer,
+    adds: addsReducer,
     feed: feedReducer,
     matcher: matcherReducer,
     nomenclatures: nomReducer,

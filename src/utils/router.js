@@ -16,6 +16,7 @@ import StudentProfileView from '../profile/StudentProfile.view';
 import UniversityProfileView from '../profile/UniversityProfile.view';
 import PartnerMatcherView from '../matcher/PartnerMatcher.view';
 import PartnerDashboardView from '../dashboard/PartnerDashboard.view';
+import PartnerAddsListView from '../adds/PartnerAddsList.view';
 
 export const Link = _Link;
 
@@ -34,6 +35,7 @@ const PrivateRoute = ({ component: Component, fallbackComponent: FallBackCompone
     );
 }
 
+// TODO: Extract switch case logic whiting SwitchRoute component
 export const Routes = ({ account }) => {
     const authenticated = account.authenticated && account.profileId;
 
@@ -101,6 +103,24 @@ export const Routes = ({ account }) => {
                                 case accountType.partner.toLocaleLowerCase(): return <PartnerProfileView />
                                 case accountType.university.toLocaleLowerCase(): return <UniversityProfileView />
                                 case accountType.student.toLocaleLowerCase(): return <StudentProfileView />
+                                default: return <Redirect path="*" to="/" />;
+                            }
+                        } else {
+                            return <Redirect path="*" to="/" />;
+                        }
+                    }
+                }
+            />
+
+            <Route
+                path="/adds"
+                exact
+                strict
+                render={
+                    () => {
+                        if (authenticated) {
+                            switch (account.type.toLocaleLowerCase()) {
+                                case accountType.partner.toLocaleLowerCase(): return <PartnerAddsListView />
                                 default: return <Redirect path="*" to="/" />;
                             }
                         } else {
