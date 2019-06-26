@@ -97,7 +97,7 @@ class PartnerDashboardView extends Component {
 
                         <Grid container alignItems="center" justify="space-between">
                             <Grid item>
-                                <Link to="/projects">All Adds</Link>
+                                <Link to="/adds">All Adds</Link>
                             </Grid>
 
                             <Grid>
