@@ -97,14 +97,16 @@ class PartnerDashboardView extends Component {
 
                         <Grid container alignItems="center" justify="space-between">
                             <Grid item>
-                                <Link to="/adds">All Adds</Link>
+                                <Link to="/adds/list">All Adds</Link>
                             </Grid>
 
                             <Grid>
                                 <Tooltip title="Create new">
-                                    <IconButton>
-                                        <AddCircle />
-                                    </IconButton>
+                                    <Link to="/adds/create">
+                                        <IconButton>
+                                            <AddCircle />
+                                        </IconButton>
+                                    </Link>
                                 </Tooltip>
                             </Grid>
                         </Grid>
