@@ -101,7 +101,7 @@ class PartnerDashboardView extends Component {
                             </Grid>
 
                             <Grid>
-                                <Link to="/adds/list">
+                                <Link to="/adds/create">
                                     <Tooltip title="Create new">
                                         <IconButton>
                                             <AddCircle />

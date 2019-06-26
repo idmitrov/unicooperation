@@ -2,7 +2,8 @@ import addsEndpoints from './Adds.endpoints';
 
 export const addsActionTypes = {
     fetchAddsList: 'ADDS_LIST_FETCH',
-    setAddsList: 'ADDS_LIST_SET'
+    setAddsList: 'ADDS_LIST_SET',
+    setAddProp: 'ADD_PROP_SET'
 };
 
 export const fetchAddsList = () => (dispatch) => {
@@ -25,3 +26,27 @@ export const setAddsList = (adds) => (dispatch) => {
 
     return dispatch(action);
 }
+
+export const updateAddProps = (key, value) => (dispatch) => {
+    const action = {
+        type: addsActionTypes.setAddProp,
+        payload: { key, value }
+    };
+
+    return dispatch(action);
+}
+
+export const createAdd = (title, content) => (dispatch) => {
+    const action = {
+        type: addsActionTypes.setAddProp,
+        payload: { title, content },
+        api: {
+            endpoint: addsEndpoints.createAdd.endpoint,
+            method: addsEndpoints.createAdd.method,
+        }
+    };
+
+    return dispatch(action);
+}
+
+
