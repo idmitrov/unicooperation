@@ -11,12 +11,17 @@ import '../app/App.scss';
 
 import {
     updateAddProps,
-    createAdd
+    createAdd,
+    resetAddInstance
 } from './Adds.actions';
 
 import history from '../utils/history';
 
 class PartnerAddsCreateView extends Component {
+    componentWillUnmount() {
+        this.props.resetAddInstance();
+    }
+
     render() {
         const {
             addTitle,
@@ -74,6 +79,9 @@ const mapDispatchToProps = (dispatch) => {
             const { name, value } = e.target;
 
             return dispatch(updateAddProps(name, value));
+        },
+        resetAddInstance() {
+            return dispatch(resetAddInstance());
         }
     };
 }

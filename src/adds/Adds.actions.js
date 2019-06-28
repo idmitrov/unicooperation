@@ -3,7 +3,8 @@ import addsEndpoints from './Adds.endpoints';
 export const addsActionTypes = {
     fetchAddsList: 'ADDS_LIST_FETCH',
     setAddsList: 'ADDS_LIST_SET',
-    setAddProp: 'ADD_PROP_SET'
+    setAddProp: 'ADD_PROP_SET',
+    resetAddInstance: 'ADD_INSTANCE_RESET'
 };
 
 export const fetchAddsList = () => (dispatch) => {
@@ -49,4 +50,11 @@ export const createAdd = (title, content) => (dispatch) => {
     return dispatch(action);
 }
 
+export const resetAddInstance = () => (dispatch) => {
+    const action = {
+        type: addsActionTypes.resetAddInstance
+    };
+
+    return dispatch(action);
+}
 

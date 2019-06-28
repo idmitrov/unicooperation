@@ -1,15 +1,23 @@
 import { addsActionTypes } from './Adds.actions';
 
+const addInstanceDefaults = {
+    title: '',
+    content: ''
+};
+
 const addsDefautls = {
-    instance: {
-        title: '',
-        content: ''
-    },
+    instance: addInstanceDefaults,
     list: []
 };
 
 export default (state = addsDefautls, action = {}) => {
     switch (action.type) {
+        case addsActionTypes.resetAddInstance: {
+            return {
+                ...state,
+                instance: addInstanceDefaults
+            }
+        }
         case addsActionTypes.setAddProp: {
             return {
                 ...state,
