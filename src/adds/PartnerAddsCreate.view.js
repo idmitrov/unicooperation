@@ -31,31 +31,34 @@ class PartnerAddsCreateView extends Component {
         } = this.props;
 
         return(
-            <Grid container justify="center" alignItems="flex-start">
-                <Grid item xs={12} md={6} lg={4}>
-                    <TextField
-                        label="Title"
-                        name="title"
-                        value={addTitle || ''}
-                        required
-                        fullWidth
-                        onChange={addPropChanged}
-                    />
+            <div className="page-row">
 
-                    <TextField
-                        label="Content"
-                        name="content"
-                        value={addContent || ''}
-                        multiline
-                        required
-                        fullWidth
-                        rows="5"
-                        onChange={addPropChanged}
-                    />
+                <Grid container justify="center" alignItems="flex-start">
+                    <Grid item xs={12} md={6} lg={4}>
+                        <TextField
+                            label="Title"
+                            name="title"
+                            value={addTitle || ''}
+                            required
+                            fullWidth
+                            onChange={addPropChanged}
+                        />
 
-                    <Button onClick={() => createAdd(addTitle, addContent)}>Create</Button>
+                        <TextField
+                            label="Content"
+                            name="content"
+                            value={addContent || ''}
+                            multiline
+                            required
+                            fullWidth
+                            rows="5"
+                            onChange={addPropChanged}
+                        />
+
+                        <Button onClick={() => createAdd(addTitle, addContent)}>Create</Button>
+                    </Grid>
                 </Grid>
-            </Grid>
+            </div>
         );
     }
 }
