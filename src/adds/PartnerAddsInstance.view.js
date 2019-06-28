@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Trans } from 'react-i18next';
+import { withRouter } from 'react-router-dom';
 
 import {
     Button,
@@ -18,13 +19,24 @@ import {
 
 import history from '../utils/history';
 
-class PartnerAddsCreateView extends Component {
+class PartnerAddsInstanceView extends Component {
+    constructor(props) {
+        super(props);
+
+        const { addId } = this.props.match.params;
+
+        if (addId) {
+            // TODO: Fetch add
+        }
+    }
+
     componentWillUnmount() {
         this.props.resetAddInstance();
     }
 
     render() {
         const {
+            addId,
             addTitle,
             addContent,
             createAdd,
@@ -33,11 +45,10 @@ class PartnerAddsCreateView extends Component {
 
         return(
             <div className="page-row">
-
                 <Grid container justify="center" alignItems="flex-start">
                     <Grid item xs={12} md={6} lg={4}>
                         <TextField
-                            label={<Trans>add.create.title.label</Trans>}
+                            label={<Trans>add.instance.create.title.label</Trans>}
                             name="title"
                             value={addTitle || ''}
                             required
@@ -46,21 +57,29 @@ class PartnerAddsCreateView extends Component {
                         />
 
                         <TextField
-                            label={<Trans>add.create.content.label</Trans>}
+                            label={<Trans>add.instance.create.content.label</Trans>}
                             name="content"
                             value={addContent || ''}
                             multiline
                             required
-                            fullWidth
                             rows="5"
+                            fullWidth
                             onChange={addPropChanged}
                         />
 
-                        <Button
-                            title={<Trans>add.create.button.label</Trans>}
-                            onClick={() => createAdd(addTitle, addContent)}>
-                            <Trans>add.create.button.label</Trans>
-                        </Button>
+                        {
+                            addId ? (
+                                <Button
+                                    onClick={() => createAdd(addTitle, addContent)}>
+                                    <Trans>add.instance.edit.button.label</Trans>
+                                </Button>
+                            ) : (
+                                <Button
+                                    onClick={() => createAdd(addTitle, addContent)}>
+                                    <Trans>add.instance.create.button.label</Trans>
+                                </Button>
+                            )
+                        }
                     </Grid>
                 </Grid>
             </div>
@@ -70,6 +89,7 @@ class PartnerAddsCreateView extends Component {
 
 const mapStateToProps = (state) => {
     return {
+        addId: state.adds.instance.id,
         addTitle: state.adds.instance.title,
         addContent: state.adds.instance.content
     };
@@ -94,7 +114,9 @@ const mapDispatchToProps = (dispatch) => {
     };
 }
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(PartnerAddsCreateView);
+export default withRouter(
+    connect(
+        mapStateToProps,
+        mapDispatchToProps
+    )(PartnerAddsInstanceView)
+);

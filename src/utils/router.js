@@ -17,7 +17,7 @@ import UniversityProfileView from '../profile/UniversityProfile.view';
 import PartnerMatcherView from '../matcher/PartnerMatcher.view';
 import PartnerDashboardView from '../dashboard/PartnerDashboard.view';
 import PartnerAddsListView from '../adds/PartnerAddsList.view';
-import PartnerAddsCreateView from '../adds/PartnerAddsCreate.view';
+import PartnerAddsInstanceView from '../adds/PartnerAddsInstance.view';
 
 export const Link = _Link;
 
@@ -139,7 +139,25 @@ export const Routes = ({ account }) => {
                     () => {
                         if (authenticated) {
                             switch (account.type.toLocaleLowerCase()) {
-                                case accountType.partner.toLocaleLowerCase(): return <PartnerAddsCreateView />
+                                case accountType.partner.toLocaleLowerCase(): return <PartnerAddsInstanceView />
+                                default: return <Redirect path="*" to="/" />;
+                            }
+                        } else {
+                            return <Redirect path="*" to="/" />;
+                        }
+                    }
+                }
+            />
+
+            <Route
+                path="/adds/edit/:addId"
+                exact
+                strict
+                render={
+                    () => {
+                        if (authenticated) {
+                            switch (account.type.toLocaleLowerCase()) {
+                                case accountType.partner.toLocaleLowerCase(): return <PartnerAddsInstanceView />
                                 default: return <Redirect path="*" to="/" />;
                             }
                         } else {
