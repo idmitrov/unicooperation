@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Trans } from 'react-i18next';
 
 import {
     Button,
@@ -36,7 +37,7 @@ class PartnerAddsCreateView extends Component {
                 <Grid container justify="center" alignItems="flex-start">
                     <Grid item xs={12} md={6} lg={4}>
                         <TextField
-                            label="Title"
+                            label={<Trans>add.create.title.label</Trans>}
                             name="title"
                             value={addTitle || ''}
                             required
@@ -45,7 +46,7 @@ class PartnerAddsCreateView extends Component {
                         />
 
                         <TextField
-                            label="Content"
+                            label={<Trans>add.create.content.label</Trans>}
                             name="content"
                             value={addContent || ''}
                             multiline
@@ -55,7 +56,11 @@ class PartnerAddsCreateView extends Component {
                             onChange={addPropChanged}
                         />
 
-                        <Button onClick={() => createAdd(addTitle, addContent)}>Create</Button>
+                        <Button
+                            title={<Trans>add.create.button.label</Trans>}
+                            onClick={() => createAdd(addTitle, addContent)}>
+                            <Trans>add.create.button.label</Trans>
+                        </Button>
                     </Grid>
                 </Grid>
             </div>
