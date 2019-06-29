@@ -4,20 +4,18 @@ import { Router, Route, Switch, Redirect, Link as _Link } from 'react-router-dom
 import { accountType } from '../account/Account.constants';
 
 import AccountView from '../account/Account.view';
-import FeedView from '../feed/Feed.view';
-
-import PartnerSetupView from '../setup/PartnerSetup.view';
-import StudentSetupView from '../setup/StudentSetup.view';
-import UniversitySetupView from '../setup/UniversitySetup.view';
-
+import AddsListView from '../adds/AddsList.view';
 import AdminProfileView from '../profile/AdminProfile.view';
+import FeedView from '../feed/Feed.view';
+import PartnerSetupView from '../setup/PartnerSetup.view';
 import PartnerProfileView from '../profile/PartnerProfile.view';
-import StudentProfileView from '../profile/StudentProfile.view';
-import UniversityProfileView from '../profile/UniversityProfile.view';
 import PartnerMatcherView from '../matcher/PartnerMatcher.view';
 import PartnerDashboardView from '../dashboard/PartnerDashboard.view';
-import PartnerAddsListView from '../adds/PartnerAddsList.view';
 import PartnerAddsInstanceView from '../adds/PartnerAddsInstance.view';
+import StudentProfileView from '../profile/StudentProfile.view';
+import StudentSetupView from '../setup/StudentSetup.view';
+import UniversitySetupView from '../setup/UniversitySetup.view';
+import UniversityProfileView from '../profile/UniversityProfile.view';
 
 export const Link = _Link;
 
@@ -115,7 +113,7 @@ export const Routes = ({ account }) => {
 
             <PrivateRoute
                 path="/adds/list"
-                component={PartnerAddsListView}
+                component={AddsListView}
                 allowed={authenticated}
                 strict
                 exact

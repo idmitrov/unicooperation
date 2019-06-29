@@ -17,7 +17,7 @@ import {
 
 import { accountType } from '../account/Account.constants';
 
-class PartnerAddsListView extends Component {
+class AddsListView extends Component {
     constructor(props) {
         super(props);
 
@@ -82,4 +82,4 @@ const mapDispatchToProps = (dispatch) => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(PartnerAddsListView);
+)(AddsListView);
