@@ -22,7 +22,7 @@ class StudentSetupView extends Component {
         this.state = {
             firstName: null,
             facultyId: null,
-            universityId: null,
+            university: null,
             universityName: null,
             isFirstNameDirty: true,
             isFacultyIdDirty: true,
@@ -46,7 +46,7 @@ class StudentSetupView extends Component {
                 <form onSubmit={(e) => {
                     e.preventDefault();
 
-                    createStudentSetup(this.state.firstName, this.state.facultyId, this.state.universityId);
+                    createStudentSetup(this.state.firstName, this.state.facultyId, this.state.university);
                 }}>
                     <Grid container justify="center">
                         <Grid item xs={12} md={6} lg={4}>
@@ -103,7 +103,7 @@ class StudentSetupView extends Component {
                                                         this.setState({
                                                             ...this.state,
                                                             universityName: university.name,
-                                                            universityId: university._id
+                                                            university: university._id
                                                         });
                                                     }}>
                                                         {university.name}
@@ -140,7 +140,7 @@ class StudentSetupView extends Component {
                                             type="submit"
                                             variant="contained"
                                             color="primary"
-                                            disabled={!this.state.facultyId || !this.state.firstName || !this.state.universityId}>
+                                            disabled={!this.state.facultyId || !this.state.firstName || !this.state.university}>
                                             <Trans>global.proceed</Trans>
                                         </Button>
                                     </div>
@@ -162,8 +162,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        createStudentSetup(name, facultyId, universityId) {
-            return dispatch(createStudentSetup(name, facultyId, universityId))
+        createStudentSetup(name, facultyId, university) {
+            return dispatch(createStudentSetup(name, facultyId, university))
                 .then((data) => {
                     return dispatch(setAccount(data.account));
                 });

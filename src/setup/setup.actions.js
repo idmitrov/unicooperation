@@ -28,10 +28,10 @@ export const createPartnerSetup = (name, countryCode) => (dispatch) => {
     });
 }
 
-export const createStudentSetup = (firstName, facultyId, universityId) => (dispatch) => {
+export const createStudentSetup = (firstName, facultyId, university) => (dispatch) => {
     return dispatch({
         type: setupActionTypes.createStudentSetup,
-        payload: { firstName, facultyId, universityId },
+        payload: { firstName, facultyId, university },
         api: {
             endpoint: setupEndpoints.createStudentSetup.endpoint,
             method: setupEndpoints.createStudentSetup.method
