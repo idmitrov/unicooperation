@@ -43,22 +43,22 @@ class UniversityProfile extends Component {
     constructor(props) {
         super(props);
 
-        const { type, profileId } = props.match.params;
+        const { type, profile } = props.match.params;
 
-        if (profileId) {
-            this.props.getProfile(type, profileId);
+        if (profile) {
+            this.props.getProfile(type, profile);
         } else {
             this.props.getMyProfile();
         }
     }
 
     componentDidUpdate(prevProps) {
-        const { profileId } = prevProps.match.params;
+        const { profile } = prevProps.match.params;
 
-        if (profileId && profileId !== this.props.match.params.profileId) {
-            const { type, profileId } = this.props.match.params;
+        if (profile && profile !== this.props.match.params.profile) {
+            const { type, profile } = this.props.match.params;
 
-            this.props.getProfile(type, profileId);
+            this.props.getProfile(type, profile);
         }
     }
 
@@ -81,7 +81,7 @@ class UniversityProfile extends Component {
                         {/* PROFILE HEADER ACTIONS */}
                         <div className="profile-header-actions">
                         {
-                            match.params.profileId ? (
+                            match.params.profile ? (
                                 profile.hasOwnProperty('isFollowed') ? (
                                     <Grid container justify="flex-end">
                                         <Grid item>
@@ -184,7 +184,7 @@ class UniversityProfile extends Component {
                         </Grid>
 
                         {
-                            match.params.profileId ? (null) : (
+                            match.params.profile ? (null) : (
                                 <div className="profile-header-content">
                                     {/* PERSONAL SECTION */}
                                     <div className="page-row">
@@ -399,8 +399,8 @@ const mapDispatchToProps = (dispatch) => {
                     return dispatch(setMyProfile(profileData));
                 });
         },
-        getProfile(profileType, profileId) {
-            return dispatch(fetchProfile(profileType, profileId))
+        getProfile(profileType, profile) {
+            return dispatch(fetchProfile(profileType, profile))
                 .then((foundProfile) => {
                     return dispatch(setProfile(foundProfile));
                 });

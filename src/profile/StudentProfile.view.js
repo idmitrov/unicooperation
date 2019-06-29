@@ -40,10 +40,10 @@ class StudentProfileView extends Component {
     constructor(props) {
         super(props);
 
-        const { type, profileId } = props.match.params;
+        const { type, profile } = props.match.params;
 
-        if (profileId) {
-            this.props.getProfile(type, profileId);
+        if (profile) {
+            this.props.getProfile(type, profile);
         } else {
             this.props.getMyProfile();
         }
@@ -67,7 +67,7 @@ class StudentProfileView extends Component {
                         {/* PROFILE HEADER ACTIONS */}
                         <div className="profile-header-actions">
                             {
-                                match.params.profileId ? (
+                                match.params.profile ? (
                                     // TODO: Preview actions
                                     null
                                 ) : (
@@ -396,8 +396,8 @@ const mapDispatchToProps = (dispatch) => {
                     return dispatch(setMyProfile(profileData));
                 });
         },
-        getProfile(profileType, profileId) {
-            return dispatch(fetchProfile(profileType, profileId))
+        getProfile(profileType, profile) {
+            return dispatch(fetchProfile(profileType, profile))
                 .then((foundProfile) => {
                     return dispatch(setProfile(foundProfile));
                 });

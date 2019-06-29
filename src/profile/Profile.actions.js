@@ -31,7 +31,7 @@ export const followProfile = (followerProfileType, followingId) => (dispatch) =>
 export const fetchProfile = (type, id) => (dispatch) => {
     const endpoint = profileEndpoints.getProfile.endpoint
         .replace('{profileType}', type)
-        .replace('{profileId}', id)
+        .replace('{profile}', id)
 
     return dispatch({
         type: profileActionTypes.fetchProfile,

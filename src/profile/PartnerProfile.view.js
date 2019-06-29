@@ -39,10 +39,10 @@ class PartnerProfile extends Component {
     constructor(props) {
         super(props);
 
-        const { type, profileId } = props.match.params;
+        const { type, profile } = props.match.params;
 
-        if (type && profileId) {
-            this.props.getProfile(type, profileId);
+        if (type && profile) {
+            this.props.getProfile(type, profile);
         } else {
             this.props.getMyProfile();
         }
@@ -66,7 +66,7 @@ class PartnerProfile extends Component {
                         {/* PROFILE HEADER ACTIONS */}
                         <div className="profile-header-actions">
                             {
-                                match.params.profileId ? (
+                                match.params.profile ? (
                                     // TODO: IMPLEMENT FOLLOW LOGIC
                                     null
                                 ) : (
@@ -150,7 +150,7 @@ class PartnerProfile extends Component {
                         </Grid>
 
                         {
-                            match.params.profileId ? (null) : (
+                            match.params.profile ? (null) : (
                                 <div className="profile-header-content">
                                     {/* PERSONAL SECTION */}
                                     <div className="page-row">
@@ -365,8 +365,8 @@ const mapDispatchToProps = (dispatch) => {
                     return dispatch(setMyProfile(profileData));
                 });
         },
-        getProfile(profileType, profileId) {
-            return dispatch(fetchProfile(profileType, profileId))
+        getProfile(profileType, profile) {
+            return dispatch(fetchProfile(profileType, profile))
                 .then((foundProfile) => {
                     return dispatch(setProfile(foundProfile));
                 });

@@ -4,7 +4,7 @@ export default {
         method: 'POST'
     },
     getProfile: {
-        endpoint: '{profileType}/preview/{profileId}',
+        endpoint: '{profileType}/preview/{profile}',
         method: 'GET'
     },
     getMyProfile: {

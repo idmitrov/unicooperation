@@ -38,7 +38,7 @@ const PrivateRoute = ({ component: Component, fallbackComponent: FallBackCompone
 
 // TODO: Extract switch case logic whiting SwitchRoute component
 export const Routes = ({ account }) => {
-    const authenticated = account.authenticated && account.profileId;
+    const authenticated = account.authenticated && account.profile;
 
     return (
         <Switch>
@@ -94,7 +94,7 @@ export const Routes = ({ account }) => {
             />
 
             <Route
-                path="/profile/:type/:profileId"
+                path="/profile/:type/:profile"
                 exact
                 strict
                 render={

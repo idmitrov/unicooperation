@@ -7,7 +7,7 @@ const accountReset = {
     token: null,
     email: null,
     avatar: null,
-    profileId: null,
+    profile: null,
     type: null
 };
 
@@ -16,7 +16,7 @@ const accountDefaults = {
     avatar: __cachedAccount ? __cachedAccount.avatar : accountReset.avatar,
     email: __cachedAccount ? __cachedAccount.email : accountReset.email,
     token: __cachedAccount ? __cachedAccount.token : accountReset.token,
-    profileId: __cachedAccount ? __cachedAccount.profileId : accountReset.profileId,
+    profile: __cachedAccount ? __cachedAccount.profile : accountReset.profile,
     type: __cachedAccount ? __cachedAccount.type : accountReset.type
 };
 
