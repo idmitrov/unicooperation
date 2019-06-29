@@ -1,6 +1,6 @@
 export default {
     fetchAddsList: {
-        endpoint: 'adds',
+        endpoint: 'adds/mine',
         method: 'GET'
     },
     createAdd: {
