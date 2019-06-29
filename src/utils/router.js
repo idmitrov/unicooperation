@@ -113,22 +113,12 @@ export const Routes = ({ account }) => {
                 }
             />
 
-            <Route
+            <PrivateRoute
                 path="/adds/list"
-                exact
+                component={PartnerAddsListView}
+                allowed={authenticated}
                 strict
-                render={
-                    () => {
-                        if (authenticated) {
-                            switch (account.type.toLocaleLowerCase()) {
-                                case accountType.partner.toLocaleLowerCase(): return <PartnerAddsListView />
-                                default: return <Redirect path="*" to="/" />;
-                            }
-                        } else {
-                            return <Redirect path="*" to="/" />;
-                        }
-                    }
-                }
+                exact
             />
 
             <Route

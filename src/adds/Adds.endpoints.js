@@ -1,5 +1,9 @@
 export default {
-    fetchAddsList: {
+    getMyUniversityAdds: {
+        endpoint: 'adds',
+        method: 'GET'
+    },
+    getMyAdds: {
         endpoint: 'adds/mine',
         method: 'GET'
     },

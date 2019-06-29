@@ -1,18 +1,31 @@
 import addsEndpoints from './Adds.endpoints';
 
 export const addsActionTypes = {
-    fetchAddsList: 'ADDS_LIST_FETCH',
+    fetchMyadds: 'ADDS_MINE_FETCH',
     setAddsList: 'ADDS_LIST_SET',
     setAddProp: 'ADD_PROP_SET',
-    resetAddInstance: 'ADD_INSTANCE_RESET'
+    resetAddInstance: 'ADD_INSTANCE_RESET',
+    fetchMyUniversityAdds: 'ADDS_UNIVERSITY_MINE_FETCH'
 };
 
-export const fetchAddsList = () => (dispatch) => {
+export const fetchMyUniversityPartnersAdds = () => (dispatch) => {
+    const action = {
+        type: addsActionTypes.fetchMyUniversityAdds,
+        api: {
+            endpoint: addsEndpoints.getMyUniversityAdds.endpoint,
+            method: addsEndpoints.getMyUniversityAdds.method
+        }
+    };
+
+    return dispatch(action);
+}
+
+export const fetchMyadds = () => (dispatch) => {
     const action = {
         type: addsActionTypes.fetchAddsList,
         api: {
-            endpoint: addsEndpoints.fetchAddsList.endpoint,
-            method: addsEndpoints.fetchAddsList.method
+            endpoint: addsEndpoints.getMyAdds.endpoint,
+            method: addsEndpoints.getMyAdds.method
         }
     };
 

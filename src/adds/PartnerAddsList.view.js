@@ -9,13 +9,27 @@ import {
 
 import '../app/App.scss';
 
-import { fetchAddsList, setAddsList } from './Adds.actions';
+import {
+    fetchMyadds,
+    fetchMyUniversityPartnersAdds,
+    setAddsList
+} from './Adds.actions';
+
+import { accountType } from '../account/Account.constants';
 
 class PartnerAddsListView extends Component {
     constructor(props) {
         super(props);
 
-        this.props.fetchAddsList();
+        switch (this.props.accountType) {
+            case accountType.student:
+                this.props.fetchMyUniversityPartnersAdds();
+                break;
+            case accountType.partner:
+                this.props.fetchMyadds();
+                break;
+            default: console.error('Unknown accountType');
+        }
     }
 
     render() {
@@ -43,14 +57,21 @@ class PartnerAddsListView extends Component {
 
 const mapStateToProps = (state) => {
     return {
+        accountType: state.account.type,
         adds: state.adds.list
     };
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        fetchAddsList() {
-            return dispatch(fetchAddsList())
+        fetchMyUniversityPartnersAdds() {
+            return dispatch(fetchMyUniversityPartnersAdds())
+                .then((adds) => {
+                    return dispatch(setAddsList(adds.list));
+                });
+        },
+        fetchMyadds() {
+            return dispatch(fetchMyadds())
                 .then((adds) => {
                     return dispatch(setAddsList(adds.list));
                 });
