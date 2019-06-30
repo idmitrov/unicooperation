@@ -95,11 +95,17 @@ class App extends Component {
                                             </a>
 
                                             <Grid item xs={true} sm="auto">
-                                                <Tooltip title={<Trans>global.search.label</Trans>}>
-                                                    <button className="header-button" onClick={toggleSearchVisiblity}>
-                                                        <Search />
-                                                    </button>
-                                                </Tooltip>
+                                                {
+                                                    account.type !== accountType.student ? (
+                                                        <Tooltip title={<Trans>global.search.label</Trans>}>
+                                                            <button className="header-button" onClick={toggleSearchVisiblity}>
+                                                                <Search />
+                                                            </button>
+                                                        </Tooltip>
+                                                    ) : (
+                                                        null
+                                                    )
+                                                }
                                             </Grid>
 
                                             <Grid item>
