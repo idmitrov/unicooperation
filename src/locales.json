@@ -12,7 +12,7 @@
             "ads.instance.create.content.label": "Content",
             "ads.instance.create.button.label": "Create",
             "ads.instance.edit.button.label": "Edit",
-            "ads.list.item.apply": "Apply to ad",
+            "ads.list.item.apply": "Apply",
             "ads.list.item.applied": "Applied",
             "ads.list.item.edit": "Edit",
             "global.apply": "Apply",
