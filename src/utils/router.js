@@ -19,7 +19,12 @@ import UniversityProfileView from '../profile/UniversityProfile.view';
 
 export const Link = _Link;
 
-const PrivateRoute = ({ component: Component, fallbackComponent: FallBackComponent, redirect = '/', allowed, ...rest }) => {
+const PrivateRoute = ({
+    component: Component,
+    fallbackComponent: FallBackComponent,
+    redirect = '/',
+    allowed, ...rest
+}) => {
     return (
         <Route
             {...rest}
@@ -114,7 +119,7 @@ export const Routes = ({ account }) => {
             <PrivateRoute
                 path="/ads/list"
                 component={AdsListView}
-                allowed={authenticated}
+                allowed={authenticated && [accountType.partner, accountType.student].includes(account.type)}
                 strict
                 exact
             />
