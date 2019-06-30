@@ -27,7 +27,8 @@ export default (state = adsDefautls, action = {}) => {
                 }
             }
         }
-        case adsActionTypes.setAdsList: {
+        case adsActionTypes.setAdsList:
+        case adsActionTypes.updateAdsList: {
             return {
                 ...state,
                 list: action.payload

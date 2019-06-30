@@ -15,7 +15,9 @@ import '../app/App.scss';
 import {
     fetchMyads,
     fetchMyUniversityPartnersAds,
-    setAdsList
+    setAdsList,
+    applyToAd,
+    updateAdsList
 } from './Ads.actions';
 
 import { accountType } from '../account/Account.constants';
@@ -38,7 +40,8 @@ class AdsListView extends Component {
     render() {
         const {
             ads,
-            loggedAccountType
+            loggedAccountType,
+            applyToAd
         } = this.props;
 
         return (
@@ -60,7 +63,7 @@ class AdsListView extends Component {
                                                 {
                                                     loggedAccountType === accountType.student ? (
                                                         <CardActions>
-                                                            <Button>Apply</Button>
+                                                            <Button disabled={adItem.applied} onClick={() => applyToAd(adItem)}>Apply</Button>
                                                         </CardActions>
                                                     ) : loggedAccountType === accountType.partner ? (
                                                         <CardActions>
@@ -90,6 +93,14 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
+        applyToAd(adToApply) {
+            if (!adToApply.applied) {
+                return dispatch(applyToAd(adToApply._id))
+                    .then((ad) => {
+                        return dispatch(updateAdsList(ad));
+                    });
+            }
+        },
         fetchMyUniversityPartnersAds() {
             return dispatch(fetchMyUniversityPartnersAds())
                 .then((ads) => {
