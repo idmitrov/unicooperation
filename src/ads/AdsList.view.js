@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { Trans } from 'react-i18next';
 
 import {
@@ -22,6 +23,8 @@ import {
 } from './Ads.actions';
 
 import { accountType } from '../account/Account.constants';
+
+import './Ads.scss';
 
 class AdsListView extends Component {
     constructor(props) {
@@ -66,7 +69,12 @@ class AdsListView extends Component {
                                                 } />
 
                                                 <CardActions>
-                                                    <Button fullWidth>Details</Button>
+                                                    <Button fullWidth>
+                                                        <Link to={`/ads/details/${adItem._id}`} className="ad-anchor-button">
+                                                            <Trans>ads.list.item.details</Trans>
+                                                        </Link>
+                                                    </Button>
+
                                                     {
                                                         loggedAccountType === accountType.student ? (
                                                             <Button
