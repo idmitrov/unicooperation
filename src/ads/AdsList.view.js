@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Trans } from 'react-i18next';
 
 import {
     Button,
@@ -63,7 +64,9 @@ class AdsListView extends Component {
                                                 {
                                                     loggedAccountType === accountType.student ? (
                                                         <CardActions>
-                                                            <Button disabled={adItem.applied} onClick={() => applyToAd(adItem)}>Apply</Button>
+                                                            <Button disabled={adItem.applied} onClick={() => applyToAd(adItem)}>
+                                                                <Trans>{adItem.applied ? 'ads.list.item.applied' : 'ads.list.item.apply' }</Trans>
+                                                            </Button>
                                                         </CardActions>
                                                     ) : loggedAccountType === accountType.partner ? (
                                                         <CardActions>
