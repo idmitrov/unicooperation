@@ -21,7 +21,8 @@ import {
     School,
     PowerSettingsNew,
     ChevronLeft,
-    ChevronRight
+    ChevronRight,
+    WorkOutline
 } from '@material-ui/icons';
 
 import { Trans } from 'react-i18next';
@@ -96,14 +97,18 @@ class App extends Component {
 
                                             <Grid item xs={true} sm="auto">
                                                 {
-                                                    account.type !== accountType.student ? (
+                                                    account.type === accountType.student ? (
+                                                        <Tooltip title={<Trans>global.ads</Trans>}>
+                                                            <Link className="header-button" to="/adds/list">
+                                                                <WorkOutline />
+                                                            </Link>
+                                                        </Tooltip>
+                                                    ) : (
                                                         <Tooltip title={<Trans>global.search.label</Trans>}>
                                                             <button className="header-button" onClick={toggleSearchVisiblity}>
                                                                 <Search />
                                                             </button>
                                                         </Tooltip>
-                                                    ) : (
-                                                        null
                                                     )
                                                 }
                                             </Grid>
