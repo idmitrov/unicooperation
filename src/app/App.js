@@ -99,7 +99,7 @@ class App extends Component {
                                                 {
                                                     account.type === accountType.student ? (
                                                         <Tooltip title={<Trans>global.ads</Trans>}>
-                                                            <Link className="header-button" to="/adds/list">
+                                                            <Link className="header-button" to="/ads/list">
                                                                 <WorkOutline />
                                                             </Link>
                                                         </Tooltip>

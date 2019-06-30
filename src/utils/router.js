@@ -4,14 +4,14 @@ import { Router, Route, Switch, Redirect, Link as _Link } from 'react-router-dom
 import { accountType } from '../account/Account.constants';
 
 import AccountView from '../account/Account.view';
-import AddsListView from '../adds/AddsList.view';
+import AdsListView from '../ads/AdsList.view';
 import AdminProfileView from '../profile/AdminProfile.view';
 import FeedView from '../feed/Feed.view';
 import PartnerSetupView from '../setup/PartnerSetup.view';
 import PartnerProfileView from '../profile/PartnerProfile.view';
 import PartnerMatcherView from '../matcher/PartnerMatcher.view';
 import PartnerDashboardView from '../dashboard/PartnerDashboard.view';
-import PartnerAddsInstanceView from '../adds/PartnerAddsInstance.view';
+import PartnerAdsInstanceView from '../ads/PartnerAdsInstance.view';
 import StudentProfileView from '../profile/StudentProfile.view';
 import StudentSetupView from '../setup/StudentSetup.view';
 import UniversitySetupView from '../setup/UniversitySetup.view';
@@ -112,22 +112,22 @@ export const Routes = ({ account }) => {
             />
 
             <PrivateRoute
-                path="/adds/list"
-                component={AddsListView}
+                path="/ads/list"
+                component={AdsListView}
                 allowed={authenticated}
                 strict
                 exact
             />
 
             <Route
-                path="/adds/create"
+                path="/ads/create"
                 exact
                 strict
                 render={
                     () => {
                         if (authenticated) {
                             switch (account.type.toLocaleLowerCase()) {
-                                case accountType.partner.toLocaleLowerCase(): return <PartnerAddsInstanceView />
+                                case accountType.partner.toLocaleLowerCase(): return <PartnerAdsInstanceView />
                                 default: return <Redirect path="*" to="/" />;
                             }
                         } else {
@@ -138,14 +138,14 @@ export const Routes = ({ account }) => {
             />
 
             <Route
-                path="/adds/edit/:addId"
+                path="/ads/edit/:adId"
                 exact
                 strict
                 render={
                     () => {
                         if (authenticated) {
                             switch (account.type.toLocaleLowerCase()) {
-                                case accountType.partner.toLocaleLowerCase(): return <PartnerAddsInstanceView />
+                                case accountType.partner.toLocaleLowerCase(): return <PartnerAdsInstanceView />
                                 default: return <Redirect path="*" to="/" />;
                             }
                         } else {

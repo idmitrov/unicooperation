@@ -10,41 +10,41 @@ import {
 import '../app/App.scss';
 
 import {
-    fetchMyadds,
-    fetchMyUniversityPartnersAdds,
-    setAddsList
-} from './Adds.actions';
+    fetchMyads,
+    fetchMyUniversityPartnersAds,
+    setAdsList
+} from './Ads.actions';
 
 import { accountType } from '../account/Account.constants';
 
-class AddsListView extends Component {
+class AdsListView extends Component {
     constructor(props) {
         super(props);
 
         switch (this.props.accountType) {
             case accountType.student:
-                this.props.fetchMyUniversityPartnersAdds();
+                this.props.fetchMyUniversityPartnersAds();
                 break;
             case accountType.partner:
-                this.props.fetchMyadds();
+                this.props.fetchMyads();
                 break;
             default: console.error('Unknown accountType');
         }
     }
 
     render() {
-        const { adds } = this.props;
+        const { ads } = this.props;
 
         return (
             <Grid container justify="center" alignItems="flex-start">
                 <Grid item xs={12} md={6} lg={4}>
                     {
-                        adds.map((addItem, index) => {
+                        ads.map((adItem, index) => {
                             return (
                                 <Paper className="page-row" key={index}>
-                                    <Typography variant="h6">{addItem.title}</Typography>
+                                    <Typography variant="h6">{adItem.title}</Typography>
 
-                                    {addItem.content}
+                                    {adItem.content}
                                 </Paper>
                             );
                         })
@@ -58,22 +58,22 @@ class AddsListView extends Component {
 const mapStateToProps = (state) => {
     return {
         accountType: state.account.type,
-        adds: state.adds.list
+        ads: state.ads.list
     };
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        fetchMyUniversityPartnersAdds() {
-            return dispatch(fetchMyUniversityPartnersAdds())
-                .then((adds) => {
-                    return dispatch(setAddsList(adds.list));
+        fetchMyUniversityPartnersAds() {
+            return dispatch(fetchMyUniversityPartnersAds())
+                .then((ads) => {
+                    return dispatch(setAdsList(ads.list));
                 });
         },
-        fetchMyadds() {
-            return dispatch(fetchMyadds())
-                .then((adds) => {
-                    return dispatch(setAddsList(adds.list));
+        fetchMyads() {
+            return dispatch(fetchMyads())
+                .then((ads) => {
+                    return dispatch(setAdsList(ads.list));
                 });
         }
     };
@@ -82,4 +82,4 @@ const mapDispatchToProps = (dispatch) => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(AddsListView);
+)(AdsListView);

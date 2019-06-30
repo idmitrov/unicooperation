@@ -12,35 +12,35 @@ import {
 import '../app/App.scss';
 
 import {
-    updateAddProps,
-    createAdd,
-    resetAddInstance
-} from './Adds.actions';
+    updateAdProp,
+    createAd,
+    resetAdInstance
+} from './Ads.actions';
 
 import history from '../utils/history';
 
-class PartnerAddsInstanceView extends Component {
+class PartnerAdsInstanceView extends Component {
     constructor(props) {
         super(props);
 
-        const { addId } = this.props.match.params;
+        const { adId } = this.props.match.params;
 
-        if (addId) {
-            // TODO: Fetch add
+        if (adId) {
+            // TODO: Fetch ad
         }
     }
 
     componentWillUnmount() {
-        this.props.resetAddInstance();
+        this.props.resetAdInstance();
     }
 
     render() {
         const {
-            addId,
-            addTitle,
-            addContent,
-            createAdd,
-            addPropChanged
+            adId,
+            adTitle,
+            adContent,
+            createAd,
+            adPropChanged
         } = this.props;
 
         return(
@@ -48,35 +48,35 @@ class PartnerAddsInstanceView extends Component {
                 <Grid container justify="center" alignItems="flex-start">
                     <Grid item xs={12} md={6} lg={4}>
                         <TextField
-                            label={<Trans>add.instance.create.title.label</Trans>}
+                            label={<Trans>ads.instance.create.title.label</Trans>}
                             name="title"
-                            value={addTitle || ''}
+                            value={adTitle || ''}
                             required
                             fullWidth
-                            onChange={addPropChanged}
+                            onChange={adPropChanged}
                         />
 
                         <TextField
-                            label={<Trans>add.instance.create.content.label</Trans>}
+                            label={<Trans>ads.instance.create.content.label</Trans>}
                             name="content"
-                            value={addContent || ''}
+                            value={adContent || ''}
                             multiline
                             required
                             rows="5"
                             fullWidth
-                            onChange={addPropChanged}
+                            onChange={adPropChanged}
                         />
 
                         {
-                            addId ? (
+                            adId ? (
                                 <Button
-                                    onClick={() => createAdd(addTitle, addContent)}>
-                                    <Trans>add.instance.edit.button.label</Trans>
+                                    onClick={() => createAd(adTitle, adContent)}>
+                                    <Trans>ads.instance.edit.button.label</Trans>
                                 </Button>
                             ) : (
                                 <Button
-                                    onClick={() => createAdd(addTitle, addContent)}>
-                                    <Trans>add.instance.create.button.label</Trans>
+                                    onClick={() => createAd(adTitle, adContent)}>
+                                    <Trans>ads.instance.create.button.label</Trans>
                                 </Button>
                             )
                         }
@@ -89,27 +89,27 @@ class PartnerAddsInstanceView extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        addId: state.adds.instance.id,
-        addTitle: state.adds.instance.title,
-        addContent: state.adds.instance.content
+        adId: state.ads.instance.id,
+        adTitle: state.ads.instance.title,
+        adContent: state.ads.instance.content
     };
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        createAdd(title, content) {
-            return dispatch(createAdd(title, content))
+        createAd(title, content) {
+            return dispatch(createAd(title, content))
                 .then(() => {
-                    history.push('/adds/list');
+                    history.push('/ads/list');
                 });
         },
-        addPropChanged(e) {
+        adPropChanged(e) {
             const { name, value } = e.target;
 
-            return dispatch(updateAddProps(name, value));
+            return dispatch(updateAdProp(name, value));
         },
-        resetAddInstance() {
-            return dispatch(resetAddInstance());
+        resetAdInstance() {
+            return dispatch(resetAdInstance());
         }
     };
 }
@@ -118,5 +118,5 @@ export default withRouter(
     connect(
         mapStateToProps,
         mapDispatchToProps
-    )(PartnerAddsInstanceView)
+    )(PartnerAdsInstanceView)
 );

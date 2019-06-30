@@ -93,15 +93,15 @@ class PartnerDashboardView extends Component {
                     </div>
 
                     <div className="page-row">
-                        <Typography variant="h6">Adds</Typography>
+                        <Typography variant="h6">Ads</Typography>
 
                         <Grid container alignItems="center" justify="space-between">
                             <Grid item>
-                                <Link to="/adds/list">All Adds</Link>
+                                <Link to="/ads/list">All Ads</Link>
                             </Grid>
 
                             <Grid>
-                                <Link to="/adds/create">
+                                <Link to="/ads/create">
                                     <Tooltip title="Create new">
                                         <IconButton>
                                             <AddCircle />

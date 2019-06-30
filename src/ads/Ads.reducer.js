@@ -1,24 +1,24 @@
-import { addsActionTypes } from './Adds.actions';
+import { adsActionTypes } from './Ads.actions';
 
-const addInstanceDefaults = {
+const adInstanceDefaults = {
     title: '',
     content: ''
 };
 
-const addsDefautls = {
-    instance: addInstanceDefaults,
+const adsDefautls = {
+    instance: adInstanceDefaults,
     list: []
 };
 
-export default (state = addsDefautls, action = {}) => {
+export default (state = adsDefautls, action = {}) => {
     switch (action.type) {
-        case addsActionTypes.resetAddInstance: {
+        case adsActionTypes.resetAdInstance: {
             return {
                 ...state,
-                instance: addInstanceDefaults
+                instance: adInstanceDefaults
             }
         }
-        case addsActionTypes.setAddProp: {
+        case adsActionTypes.setAdProp: {
             return {
                 ...state,
                 instance: {
@@ -27,7 +27,7 @@ export default (state = addsDefautls, action = {}) => {
                 }
             }
         }
-        case addsActionTypes.setAddsList: {
+        case adsActionTypes.setAdsList: {
             return {
                 ...state,
                 list: action.payload
