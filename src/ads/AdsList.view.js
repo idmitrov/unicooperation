@@ -5,10 +5,10 @@ import { Trans } from 'react-i18next';
 import {
     Button,
     Card,
-    CardContent,
     CardHeader,
     CardActions,
-    Grid
+    Grid,
+    Typography
 } from '@material-ui/core';
 
 import '../app/App.scss';
@@ -53,27 +53,37 @@ class AdsListView extends Component {
                             {
                                 ads.map((adItem, index) => {
                                     return (
-                                        <Grid item sm={4} key={index}>
+                                        <Grid item xs={12} sm={6} key={index}>
                                             <Card>
-                                                <CardHeader title={adItem.title} />
+                                                <CardHeader title={
+                                                    <Typography variant="h6">
+                                                        {
+                                                            adItem.title.length < 17
+                                                                ? adItem.title
+                                                                : `${adItem.title.substring(0, 17)}...`
+                                                        }
+                                                    </Typography>
+                                                } />
 
-                                                <CardContent>
-                                                    {adItem.content}
-                                                </CardContent>
-
-                                                {
-                                                    loggedAccountType === accountType.student ? (
-                                                        <CardActions>
-                                                            <Button disabled={adItem.applied} onClick={() => applyToAd(adItem)}>
+                                                <CardActions>
+                                                    <Button fullWidth>Details</Button>
+                                                    {
+                                                        loggedAccountType === accountType.student ? (
+                                                            <Button
+                                                                disabled={adItem.applied}
+                                                                fullWidth
+                                                                onClick={() => applyToAd(adItem)}>
                                                                 <Trans>{adItem.applied ? 'ads.list.item.applied' : 'ads.list.item.apply' }</Trans>
                                                             </Button>
-                                                        </CardActions>
-                                                    ) : loggedAccountType === accountType.partner ? (
-                                                        <CardActions>
-                                                            <Button>Edit</Button>
-                                                        </CardActions>
-                                                    ) : (null)
-                                                }
+                                                        ) : loggedAccountType === accountType.partner ? (
+                                                            <Button
+                                                                fullWidth>
+                                                                <Trans>ads.list.item.edit</Trans>
+                                                            </Button>
+                                                        ) : (null)
+                                                    }
+                                                </CardActions>
+
                                             </Card>
                                         </Grid>
                                     );
