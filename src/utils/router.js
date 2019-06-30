@@ -11,7 +11,7 @@ import PartnerSetupView from '../setup/PartnerSetup.view';
 import PartnerProfileView from '../profile/PartnerProfile.view';
 import PartnerMatcherView from '../matcher/PartnerMatcher.view';
 import PartnerDashboardView from '../dashboard/PartnerDashboard.view';
-import PartnerAdsInstanceView from '../ads/PartnerAdsInstance.view';
+import AdsInstanceView from '../ads/AdsInstance.view';
 import StudentProfileView from '../profile/StudentProfile.view';
 import StudentSetupView from '../setup/StudentSetup.view';
 import UniversitySetupView from '../setup/UniversitySetup.view';
@@ -124,40 +124,28 @@ export const Routes = ({ account }) => {
                 exact
             />
 
-            <Route
+            <PrivateRoute
                 path="/ads/create"
+                component={AdsInstanceView}
+                allowed={authenticated && account.type === accountType.partner}
                 exact
                 strict
-                render={
-                    () => {
-                        if (authenticated) {
-                            switch (account.type.toLocaleLowerCase()) {
-                                case accountType.partner.toLocaleLowerCase(): return <PartnerAdsInstanceView />
-                                default: return <Redirect path="*" to="/" />;
-                            }
-                        } else {
-                            return <Redirect path="*" to="/" />;
-                        }
-                    }
-                }
             />
 
-            <Route
+            <PrivateRoute
                 path="/ads/edit/:adId"
+                component={AdsInstanceView}
+                allowed={authenticated && account.type === accountType.partner}
                 exact
                 strict
-                render={
-                    () => {
-                        if (authenticated) {
-                            switch (account.type.toLocaleLowerCase()) {
-                                case accountType.partner.toLocaleLowerCase(): return <PartnerAdsInstanceView />
-                                default: return <Redirect path="*" to="/" />;
-                            }
-                        } else {
-                            return <Redirect path="*" to="/" />;
-                        }
-                    }
-                }
+            />
+
+            <PrivateRoute
+                path="/ads/details/:adId"
+                component={AdsInstanceView}
+                allowed={authenticated && [accountType.partner, accountType.student].includes(account.type)}
+                exact
+                strict
             />
 
             <Route

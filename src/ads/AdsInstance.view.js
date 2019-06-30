@@ -19,7 +19,7 @@ import {
 
 import history from '../utils/history';
 
-class PartnerAdsInstanceView extends Component {
+class AdsInstanceView extends Component {
     constructor(props) {
         super(props);
 
@@ -118,5 +118,5 @@ export default withRouter(
     connect(
         mapStateToProps,
         mapDispatchToProps
-    )(PartnerAdsInstanceView)
+    )(AdsInstanceView)
 );
