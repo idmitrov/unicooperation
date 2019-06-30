@@ -2,9 +2,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import {
-    Grid,
-    Paper,
-    Typography
+    Button,
+    Card,
+    CardContent,
+    CardHeader,
+    CardActions,
+    Grid
 } from '@material-ui/core';
 
 import '../app/App.scss';
@@ -21,7 +24,7 @@ class AdsListView extends Component {
     constructor(props) {
         super(props);
 
-        switch (this.props.accountType) {
+        switch (this.props.loggedAccountType) {
             case accountType.student:
                 this.props.fetchMyUniversityPartnersAds();
                 break;
@@ -33,22 +36,45 @@ class AdsListView extends Component {
     }
 
     render() {
-        const { ads } = this.props;
+        const {
+            ads,
+            loggedAccountType
+        } = this.props;
 
         return (
             <Grid container justify="center" alignItems="flex-start">
                 <Grid item xs={12} md={6} lg={4}>
-                    {
-                        ads.map((adItem, index) => {
-                            return (
-                                <Paper className="page-row" key={index}>
-                                    <Typography variant="h6">{adItem.title}</Typography>
+                    <div className="page-row">
+                        <Grid container spacing={16}>
+                            {
+                                ads.map((adItem, index) => {
+                                    return (
+                                        <Grid item sm={4} key={index}>
+                                            <Card>
+                                                <CardHeader title={adItem.title} />
 
-                                    {adItem.content}
-                                </Paper>
-                            );
-                        })
-                    }
+                                                <CardContent>
+                                                    {adItem.content}
+                                                </CardContent>
+
+                                                {
+                                                    loggedAccountType === accountType.student ? (
+                                                        <CardActions>
+                                                            <Button>Apply</Button>
+                                                        </CardActions>
+                                                    ) : loggedAccountType === accountType.partner ? (
+                                                        <CardActions>
+                                                            <Button>Edit</Button>
+                                                        </CardActions>
+                                                    ) : (null)
+                                                }
+                                            </Card>
+                                        </Grid>
+                                    );
+                                })
+                            }
+                        </Grid>
+                    </div>
                 </Grid>
             </Grid>
         );
@@ -57,7 +83,7 @@ class AdsListView extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        accountType: state.account.type,
+        loggedAccountType: state.account.type,
         ads: state.ads.list
     };
 }
