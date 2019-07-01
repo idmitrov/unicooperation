@@ -88,13 +88,13 @@ class PartnerDashboardView extends Component {
                                                         }
                                                         actions={
                                                             <React.Fragment>
-                                                                <Tooltip title={<Trans>match.profile.view</Trans>}>
                                                                     <Link to={`profile/${match.account.type}/${match._id}`}>
-                                                                        <IconButton className="dashboard-grid-icon-button">
-                                                                            <Visibility className="dashboard-grid-icon" />
-                                                                        </IconButton>
+                                                                        <Tooltip title={<Trans>match.profile.view</Trans>}>
+                                                                            <IconButton className="dashboard-grid-icon-button">
+                                                                                <Visibility className="dashboard-grid-icon" />
+                                                                            </IconButton>
+                                                                        </Tooltip>
                                                                     </Link>
-                                                                </Tooltip>
 
                                                                 <Tooltip title={<Trans>match.profile.invite</Trans>}>
                                                                     <IconButton className="dashboard-grid-icon-button">
