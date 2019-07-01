@@ -173,16 +173,16 @@ class PartnerDashboardView extends Component {
                                                                                 </IconButton>
                                                                             </Tooltip>
                                                                         </Link>
-                                                                    ) :(
-                                                                        <Link to={`/ads/details/${adItem._id}`}>
-                                                                            <Tooltip title={<Trans>ads.list.item.details</Trans>}>
-                                                                                <IconButton className="dashboard-grid-icon-button">
-                                                                                    <Visibility className="dashboard-grid-icon" />
-                                                                                </IconButton>
-                                                                            </Tooltip>
-                                                                        </Link>
-                                                                    )
+                                                                    ) :(null)
                                                                 }
+
+                                                                <Link to={`/ads/details/${adItem._id}`}>
+                                                                    <Tooltip title={<Trans>ads.list.item.details</Trans>}>
+                                                                        <IconButton className="dashboard-grid-icon-button">
+                                                                            <Visibility className="dashboard-grid-icon" />
+                                                                        </IconButton>
+                                                                    </Tooltip>
+                                                                </Link>
                                                             </React.Fragment>
                                                         }
                                                     />
