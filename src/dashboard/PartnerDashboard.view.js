@@ -12,8 +12,9 @@ import {
 } from '@material-ui/core';
 
 import {
-    Visibility,
+    Edit,
     GroupWork,
+    Visibility,
     AddCircle
 } from '@material-ui/icons';
 
@@ -21,18 +22,30 @@ import './PartnerDashboard.scss';
 import ProfileIntroCard from '../components/profile-intro-card/ProfileIntroCard.component';
 
 import { getMatches, setMatches } from '../matcher/Matcher.actions';
+import { fetchMyads, fetchMyUniversityPartnersAds, setAdsList } from '../ads/Ads.actions';
+import { accountType } from '../account/Account.constants';
 
 class PartnerDashboardView extends Component {
     constructor(props) {
         super(props);
 
-        this.props.getTopMathes();
+        switch (this.props.loggedInAccount.type) {
+            case accountType.partner:
+                this.props.getTopMathes();
+                this.props.getTopAds();
+                break;
+            case accountType.student:
+                this.props.getTopMyUniversityPartnersAds()
+                break;
+            default: console.error('Fetch Dashboard -> Unknown account type');
+        }
     }
 
     render() {
         const {
             matches,
-            ads
+            ads,
+            loggedInAccount
         } = this.props;
 
         return (
@@ -53,7 +66,7 @@ class PartnerDashboardView extends Component {
                             </Grid>
                         </Grid>
 
-                        <div className="matches-grid">
+                        <div className="dashboard-grid">
                             <Grid container spacing={16}>
                                 {
                                     matches.length ? (
@@ -77,15 +90,15 @@ class PartnerDashboardView extends Component {
                                                             <React.Fragment>
                                                                 <Tooltip title={<Trans>match.profile.view</Trans>}>
                                                                     <Link to={`profile/${match.account.type}/${match._id}`}>
-                                                                        <IconButton className="match-icon-button">
-                                                                            <Visibility className="match-icon" />
+                                                                        <IconButton className="dashboard-grid-icon-button">
+                                                                            <Visibility className="dashboard-grid-icon" />
                                                                         </IconButton>
                                                                     </Link>
                                                                 </Tooltip>
 
                                                                 <Tooltip title={<Trans>match.profile.invite</Trans>}>
-                                                                    <IconButton className="match-icon-button">
-                                                                        <GroupWork className="match-icon" />
+                                                                    <IconButton className="dashboard-grid-icon-button">
+                                                                        <GroupWork className="dashboard-grid-icon" />
                                                                     </IconButton>
                                                                 </Tooltip>
                                                             </React.Fragment>
@@ -95,7 +108,9 @@ class PartnerDashboardView extends Component {
                                             )
                                         })
                                     ) : (
-                                        <Trans>dashboard.matches.noData</Trans>
+                                        <Grid item xs={12}>
+                                            <Trans>dashboard.matches.noData</Trans>
+                                        </Grid>
                                     )
                                 }
 
@@ -129,13 +144,59 @@ class PartnerDashboardView extends Component {
                             </Grid>
                         </Grid>
 
-                        {
-                            ads.length ? (
-                                null
-                            ) : (
-                                <Trans>dashboard.ads.noData</Trans>
-                            )
-                        }
+                        <div className="dashboard-grid">
+                            <Grid container spacing={16}>
+                                {
+                                    ads.length ? (
+                                        ads.map((adItem, index) => {
+                                            return (
+                                                <Grid item xs={12} sm={6} key={index}>
+                                                    <ProfileIntroCard
+                                                        avatar={adItem.conver}
+                                                        title={
+                                                            adItem.title.length < 17
+                                                                ? adItem.title
+                                                                : `${adItem.title.substring(0, 17)}...`
+                                                        }
+                                                        hoverText={
+                                                            <Trans>ads.list.item.intro</Trans>
+                                                        }
+                                                        actions={
+                                                            <React.Fragment>
+                                                                {
+                                                                    loggedInAccount.type === accountType.partner &&
+                                                                    loggedInAccount.profile === adItem.author ? (
+                                                                        <Link to={`/ads/edit/${adItem._id}`}>
+                                                                            <Tooltip title={<Trans>ads.list.item.edit</Trans>}>
+                                                                                <IconButton className="dashboard-grid-icon-button">
+                                                                                    <Edit className="dashboard-grid-icon" />
+                                                                                </IconButton>
+                                                                            </Tooltip>
+                                                                        </Link>
+                                                                    ) :(
+                                                                        <Link to={`/ads/details/${adItem._id}`}>
+                                                                            <Tooltip title={<Trans>ads.list.item.details</Trans>}>
+                                                                                <IconButton className="dashboard-grid-icon-button">
+                                                                                    <Visibility className="dashboard-grid-icon" />
+                                                                                </IconButton>
+                                                                            </Tooltip>
+                                                                        </Link>
+                                                                    )
+                                                                }
+                                                            </React.Fragment>
+                                                        }
+                                                    />
+                                                </Grid>
+                                            )
+                                        })
+                                    ) : (
+                                        <Grid item xs={12}>
+                                            <Trans>dashboard.ads.noData</Trans>
+                                        </Grid>
+                                    )
+                                }
+                            </Grid>
+                        </div>
 
                         <Grid container>
                             <Grid item>
@@ -155,17 +216,30 @@ class PartnerDashboardView extends Component {
 
 const mapStateToProps = (state) => {
     return {
+        loggedInAccount: state.account,
         matches: state.matcher.matches.slice(0, 2),
-        ads: []
+        ads: state.ads.list.slice(0, 2)
     };
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
+        getTopAds() {
+            return dispatch(fetchMyads())
+                .then((ads) => {
+                    return dispatch(setAdsList(ads.list));
+                });
+        },
         getTopMathes() {
             return dispatch(getMatches())
                 .then((matches) => {
                     return dispatch(setMatches(matches.list));
+                });
+        },
+        getTopMyUniversityPartnersAds() {
+            return dispatch(fetchMyUniversityPartnersAds())
+                .then((ads) => {
+                    return dispatch(setAdsList(ads.list));
                 });
         }
     };
