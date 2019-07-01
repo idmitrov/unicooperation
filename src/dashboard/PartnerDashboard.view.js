@@ -31,7 +31,8 @@ class PartnerDashboardView extends Component {
 
     render() {
         const {
-            matches
+            matches,
+            ads
         } = this.props;
 
         return (
@@ -55,43 +56,47 @@ class PartnerDashboardView extends Component {
                         <div className="matches-grid">
                             <Grid container spacing={16}>
                                 {
-                                    matches.map((match, index) => {
-                                        return (
-                                            <Grid item xs={12} sm={6} key={index}>
-                                                <ProfileIntroCard
-                                                    avatar={match.avatar}
-                                                    title={match.firstName}
-                                                    subtitle={match.title}
-                                                    hoverText={
-                                                        <Trans values={{
-                                                            profileName: match.firstName.length < 15
-                                                                ? match.firstName
-                                                                : `${match.firstName.substring(0, 14)}...`
-                                                        }}>
-                                                            match.profile.intro
-                                                        </Trans>
-                                                    }
-                                                    actions={
-                                                        <React.Fragment>
-                                                            <Tooltip title={<Trans>match.profile.view</Trans>}>
-                                                                <Link to={`profile/${match.account.type}/${match._id}`}>
-                                                                    <IconButton className="match-icon-button">
-                                                                        <Visibility className="match-icon" />
-                                                                    </IconButton>
-                                                                </Link>
-                                                            </Tooltip>
+                                    matches.length ? (
+                                        matches.map((match, index) => {
+                                            return (
+                                                <Grid item xs={12} sm={6} key={index}>
+                                                    <ProfileIntroCard
+                                                        avatar={match.avatar}
+                                                        title={match.firstName}
+                                                        subtitle={match.title}
+                                                        hoverText={
+                                                            <Trans values={{
+                                                                profileName: match.firstName.length < 15
+                                                                    ? match.firstName
+                                                                    : `${match.firstName.substring(0, 14)}...`
+                                                            }}>
+                                                                match.profile.intro
+                                                            </Trans>
+                                                        }
+                                                        actions={
+                                                            <React.Fragment>
+                                                                <Tooltip title={<Trans>match.profile.view</Trans>}>
+                                                                    <Link to={`profile/${match.account.type}/${match._id}`}>
+                                                                        <IconButton className="match-icon-button">
+                                                                            <Visibility className="match-icon" />
+                                                                        </IconButton>
+                                                                    </Link>
+                                                                </Tooltip>
 
-                                                            <Tooltip title={<Trans>match.profile.invite</Trans>}>
-                                                                <IconButton className="match-icon-button">
-                                                                    <GroupWork className="match-icon" />
-                                                                </IconButton>
-                                                            </Tooltip>
-                                                        </React.Fragment>
-                                                    }
-                                                />
-                                            </Grid>
-                                        )
-                                    })
+                                                                <Tooltip title={<Trans>match.profile.invite</Trans>}>
+                                                                    <IconButton className="match-icon-button">
+                                                                        <GroupWork className="match-icon" />
+                                                                    </IconButton>
+                                                                </Tooltip>
+                                                            </React.Fragment>
+                                                        }
+                                                    />
+                                                </Grid>
+                                            )
+                                        })
+                                    ) : (
+                                        <Trans>dashboard.matches.noData</Trans>
+                                    )
                                 }
 
                                 <Grid item xs={12}>
@@ -124,6 +129,14 @@ class PartnerDashboardView extends Component {
                             </Grid>
                         </Grid>
 
+                        {
+                            ads.length ? (
+                                null
+                            ) : (
+                                <Trans>dashboard.ads.noData</Trans>
+                            )
+                        }
+
                         <Grid container>
                             <Grid item>
                                 <Link to="/ads/list">
@@ -142,7 +155,8 @@ class PartnerDashboardView extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        matches: state.matcher.matches.slice(0, 2)
+        matches: state.matcher.matches.slice(0, 2),
+        ads: []
     };
 }
 
