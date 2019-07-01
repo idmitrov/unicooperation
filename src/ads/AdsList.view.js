@@ -70,6 +70,14 @@ class AdsListView extends Component {
                                                 }
                                                 actions={
                                                     <React.Fragment>
+                                                        <Link to={`/ads/details/${adItem._id}`}>
+                                                            <Tooltip title={<Trans>ads.list.item.details</Trans>}>
+                                                                <IconButton className="ad-icon-button">
+                                                                    <Visibility className="ad-icon" />
+                                                                </IconButton>
+                                                            </Tooltip>
+                                                        </Link>
+
                                                         {
                                                             loggedInAccount.type === accountType.partner &&
                                                             loggedInAccount.profile === adItem.author ? (
@@ -80,15 +88,7 @@ class AdsListView extends Component {
                                                                         </IconButton>
                                                                     </Tooltip>
                                                                 </Link>
-                                                            ) :(
-                                                                <Link to={`/ads/details/${adItem._id}`}>
-                                                                    <Tooltip title={<Trans>ads.list.item.details</Trans>}>
-                                                                        <IconButton className="ad-icon-button">
-                                                                            <Visibility className="ad-icon" />
-                                                                        </IconButton>
-                                                                    </Tooltip>
-                                                                </Link>
-                                                            )
+                                                            ) :(null)
                                                         }
                                                     </React.Fragment>
                                                 }
