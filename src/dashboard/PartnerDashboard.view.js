@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { Trans } from 'react-i18next';
 
 import {
+    Button,
     Grid,
     IconButton,
     Typography,
@@ -37,11 +38,19 @@ class PartnerDashboardView extends Component {
             <Grid container justify="center" alignItems="flex-start">
                 <Grid item xs={12} md={6} lg={4}>
                     <div className="page-row">
-                        <Typography variant="h5">Dashboard</Typography>
+                        <Typography variant="h5">
+                            <Trans>dashboard.title</Trans>
+                        </Typography>
                     </div>
 
                     <div className="page-row">
-                        <Typography variant="h6">Matches</Typography>
+                        <Grid container>
+                            <Grid item xs={true}>
+                                <Typography variant="h6">
+                                    <Trans>dashboard.matches.title</Trans>
+                                </Typography>
+                            </Grid>
+                        </Grid>
 
                         <div className="matches-grid">
                             <Grid container spacing={16}>
@@ -84,29 +93,43 @@ class PartnerDashboardView extends Component {
                                         )
                                     })
                                 }
-                                <Grid item>
-                                    <Link to="/matches">All Matches</Link>
-                                </Grid>
 
+                                <Grid item xs={12}>
+                                    <Link to="/matches">
+                                        <Button variant="text">
+                                            <Trans>dashboard.viewAll</Trans>
+                                        </Button>
+                                    </Link>
+                                </Grid>
                             </Grid>
                         </div>
                     </div>
 
                     <div className="page-row">
-                        <Typography variant="h6">Ads</Typography>
-
                         <Grid container alignItems="center" justify="space-between">
-                            <Grid item>
-                                <Link to="/ads/list">All Ads</Link>
+                            <Grid item xs={true}>
+                                <Typography variant="h6">
+                                    <Trans>dashboard.ads.title</Trans>
+                                </Typography>
                             </Grid>
 
-                            <Grid>
+                            <Grid item>
                                 <Link to="/ads/create">
-                                    <Tooltip title="Create new">
+                                    <Tooltip title="Create ad">
                                         <IconButton>
                                             <AddCircle />
                                         </IconButton>
                                     </Tooltip>
+                                </Link>
+                            </Grid>
+                        </Grid>
+
+                        <Grid container>
+                            <Grid item>
+                                <Link to="/ads/list">
+                                    <Button variant="text">
+                                        <Trans>dashboard.viewAll</Trans>
+                                    </Button>
                                 </Link>
                             </Grid>
                         </Grid>
