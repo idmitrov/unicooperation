@@ -1,9 +1,11 @@
 import adsEndpoints from './Ads.endpoints';
 
 export const adsActionTypes = {
-    fetchMyads: 'ADS_MINE_FETCH',
+    fetchMyAds: 'ADS_MINE_FETCH',
     setAdsList: 'ADS_LIST_SET',
     updateAdsList: 'ADS_LIST_UPDATE',
+    fetchAdInstance: 'AD_INSTNACE_FETCH',
+    setAdInstance: 'AD_INSTNACE_SET',
     setAdProp: 'AD_PROP_SET',
     resetAdInstance: 'AD_INSTANCE_RESET',
     fetchMyUniversityAds: 'ADS_UNIVERSITY_MINE_FETCH'
@@ -34,9 +36,9 @@ export const fetchMyUniversityPartnersAds = () => (dispatch) => {
     return dispatch(action);
 }
 
-export const fetchMyads = () => (dispatch) => {
+export const fetchMyAds = () => (dispatch) => {
     const action = {
-        type: adsActionTypes.fetchMyads,
+        type: adsActionTypes.fetchMyAds,
         api: {
             endpoint: adsEndpoints.getMyAds.endpoint,
             method: adsEndpoints.getMyAds.method
@@ -86,6 +88,27 @@ export const createAd = (title, content) => (dispatch) => {
             endpoint: adsEndpoints.createAd.endpoint,
             method: adsEndpoints.createAd.method,
         }
+    };
+
+    return dispatch(action);
+}
+
+export const fetchAdInstance = (adId) => (dispatch) => {
+    const action = {
+        type: adsActionTypes.fetchAdInstance,
+        api: {
+            endpoint: adsEndpoints.getAd.endpoint.replace('{adId}', adId),
+            method: adsEndpoints.getAd.method,
+        }
+    };
+
+    return dispatch(action);
+}
+
+export const setAdInstance = (add) => (dispatch) => {
+    const action = {
+        type: adsActionTypes.setAdInstance,
+        payload: add
     };
 
     return dispatch(action);

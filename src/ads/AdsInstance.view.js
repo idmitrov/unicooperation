@@ -14,7 +14,9 @@ import '../app/App.scss';
 import {
     updateAdProp,
     createAd,
-    resetAdInstance
+    resetAdInstance,
+    fetchAdInstance,
+    setAdInstance
 } from './Ads.actions';
 
 import history from '../utils/history';
@@ -26,7 +28,7 @@ class AdsInstanceView extends Component {
         const { adId } = this.props.match.params;
 
         if (adId) {
-            // TODO: Fetch ad
+            this.props.getAdInstance(adId);
         }
     }
 
@@ -97,6 +99,12 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
+        getAdInstance(adId) {
+            return dispatch(fetchAdInstance(adId))
+                .then((ad) => {
+                    return dispatch(setAdInstance(ad));
+                });
+        },
         createAd(title, content) {
             return dispatch(createAd(title, content))
                 .then(() => {

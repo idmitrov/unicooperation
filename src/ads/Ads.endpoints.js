@@ -1,4 +1,8 @@
 export default {
+    getAd: {
+        endpoint: 'ads/{adId}',
+        method: 'GET'
+    },
     applyToAd: {
         endpoint: 'ads/apply',
         method: 'POST'

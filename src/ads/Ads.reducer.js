@@ -12,6 +12,12 @@ const adsDefautls = {
 
 export default (state = adsDefautls, action = {}) => {
     switch (action.type) {
+        case adsActionTypes.setAdInstance: {
+            return {
+                ...state,
+                instance: action.payload
+            }
+        }
         case adsActionTypes.resetAdInstance: {
             return {
                 ...state,
