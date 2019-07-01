@@ -194,18 +194,16 @@ class PartnerDashboardView extends Component {
                                         </Grid>
                                     )
                                 }
+
+                                <Grid item xs={12}>
+                                    <Link to="/ads/list">
+                                        <Button variant="text">
+                                            <Trans>dashboard.viewAll</Trans>
+                                        </Button>
+                                    </Link>
+                                </Grid>
                             </Grid>
                         </div>
-
-                        <Grid container>
-                            <Grid item>
-                                <Link to="/ads/list">
-                                    <Button variant="text">
-                                        <Trans>dashboard.viewAll</Trans>
-                                    </Button>
-                                </Link>
-                            </Grid>
-                        </Grid>
                     </div>
                 </Grid>
             </Grid>
