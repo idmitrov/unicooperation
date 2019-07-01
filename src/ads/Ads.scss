@@ -1,4 +1,14 @@
-.ad-anchor-button {
-    text-decoration: none;
-    color: #000;
+.ads-grid {
+    margin-top: 15px;
+
+    .ad-icon-button {
+        height: 40px;
+        width: 40px;
+        padding: 0;
+    }
+
+    .ad-icon {
+        color: #fff;
+    }
 }
+
