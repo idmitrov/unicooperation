@@ -17,7 +17,7 @@ import {
 import '../app/App.scss';
 
 import {
-    fetchMyads,
+    fetchMyAds,
     fetchMyUniversityPartnersAds,
     setAdsList
 } from './Ads.actions';
@@ -37,7 +37,7 @@ class AdsListView extends Component {
                 this.props.fetchMyUniversityPartnersAds();
                 break;
             case accountType.partner:
-                this.props.fetchMyads();
+                this.props.fetchMyAds();
                 break;
             default: console.error('Fetch Ads -> Unknown accountType');
         }
@@ -120,8 +120,8 @@ const mapDispatchToProps = (dispatch) => {
                     return dispatch(setAdsList(ads.list));
                 });
         },
-        fetchMyads() {
-            return dispatch(fetchMyads())
+        fetchMyAds() {
+            return dispatch(fetchMyAds())
                 .then((ads) => {
                     return dispatch(setAdsList(ads.list));
                 });

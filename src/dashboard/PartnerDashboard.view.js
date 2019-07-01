@@ -22,7 +22,7 @@ import './PartnerDashboard.scss';
 import ProfileIntroCard from '../components/profile-intro-card/ProfileIntroCard.component';
 
 import { getMatches, setMatches } from '../matcher/Matcher.actions';
-import { fetchMyads, fetchMyUniversityPartnersAds, setAdsList } from '../ads/Ads.actions';
+import { fetchMyAds, fetchMyUniversityPartnersAds, setAdsList } from '../ads/Ads.actions';
 import { accountType } from '../account/Account.constants';
 
 class PartnerDashboardView extends Component {
@@ -224,7 +224,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         getTopAds() {
-            return dispatch(fetchMyads())
+            return dispatch(fetchMyAds())
                 .then((ads) => {
                     return dispatch(setAdsList(ads.list));
                 });
