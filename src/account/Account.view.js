@@ -67,85 +67,18 @@ class AccountView extends Component {
                     </Tabs>
                 </AppBar>
 
-                <Grid container justify="center">
-                    <Grid item sm={8} md={4}>
-                        {
-                            this.state.mode === 'login' ? (
-                                <form onSubmit={(e) => {
-                                    e.preventDefault();
+                <div className="page-row">
 
-                                    login(this.state.email, this.state.password);
-                                }}>
-                                    <Grid container>
-                                        <Grid item xs={12}>
-                                            <TextField
-                                                type="email"
-                                                name="email"
-                                                value={this.state.email}
-                                                label={<Trans>account.email.label</Trans>}
-                                                autoComplete="email"
-                                                required
-                                                fullWidth
-                                                onChange={this.handleAccountInputChange}
-                                            />
-                                        </Grid>
-
-                                        <Grid item xs={12}>
-                                            <TextField
-                                                type="password"
-                                                name="password"
-                                                value={this.state.password}
-                                                autoComplete="current-password"
-                                                label={<Trans>account.password.label</Trans>}
-                                                required
-                                                fullWidth
-                                                onChange={this.handleAccountInputChange}
-                                            />
-                                        </Grid>
-
-                                        <Grid item xs={12}>
-                                            <Button type="submit" variant="contained" color="primary">
-                                                <Trans>account.login.label</Trans>
-                                            </Button>
-                                        </Grid>
-                                    </Grid>
-                                </form>
-                            ) : (
+                    <Grid container justify="center">
+                        <Grid item sm={8} md={4}>
+                            {
+                                this.state.mode === 'login' ? (
                                     <form onSubmit={(e) => {
                                         e.preventDefault();
 
-                                        register(this.state.email, this.state.password, this.state.name, this.state.type);
+                                        login(this.state.email, this.state.password);
                                     }}>
                                         <Grid container>
-                                            <Grid item xs={12}>
-                                                <FormControl>
-                                                    <FormLabel>
-                                                        <Trans>account.type.label</Trans>
-                                                    </FormLabel>
-
-                                                    <RadioGroup
-                                                        name="type"
-                                                        value={this.state.type}
-                                                        row
-                                                        onChange={this.handleAccountInputChange}>
-                                                        {
-                                                            Object
-                                                                .keys(accountType)
-                                                                .map((accountTypeKey) => {
-                                                                    return accountType[accountTypeKey] !== accountType.admin ? (
-                                                                        <FormControlLabel
-                                                                            key={accountTypeKey}
-                                                                            value={accountType[accountTypeKey]}
-                                                                            control={<Radio color="primary" />}
-                                                                            label={<Trans>{`${accountTypeKey}.label`}</Trans>}
-                                                                        />
-                                                                    ) : (null)
-                                                                })
-                                                        }
-                                                    </RadioGroup>
-                                                </FormControl>
-                                            </Grid>
-
                                             <Grid item xs={12}>
                                                 <TextField
                                                     type="email"
@@ -164,28 +97,98 @@ class AccountView extends Component {
                                                     type="password"
                                                     name="password"
                                                     value={this.state.password}
+                                                    autoComplete="current-password"
                                                     label={<Trans>account.password.label</Trans>}
-                                                    autoComplete="new-password"
                                                     required
                                                     fullWidth
                                                     onChange={this.handleAccountInputChange}
                                                 />
                                             </Grid>
 
-                                            <Grid item xs={12}>
-                                                <Button
-                                                    type="submit"
-                                                    variant="contained"
-                                                    color="primary">
-                                                    <Trans>account.register.label</Trans>
+                                            <Grid item xs={12} style={{marginTop: 15}}>
+                                                <Button type="submit" variant="contained" color="primary">
+                                                    <Trans>account.login.label</Trans>
                                                 </Button>
                                             </Grid>
                                         </Grid>
                                     </form>
-                                )
-                        }
+                                ) : (
+                                        <form onSubmit={(e) => {
+                                            e.preventDefault();
+
+                                            register(this.state.email, this.state.password, this.state.name, this.state.type);
+                                        }}>
+                                            <Grid container>
+                                                <Grid item xs={12}>
+                                                    <FormControl>
+                                                        <FormLabel>
+                                                            <Trans>account.type.label</Trans>
+                                                        </FormLabel>
+
+                                                        <RadioGroup
+                                                            name="type"
+                                                            value={this.state.type}
+                                                            row
+                                                            onChange={this.handleAccountInputChange}>
+                                                            {
+                                                                Object
+                                                                    .keys(accountType)
+                                                                    .map((accountTypeKey) => {
+                                                                        return accountType[accountTypeKey] !== accountType.admin ? (
+                                                                            <FormControlLabel
+                                                                                key={accountTypeKey}
+                                                                                value={accountType[accountTypeKey]}
+                                                                                control={<Radio color="primary" />}
+                                                                                label={<Trans>{`${accountTypeKey}.label`}</Trans>}
+                                                                            />
+                                                                        ) : (null)
+                                                                    })
+                                                            }
+                                                        </RadioGroup>
+                                                    </FormControl>
+                                                </Grid>
+
+                                                <Grid item xs={12}>
+                                                    <TextField
+                                                        type="email"
+                                                        name="email"
+                                                        value={this.state.email}
+                                                        label={<Trans>account.email.label</Trans>}
+                                                        autoComplete="email"
+                                                        required
+                                                        fullWidth
+                                                        onChange={this.handleAccountInputChange}
+                                                    />
+                                                </Grid>
+
+                                                <Grid item xs={12}>
+                                                    <TextField
+                                                        type="password"
+                                                        name="password"
+                                                        value={this.state.password}
+                                                        label={<Trans>account.password.label</Trans>}
+                                                        autoComplete="new-password"
+                                                        required
+                                                        fullWidth
+                                                        onChange={this.handleAccountInputChange}
+                                                    />
+                                                </Grid>
+
+                                                <Grid item xs={12} style={{marginTop: 15}}>
+                                                    <Button
+                                                        type="submit"
+                                                        variant="contained"
+                                                        color="primary">
+                                                        <Trans>account.register.label</Trans>
+                                                    </Button>
+                                                </Grid>
+                                            </Grid>
+                                        </form>
+                                    )
+                            }
+                        </Grid>
                     </Grid>
-                </Grid>
+                </div>
             </div>
         );
     }
