@@ -56,6 +56,7 @@ class AdsInstanceView extends Component {
             account,
             createAd,
             applyToAd,
+            cancelAdApplication,
             adPropChanged
         } = this.props;
 
@@ -63,57 +64,73 @@ class AdsInstanceView extends Component {
             <div className="page-row">
                 <Grid container justify="center" alignItems="flex-start">
                     <Grid item xs={12} md={6} lg={4}>
-                        <TextField
-                            label={<Trans>ads.instance.create.title.label</Trans>}
-                            name="title"
-                            value={ad.title || ''}
-                            InputProps={{readOnly: isReadonly}}
-                            required
-                            fullWidth
-                            onChange={adPropChanged}
-                        />
+                        <Grid container>
+                            <Grid item xs={12}>
+                                <TextField
+                                    label={<Trans>ads.instance.create.title.label</Trans>}
+                                    name="title"
+                                    value={ad.title || ''}
+                                    InputProps={{readOnly: isReadonly}}
+                                    required
+                                    fullWidth
+                                    onChange={adPropChanged}
+                                />
+                            </Grid>
 
-                        <TextField
-                            label={<Trans>ads.instance.create.content.label</Trans>}
-                            name="content"
-                            value={ad.content || ''}
-                            rows="5"
-                            InputProps={{readOnly: isReadonly}}
-                            multiline
-                            required
-                            fullWidth
-                            onChange={adPropChanged}
-                        />
+                            <Grid item xs={12} style={{marginTop: 15}}>
+                                <TextField
+                                    label={<Trans>ads.instance.create.content.label</Trans>}
+                                    name="content"
+                                    value={ad.content || ''}
+                                    rows="5"
+                                    InputProps={{readOnly: isReadonly}}
+                                    multiline
+                                    required
+                                    fullWidth
+                                    onChange={adPropChanged}
+                                />
+                            </Grid>
 
-                        {
-                            isEditing ? (
-                                <Button
-                                    onClick={() => createAd(ad)}
-                                    disabled={!ad.title || !ad.content}>
-                                    <Trans>ads.instance.edit.button.label</Trans>
-                                </Button>
-                            ) : (null)
-                        }
+                            <Grid item xs={12} style={{marginTop: 15}}>
 
-                        {
-                            isCreation ? (
-                                <Button
-                                    onClick={() => createAd(ad)}
-                                    disabled={!ad.title || !ad.content}>
-                                    <Trans>ads.instance.create.button.label</Trans>
-                                </Button>
-                            ) : (null)
-                        }
+                                {
+                                    isEditing ? (
+                                        <Button
+                                            onClick={() => createAd(ad)}
+                                            disabled={!ad.title || !ad.content}>
+                                            <Trans>ads.instance.edit.button.label</Trans>
+                                        </Button>
+                                    ) : (null)
+                                }
 
-                        {
-                            isReadonly ? (
-                                <Button
-                                    onClick={() => applyToAd(ad)}
-                                    disabled={ad.applied}>
-                                    <Trans>ads.instance.details.apply.utton.label</Trans>
-                                </Button>
-                            ) : (null)
-                        }
+                                {
+                                    isCreation ? (
+                                        <Button
+                                            onClick={() => createAd(ad)}
+                                            disabled={!ad.title || !ad.content}>
+                                            <Trans>ads.instance.create.button.label</Trans>
+                                        </Button>
+                                    ) : (null)
+                                }
+
+                                {
+                                    isReadonly ? (
+                                        ad.applied ? (
+                                            <Button
+                                                onClick={() => cancelAdApplication(ad)}>
+                                                <Trans>ads.instance.details.cancelApply.button.label</Trans>
+                                            </Button>
+                                        ) : (
+                                            <Button
+                                                onClick={() => applyToAd(ad)}
+                                                disabled={ad.applied}>
+                                                <Trans>ads.instance.details.apply.button.label</Trans>
+                                            </Button>
+                                        )
+                                    ) : (null)
+                                }
+                            </Grid>
+                        </Grid>
                     </Grid>
                 </Grid>
             </div>
@@ -135,6 +152,9 @@ const mapDispatchToProps = (dispatch) => {
                 .then((ad) => {
                     return dispatch(setAdInstance(ad));
                 });
+        },
+        cancelAdApplication(ad) {
+            console.error('METHOD NOT IMPLEMENTED');
         },
         getAdInstance(adId) {
             return dispatch(fetchAdInstance(adId))
