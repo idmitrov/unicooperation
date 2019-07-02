@@ -49,14 +49,14 @@ export const fetchMyAds = () => (dispatch) => {
 }
 
 export const updateAdsList = (ad) => (dispatch, getState) => {
-    const addsList = getState().ads.list.slice();
+    const adsList = getState().ads.list.slice();
 
-    const adToUpdateIndex = addsList.findIndex((a) => a._id === ad._id);
-    addsList[adToUpdateIndex] = ad;
+    const adToUpdateIndex = adsList.findIndex((a) => a._id === ad._id);
+    adsList[adToUpdateIndex] = ad;
 
     const action = {
         type: adsActionTypes.updateAdsList,
-        payload: addsList
+        payload: adsList
     };
 
     return dispatch(action);
@@ -80,7 +80,9 @@ export const updateAdProp = (key, value) => (dispatch) => {
     return dispatch(action);
 }
 
-export const createAd = (title, content) => (dispatch) => {
+export const createAd = (ad) => (dispatch) => {
+    const { title, content } = ad;
+
     const action = {
         type: adsActionTypes.setAdProp,
         payload: { title, content },
@@ -105,10 +107,10 @@ export const fetchAdInstance = (adId) => (dispatch) => {
     return dispatch(action);
 }
 
-export const setAdInstance = (add) => (dispatch) => {
+export const setAdInstance = (ad) => (dispatch) => {
     const action = {
         type: adsActionTypes.setAdInstance,
-        payload: add
+        payload: ad
     };
 
     return dispatch(action);

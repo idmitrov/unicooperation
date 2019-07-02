@@ -16,7 +16,9 @@ import {
     createAd,
     resetAdInstance,
     fetchAdInstance,
-    setAdInstance
+    setAdInstance,
+    applyToAd,
+    updateAdsList
 } from './Ads.actions';
 
 import history from '../utils/history';
@@ -25,10 +27,16 @@ class AdsInstanceView extends Component {
     constructor(props) {
         super(props);
 
-        const { adId } = this.props.match.params;
+        const { adId, adDetailId } = this.props.match.params;
 
-        if (adId) {
-            this.props.getAdInstance(adId);
+        this.state = {
+            isCreation: adId === undefined && adDetailId === undefined,
+            isReadonly: adId === undefined && adDetailId !== undefined,
+            isEditing: adId !== undefined && adDetailId === undefined
+        };
+
+        if (this.state.isEditing || this.state.isReadonly) {
+            this.props.getAdInstance(adId || adDetailId);
         }
     }
 
@@ -38,10 +46,16 @@ class AdsInstanceView extends Component {
 
     render() {
         const {
-            adId,
-            adTitle,
-            adContent,
+            isEditing,
+            isReadonly,
+            isCreation
+        } = this.state;
+
+        const {
+            ad,
+            account,
             createAd,
+            applyToAd,
             adPropChanged
         } = this.props;
 
@@ -52,7 +66,8 @@ class AdsInstanceView extends Component {
                         <TextField
                             label={<Trans>ads.instance.create.title.label</Trans>}
                             name="title"
-                            value={adTitle || ''}
+                            value={ad.title || ''}
+                            InputProps={{readOnly: isReadonly}}
                             required
                             fullWidth
                             onChange={adPropChanged}
@@ -61,26 +76,43 @@ class AdsInstanceView extends Component {
                         <TextField
                             label={<Trans>ads.instance.create.content.label</Trans>}
                             name="content"
-                            value={adContent || ''}
+                            value={ad.content || ''}
+                            rows="5"
+                            InputProps={{readOnly: isReadonly}}
                             multiline
                             required
-                            rows="5"
                             fullWidth
                             onChange={adPropChanged}
                         />
 
                         {
-                            adId ? (
+                            isEditing ? (
                                 <Button
-                                    onClick={() => createAd(adTitle, adContent)}>
+                                    onClick={() => createAd(ad)}
+                                    disabled={!ad.title || !ad.content}>
                                     <Trans>ads.instance.edit.button.label</Trans>
                                 </Button>
-                            ) : (
+                            ) : (null)
+                        }
+
+                        {
+                            isCreation ? (
                                 <Button
-                                    onClick={() => createAd(adTitle, adContent)}>
+                                    onClick={() => createAd(ad)}
+                                    disabled={!ad.title || !ad.content}>
                                     <Trans>ads.instance.create.button.label</Trans>
                                 </Button>
-                            )
+                            ) : (null)
+                        }
+
+                        {
+                            isReadonly ? (
+                                <Button
+                                    onClick={() => applyToAd(ad)}
+                                    disabled={ad.applied}>
+                                    <Trans>ads.instance.details.apply.utton.label</Trans>
+                                </Button>
+                            ) : (null)
                         }
                     </Grid>
                 </Grid>
@@ -91,22 +123,27 @@ class AdsInstanceView extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        adId: state.ads.instance.id,
-        adTitle: state.ads.instance.title,
-        adContent: state.ads.instance.content
+        account: state.account,
+        ad: state.ads.instance
     };
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
+        applyToAd(ad) {
+            return dispatch(applyToAd(ad._id))
+                .then((ad) => {
+                    return dispatch(setAdInstance(ad));
+                });
+        },
         getAdInstance(adId) {
             return dispatch(fetchAdInstance(adId))
                 .then((ad) => {
                     return dispatch(setAdInstance(ad));
                 });
         },
-        createAd(title, content) {
-            return dispatch(createAd(title, content))
+        createAd(ad) {
+            return dispatch(createAd(ad))
                 .then(() => {
                     history.push('/ads/list');
                 });
