@@ -2,7 +2,8 @@ import { adsActionTypes } from './Ads.actions';
 
 const adInstanceDefaults = {
     title: '',
-    content: ''
+    content: '',
+    candidates: []
 };
 
 const adsDefautls = {
@@ -15,7 +16,10 @@ export default (state = adsDefautls, action = {}) => {
         case adsActionTypes.setAdInstance: {
             return {
                 ...state,
-                instance: action.payload
+                instance: {
+                    ...state.instance,
+                    ...action.payload
+                }
             }
         }
         case adsActionTypes.resetAdInstance: {

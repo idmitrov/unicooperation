@@ -4,6 +4,7 @@ import { Trans } from 'react-i18next';
 import { withRouter } from 'react-router-dom';
 
 import {
+    Avatar,
     Button,
     Grid,
     TextField,
@@ -13,6 +14,7 @@ import {
 
 
 import {
+    Assignment,
     Delete,
     Save
 } from '@material-ui/icons';
@@ -142,19 +144,58 @@ class AdsInstanceView extends Component {
                                 }
 
                                 {
-                                    isReadonly && loggedInProfile !== ad.author ? (
-                                        ad.applied ? (
-                                            <Button
-                                                onClick={() => cancelAdApplication(ad)}>
-                                                <Trans>ads.instance.details.cancelApply.button.label</Trans>
-                                            </Button>
-                                        ) : (
-                                            <Button
-                                                onClick={() => applyToAd(ad)}
-                                                disabled={ad.applied}>
-                                                <Trans>ads.instance.details.apply.button.label</Trans>
-                                            </Button>
-                                        )
+                                    isReadonly ? (
+                                        <React.Fragment>
+                                            {
+                                                loggedInProfile !== ad.author ? (
+                                                    <Grid container alignItems="center" justify="space-between">
+                                                        <Grid item>
+                                                            <Trans>ads.instance.applicationsTotal</Trans>: {ad.applicationsTotal || 0}
+                                                        </Grid>
+
+                                                        <Grid item>
+                                                            {
+                                                                ad.applied ? (
+                                                                    <Button
+                                                                        variant="raised"
+                                                                        onClick={() => cancelAdApplication(ad)}>
+                                                                        <Trans>ads.instance.details.cancelApply.button.label</Trans>
+                                                                    </Button>
+                                                                ) : (
+                                                                    <Button
+                                                                        variant="raised"
+                                                                        disabled={ad.applied}
+                                                                        onClick={() => applyToAd(ad)}>
+                                                                        <Trans>ads.instance.details.apply.button.label</Trans>
+                                                                    </Button>
+                                                                )
+                                                            }
+                                                        </Grid>
+                                                    </Grid>
+                                                ) : (
+                                                    <Grid container alignItems="center" spacing={16}>
+                                                        <Grid item>
+                                                            <Avatar>
+                                                                <Assignment />
+                                                            </Avatar>
+                                                        </Grid>
+
+                                                        <Grid item>
+                                                            Applications: {ad.applicationsTotal || 0}
+                                                        </Grid>
+
+                                                        <Grid item xs={true}>
+                                                            <Button
+                                                                variant="raised"
+                                                                disabled={!ad.applicationsTotal}
+                                                                fullWidth>
+                                                                Show applicants
+                                                            </Button>
+                                                        </Grid>
+                                                    </Grid>
+                                                )
+                                            }
+                                        </React.Fragment>
                                     ) : (null)
                                 }
                             </Grid>
