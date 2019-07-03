@@ -18,5 +18,9 @@ export default {
     createAd: {
         endpoint: 'ads',
         method: 'POST'
+    },
+    editAd: {
+        endpoint: 'ads/{adId}',
+        method: 'PUT'
     }
 }

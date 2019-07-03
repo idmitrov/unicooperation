@@ -6,14 +6,22 @@ import { withRouter } from 'react-router-dom';
 import {
     Button,
     Grid,
-    TextField
+    TextField,
+    IconButton,
+    Tooltip
 } from '@material-ui/core';
+
+
+import {
+    Save
+} from '@material-ui/icons';
 
 import '../app/App.scss';
 
 import {
     updateAdProp,
     createAd,
+    editAd,
     resetAdInstance,
     fetchAdInstance,
     setAdInstance,
@@ -53,8 +61,9 @@ class AdsInstanceView extends Component {
 
         const {
             ad,
-            account,
+            loggedInProfile,
             createAd,
+            editAd,
             applyToAd,
             cancelAdApplication,
             adPropChanged
@@ -91,30 +100,34 @@ class AdsInstanceView extends Component {
                                 />
                             </Grid>
 
-                            <Grid item xs={12} style={{marginTop: 15}}>
+                            <Grid item xs="auto" style={{marginTop: 15}}>
 
                                 {
                                     isEditing ? (
-                                        <Button
-                                            onClick={() => createAd(ad)}
-                                            disabled={!ad.title || !ad.content}>
-                                            <Trans>ads.instance.edit.button.label</Trans>
-                                        </Button>
+                                        <Tooltip title={<Trans>ads.instance.edit.button.label</Trans>}>
+                                            <div>
+                                                <IconButton disabled={!ad.title || !ad.content} onClick={() => editAd(ad)}>
+                                                    <Save />
+                                                </IconButton>
+                                            </div>
+                                        </Tooltip>
                                     ) : (null)
                                 }
 
                                 {
                                     isCreation ? (
-                                        <Button
-                                            onClick={() => createAd(ad)}
-                                            disabled={!ad.title || !ad.content}>
-                                            <Trans>ads.instance.create.button.label</Trans>
-                                        </Button>
+                                        <Tooltip title={<Trans>ads.instance.create.button.label</Trans>}>
+                                            <div>
+                                                <IconButton disabled={!ad.title || !ad.content} onClick={() => createAd(ad)}>
+                                                    <Save />
+                                                </IconButton>
+                                            </div>
+                                        </Tooltip>
                                     ) : (null)
                                 }
 
                                 {
-                                    isReadonly ? (
+                                    isReadonly && loggedInProfile !== ad.author ? (
                                         ad.applied ? (
                                             <Button
                                                 onClick={() => cancelAdApplication(ad)}>
@@ -140,7 +153,7 @@ class AdsInstanceView extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        account: state.account,
+        loggedInProfile: state.account.profile,
         ad: state.ads.instance
     };
 }
@@ -166,6 +179,14 @@ const mapDispatchToProps = (dispatch) => {
             return dispatch(createAd(ad))
                 .then(() => {
                     history.push('/ads/list');
+                });
+        },
+        editAd(ad) {
+            return dispatch(editAd(ad))
+                .then((ad) => {
+                    history.push('/ads/list');
+
+                    return dispatch(updateAdsList(ad));
                 });
         },
         adPropChanged(e) {

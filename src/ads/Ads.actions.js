@@ -2,6 +2,7 @@ import adsEndpoints from './Ads.endpoints';
 
 export const adsActionTypes = {
     fetchMyAds: 'ADS_MINE_FETCH',
+    editAd: 'AD_EDIT',
     setAdsList: 'ADS_LIST_SET',
     updateAdsList: 'ADS_LIST_UPDATE',
     fetchAdInstance: 'AD_INSTNACE_FETCH',
@@ -89,6 +90,21 @@ export const createAd = (ad) => (dispatch) => {
         api: {
             endpoint: adsEndpoints.createAd.endpoint,
             method: adsEndpoints.createAd.method,
+        }
+    };
+
+    return dispatch(action);
+}
+
+export const editAd = (ad) => (dispatch) => {
+    const { title, content } = ad;
+
+    const action = {
+        type: adsActionTypes.editAd,
+        payload: { title, content },
+        api: {
+            endpoint: adsEndpoints.editAd.endpoint.replace('{adId}', ad._id),
+            method: adsEndpoints.editAd.method,
         }
     };
 
