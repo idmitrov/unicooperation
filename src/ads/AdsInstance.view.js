@@ -13,6 +13,7 @@ import {
 
 
 import {
+    Delete,
     Save
 } from '@material-ui/icons';
 
@@ -64,6 +65,7 @@ class AdsInstanceView extends Component {
             loggedInProfile,
             createAd,
             editAd,
+            deleteAd,
             applyToAd,
             cancelAdApplication,
             adPropChanged
@@ -100,17 +102,30 @@ class AdsInstanceView extends Component {
                                 />
                             </Grid>
 
-                            <Grid item xs="auto" style={{marginTop: 15}}>
-
+                            <Grid item xs={12} style={{marginTop: 15}}>
                                 {
                                     isEditing ? (
-                                        <Tooltip title={<Trans>ads.instance.edit.button.label</Trans>}>
-                                            <div>
-                                                <IconButton disabled={!ad.title || !ad.content} onClick={() => editAd(ad)}>
-                                                    <Save />
-                                                </IconButton>
-                                            </div>
-                                        </Tooltip>
+                                        <Grid container justify="space-between" alignItems="center">
+                                            <Grid item>
+                                                <Tooltip title={<Trans>ads.instance.delete.button.label</Trans>}>
+                                                    <div>
+                                                        <IconButton disabled={!ad.title || !ad.content} onClick={() => deleteAd(ad)}>
+                                                            <Delete />
+                                                        </IconButton>
+                                                    </div>
+                                                </Tooltip>
+                                            </Grid>
+
+                                            <Grid item>
+                                                <Tooltip title={<Trans>ads.instance.save.button.label</Trans>}>
+                                                    <div>
+                                                        <IconButton disabled={!ad.title || !ad.content} onClick={() => editAd(ad)}>
+                                                            <Save />
+                                                        </IconButton>
+                                                    </div>
+                                                </Tooltip>
+                                            </Grid>
+                                        </Grid>
                                     ) : (null)
                                 }
 
@@ -188,6 +203,10 @@ const mapDispatchToProps = (dispatch) => {
 
                     return dispatch(updateAdsList(ad));
                 });
+        },
+        deleteAd(ad) {
+            // TODO: Popup confirmation, then cancel or delete and redirect to ads list
+            console.error('Method not implemented');
         },
         adPropChanged(e) {
             const { name, value } = e.target;
