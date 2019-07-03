@@ -11,7 +11,6 @@ import {
     IconButton,
     Tooltip,
     Card,
-    CardContent,
     CardHeader
 } from '@material-ui/core';
 
