@@ -18,6 +18,8 @@ import {
     AddCircle
 } from '@material-ui/icons';
 
+import UniTitle from '../components/uni-title/UniTitle.component';
+
 import './PartnerDashboard.scss';
 import ProfileIntroCard from '../components/profile-intro-card/ProfileIntroCard.component';
 
@@ -60,9 +62,9 @@ class PartnerDashboardView extends Component {
                     <div className="page-row">
                         <Grid container>
                             <Grid item xs={true}>
-                                <Typography variant="h6">
+                                <UniTitle>
                                     <Trans>dashboard.matches.title</Trans>
-                                </Typography>
+                                </UniTitle>
                             </Grid>
                         </Grid>
 
@@ -128,19 +130,9 @@ class PartnerDashboardView extends Component {
                     <div className="page-row">
                         <Grid container alignItems="center" justify="space-between">
                             <Grid item xs={true}>
-                                <Typography variant="h6">
+                                <UniTitle>
                                     <Trans>dashboard.ads.title</Trans>
-                                </Typography>
-                            </Grid>
-
-                            <Grid item>
-                                <Link to="/ads/create">
-                                    <Tooltip title="Create ad">
-                                        <IconButton>
-                                            <AddCircle />
-                                        </IconButton>
-                                    </Tooltip>
-                                </Link>
+                                </UniTitle>
                             </Grid>
                         </Grid>
 
@@ -194,12 +186,24 @@ class PartnerDashboardView extends Component {
                                         </Grid>
                                     )
                                 }
+                            </Grid>
 
-                                <Grid item xs={12}>
+                            <Grid container style={{marginTop: 15}}>
+                                <Grid item xs={true}>
                                     <Link to="/ads/list">
                                         <Button variant="text">
                                             <Trans>dashboard.viewAll</Trans>
                                         </Button>
+                                    </Link>
+                                </Grid>
+
+                                <Grid item>
+                                    <Link to="/ads/create">
+                                        <Tooltip title="Create ad">
+                                            <IconButton>
+                                                <AddCircle />
+                                            </IconButton>
+                                        </Tooltip>
                                     </Link>
                                 </Grid>
                             </Grid>
