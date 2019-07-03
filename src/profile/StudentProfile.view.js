@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import { Trans } from 'react-i18next';
 
 import {
     Grid,
@@ -18,7 +19,7 @@ import {
     Cancel
 } from '@material-ui/icons';
 
-import { Trans } from 'react-i18next';
+import UniTitle from '../components/uni-title/UniTitle.component';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -161,9 +162,9 @@ class StudentProfileView extends Component {
                         <div className="profile-header-content">
                             {/* PERSONAL SECTION */}
                             <div className="page-row">
-                                <Typography className="profile-title" variant="h6">
+                                <UniTitle>
                                     <Trans>student.personal.label</Trans>
-                                </Typography>
+                                </UniTitle>
                             </div>
 
                             <div className="page-row">
@@ -211,9 +212,9 @@ class StudentProfileView extends Component {
 
                             {/* SOCIALS SECTION */}
                             <div className="page-row">
-                                <Typography className="profile-title" variant="h6">
+                                <UniTitle>
                                     <Trans>student.socials.label</Trans>
-                                </Typography>
+                                </UniTitle>
                             </div>
 
                             <div className="page-row">

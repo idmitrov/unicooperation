@@ -13,29 +13,6 @@
     border: solid 1px rgba(0, 0, 0, 0.23);
 }
 
-.profile-title {
-    display: flex !important;
-    align-items: center;
-
-    &:before {
-        content: '';
-        display: block;
-        height: 1px;
-        background: #000;
-        flex: .03;
-        margin-right: 10px;
-    }
-
-    &:after {
-        content: '';
-        display: block;
-        height: 1px;
-        background: #000;
-        flex: .97;
-        margin-left: 10px;
-    }
-}
-
 .profile-header {
     background: #fff;
     padding: 16px;

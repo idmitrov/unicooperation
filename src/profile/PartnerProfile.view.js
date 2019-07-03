@@ -11,6 +11,8 @@ import {
     Typography
 } from '@material-ui/core';
 
+import UniTitle from '../components/uni-title/UniTitle.component';
+
 import {
     Edit,
     Save,
@@ -154,9 +156,9 @@ class PartnerProfile extends Component {
                                 <div className="profile-header-content">
                                     {/* PERSONAL SECTION */}
                                     <div className="page-row">
-                                        <Typography className="profile-title" variant="h6">
+                                        <UniTitle>
                                             <Trans>student.personal.label</Trans>
-                                        </Typography>
+                                        </UniTitle>
                                     </div>
 
                                     <div className="page-row">
@@ -178,9 +180,9 @@ class PartnerProfile extends Component {
 
                                     {/* SOCIALS SECTION */}
                                     <div className="page-row">
-                                        <Typography className="profile-title" variant="h6">
+                                        <UniTitle>
                                             <Trans>student.socials.label</Trans>
-                                        </Typography>
+                                        </UniTitle>
                                     </div>
 
                                     <div className="page-row">

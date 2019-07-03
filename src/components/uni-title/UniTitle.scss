@@ -1,0 +1,22 @@
+.uni-title {
+    display: flex !important;
+    align-items: center;
+
+    &:before {
+        content: '';
+        display: block;
+        height: 1px;
+        background: #000;
+        flex: .03;
+        margin-right: 10px;
+    }
+
+    &:after {
+        content: '';
+        display: block;
+        height: 1px;
+        background: #000;
+        flex: .97;
+        margin-left: 10px;
+    }
+}
