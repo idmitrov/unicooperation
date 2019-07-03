@@ -3,6 +3,10 @@ export default {
         endpoint: 'ads/{adId}',
         method: 'GET'
     },
+    getAdApplications: {
+        endpoint: 'ads/candidates/{adId}',
+        method: 'GET'
+    },
     applyToAd: {
         endpoint: 'ads/apply',
         method: 'POST'

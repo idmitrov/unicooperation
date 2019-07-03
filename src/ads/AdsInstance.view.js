@@ -9,7 +9,10 @@ import {
     Grid,
     TextField,
     IconButton,
-    Tooltip
+    Tooltip,
+    Card,
+    CardContent,
+    CardHeader
 } from '@material-ui/core';
 
 
@@ -27,7 +30,9 @@ import {
     editAd,
     resetAdInstance,
     fetchAdInstance,
+    fetchAdInstanceApplicants,
     setAdInstance,
+    setAdInstanceApplicants,
     applyToAd,
     updateAdsList
 } from './Ads.actions';
@@ -69,6 +74,7 @@ class AdsInstanceView extends Component {
             editAd,
             deleteAd,
             applyToAd,
+            getAdInstanceApplicants,
             cancelAdApplication,
             adPropChanged
         } = this.props;
@@ -157,13 +163,13 @@ class AdsInstanceView extends Component {
                                                             {
                                                                 ad.applied ? (
                                                                     <Button
-                                                                        variant="raised"
+                                                                        variant="contained"
                                                                         onClick={() => cancelAdApplication(ad)}>
                                                                         <Trans>ads.instance.details.cancelApply.button.label</Trans>
                                                                     </Button>
                                                                 ) : (
                                                                     <Button
-                                                                        variant="raised"
+                                                                        variant="contained"
                                                                         disabled={ad.applied}
                                                                         onClick={() => applyToAd(ad)}>
                                                                         <Trans>ads.instance.details.apply.button.label</Trans>
@@ -173,26 +179,47 @@ class AdsInstanceView extends Component {
                                                         </Grid>
                                                     </Grid>
                                                 ) : (
-                                                    <Grid container alignItems="center" spacing={16}>
-                                                        <Grid item>
-                                                            <Avatar>
-                                                                <Assignment />
-                                                            </Avatar>
+                                                    <React.Fragment>
+                                                        <Grid container alignItems="center" spacing={16}>
+                                                            <Grid item>
+                                                                <Avatar>
+                                                                    <Assignment />
+                                                                </Avatar>
+                                                            </Grid>
+
+                                                            <Grid item>
+                                                                <Trans>ads.instance.applicationsTotal</Trans>: {ad.applicationsTotal || 0}
+                                                            </Grid>
+
+                                                            <Grid item xs={true}>
+                                                                <Button
+                                                                    variant="contained"
+                                                                    disabled={!ad.applicationsTotal}
+                                                                    fullWidth
+                                                                    onClick={() => getAdInstanceApplicants(ad._id)}>
+                                                                    <Trans>ads.instance.showApplicants.button.label</Trans>
+                                                                </Button>
+                                                            </Grid>
                                                         </Grid>
 
-                                                        <Grid item>
-                                                            Applications: {ad.applicationsTotal || 0}
+                                                        <Grid container spacing={16} alignItems="stretch" style={{marginTop: 15}}>
+                                                            {
+                                                                ad.candidates.map((candidate, index) => {
+                                                                    return (
+                                                                        <Grid item xs={12} sm={4} key={index}>
+                                                                            <Card>
+                                                                                <CardHeader
+                                                                                    title={candidate.firstName}
+                                                                                    subheader={candidate.title}
+                                                                                    avatar={<Avatar src={candidate.avatar} />}
+                                                                                />
+                                                                            </Card>
+                                                                        </Grid>
+                                                                    );
+                                                                })
+                                                            }
                                                         </Grid>
-
-                                                        <Grid item xs={true}>
-                                                            <Button
-                                                                variant="raised"
-                                                                disabled={!ad.applicationsTotal}
-                                                                fullWidth>
-                                                                Show applicants
-                                                            </Button>
-                                                        </Grid>
-                                                    </Grid>
+                                                    </React.Fragment>
                                                 )
                                             }
                                         </React.Fragment>
@@ -216,6 +243,12 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
+        getAdInstanceApplicants(adId) {
+            return dispatch(fetchAdInstanceApplicants(adId))
+                .then((applicants) => {
+                    return dispatch(setAdInstanceApplicants(applicants));
+                });
+        },
         applyToAd(ad) {
             return dispatch(applyToAd(ad._id))
                 .then((ad) => {

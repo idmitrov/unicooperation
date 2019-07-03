@@ -6,6 +6,8 @@ export const adsActionTypes = {
     setAdsList: 'ADS_LIST_SET',
     updateAdsList: 'ADS_LIST_UPDATE',
     fetchAdInstance: 'AD_INSTNACE_FETCH',
+    fetchAdInstanceApplicants: 'AD_INSTANCE_APPLICANTS_FETCH',
+    setAdInstanceApplicants: 'AD_INSTANCE_APPLICANTS_SET',
     setAdInstance: 'AD_INSTNACE_SET',
     setAdProp: 'AD_PROP_SET',
     resetAdInstance: 'AD_INSTANCE_RESET',
@@ -118,6 +120,27 @@ export const fetchAdInstance = (adId) => (dispatch) => {
             endpoint: adsEndpoints.getAd.endpoint.replace('{adId}', adId),
             method: adsEndpoints.getAd.method,
         }
+    };
+
+    return dispatch(action);
+}
+
+export const fetchAdInstanceApplicants = (adId) => (dispatch) => {
+    const action = {
+        type: adsActionTypes.fetchAdInstanceApplicants,
+        api: {
+            endpoint: adsEndpoints.getAdApplications.endpoint.replace('{adId}', adId),
+            method: adsEndpoints.getAdApplications.method,
+        }
+    };
+
+    return dispatch(action);
+};
+
+export const setAdInstanceApplicants = (applicants) => (dispatch) => {
+    const action = {
+        type: adsActionTypes.setAdInstanceApplicants,
+        payload: applicants
     };
 
     return dispatch(action);

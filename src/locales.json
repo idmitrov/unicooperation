@@ -9,6 +9,7 @@
             "account.register.label": "Register",
             "account.logout.label": "Logout",
             "ads.instance.applicationsTotal": "Applications",
+            "ads.instance.showApplicants.button.label": "Show applicants",
             "ads.instance.create.title.label": "Title",
             "ads.instance.create.content.label": "Content",
             "ads.instance.create.button.label": "Create",
