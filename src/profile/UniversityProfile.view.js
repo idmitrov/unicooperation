@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { Trans } from 'react-i18next';
@@ -116,7 +116,7 @@ class UniversityProfile extends Component {
                                                 </Tooltip>
                                             </Grid>
                                         ) : (
-                                            <React.Fragment>
+                                            <Fragment>
                                                 <Grid item>
                                                     <Tooltip title={<Trans>global.save</Trans>} placement="left">
                                                         <IconButton onClick={() => updateMyProfile(profile)}>
@@ -132,7 +132,7 @@ class UniversityProfile extends Component {
                                                         </IconButton>
                                                     </Tooltip>
                                                 </Grid>
-                                            </React.Fragment>
+                                            </Fragment>
                                         )
                                     }
                                 </Grid>

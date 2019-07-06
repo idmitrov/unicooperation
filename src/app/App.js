@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 
 import {
@@ -76,7 +76,7 @@ class App extends Component {
 
         return (
             <Router history={history}>
-                <React.Fragment>
+                <Fragment>
                     {
                         account.authenticated ? (
                             <AppBar position="sticky" color="inherit">
@@ -239,7 +239,7 @@ class App extends Component {
                             ) : (null)
                         }
                     </Drawer>
-                </React.Fragment>
+                </Fragment>
             </Router>
         );
     }

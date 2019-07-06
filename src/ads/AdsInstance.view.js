@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Trans } from 'react-i18next';
 import { withRouter } from 'react-router-dom';
@@ -152,7 +152,7 @@ class AdsInstanceView extends Component {
 
                                 {
                                     isReadonly ? (
-                                        <React.Fragment>
+                                        <Fragment>
                                             {
                                                 loggedInProfile !== ad.author ? (
                                                     <Grid container alignItems="center" justify="space-between">
@@ -180,7 +180,7 @@ class AdsInstanceView extends Component {
                                                         </Grid>
                                                     </Grid>
                                                 ) : (
-                                                    <React.Fragment>
+                                                    <Fragment>
                                                         <Grid container alignItems="center" spacing={16}>
                                                             <Grid item xs={true}>
                                                                 <Link to={`/ads/edit/${ad._id}`}>
@@ -223,10 +223,10 @@ class AdsInstanceView extends Component {
                                                                 })
                                                             }
                                                         </Grid>
-                                                    </React.Fragment>
+                                                    </Fragment>
                                                 )
                                             }
-                                        </React.Fragment>
+                                        </Fragment>
                                     ) : (null)
                                 }
                             </Grid>

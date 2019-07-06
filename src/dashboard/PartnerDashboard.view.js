@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Trans } from 'react-i18next';
@@ -89,7 +89,7 @@ class PartnerDashboardView extends Component {
                                                             </Trans>
                                                         }
                                                         actions={
-                                                            <React.Fragment>
+                                                            <Fragment>
                                                                     <Link to={`profile/${match.account.type}/${match._id}`}>
                                                                         <Tooltip title={<Trans>match.profile.view</Trans>}>
                                                                             <IconButton className="dashboard-grid-icon-button">
@@ -103,7 +103,7 @@ class PartnerDashboardView extends Component {
                                                                         <GroupWork className="dashboard-grid-icon" />
                                                                     </IconButton>
                                                                 </Tooltip>
-                                                            </React.Fragment>
+                                                            </Fragment>
                                                         }
                                                     />
                                                 </Grid>
@@ -154,7 +154,7 @@ class PartnerDashboardView extends Component {
                                                             <Trans>ads.list.item.intro</Trans>
                                                         }
                                                         actions={
-                                                            <React.Fragment>
+                                                            <Fragment>
                                                                 <Link to={`/ads/details/${adItem._id}`}>
                                                                     <Tooltip title={<Trans>ads.list.item.details</Trans>}>
                                                                         <IconButton className="dashboard-grid-icon-button">
@@ -174,7 +174,7 @@ class PartnerDashboardView extends Component {
                                                                         </Link>
                                                                     ) :(null)
                                                                 }
-                                                            </React.Fragment>
+                                                            </Fragment>
                                                         }
                                                     />
                                                 </Grid>

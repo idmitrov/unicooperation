@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Trans } from 'react-i18next';
@@ -69,7 +69,7 @@ class AdsListView extends Component {
                                                     <Trans>ads.list.item.intro</Trans>
                                                 }
                                                 actions={
-                                                    <React.Fragment>
+                                                    <Fragment>
                                                         <Link to={`/ads/details/${adItem._id}`}>
                                                             <Tooltip title={<Trans>ads.list.item.details</Trans>}>
                                                                 <IconButton className="ad-icon-button">
@@ -90,7 +90,7 @@ class AdsListView extends Component {
                                                                 </Link>
                                                             ) :(null)
                                                         }
-                                                    </React.Fragment>
+                                                    </Fragment>
                                                 }
                                             />
                                         </Grid>

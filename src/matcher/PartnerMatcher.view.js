@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Trans } from 'react-i18next';
 import { Link } from 'react-router-dom';
@@ -150,7 +150,7 @@ class MatcherView extends Component {
                                                                 </Trans>
                                                             }
                                                             actions={
-                                                                <React.Fragment>
+                                                                <Fragment>
                                                                     <Tooltip title={<Trans>match.profile.view</Trans>}>
                                                                         <Link to={`profile/${match.account.type}/${match._id}`}>
                                                                             <IconButton className="match-icon-button">
@@ -164,7 +164,7 @@ class MatcherView extends Component {
                                                                             <GroupWork className="match-icon" />
                                                                         </IconButton>
                                                                     </Tooltip>
-                                                                </React.Fragment>
+                                                                </Fragment>
                                                             }
                                                         />
                                                     </Grid>
