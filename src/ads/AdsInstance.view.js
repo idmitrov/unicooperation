@@ -5,14 +5,11 @@ import { withRouter } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
 import {
-    Avatar,
     Button,
     Grid,
     TextField,
     IconButton,
     Tooltip,
-    Card,
-    CardHeader,
     Zoom
 } from '@material-ui/core';
 
