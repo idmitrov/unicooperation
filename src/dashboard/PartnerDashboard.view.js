@@ -21,7 +21,7 @@ import {
 import UniTitle from '../components/uni-title/UniTitle.component';
 
 import './PartnerDashboard.scss';
-import ProfileIntroCard from '../components/intro-card/IntroCard.component';
+import UniIntroCard from '../components/uni-intro-card/UniIntroCard.component';
 
 import { getMatches, setMatches } from '../matcher/Matcher.actions';
 import { fetchMyAds, fetchMyUniversityPartnersAds, setAdsList } from '../ads/Ads.actions';
@@ -75,7 +75,7 @@ class PartnerDashboardView extends Component {
                                         matches.map((match, index) => {
                                             return (
                                                 <Grid item xs={12} sm={6} key={index}>
-                                                    <ProfileIntroCard
+                                                    <UniIntroCard
                                                         avatar={match.avatar}
                                                         title={match.firstName}
                                                         subtitle={match.title}
@@ -143,7 +143,7 @@ class PartnerDashboardView extends Component {
                                         ads.map((adItem, index) => {
                                             return (
                                                 <Grid item xs={12} sm={6} key={index}>
-                                                    <ProfileIntroCard
+                                                    <UniIntroCard
                                                         avatar={adItem.conver}
                                                         title={
                                                             adItem.title.length < 17

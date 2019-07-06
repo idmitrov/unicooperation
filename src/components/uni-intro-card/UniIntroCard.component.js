@@ -9,7 +9,7 @@ import {
     Zoom
 } from '@material-ui/core';
 
-import './IntroCard.scss';
+import './UniIntroCard.scss';
 
 export default (props) => {
     const {

@@ -29,7 +29,7 @@ import {
     setMatcherTitle
 } from './Matcher.actions';
 
-import ProfileIntroCard from '../components/profile-intro-card/ProfileIntroCard.component';
+import UniIntroCard from '../components/uni-intro-card/UniIntroCard.component';
 
 class MatcherView extends Component {
     constructor(props) {
@@ -136,7 +136,7 @@ class MatcherView extends Component {
                                             matches.map((match, index) => {
                                                 return(
                                                     <Grid item key={index} xs={12} sm={6}>
-                                                        <ProfileIntroCard
+                                                        <UniIntroCard
                                                             avatar={match.avatar}
                                                             title={match.firstName}
                                                             subtitle={match.title}
