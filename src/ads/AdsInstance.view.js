@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Trans } from 'react-i18next';
 import { withRouter } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import {
     Avatar,
@@ -11,14 +12,15 @@ import {
     IconButton,
     Tooltip,
     Card,
-    CardHeader
+    CardHeader,
+    Zoom
 } from '@material-ui/core';
 
 
 import {
-    Assignment,
     Delete,
-    Save
+    Save,
+    Edit
 } from '@material-ui/icons';
 
 import '../app/App.scss';
@@ -180,39 +182,42 @@ class AdsInstanceView extends Component {
                                                 ) : (
                                                     <React.Fragment>
                                                         <Grid container alignItems="center" spacing={16}>
-                                                            <Grid item>
-                                                                <Avatar>
-                                                                    <Assignment />
-                                                                </Avatar>
-                                                            </Grid>
-
-                                                            <Grid item>
-                                                                <Trans>ads.instance.applicationsTotal</Trans>: {ad.applicationsTotal || 0}
-                                                            </Grid>
-
                                                             <Grid item xs={true}>
+                                                                <Tooltip title={<Trans>ads.list.item.edit</Trans>}>
+                                                                    <Link to={`/ads/edit/${ad._id}`}>
+                                                                        <IconButton>
+                                                                            <Edit />
+                                                                        </IconButton>
+                                                                    </Link>
+                                                                </Tooltip>
+                                                            </Grid>
+
+                                                            <Grid item>
                                                                 <Button
                                                                     variant="contained"
                                                                     disabled={!ad.applicationsTotal}
                                                                     fullWidth
                                                                     onClick={() => getAdInstanceApplicants(ad._id)}>
-                                                                    <Trans>ads.instance.showApplicants.button.label</Trans>
+                                                                    <Trans>ads.instance.showApplicants.button.label</Trans> ({ad.applicationsTotal || 0})
                                                                 </Button>
                                                             </Grid>
                                                         </Grid>
+
 
                                                         <Grid container spacing={16} alignItems="stretch" style={{marginTop: 15}}>
                                                             {
                                                                 ad.candidates.map((candidate, index) => {
                                                                     return (
                                                                         <Grid item xs={12} sm={4} key={index}>
-                                                                            <Card>
-                                                                                <CardHeader
-                                                                                    title={candidate.firstName}
-                                                                                    subheader={candidate.title}
-                                                                                    avatar={<Avatar src={candidate.avatar} />}
-                                                                                />
-                                                                            </Card>
+                                                                            <Zoom in>
+                                                                                <Card>
+                                                                                    <CardHeader
+                                                                                        title={candidate.firstName}
+                                                                                        subheader={candidate.title}
+                                                                                        avatar={<Avatar src={candidate.avatar} />}
+                                                                                    />
+                                                                                </Card>
+                                                                            </Zoom>
                                                                         </Grid>
                                                                     );
                                                                 })
