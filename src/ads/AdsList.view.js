@@ -22,7 +22,7 @@ import {
     setAdsList
 } from './Ads.actions';
 
-import ProfileIntroCard from '../components/profile-intro-card/ProfileIntroCard.component';
+import IntroCard from '../components/intro-card/IntroCard.component';
 
 import { accountType } from '../account/Account.constants';
 
@@ -58,7 +58,7 @@ class AdsListView extends Component {
                                 ads.map((adItem, index) => {
                                     return (
                                         <Grid item xs={12} sm={6} key={index}>
-                                            <ProfileIntroCard
+                                            <IntroCard
                                                 avatar={adItem.conver}
                                                 title={
                                                     adItem.title.length < 17

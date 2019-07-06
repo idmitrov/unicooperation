@@ -21,7 +21,7 @@ import {
 import UniTitle from '../components/uni-title/UniTitle.component';
 
 import './PartnerDashboard.scss';
-import ProfileIntroCard from '../components/profile-intro-card/ProfileIntroCard.component';
+import ProfileIntroCard from '../components/intro-card/IntroCard.component';
 
 import { getMatches, setMatches } from '../matcher/Matcher.actions';
 import { fetchMyAds, fetchMyUniversityPartnersAds, setAdsList } from '../ads/Ads.actions';
