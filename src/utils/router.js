@@ -133,6 +133,7 @@ export const Routes = ({ account }) => {
             />
 
             <PrivateRoute
+                key="adEdit"
                 path="/ads/edit/:adId"
                 component={AdsInstanceView}
                 allowed={authenticated && account.type === accountType.partner}
@@ -141,6 +142,7 @@ export const Routes = ({ account }) => {
             />
 
             <PrivateRoute
+                key="adDetails"
                 path="/ads/details/:adDetailId"
                 component={AdsInstanceView}
                 allowed={authenticated && [accountType.partner, accountType.student].includes(account.type)}
