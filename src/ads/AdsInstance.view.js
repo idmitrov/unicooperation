@@ -183,13 +183,13 @@ class AdsInstanceView extends Component {
                                                     <React.Fragment>
                                                         <Grid container alignItems="center" spacing={16}>
                                                             <Grid item xs={true}>
-                                                                <Tooltip title={<Trans>ads.list.item.edit</Trans>}>
-                                                                    <Link to={`/ads/edit/${ad._id}`}>
-                                                                        <IconButton>
-                                                                            <Edit />
-                                                                        </IconButton>
-                                                                    </Link>
-                                                                </Tooltip>
+                                                                <Link to={`/ads/edit/${ad._id}`}>
+                                                                    <Tooltip title={<Trans>ads.list.item.edit</Trans>}>
+                                                                            <IconButton>
+                                                                                <Edit />
+                                                                            </IconButton>
+                                                                    </Tooltip>
+                                                                </Link>
                                                             </Grid>
 
                                                             <Grid item>
