@@ -235,11 +235,13 @@ class AdsInstanceView extends Component {
                                                                                                 </Tooltip>
                                                                                             </Link>
 
-                                                                                            <Tooltip title={<Trans>ads.instance.details.requestInterview</Trans>}>
-                                                                                                <IconButton className="dashboard-grid-icon-button">
-                                                                                                    <EventSeat className="dashboard-grid-icon" />
-                                                                                                </IconButton>
-                                                                                            </Tooltip>
+                                                                                            <Link to={`/interview/request?candidate=${candidate._id}&ad=${ad._id}`}>
+                                                                                                <Tooltip title={<Trans>ads.instance.details.requestInterview</Trans>}>
+                                                                                                    <IconButton className="dashboard-grid-icon-button">
+                                                                                                        <EventSeat className="dashboard-grid-icon" />
+                                                                                                    </IconButton>
+                                                                                                </Tooltip>
+                                                                                            </Link>
                                                                                         </Fragment>
                                                                                     }
                                                                                 />

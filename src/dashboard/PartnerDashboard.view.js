@@ -12,10 +12,10 @@ import {
 } from '@material-ui/core';
 
 import {
+    AddCircle,
     Edit,
-    GroupWork,
     Visibility,
-    AddCircle
+    GroupWork
 } from '@material-ui/icons';
 
 import UniTitle from '../components/uni-title/UniTitle.component';
@@ -90,17 +90,19 @@ class PartnerDashboardView extends Component {
                                                         }
                                                         actions={
                                                             <Fragment>
-                                                                    <Link to={`profile/${match.account.type}/${match._id}`}>
-                                                                        <Tooltip title={<Trans>match.profile.view</Trans>}>
-                                                                            <IconButton className="dashboard-grid-icon-button">
-                                                                                <Visibility className="dashboard-grid-icon" />
-                                                                            </IconButton>
-                                                                        </Tooltip>
-                                                                    </Link>
+                                                                <Link to={`profile/${match.account.type}/${match._id}`}>
+                                                                    <Tooltip title={<Trans>match.profile.view</Trans>}>
+                                                                        <IconButton className="dashboard-grid-icon-button">
+                                                                            <Visibility className="dashboard-grid-icon" />
+                                                                        </IconButton>
+                                                                    </Tooltip>
+                                                                </Link>
 
                                                                 <Tooltip title={<Trans>match.profile.invite</Trans>}>
                                                                     <IconButton className="dashboard-grid-icon-button">
-                                                                        <GroupWork className="dashboard-grid-icon" />
+                                                                        <GroupWork
+                                                                            className="dashboard-grid-icon"
+                                                                        />
                                                                     </IconButton>
                                                                 </Tooltip>
                                                             </Fragment>

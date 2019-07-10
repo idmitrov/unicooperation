@@ -8,6 +8,7 @@ import accountReducer from '../account/Account.reducer';
 import appReducer from '../app/App.reducer';
 import adsReducer from '../ads/Ads.reducer';
 import feedReducer from '../feed/Feed.reducer';
+import interviewReducer from '../interview/Interview.reducer';
 import matcherReducer from '../matcher/Matcher.reducer';
 import nomReducer from '../nomenclatures/Nom.reducer';
 import profileReducer from '../profile/Profile.reducer';
@@ -22,6 +23,7 @@ const allReducers = combineReducers({
     app: appReducer,
     ads: adsReducer,
     feed: feedReducer,
+    interview: interviewReducer,
     matcher: matcherReducer,
     nomenclatures: nomReducer,
     profile: profileReducer,

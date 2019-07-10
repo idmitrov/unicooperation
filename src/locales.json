@@ -50,7 +50,7 @@
             "global.shownFromToOfTotal": "Shown from {{from}} to {{to}} of total {{total}}",
             "match.profile.view": "View profile",
             "match.profile.interview": "Request interview",
-            "match.profile.invite": "Invite to project",
+            "match.profile.invite": "Invite to cooperation",
             "match.profile.intro": "Is {{profileName}} you'r next employee?",
             "partner.label": "Partner",
             "partner.name.label": "Display name",
