@@ -23,13 +23,16 @@ import UniTitle from '../components/uni-title/UniTitle.component';
 import './PartnerDashboard.scss';
 import UniIntroCard from '../components/uni-intro-card/UniIntroCard.component';
 
+import { accountType } from '../account/Account.constants';
 import { getMatches, setMatches } from '../matcher/Matcher.actions';
 import { fetchMyAds, fetchMyUniversityPartnersAds, setAdsList } from '../ads/Ads.actions';
-import { accountType } from '../account/Account.constants';
+import { fetchMineInterviews, setInterviewsList } from '../interview/Interview.actions';
 
 class PartnerDashboardView extends Component {
     constructor(props) {
         super(props);
+
+        this.props.getTopInterviews();
 
         switch (this.props.loggedInAccount.type) {
             case accountType.partner:
@@ -47,6 +50,7 @@ class PartnerDashboardView extends Component {
         const {
             matches,
             ads,
+            interviews,
             loggedInAccount
         } = this.props;
 
@@ -211,6 +215,89 @@ class PartnerDashboardView extends Component {
                             </Grid>
                         </div>
                     </div>
+
+                    <div className="page-row">
+                        <Grid container alignItems="center" justify="space-between">
+                            <Grid item xs={true}>
+                                <UniTitle>
+                                    <Trans>dashboard.interviews.title</Trans>
+                                </UniTitle>
+                            </Grid>
+                        </Grid>
+
+                        <div className="dashboard-grid">
+                            <Grid container spacing={16}>
+                                {
+                                    // TODO: LOCALIZE AND CHANGE ACTIONS
+                                    interviews.length ? (
+                                        interviews.map((interviewItem, index) => {
+                                            return (
+                                                <Grid item xs={12} sm={6} key={index}>
+                                                    <UniIntroCard
+                                                        title={
+                                                            interviewItem.title.length < 17
+                                                                ? interviewItem.title
+                                                                : `${interviewItem.title.substring(0, 17)}...`
+                                                        }
+                                                        hoverText={
+                                                            <Trans>ads.list.item.intro</Trans>
+                                                        }
+                                                        actions={
+                                                            <Fragment>
+                                                                <Link to={`/interview/details/${interviewItem._id}`}>
+                                                                    <Tooltip title={<Trans>ads.list.item.details</Trans>}>
+                                                                        <IconButton className="dashboard-grid-icon-button">
+                                                                            <Visibility className="dashboard-grid-icon" />
+                                                                        </IconButton>
+                                                                    </Tooltip>
+                                                                </Link>
+                                                                {
+                                                                    loggedInAccount.type === accountType.partner &&
+                                                                    loggedInAccount.profile === interviewItem.interviewer ? (
+                                                                        <Link to={`/interview/edit/${interviewItem._id}`}>
+                                                                            <Tooltip title={<Trans>ads.list.item.edit</Trans>}>
+                                                                                <IconButton className="dashboard-grid-icon-button">
+                                                                                    <Edit className="dashboard-grid-icon" />
+                                                                                </IconButton>
+                                                                            </Tooltip>
+                                                                        </Link>
+                                                                    ) :(null)
+                                                                }
+                                                            </Fragment>
+                                                        }
+                                                    />
+                                                </Grid>
+                                            )
+                                        })
+                                    ) : (
+                                        <Grid item xs={12}>
+                                            <Trans>dashboard.interviews.noData</Trans>
+                                        </Grid>
+                                    )
+                                }
+                            </Grid>
+
+                            <Grid container style={{marginTop: 15}}>
+                                <Grid item xs={true}>
+                                    <Link to="/interview/list">
+                                        <Button variant="text">
+                                            <Trans>dashboard.viewAll</Trans>
+                                        </Button>
+                                    </Link>
+                                </Grid>
+
+                                <Grid item>
+                                    <Link to="/interview">
+                                        <Tooltip title="Create interview">
+                                            <IconButton>
+                                                <AddCircle />
+                                            </IconButton>
+                                        </Tooltip>
+                                    </Link>
+                                </Grid>
+                            </Grid>
+                        </div>
+                    </div>
                 </Grid>
             </Grid>
         )
@@ -221,12 +308,19 @@ const mapStateToProps = (state) => {
     return {
         loggedInAccount: state.account,
         matches: state.matcher.matches.slice(0, 2),
+        interviews: state.interview.list.slice(0, 2),
         ads: state.ads.list.slice(0, 2)
     };
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
+        getTopInterviews() {
+            return dispatch(fetchMineInterviews())
+                .then((interviews) => {
+                    return dispatch(setInterviewsList(interviews));
+                });
+        },
         getTopAds() {
             return dispatch(fetchMyAds())
                 .then((ads) => {

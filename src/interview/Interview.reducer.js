@@ -7,6 +7,12 @@ const interviewDefaults = {
 
 export default (state = interviewDefaults, action = {}) => {
     switch (action.type) {
+        case interviewActionTypes.setInterviewsList: {
+            return {
+                ...state,
+                ...action.payload
+            }
+        }
         case interviewActionTypes.changeInterviewProp: {
             return {
                 ...state,

@@ -1,4 +1,8 @@
 export default {
+    mine: {
+        endpoint: 'interview/mine',
+        method: 'GET'
+    },
     get: {
         endpoint: 'interview/{id}',
         method: 'GET'
