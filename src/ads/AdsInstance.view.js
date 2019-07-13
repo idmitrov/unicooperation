@@ -208,48 +208,51 @@ class AdsInstanceView extends Component {
 
                                                         <Grid container spacing={16} alignItems="stretch" style={{marginTop: 15}}>
                                                             {
-                                                                ad.candidates.map((candidate, index) => {
-                                                                    // TODO: Replace Trans keys
-                                                                    return (
-                                                                        <Grid item xs={12} sm={6} key={index}>
-                                                                            <Zoom in>
-                                                                                <UniIntroCard
-                                                                                    avatar={candidate.avatar}
-                                                                                    title={candidate.firstName}
-                                                                                    subtitle={candidate.title}
-                                                                                    hoverText={
-                                                                                        <Trans values={{
-                                                                                            profileName: candidate.firstName.length < 15
-                                                                                                ? candidate.firstName
-                                                                                                : `${candidate.firstName.substring(0, 14)}...`
-                                                                                        }}>
-                                                                                            match.profile.intro
-                                                                                        </Trans>
-                                                                                    }
-                                                                                    actions={
-                                                                                        <Fragment>
-                                                                                            <Link to={`/profile/student/${candidate._id}`}>
-                                                                                                <Tooltip title={<Trans>match.profile.view</Trans>}>
-                                                                                                    <IconButton className="dashboard-grid-icon-button">
-                                                                                                        <Visibility className="dashboard-grid-icon" />
-                                                                                                    </IconButton>
-                                                                                                </Tooltip>
-                                                                                            </Link>
+                                                                ad.candidates ? (
 
-                                                                                            <Link to={`/interview/request?candidate=${candidate._id}&ad=${ad._id}`}>
-                                                                                                <Tooltip title={<Trans>ads.instance.details.requestInterview</Trans>}>
-                                                                                                    <IconButton className="dashboard-grid-icon-button">
-                                                                                                        <EventSeat className="dashboard-grid-icon" />
-                                                                                                    </IconButton>
-                                                                                                </Tooltip>
-                                                                                            </Link>
-                                                                                        </Fragment>
-                                                                                    }
-                                                                                />
-                                                                            </Zoom>
-                                                                        </Grid>
-                                                                    );
-                                                                })
+                                                                    ad.candidates.map((candidate, index) => {
+                                                                        // TODO: Replace Trans keys
+                                                                        return (
+                                                                            <Grid item xs={12} sm={6} key={index}>
+                                                                                <Zoom in>
+                                                                                    <UniIntroCard
+                                                                                        avatar={candidate.avatar}
+                                                                                        title={candidate.firstName}
+                                                                                        subtitle={candidate.title}
+                                                                                        hoverText={
+                                                                                            <Trans values={{
+                                                                                                profileName: candidate.firstName.length < 15
+                                                                                                    ? candidate.firstName
+                                                                                                    : `${candidate.firstName.substring(0, 14)}...`
+                                                                                            }}>
+                                                                                                match.profile.intro
+                                                                                            </Trans>
+                                                                                        }
+                                                                                        actions={
+                                                                                            <Fragment>
+                                                                                                <Link to={`/profile/student/${candidate._id}`}>
+                                                                                                    <Tooltip title={<Trans>match.profile.view</Trans>}>
+                                                                                                        <IconButton className="dashboard-grid-icon-button">
+                                                                                                            <Visibility className="dashboard-grid-icon" />
+                                                                                                        </IconButton>
+                                                                                                    </Tooltip>
+                                                                                                </Link>
+
+                                                                                                <Link to={`/interview/request?candidate=${candidate._id}&ad=${ad._id}`}>
+                                                                                                    <Tooltip title={<Trans>ads.instance.details.requestInterview</Trans>}>
+                                                                                                        <IconButton className="dashboard-grid-icon-button">
+                                                                                                            <EventSeat className="dashboard-grid-icon" />
+                                                                                                        </IconButton>
+                                                                                                    </Tooltip>
+                                                                                                </Link>
+                                                                                            </Fragment>
+                                                                                        }
+                                                                                    />
+                                                                                </Zoom>
+                                                                            </Grid>
+                                                                        );
+                                                                    })
+                                                                ) : (null)
                                                             }
                                                         </Grid>
                                                     </Fragment>
