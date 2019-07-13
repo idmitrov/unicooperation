@@ -4,7 +4,7 @@ const getInterview = (state) => state.interview.instance;
 
 export const selectInterviewMode = createSelector(
     getInterview,
-    (interview) => interview._id && interview._id !== null && interview._id !== undefined
+    (interview) => interview && interview._id
 )
 
 export const selectInterview = createSelector(
