@@ -12,6 +12,8 @@ import {
     requestInterview
 } from './Interview.actions';
 
+import { selectInterview, selectInterviewMode } from './Interview.selector';
+
 class InterviewView extends Component {
     constructor(props) {
         super(props);
@@ -19,9 +21,10 @@ class InterviewView extends Component {
         const { interviewId } = this.props.match.params;
 
         if (interviewId) {
-            const { interviewId } = this.props.match.params;
             this.props.fetchInterview(interviewId);
         } else {
+            this.props.changeInterviewProp({ _id: null});
+
             const queryString = this.props.history.location.search;
 
             if (queryString) {
@@ -32,8 +35,7 @@ class InterviewView extends Component {
                 if (candidateId && adId) {
                     this.props.changeInterviewProp({
                         applicant: candidateId,
-                        ad: adId,
-                        _id: null
+                        ad: adId
                     });
                 }
             }
@@ -43,6 +45,7 @@ class InterviewView extends Component {
     render() {
         const {
             interview,
+            isEditMode,
             requestInterview
         } = this.props;
 
@@ -51,7 +54,7 @@ class InterviewView extends Component {
                 <Grid container justify="center" alignItems="flex-start">
                     <Grid item xs={12} md={6} lg={4}>
                         {
-                            interview._id || interview.id ? (
+                            isEditMode ? (
                                 <Fragment>
                                     <h2>Edit interview</h2>
                                 </Fragment>
@@ -71,7 +74,8 @@ class InterviewView extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        interview: state.interview.instance
+        isEditMode: selectInterviewMode(state),
+        interview: selectInterview(state)
     };
 }
 
