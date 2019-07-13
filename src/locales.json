@@ -17,7 +17,7 @@
             "ads.instance.delete.button.label": "Delete ad",
             "ads.instance.save.button.label": "Save ad changes",
             "ads.instance.details.apply.button.label": "Apply to ad",
-            "ads.instance.details.cancelApply.button.label": "Reject application",
+            "ads.instance.details.cancelApply.button.label": "Cancel application",
             "ads.instance.details.requestInterview": "Request interview",
             "ads.list.item.apply": "Apply",
             "ads.list.item.intro": "Take an action",
