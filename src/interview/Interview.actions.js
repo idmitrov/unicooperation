@@ -2,24 +2,38 @@ import interviewEndpoints from './Interview.endpoints';
 
 export const interviewActionTypes = {
     fetchInterview: 'INTERVIEW_FETCH',
+    saveInterview: 'INTERVIEW_SAVE',
     setInterview: 'INTERVIEW_SET',
     changeInterviewProp: 'INTERVIEW_PROP_SET',
     fetchMineInterviews: 'INTERVIEW_MINE_FETCH',
     setInterviewsList: 'INTERVIEW_LIST_SET'
 };
 
-export const requestInterview = (candidateId, adId, scheduledDate, title=`Interview ${new Date()}`) => (dispatch) => {
-    // TODO: Make title required after ui implementation for it
-    const payload = {
-        ad: adId,
-        applicant: candidateId,
-        scheduledDate,
-        title
+export const saveInterview = (interview) => (dispatch) => {
+    if (!interview.scheduledDate) {
+        interview.scheduledDate = new Date();
+    }
+
+    const action = {
+        type: interviewActionTypes.saveInterview,
+        payload: { interview },
+        api: {
+            endpoint: interviewEndpoints.save.endpoint,
+            method: interviewEndpoints.save.method
+        }
     };
+
+    return dispatch(action);
+}
+
+export const requestInterview = (interviewData) => (dispatch) => {
+    if (!interviewData.scheduledDate) {
+        interviewData.scheduledDate = new Date();
+    }
 
     const action = {
         type: interviewActionTypes.fetchInterview,
-        payload,
+        payload: interviewData,
         api: {
             endpoint: interviewEndpoints.request.endpoint,
             method: interviewEndpoints.request.method

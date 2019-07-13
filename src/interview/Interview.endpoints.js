@@ -10,5 +10,9 @@ export default {
     request: {
         endpoint: 'interview/request',
         method: 'POST'
+    },
+    save: {
+        endpoint: 'interview/request',
+        method: 'PUT'
     }
 }

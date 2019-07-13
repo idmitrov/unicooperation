@@ -25,7 +25,7 @@ export default (state = interviewDefaults, action = {}) => {
         case interviewActionTypes.setInterview: {
             return {
                 ...state,
-                instance: action.payload
+                instance: action.payload || interviewDefaults.instance
             };
         }
         default: return state;
