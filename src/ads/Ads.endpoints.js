@@ -11,6 +11,10 @@ export default {
         endpoint: 'ads/apply',
         method: 'POST'
     },
+    cancelAdApplication: {
+        endpoint: 'ads/cancel',
+        method: 'POST'
+    },
     getMyUniversityAds: {
         endpoint: 'ads',
         method: 'GET'

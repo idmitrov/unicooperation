@@ -36,6 +36,7 @@ import {
     setAdInstance,
     setAdInstanceApplicants,
     applyToAd,
+    cancelAdApplication,
     updateAdsList
 } from './Ads.actions';
 
@@ -288,7 +289,10 @@ const mapDispatchToProps = (dispatch) => {
                 });
         },
         cancelAdApplication(ad) {
-            console.error('METHOD NOT IMPLEMENTED');
+            return dispatch(cancelAdApplication(ad._id))
+                .then((ad) => {
+                    return dispatch(setAdInstance(ad));
+                });
         },
         getAdInstance(adId) {
             return dispatch(fetchAdInstance(adId))

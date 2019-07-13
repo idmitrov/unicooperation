@@ -1,6 +1,8 @@
 import adsEndpoints from './Ads.endpoints';
 
 export const adsActionTypes = {
+    applyToAd: 'AD_APPLY',
+    cancelAdApplication: 'AD_CANCEL_APPLICATION',
     fetchMyAds: 'ADS_MINE_FETCH',
     editAd: 'AD_EDIT',
     setAdsList: 'ADS_LIST_SET',
@@ -14,9 +16,22 @@ export const adsActionTypes = {
     fetchMyUniversityAds: 'ADS_UNIVERSITY_MINE_FETCH'
 };
 
+export const cancelAdApplication = (adId) => (dispatch) => {
+    const action = {
+        type: adsActionTypes.cancelAdApplication,
+        payload: {adId},
+        api: {
+            endpoint: adsEndpoints.cancelAdApplication.endpoint,
+            method: adsEndpoints.cancelAdApplication.method
+        }
+    };
+
+    return dispatch(action);
+}
+
 export const applyToAd = (adId) => (dispatch) => {
     const action = {
-        type: adsActionTypes.fetchMyUniversityAds,
+        type: adsActionTypes.applyToAd,
         payload: {adId},
         api: {
             endpoint: adsEndpoints.applyToAd.endpoint,

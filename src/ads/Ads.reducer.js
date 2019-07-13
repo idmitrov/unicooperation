@@ -25,10 +25,7 @@ export default (state = adsDefautls, action = {}) => {
         case adsActionTypes.setAdInstance: {
             return {
                 ...state,
-                instance: {
-                    ...state.instance,
-                    ...action.payload
-                }
+                instance: action.payload
             }
         }
         case adsActionTypes.resetAdInstance: {
