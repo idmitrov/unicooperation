@@ -134,7 +134,7 @@ export const Routes = ({ account }) => {
             />
 
             <PrivateRoute
-                key="adEdit"
+                key="ad-edit"
                 path="/ads/edit/:adId"
                 component={AdsInstanceView}
                 allowed={authenticated && account.type === accountType.partner}
@@ -143,7 +143,7 @@ export const Routes = ({ account }) => {
             />
 
             <PrivateRoute
-                key="adDetails"
+                key="ad-details"
                 path="/ads/details/:adDetailId"
                 component={AdsInstanceView}
                 allowed={authenticated && [accountType.partner, accountType.student].includes(account.type)}
@@ -152,7 +152,17 @@ export const Routes = ({ account }) => {
             />
 
             <PrivateRoute
+                key="interview-request"
                 path="/interview/request"
+                component={InterviewView}
+                allowed={authenticated && [accountType.partner].includes(account.type)}
+                exact
+                strict
+            />
+
+            <PrivateRoute
+                key="interview-edit"
+                path="/interview/edit/:interviewId"
                 component={InterviewView}
                 allowed={authenticated && [accountType.partner].includes(account.type)}
                 exact

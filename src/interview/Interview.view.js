@@ -1,5 +1,9 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
+
+import {
+    Grid
+} from '@material-ui/core';
 
 import {
     fetchInterview,
@@ -11,24 +15,28 @@ import {
 class InterviewView extends Component {
     constructor(props) {
         super(props);
-        const queryString = this.props.history.location.search;
 
-        if (queryString) {
-            const params = new URLSearchParams(queryString);
-            const candidateId = params.get('candidate');
-            const adId = params.get('ad');
+        const { interviewId } = this.props.match.params;
 
-            if (candidateId && adId) {
-                this.props.changeInterviewProp({
-                    applicant: candidateId,
-                    ad: adId
-                });
-            }
-            // REQUEST
+        if (interviewId) {
+            const { interviewId } = this.props.match.params;
+            this.props.fetchInterview(interviewId);
         } else {
-            // EDIT
-            // const { interviewId } = this.props.match.params;
-            // this.props.fetchInterview(interviewId);
+            const queryString = this.props.history.location.search;
+
+            if (queryString) {
+                const params = new URLSearchParams(queryString);
+                const candidateId = params.get('candidate');
+                const adId = params.get('ad');
+
+                if (candidateId && adId) {
+                    this.props.changeInterviewProp({
+                        applicant: candidateId,
+                        ad: adId,
+                        _id: null
+                    });
+                }
+            }
         }
     }
 
@@ -39,10 +47,23 @@ class InterviewView extends Component {
         } = this.props;
 
         return (
-            <div>
-                <h2>Interview {interview._id}</h2>
-
-                <button onClick={() => requestInterview(interview.applicant, interview.ad, new Date())}>Request interview</button>
+            <div className="page-row">
+                <Grid container justify="center" alignItems="flex-start">
+                    <Grid item xs={12} md={6} lg={4}>
+                        {
+                            interview._id || interview.id ? (
+                                <Fragment>
+                                    <h2>Edit interview</h2>
+                                </Fragment>
+                            ) : (
+                                <Fragment>
+                                    <h2>Request interview</h2>
+                                    <button onClick={() => requestInterview(interview.applicant, interview.ad, new Date())}>Request interview</button>
+                                </Fragment>
+                            )
+                        }
+                    </Grid>
+                </Grid>
             </div>
         )
     }
