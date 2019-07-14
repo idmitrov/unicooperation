@@ -5,6 +5,8 @@ import {
     Grid, TextField
 } from '@material-ui/core';
 
+import { DateTimePicker } from '@material-ui/pickers';
+
 import {
     fetchInterview,
     setInterview,
@@ -58,13 +60,25 @@ class InterviewView extends Component {
             <div className="page-row">
                 <Grid container justify="center" alignItems="flex-start">
                     <Grid item xs={12} md={6} lg={4}>
-                        <Grid container>
-                            <Grid item xs={12}>
+                        <Grid container spacing={2}>
+                            <Grid item xs={6}>
                                 <TextField
                                     label="Title"
                                     value={interview.title || ''}
                                     fullWidth
                                     onChange={(e) => changeInterviewProp({ title: e.target.value })}
+                                />
+                            </Grid>
+
+                            <Grid item xs={6}>
+                                <DateTimePicker
+                                    label="Date"
+                                    autoOk
+                                    ampm={false}
+                                    disablePast
+                                    value={interview.scheduledDate}
+                                    onChange={(e) => changeInterviewProp({ scheduledDate: e._d })}
+                                    fullWidth
                                 />
                             </Grid>
 
