@@ -108,7 +108,7 @@ class PartnerProfile extends Component {
                         </div>
 
                         {/* PROFILE HEADER AVATAR */}
-                        <Grid container spacing={16} alignItems="center">
+                        <Grid container spacing={2} alignItems="center">
                             <Grid item>
                                 <div className="profile-avatar">
                                     <div className={`profile-avatar-image ${profile.isReadonly ? 'readonly' : ''}`}>
@@ -162,7 +162,7 @@ class PartnerProfile extends Component {
                                     </div>
 
                                     <div className="page-row">
-                                        <Grid container spacing={16}>
+                                        <Grid container spacing={2}>
                                             {/* FIRST NAME */}
                                             <Grid item xs={12}>
                                                 <TextField

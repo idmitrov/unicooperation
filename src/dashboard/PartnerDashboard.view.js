@@ -81,7 +81,7 @@ class PartnerDashboardView extends Component {
                         </Grid>
 
                         <div className="dashboard-grid">
-                            <Grid container spacing={16}>
+                            <Grid container spacing={2}>
                                 {
                                     matches.length ? (
                                         matches.map((match, index) => {
@@ -151,7 +151,7 @@ class PartnerDashboardView extends Component {
                         </Grid>
 
                         <div className="dashboard-grid">
-                            <Grid container spacing={16}>
+                            <Grid container spacing={2}>
                                 {
                                     ads.length ? (
                                         ads.map((adItem, index) => {
@@ -234,7 +234,7 @@ class PartnerDashboardView extends Component {
                         </Grid>
 
                         <div className="dashboard-grid">
-                            <Grid container spacing={16}>
+                            <Grid container spacing={2}>
                                 {
                                     // TODO: LOCALIZE AND CHANGE ACTIONS
                                     interviews.length ? (

@@ -183,7 +183,7 @@ class AdsInstanceView extends Component {
                                                     </Grid>
                                                 ) : (
                                                     <Fragment>
-                                                        <Grid container alignItems="center" spacing={16}>
+                                                        <Grid container alignItems="center" spacing={2}>
                                                             <Grid item xs={true}>
                                                                 <Link to={`/ads/edit/${ad._id}`}>
                                                                     <Tooltip title={<Trans>ads.list.item.edit</Trans>}>
@@ -206,7 +206,7 @@ class AdsInstanceView extends Component {
                                                         </Grid>
 
 
-                                                        <Grid container spacing={16} alignItems="stretch" style={{marginTop: 15}}>
+                                                        <Grid container spacing={2} alignItems="stretch" style={{marginTop: 15}}>
                                                             {
                                                                 ad.candidates ? (
 

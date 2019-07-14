@@ -69,7 +69,7 @@ class MatcherView extends Component {
                             }}>
                                 <div className={`bar-input ${this.state.isInputExpanded ? 'expanded' : ''}`}>
                                     <div className="bar-input-inner">
-                                        <Grid container alignItems="center" spacing={16}>
+                                        <Grid container alignItems="center" spacing={2}>
                                             <Grid item xs={4}>
                                                 <TextField
                                                     type="number"
@@ -131,7 +131,7 @@ class MatcherView extends Component {
                         {
                             matches && matches.length ? (
                                 <div className="matches-grid page-row">
-                                    <Grid container spacing={16} alignItems="stretch">
+                                    <Grid container spacing={2} alignItems="stretch">
                                         {
                                             matches.map((match, index) => {
                                                 return(

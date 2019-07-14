@@ -189,7 +189,7 @@ class App extends Component {
                                     </List>
 
                                     <div id="search-meta">
-                                        <Grid container justify="center" alignItems="center" spacing={16}>
+                                        <Grid container justify="center" alignItems="center" spacing={2}>
                                             <Grid item>
                                                 <IconButton
                                                     disabled={search.currentPage <= 1}

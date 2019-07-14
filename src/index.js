@@ -3,7 +3,10 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 
 import './utils/i18n';
-import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import { createMuiTheme } from '@material-ui/core/styles';
+import { ThemeProvider } from '@material-ui/styles';
+import { MuiPickersUtilsProvider } from '@material-ui/pickers';
+import MomentUtils from '@date-io/moment';
 
 import store from './utils/store';
 import App from './app/App';
@@ -27,11 +30,13 @@ const theme = createMuiTheme({
 });
 
 ReactDOM.render(
-    <MuiThemeProvider theme={theme}>
-        <Provider store={store}>
-            <App />
-        </Provider>
-    </MuiThemeProvider>,
+    <ThemeProvider theme={theme}>
+        <MuiPickersUtilsProvider utils={MomentUtils}>
+            <Provider store={store}>
+                <App />
+            </Provider>
+        </MuiPickersUtilsProvider>
+    </ThemeProvider>,
     document.getElementById('root')
 );
 
