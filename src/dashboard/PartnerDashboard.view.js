@@ -28,6 +28,14 @@ import { getMatches, setMatches } from '../matcher/Matcher.actions';
 import { fetchMyAds, fetchMyUniversityPartnersAds, setAdsList } from '../ads/Ads.actions';
 import { fetchMineInterviews, setInterviewsList } from '../interview/Interview.actions';
 
+import { selectAccount } from '../account/Account.selector';
+
+import {
+    selectTopInterviews,
+    selectTopAds,
+    selectoTopMatches
+} from './Dashboard.selector';
+
 class PartnerDashboardView extends Component {
     constructor(props) {
         super(props);
@@ -306,10 +314,10 @@ class PartnerDashboardView extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        loggedInAccount: state.account,
-        matches: state.matcher.matches.slice(0, 2),
-        interviews: state.interview.list.slice(0, 2),
-        ads: state.ads.list.slice(0, 2)
+        loggedInAccount: selectAccount(state),
+        matches: selectoTopMatches(state),
+        interviews: selectTopInterviews(state),
+        ads: selectTopAds(state)
     };
 }
 
