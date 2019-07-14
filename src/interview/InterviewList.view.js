@@ -67,8 +67,8 @@ class InterviewListView extends Component {
 
                                                             {
                                                                 loggedInAccount.type === accountType.partner &&
-                                                                loggedInAccount.profile === interview.author ? (
-                                                                    <Link to={`/ads/edit/${interview._id}`}>
+                                                                loggedInAccount.profile === interview.interviewer ? (
+                                                                    <Link to={`/interview/edit/${interview._id}`}>
                                                                         <Tooltip title={<Trans>ads.list.item.edit</Trans>}>
                                                                             <IconButton className="ad-icon-button">
                                                                                 <Edit className="ad-icon" />
