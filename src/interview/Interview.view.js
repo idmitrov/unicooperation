@@ -1,9 +1,15 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 
 import {
-    Grid, TextField
+    Grid,
+    IconButton,
+    TextField
 } from '@material-ui/core';
+
+import {
+    Save, Delete
+} from '@material-ui/icons';
 
 import { DateTimePicker } from '@material-ui/pickers';
 
@@ -107,18 +113,34 @@ class InterviewView extends Component {
                                 />
                             </Grid>
 
-                            <Grid item>
-                                {
-                                    isRedaction ? (
-                                        <button onClick={() => saveInterview(interview)}>Save interview</button>
-                                    ) : (null)
-                                }
+                            <Grid item xs={12} style={{marginTop: 15}}>
+                                <Grid container justify="space-between">
+                                    {
+                                        isRedaction ? (
+                                            <Fragment>
+                                                <Grid item>
+                                                    <IconButton>
+                                                        <Delete />
+                                                    </IconButton>
+                                                </Grid>
 
-                                {
-                                    isCreation ? (
-                                        <button onClick={() => requestInterview(interview)}>Request interview</button>
-                                    ) : (null)
-                                }
+                                                <Grid item>
+                                                    <IconButton onClick={() => saveInterview(interview)}>
+                                                        <Save/>
+                                                    </IconButton>
+                                                </Grid>
+                                            </Fragment>
+                                        ) : (null)
+                                    }
+
+                                    {
+                                        isCreation ? (
+                                            <Grid item>
+                                                <button onClick={() => requestInterview(interview)}>Request interview</button>
+                                            </Grid>
+                                        ) : (null)
+                                    }
+                                </Grid>
                             </Grid>
                         </Grid>
                     </Grid>
