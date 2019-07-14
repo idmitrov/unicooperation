@@ -81,7 +81,8 @@ class InterviewView extends Component {
                                     label="Date"
                                     autoOk
                                     ampm={false}
-                                    disabled={isReadonlyMode}
+                                    InputProps={{ readOnly: isReadonlyMode }}
+                                    DialogProps={{ hidden: isReadonlyMode }}
                                     value={interview.scheduledDate}
                                     onChange={(e) => {
                                         if (isEditMode && !isReadonlyMode) {
