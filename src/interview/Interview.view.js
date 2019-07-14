@@ -11,6 +11,8 @@ import {
     Save, Delete
 } from '@material-ui/icons';
 
+import { grid } from '../app/App.constants';
+
 import { DateTimePicker } from '@material-ui/pickers';
 
 import {
@@ -73,7 +75,7 @@ class InterviewView extends Component {
             <div className="page-row">
                 <Grid container justify="center" alignItems="flex-start">
                     <Grid item xs={12} md={6} lg={4}>
-                        <Grid container>
+                        <Grid container spacing={grid.spacing}>
                             <Grid item xs={6}>
                                 <TextField
                                     label="Title"
