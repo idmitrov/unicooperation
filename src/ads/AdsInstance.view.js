@@ -143,13 +143,17 @@ class AdsInstanceView extends Component {
 
                                 {
                                     isCreation ? (
-                                        <Tooltip title={<Trans>ads.instance.create.button.label</Trans>}>
-                                            <div>
-                                                <IconButton disabled={!ad.title || !ad.content} onClick={() => createAd(ad)}>
-                                                    <Save />
-                                                </IconButton>
-                                            </div>
-                                        </Tooltip>
+                                        <Grid container justify="flex-end" alignItems="center">
+                                            <Grid item>
+                                                <Tooltip title={<Trans>ads.instance.create.button.label</Trans>}>
+                                                    <div>
+                                                        <IconButton disabled={!ad.title || !ad.content} onClick={() => createAd(ad)}>
+                                                            <Save />
+                                                        </IconButton>
+                                                    </div>
+                                                </Tooltip>
+                                            </Grid>
+                                        </Grid>
                                     ) : (null)
                                 }
 
