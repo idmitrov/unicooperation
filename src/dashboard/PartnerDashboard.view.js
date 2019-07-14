@@ -213,7 +213,7 @@ class PartnerDashboardView extends Component {
 
                                 <Grid item>
                                     <Link to="/ads/create">
-                                        <Tooltip title="Create ad">
+                                        <Tooltip title={<Trans>ads.instance.create</Trans>}>
                                             <IconButton>
                                                 <AddCircle />
                                             </IconButton>
@@ -236,7 +236,6 @@ class PartnerDashboardView extends Component {
                         <div className="dashboard-grid">
                             <Grid container spacing={2}>
                                 {
-                                    // TODO: LOCALIZE AND CHANGE ACTIONS
                                     interviews.length ? (
                                         interviews.map((interviewItem, index) => {
                                             return (
@@ -248,12 +247,12 @@ class PartnerDashboardView extends Component {
                                                                 : `${interviewItem.title.substring(0, 17)}...`
                                                         }
                                                         hoverText={
-                                                            <Trans>ads.list.item.intro</Trans>
+                                                            <Trans>interview.list.item.intro</Trans>
                                                         }
                                                         actions={
                                                             <Fragment>
                                                                 <Link to={`/interview/details/${interviewItem._id}`}>
-                                                                    <Tooltip title={<Trans>ads.list.item.details</Trans>}>
+                                                                    <Tooltip title={<Trans>interview.list.item.details</Trans>}>
                                                                         <IconButton className="dashboard-grid-icon-button">
                                                                             <Visibility className="dashboard-grid-icon" />
                                                                         </IconButton>
@@ -263,7 +262,7 @@ class PartnerDashboardView extends Component {
                                                                     loggedInAccount.type === accountType.partner &&
                                                                     loggedInAccount.profile === interviewItem.interviewer ? (
                                                                         <Link to={`/interview/edit/${interviewItem._id}`}>
-                                                                            <Tooltip title={<Trans>ads.list.item.edit</Trans>}>
+                                                                            <Tooltip title={<Trans>interview.list.item.edit</Trans>}>
                                                                                 <IconButton className="dashboard-grid-icon-button">
                                                                                     <Edit className="dashboard-grid-icon" />
                                                                                 </IconButton>
@@ -296,7 +295,7 @@ class PartnerDashboardView extends Component {
 
                                 <Grid item>
                                     <Link to="/interview">
-                                        <Tooltip title="Create interview">
+                                        <Tooltip title={<Trans>interview.create</Trans>}>
                                             <IconButton>
                                                 <AddCircle />
                                             </IconButton>
