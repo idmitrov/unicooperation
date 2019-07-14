@@ -171,6 +171,15 @@ export const Routes = ({ account }) => {
             />
 
             <PrivateRoute
+                key="interview-details"
+                path="/interview/details/:interviewDetailsId"
+                component={InterviewView}
+                allowed={authenticated && [accountType.student, accountType.partner].includes(account.type)}
+                exact
+                strict
+            />
+
+            <PrivateRoute
                 path="/interview/list"
                 component={InterviewListView}
                 allowed={authenticated && [accountType.student, accountType.partner].includes(account.type)}

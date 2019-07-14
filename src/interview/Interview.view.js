@@ -15,7 +15,11 @@ import {
     saveInterview
 } from './Interview.actions';
 
-import { selectInterview, selectInterviewMode } from './Interview.selector';
+import {
+    selectInterview,
+    selectInterviewEditMode,
+    selectInterviewReadonlyMode
+} from './Interview.selector';
 
 import history from '../utils/history';
 
@@ -23,10 +27,10 @@ class InterviewView extends Component {
     constructor(props) {
         super(props);
 
-        const { interviewId } = this.props.match.params;
+        const { interviewId, interviewDetailsId } = this.props.match.params;
 
-        if (interviewId) {
-            this.props.fetchInterview(interviewId);
+        if (interviewId || interviewDetailsId) {
+            this.props.fetchInterview(interviewId || interviewDetailsId);
         } else {
             this.props.changeInterviewProp({ _id: null });
 
@@ -51,6 +55,7 @@ class InterviewView extends Component {
         const {
             interview,
             isEditMode,
+            isReadonlyMode,
             changeInterviewProp,
             requestInterview,
             saveInterview
@@ -66,6 +71,7 @@ class InterviewView extends Component {
                                     label="Title"
                                     value={interview.title || ''}
                                     fullWidth
+                                    InputProps={{ readOnly: isReadonlyMode }}
                                     onChange={(e) => changeInterviewProp({ title: e.target.value })}
                                 />
                             </Grid>
@@ -75,9 +81,13 @@ class InterviewView extends Component {
                                     label="Date"
                                     autoOk
                                     ampm={false}
-                                    disablePast
+                                    disabled={isReadonlyMode}
                                     value={interview.scheduledDate}
-                                    onChange={(e) => changeInterviewProp({ scheduledDate: e._d })}
+                                    onChange={(e) => {
+                                        if (isEditMode && !isReadonlyMode) {
+                                            changeInterviewProp({ scheduledDate: e._d })
+                                        }
+                                    }}
                                     fullWidth
                                 />
                             </Grid>
@@ -89,17 +99,22 @@ class InterviewView extends Component {
                                     fullWidth
                                     multiline
                                     rows="5"
+                                    InputProps={{ readOnly: isReadonlyMode }}
                                     onChange={(e) => changeInterviewProp({ description: e.target.value })}
                                 />
                             </Grid>
 
                             <Grid item>
                                 {
-                                    isEditMode ? (
+                                    isEditMode && !isReadonlyMode ? (
                                         <button onClick={() => saveInterview(interview)}>Save interview</button>
-                                    ) : (
+                                    ) : (null)
+                                }
+
+                                {
+                                    !isEditMode && !isReadonlyMode ? (
                                         <button onClick={() => requestInterview(interview)}>Request interview</button>
-                                    )
+                                    ) : (null)
                                 }
                             </Grid>
                         </Grid>
@@ -112,7 +127,8 @@ class InterviewView extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        isEditMode: selectInterviewMode(state),
+        isEditMode: selectInterviewEditMode(state),
+        isReadonlyMode: selectInterviewReadonlyMode(state),
         interview: selectInterview(state)
     };
 }
