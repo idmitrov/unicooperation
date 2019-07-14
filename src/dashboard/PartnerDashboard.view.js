@@ -83,7 +83,7 @@ class PartnerDashboardView extends Component {
                         </Grid>
 
                         <div className="dashboard-grid">
-                            <Grid container spacing={grid.spacing}>
+                            <Grid container spacing={grid.spacing} alignItems="center">
                                 {
                                     matches.length ? (
                                         matches.map((match, index) => {
@@ -132,7 +132,7 @@ class PartnerDashboardView extends Component {
                                     )
                                 }
 
-                                <Grid item xs={12}>
+                                <Grid item xs={true}>
                                     <Link to="/matches">
                                         <Button variant="text">
                                             <Trans>dashboard.viewAll</Trans>
@@ -204,8 +204,8 @@ class PartnerDashboardView extends Component {
                                 }
                             </Grid>
 
-                            <Grid container style={{marginTop: 15}}>
-                                <Grid item xs={true}>
+                            <Grid container style={{marginTop: 15}} alignItems="center" justify="space-between">
+                                <Grid item>
                                     <Link to="/ads/list">
                                         <Button variant="text">
                                             <Trans>dashboard.viewAll</Trans>
@@ -286,8 +286,8 @@ class PartnerDashboardView extends Component {
                                 }
                             </Grid>
 
-                            <Grid container style={{marginTop: 15}}>
-                                <Grid item xs={true}>
+                            <Grid container style={{marginTop: 15}} alignItems="center" justify="space-between">
+                                <Grid item>
                                     <Link to="/interview/list">
                                         <Button variant="text">
                                             <Trans>dashboard.viewAll</Trans>
