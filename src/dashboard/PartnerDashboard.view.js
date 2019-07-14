@@ -132,7 +132,7 @@ class PartnerDashboardView extends Component {
                                     )
                                 }
 
-                                <Grid item xs={true}>
+                                <Grid item xs={12}>
                                     <Link to="/matches">
                                         <Button variant="text">
                                             <Trans>dashboard.viewAll</Trans>
