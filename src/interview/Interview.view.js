@@ -4,7 +4,8 @@ import { connect } from 'react-redux';
 import {
     Grid,
     IconButton,
-    TextField
+    TextField,
+    Button
 } from '@material-ui/core';
 
 import {
@@ -20,7 +21,8 @@ import {
     setInterview,
     changeInterviewProp,
     requestInterview,
-    saveInterview
+    saveInterview,
+    answerInterview
 } from './Interview.actions';
 
 import { selectInterview } from './Interview.selector';
@@ -66,6 +68,7 @@ class InterviewView extends Component {
 
         const {
             interview,
+            answerInterview,
             changeInterviewProp,
             requestInterview,
             saveInterview
@@ -76,74 +79,101 @@ class InterviewView extends Component {
                 <Grid container justify="center" alignItems="flex-start">
                     <Grid item xs={12} md={6} lg={4}>
                         <Grid container spacing={grid.spacing}>
-                            <Grid item xs={6}>
-                                <TextField
-                                    label="Title"
-                                    value={interview.title || ''}
-                                    fullWidth
-                                    InputProps={{ readOnly: isReadonly }}
-                                    onChange={(e) => changeInterviewProp({ title: e.target.value })}
-                                />
-                            </Grid>
+                            {
+                                interview && interview.isActive ? (
+                                    <Fragment>
+                                        <Grid item xs={6}>
+                                            <TextField
+                                                label="Title"
+                                                value={interview.title || ''}
+                                                fullWidth
+                                                InputProps={{ readOnly: isReadonly }}
+                                                onChange={(e) => changeInterviewProp({ title: e.target.value })}
+                                            />
+                                        </Grid>
 
-                            <Grid item xs={6}>
-                                <DateTimePicker
-                                    label="Date"
-                                    autoOk
-                                    ampm={false}
-                                    InputProps={{ readOnly: isReadonly }}
-                                    DialogProps={{ hidden: isReadonly }}
-                                    value={interview.scheduledDate}
-                                    onChange={(e) => {
-                                        if (isRedaction && !isReadonly) {
-                                            changeInterviewProp({ scheduledDate: e._d })
-                                        }
-                                    }}
-                                    fullWidth
-                                />
-                            </Grid>
+                                        <Grid item xs={6}>
+                                            <DateTimePicker
+                                                label="Date"
+                                                autoOk
+                                                ampm={false}
+                                                InputProps={{ readOnly: isReadonly }}
+                                                DialogProps={{ hidden: isReadonly }}
+                                                value={interview.scheduledDate}
+                                                onChange={(e) => {
+                                                    if (isRedaction && !isReadonly) {
+                                                        changeInterviewProp({ scheduledDate: e._d })
+                                                    }
+                                                }}
+                                                fullWidth
+                                            />
+                                        </Grid>
 
-                            <Grid item xs={12}>
-                                <TextField
-                                    label="Description"
-                                    value={interview.description || ''}
-                                    fullWidth
-                                    multiline
-                                    rows="5"
-                                    InputProps={{ readOnly: isReadonly }}
-                                    onChange={(e) => changeInterviewProp({ description: e.target.value })}
-                                />
-                            </Grid>
+                                        <Grid item xs={12}>
+                                            <TextField
+                                                label="Description"
+                                                value={interview.description || ''}
+                                                fullWidth
+                                                multiline
+                                                rows="5"
+                                                InputProps={{ readOnly: isReadonly }}
+                                                onChange={(e) => changeInterviewProp({ description: e.target.value })}
+                                            />
+                                        </Grid>
 
-                            <Grid item xs={12} style={{marginTop: 15}}>
-                                <Grid container justify="space-between">
-                                    {
-                                        isRedaction ? (
-                                            <Fragment>
-                                                <Grid item>
-                                                    <IconButton>
-                                                        <Delete />
-                                                    </IconButton>
-                                                </Grid>
+                                        <Grid item xs={12} style={{marginTop: 15}}>
+                                            <Grid container justify="space-between">
+                                                {
+                                                    isReadonly ? (
+                                                        <Fragment>
+                                                            <Grid item>
+                                                                <Button onClick={() => answerInterview(interview, false)}>
+                                                                    Cancel
+                                                                </Button>
+                                                            </Grid>
+                                                            {
+                                                                !interview.accepted ? (
+                                                                    <Grid item>
+                                                                        <Button onClick={() => answerInterview(interview, true)}>
+                                                                            Acceppt
+                                                                        </Button>
+                                                                    </Grid>
+                                                                ) : (null)
+                                                            }
+                                                        </Fragment>
+                                                    ) : (null)
+                                                }
 
-                                                <Grid item>
-                                                    <IconButton onClick={() => saveInterview(interview)}>
-                                                        <Save/>
-                                                    </IconButton>
-                                                </Grid>
-                                            </Fragment>
-                                        ) : (null)
-                                    }
+                                                {
+                                                    isRedaction ? (
+                                                        <Fragment>
+                                                            <Grid item>
+                                                                <IconButton>
+                                                                    <Delete />
+                                                                </IconButton>
+                                                            </Grid>
 
-                                    {
-                                        isCreation ? (
-                                            <Grid item>
-                                                <button onClick={() => requestInterview(interview)}>Request interview</button>
+                                                            <Grid item>
+                                                                <IconButton onClick={() => saveInterview(interview)}>
+                                                                    <Save/>
+                                                                </IconButton>
+                                                            </Grid>
+                                                        </Fragment>
+                                                    ) : (null)
+                                                }
+
+                                                {
+                                                    isCreation ? (
+                                                        <Grid item>
+                                                            <button onClick={() => requestInterview(interview)}>Request interview</button>
+                                                        </Grid>
+                                                    ) : (null)
+                                                }
                                             </Grid>
-                                        ) : (null)
-                                    }
-                                </Grid>
-                            </Grid>
+                                        </Grid>
+                                    </Fragment>
+                                ) : (null)
+                            }
                         </Grid>
                     </Grid>
                 </Grid>
@@ -183,6 +213,16 @@ const mapDispatchToProps = (dispatch) => {
             return dispatch(fetchInterview(interviewId))
                 .then((interview) => {
                     return dispatch(setInterview(interview));
+                });
+        },
+        answerInterview(interview, accepted) {
+            return dispatch(answerInterview(interview, accepted))
+                .then((answeredInterview) => {
+                    if (!answeredInterview.isActive) {
+                        return history.push('/interview/list');
+                    }
+
+                    return dispatch(setInterview(answeredInterview));
                 });
         }
     };

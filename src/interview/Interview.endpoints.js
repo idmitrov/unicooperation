@@ -1,4 +1,8 @@
 export default {
+    answer: {
+        endpoint: 'interview/answer',
+        method: 'POST'
+    },
     mine: {
         endpoint: 'interview/mine',
         method: 'GET'

@@ -4,16 +4,26 @@ export const interviewActionTypes = {
     fetchInterview: 'INTERVIEW_FETCH',
     saveInterview: 'INTERVIEW_SAVE',
     setInterview: 'INTERVIEW_SET',
+    answerInterview: 'INTERVIEW_ANSWER',
     changeInterviewProp: 'INTERVIEW_PROP_SET',
     fetchMineInterviews: 'INTERVIEW_MINE_FETCH',
     setInterviewsList: 'INTERVIEW_LIST_SET'
 };
 
-export const saveInterview = (interview) => (dispatch) => {
-    if (!interview.scheduledDate) {
-        interview.scheduledDate = new Date();
-    }
+export const answerInterview = (interview, accepted) => (dispatch) => {
+    const action = {
+        type: interviewActionTypes.answerInterview,
+        payload: { interviewId: interview._id, accepted },
+        api: {
+            endpoint: interviewEndpoints.answer.endpoint,
+            method: interviewEndpoints.answer.method
+        }
+    };
 
+    return dispatch(action);
+}
+
+export const saveInterview = (interview) => (dispatch) => {
     const action = {
         type: interviewActionTypes.saveInterview,
         payload: { interview },
