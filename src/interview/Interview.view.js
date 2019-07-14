@@ -68,6 +68,7 @@ class InterviewView extends Component {
 
         const {
             interview,
+            loggedinProfile,
             answerInterview,
             changeInterviewProp,
             requestInterview,
@@ -79,101 +80,96 @@ class InterviewView extends Component {
                 <Grid container justify="center" alignItems="flex-start">
                     <Grid item xs={12} md={6} lg={4}>
                         <Grid container spacing={grid.spacing}>
-                            {
-                                interview && interview.isActive ? (
-                                    <Fragment>
-                                        <Grid item xs={6}>
-                                            <TextField
-                                                label="Title"
-                                                value={interview.title || ''}
-                                                fullWidth
-                                                InputProps={{ readOnly: isReadonly }}
-                                                onChange={(e) => changeInterviewProp({ title: e.target.value })}
-                                            />
-                                        </Grid>
+                            <Grid item xs={6}>
+                                <TextField
+                                    label="Title"
+                                    value={interview.title || ''}
+                                    fullWidth
+                                    InputProps={{ readOnly: isReadonly }}
+                                    onChange={(e) => changeInterviewProp({ title: e.target.value })}
+                                />
+                            </Grid>
 
-                                        <Grid item xs={6}>
-                                            <DateTimePicker
-                                                label="Date"
-                                                autoOk
-                                                ampm={false}
-                                                InputProps={{ readOnly: isReadonly }}
-                                                DialogProps={{ hidden: isReadonly }}
-                                                value={interview.scheduledDate}
-                                                onChange={(e) => {
-                                                    if (isRedaction && !isReadonly) {
-                                                        changeInterviewProp({ scheduledDate: e._d })
-                                                    }
-                                                }}
-                                                fullWidth
-                                            />
-                                        </Grid>
+                            <Grid item xs={6}>
+                                <DateTimePicker
+                                    label="Date"
+                                    autoOk
+                                    ampm={false}
+                                    InputProps={{ readOnly: isReadonly }}
+                                    DialogProps={{ hidden: isReadonly }}
+                                    value={interview.scheduledDate}
+                                    onChange={(e) => {
+                                        if (isRedaction && !isReadonly) {
+                                            changeInterviewProp({ scheduledDate: e._d })
+                                        }
+                                    }}
+                                    fullWidth
+                                />
+                            </Grid>
 
-                                        <Grid item xs={12}>
-                                            <TextField
-                                                label="Description"
-                                                value={interview.description || ''}
-                                                fullWidth
-                                                multiline
-                                                rows="5"
-                                                InputProps={{ readOnly: isReadonly }}
-                                                onChange={(e) => changeInterviewProp({ description: e.target.value })}
-                                            />
-                                        </Grid>
+                            <Grid item xs={12}>
+                                <TextField
+                                    label="Description"
+                                    value={interview.description || ''}
+                                    fullWidth
+                                    multiline
+                                    rows="5"
+                                    InputProps={{ readOnly: isReadonly }}
+                                    onChange={(e) => changeInterviewProp({ description: e.target.value })}
+                                />
+                            </Grid>
 
-                                        <Grid item xs={12} style={{marginTop: 15}}>
-                                            <Grid container justify="space-between">
-                                                {
-                                                    isReadonly ? (
-                                                        <Fragment>
-                                                            <Grid item>
-                                                                <Button onClick={() => answerInterview(interview, false)}>
-                                                                    Cancel
-                                                                </Button>
-                                                            </Grid>
-                                                            {
-                                                                !interview.accepted ? (
-                                                                    <Grid item>
-                                                                        <Button onClick={() => answerInterview(interview, true)}>
-                                                                            Acceppt
-                                                                        </Button>
-                                                                    </Grid>
-                                                                ) : (null)
-                                                            }
-                                                        </Fragment>
-                                                    ) : (null)
-                                                }
+                            <Grid item xs={12} style={{marginTop: 15}}>
+                                <Grid container justify="space-between">
+                                    {
+                                        isReadonly && interview.candidate === loggedinProfile? (
+                                            <Fragment>
+                                                <Grid item>
+                                                    <Button onClick={() => answerInterview(interview, false)}>
+                                                        Cancel
+                                                    </Button>
+                                                </Grid>
 
                                                 {
-                                                    isRedaction ? (
-                                                        <Fragment>
-                                                            <Grid item>
-                                                                <IconButton>
-                                                                    <Delete />
-                                                                </IconButton>
-                                                            </Grid>
-
-                                                            <Grid item>
-                                                                <IconButton onClick={() => saveInterview(interview)}>
-                                                                    <Save/>
-                                                                </IconButton>
-                                                            </Grid>
-                                                        </Fragment>
-                                                    ) : (null)
-                                                }
-
-                                                {
-                                                    isCreation ? (
+                                                    !interview.accepted ? (
                                                         <Grid item>
-                                                            <button onClick={() => requestInterview(interview)}>Request interview</button>
+                                                            <Button onClick={() => answerInterview(interview, true)}>
+                                                                Acceppt
+                                                            </Button>
                                                         </Grid>
                                                     ) : (null)
                                                 }
+                                            </Fragment>
+                                        ) : (null)
+                                    }
+
+                                    {
+                                        isRedaction ? (
+                                            <Fragment>
+                                                <Grid item>
+                                                    <IconButton>
+                                                        <Delete />
+                                                    </IconButton>
+                                                </Grid>
+
+                                                <Grid item>
+                                                    <IconButton onClick={() => saveInterview(interview)}>
+                                                        <Save/>
+                                                    </IconButton>
+                                                </Grid>
+                                            </Fragment>
+                                        ) : (null)
+                                    }
+
+                                    {
+                                        isCreation ? (
+                                            <Grid item>
+                                                <button onClick={() => requestInterview(interview)}>Request interview</button>
                                             </Grid>
-                                        </Grid>
-                                    </Fragment>
-                                ) : (null)
-                            }
+                                        ) : (null)
+                                    }
+                                </Grid>
+                            </Grid>
                         </Grid>
                     </Grid>
                 </Grid>
@@ -184,6 +180,7 @@ class InterviewView extends Component {
 
 const mapStateToProps = (state) => {
     return {
+        loggedinProfile: state.account.profile,
         interview: selectInterview(state)
     };
 }
@@ -216,14 +213,16 @@ const mapDispatchToProps = (dispatch) => {
                 });
         },
         answerInterview(interview, accepted) {
-            return dispatch(answerInterview(interview, accepted))
-                .then((answeredInterview) => {
-                    if (!answeredInterview.isActive) {
-                        return history.push('/interview/list');
-                    }
+            if (interview.rejected === false) {
+                return dispatch(answerInterview(interview, accepted))
+                    .then((answeredInterview) => {
+                        if (!answeredInterview.isActive) {
+                            return history.push('/interview/list');
+                        }
 
-                    return dispatch(setInterview(answeredInterview));
-                });
+                        return dispatch(setInterview(answeredInterview));
+                    });
+            }
         }
     };
 }
