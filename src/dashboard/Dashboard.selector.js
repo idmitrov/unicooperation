@@ -14,9 +14,9 @@ export const selectTopInterviews = createSelector(
 export const selectTopAds = createSelector(
     [getAds],
     (ads) => ads.slice(0, MAX_VISIBLE_ITEMS)
-)
+);
 
 export const selectoTopMatches = createSelector(
     [getMatches],
     (matches) => matches.slice(0, MAX_VISIBLE_ITEMS)
-)
+);
