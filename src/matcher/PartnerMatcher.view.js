@@ -22,6 +22,8 @@ import {
 import '../app/App.scss';
 import './Matcher.scss';
 
+import { grid } from '../app/App.constants';
+
 import {
     getMatches,
     setMatches,
@@ -131,7 +133,7 @@ class MatcherView extends Component {
                         {
                             matches && matches.length ? (
                                 <div className="matches-grid page-row">
-                                    <Grid container alignItems="stretch">
+                                    <Grid container alignItems="stretch" spacing={grid.spacing}>
                                         {
                                             matches.map((match, index) => {
                                                 return(

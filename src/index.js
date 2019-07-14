@@ -16,11 +16,6 @@ import './index.scss';
 import * as serviceWorker from './serviceWorker';
 
 const theme = createMuiTheme({
-    props: {
-        MuiGrid: {
-            spacing: 2
-        }
-    },
     palette: {
         primary: {
             main: '#000'

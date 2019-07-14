@@ -16,6 +16,8 @@ import {
 
 import '../app/App.scss';
 
+import { grid } from '../app/App.constants';
+
 import {
     fetchMyAds,
     fetchMyUniversityPartnersAds,
@@ -53,7 +55,7 @@ class AdsListView extends Component {
             <Grid container justify="center" alignItems="flex-start">
                 <Grid item xs={12} md={6} lg={4}>
                     <div className="ads-grid page-row">
-                        <Grid container>
+                        <Grid container spacing={grid.spacing}>
                             {
                                 ads.map((adItem, index) => {
                                     return (

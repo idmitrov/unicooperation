@@ -18,6 +18,8 @@ import {
     GroupWork
 } from '@material-ui/icons';
 
+import { grid } from '../app/App.constants';
+
 import UniTitle from '../components/uni-title/UniTitle.component';
 
 import './PartnerDashboard.scss';
@@ -81,7 +83,7 @@ class PartnerDashboardView extends Component {
                         </Grid>
 
                         <div className="dashboard-grid">
-                            <Grid container>
+                            <Grid container spacing={grid.spacing}>
                                 {
                                     matches.length ? (
                                         matches.map((match, index) => {
@@ -151,7 +153,7 @@ class PartnerDashboardView extends Component {
                         </Grid>
 
                         <div className="dashboard-grid">
-                            <Grid container>
+                            <Grid container spacing={grid.spacing}>
                                 {
                                     ads.length ? (
                                         ads.map((adItem, index) => {
@@ -234,7 +236,7 @@ class PartnerDashboardView extends Component {
                         </Grid>
 
                         <div className="dashboard-grid">
-                            <Grid container>
+                            <Grid container spacing={grid.spacing}>
                                 {
                                     interviews.length ? (
                                         interviews.map((interviewItem, index) => {

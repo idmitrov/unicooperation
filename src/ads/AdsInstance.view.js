@@ -13,7 +13,6 @@ import {
     Zoom
 } from '@material-ui/core';
 
-
 import {
     Delete,
     Save,
@@ -22,9 +21,11 @@ import {
     EventSeat
 } from '@material-ui/icons';
 
-import UniIntroCard from '../components/uni-intro-card/UniIntroCard.component';
-
 import '../app/App.scss';
+
+import { grid } from '../app/App.constants';
+
+import UniIntroCard from '../components/uni-intro-card/UniIntroCard.component';
 
 import {
     updateAdProp,
@@ -206,7 +207,7 @@ class AdsInstanceView extends Component {
                                                         </Grid>
 
 
-                                                        <Grid container alignItems="stretch" style={{marginTop: 15}}>
+                                                        <Grid container alignItems="stretch" style={{marginTop: 15}} spacing={grid.spacing}>
                                                             {
                                                                 ad.candidates ? (
 
