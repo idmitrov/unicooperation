@@ -15,11 +15,7 @@ import {
     saveInterview
 } from './Interview.actions';
 
-import {
-    selectInterview,
-    selectInterviewEditMode,
-    selectInterviewReadonlyMode
-} from './Interview.selector';
+import { selectInterview } from './Interview.selector';
 
 import history from '../utils/history';
 
@@ -29,7 +25,13 @@ class InterviewView extends Component {
 
         const { interviewId, interviewDetailsId } = this.props.match.params;
 
-        if (interviewId || interviewDetailsId) {
+        this.state = {
+            isCreation: interviewId === undefined && interviewDetailsId === undefined,
+            isReadonly: interviewId === undefined && interviewDetailsId !== undefined,
+            isRedaction: interviewId !== undefined && interviewDetailsId === undefined
+        };
+
+        if (this.state.isRedaction || this.state.isReadonly) {
             this.props.fetchInterview(interviewId || interviewDetailsId);
         } else {
             this.props.changeInterviewProp({ _id: null });
@@ -52,10 +54,10 @@ class InterviewView extends Component {
     }
 
     render() {
+        const { isCreation, isRedaction, isReadonly } = this.state;
+
         const {
             interview,
-            isEditMode,
-            isReadonlyMode,
             changeInterviewProp,
             requestInterview,
             saveInterview
@@ -71,7 +73,7 @@ class InterviewView extends Component {
                                     label="Title"
                                     value={interview.title || ''}
                                     fullWidth
-                                    InputProps={{ readOnly: isReadonlyMode }}
+                                    InputProps={{ readOnly: isReadonly }}
                                     onChange={(e) => changeInterviewProp({ title: e.target.value })}
                                 />
                             </Grid>
@@ -81,11 +83,11 @@ class InterviewView extends Component {
                                     label="Date"
                                     autoOk
                                     ampm={false}
-                                    InputProps={{ readOnly: isReadonlyMode }}
-                                    DialogProps={{ hidden: isReadonlyMode }}
+                                    InputProps={{ readOnly: isReadonly }}
+                                    DialogProps={{ hidden: isReadonly }}
                                     value={interview.scheduledDate}
                                     onChange={(e) => {
-                                        if (isEditMode && !isReadonlyMode) {
+                                        if (isRedaction && !isReadonly) {
                                             changeInterviewProp({ scheduledDate: e._d })
                                         }
                                     }}
@@ -100,20 +102,20 @@ class InterviewView extends Component {
                                     fullWidth
                                     multiline
                                     rows="5"
-                                    InputProps={{ readOnly: isReadonlyMode }}
+                                    InputProps={{ readOnly: isReadonly }}
                                     onChange={(e) => changeInterviewProp({ description: e.target.value })}
                                 />
                             </Grid>
 
                             <Grid item>
                                 {
-                                    isEditMode && !isReadonlyMode ? (
+                                    isRedaction ? (
                                         <button onClick={() => saveInterview(interview)}>Save interview</button>
                                     ) : (null)
                                 }
 
                                 {
-                                    !isEditMode && !isReadonlyMode ? (
+                                    isCreation ? (
                                         <button onClick={() => requestInterview(interview)}>Request interview</button>
                                     ) : (null)
                                 }
@@ -128,8 +130,6 @@ class InterviewView extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        isEditMode: selectInterviewEditMode(state),
-        isReadonlyMode: selectInterviewReadonlyMode(state),
         interview: selectInterview(state)
     };
 }
