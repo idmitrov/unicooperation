@@ -295,7 +295,7 @@ class PartnerDashboardView extends Component {
                                     </Link>
                                 </Grid>
 
-                                <Grid item>
+                                {/* <Grid item>
                                     <Link to="/interview">
                                         <Tooltip title={<Trans>interview.create</Trans>}>
                                             <IconButton>
@@ -303,7 +303,7 @@ class PartnerDashboardView extends Component {
                                             </IconButton>
                                         </Tooltip>
                                     </Link>
-                                </Grid>
+                                </Grid> */}
                             </Grid>
                         </div>
                     </div>
