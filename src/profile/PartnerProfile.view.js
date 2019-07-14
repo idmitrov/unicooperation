@@ -36,6 +36,7 @@ import {
 
 import './Profile.scss';
 import { selectProfile } from './Profile.selector';
+import { grid } from '../app/App.constants';
 
 class PartnerProfile extends Component {
     constructor(props) {
@@ -108,7 +109,7 @@ class PartnerProfile extends Component {
                         </div>
 
                         {/* PROFILE HEADER AVATAR */}
-                        <Grid container alignItems="center">
+                        <Grid container alignItems="center" spacing={grid.spacing}>
                             <Grid item>
                                 <div className="profile-avatar">
                                     <div className={`profile-avatar-image ${profile.isReadonly ? 'readonly' : ''}`}>

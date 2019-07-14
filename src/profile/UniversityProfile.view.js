@@ -39,6 +39,7 @@ import {
 import './Profile.scss';
 import { selectProfile } from './Profile.selector';
 import { accountType } from '../account/Account.constants';
+import { grid } from '../app/App.constants';
 
 class UniversityProfile extends Component {
     constructor(props) {
@@ -141,7 +142,7 @@ class UniversityProfile extends Component {
                         </div>
 
                         {/* PROFILE HEADER AVATAR */}
-                        <Grid container alignItems="center">
+                        <Grid container alignItems="center" spacing={grid.spacing}>
                             <Grid item>
                                 <div className="profile-avatar">
                                     <div className={`profile-avatar-image ${profile.isReadonly ? 'readonly' : ''}`}>
