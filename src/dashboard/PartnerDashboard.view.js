@@ -81,7 +81,7 @@ class PartnerDashboardView extends Component {
                         </Grid>
 
                         <div className="dashboard-grid">
-                            <Grid container spacing={2}>
+                            <Grid container>
                                 {
                                     matches.length ? (
                                         matches.map((match, index) => {
@@ -151,7 +151,7 @@ class PartnerDashboardView extends Component {
                         </Grid>
 
                         <div className="dashboard-grid">
-                            <Grid container spacing={2}>
+                            <Grid container>
                                 {
                                     ads.length ? (
                                         ads.map((adItem, index) => {
@@ -234,7 +234,7 @@ class PartnerDashboardView extends Component {
                         </Grid>
 
                         <div className="dashboard-grid">
-                            <Grid container spacing={2}>
+                            <Grid container>
                                 {
                                     interviews.length ? (
                                         interviews.map((interviewItem, index) => {

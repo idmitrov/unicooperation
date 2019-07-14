@@ -53,7 +53,7 @@ class AdsListView extends Component {
             <Grid container justify="center" alignItems="flex-start">
                 <Grid item xs={12} md={6} lg={4}>
                     <div className="ads-grid page-row">
-                        <Grid container spacing={2}>
+                        <Grid container>
                             {
                                 ads.map((adItem, index) => {
                                     return (

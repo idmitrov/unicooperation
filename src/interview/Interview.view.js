@@ -60,7 +60,7 @@ class InterviewView extends Component {
             <div className="page-row">
                 <Grid container justify="center" alignItems="flex-start">
                     <Grid item xs={12} md={6} lg={4}>
-                        <Grid container spacing={2}>
+                        <Grid container>
                             <Grid item xs={6}>
                                 <TextField
                                     label="Title"
