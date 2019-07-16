@@ -172,9 +172,19 @@ class InterviewView extends Component {
                                                 <Grid item xs={12}>
                                                     <Grid container justify="flex-end">
                                                         <Grid item>
-                                                            <Button>
-                                                                Complete
-                                                            </Button>
+                                                            {
+                                                                interview.accepted ? (
+                                                                    <Button>
+                                                                        Create coperation
+                                                                    </Button>
+                                                                ) : (
+                                                                    <Button>
+                                                                        {
+                                                                            interview.rejected ? 'Archive interview' : 'Cancel interview'
+                                                                        }
+                                                                    </Button>
+                                                                )
+                                                            }
                                                         </Grid>
                                                     </Grid>
                                                 </Grid>
