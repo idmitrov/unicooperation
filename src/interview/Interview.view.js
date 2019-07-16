@@ -5,7 +5,8 @@ import {
     Grid,
     IconButton,
     TextField,
-    Button
+    Button,
+    Typography
 } from '@material-ui/core';
 
 import {
@@ -80,6 +81,28 @@ class InterviewView extends Component {
                 <Grid container justify="center" alignItems="flex-start">
                     <Grid item xs={12} md={6} lg={4}>
                         <Grid container spacing={grid.spacing}>
+                            <Grid item xs={12}>
+                                {
+                                    isReadonly ? (
+                                        <Typography variant="h6">
+                                            {
+                                                interview.accepted ? (
+                                                    'The interview was accepted'
+                                                ) : interview.rejected ? (
+                                                    'The interview was rejected'
+                                                ) : (
+                                                    'Awaiting for applicant answer'
+                                                )
+                                            }
+                                        </Typography>
+                                    ) : isRedaction ? (
+                                        <Typography variant="h6">Edit interview</Typography>
+                                    ) : (
+                                        <Typography variant="h6">Arrange interview</Typography>
+                                    )
+                                }
+                            </Grid>
+
                             <Grid item xs={6}>
                                 <TextField
                                     label="Title"
@@ -144,6 +167,22 @@ class InterviewView extends Component {
                                     }
 
                                     {
+                                        isReadonly && interview.interviewer === loggedinProfile? (
+                                            <Fragment>
+                                                <Grid item xs={12}>
+                                                    <Grid container justify="flex-end">
+                                                        <Grid item>
+                                                            <Button>
+                                                                Complete
+                                                            </Button>
+                                                        </Grid>
+                                                    </Grid>
+                                                </Grid>
+                                            </Fragment>
+                                        ) : (null)
+                                    }
+
+                                    {
                                         isRedaction ? (
                                             <Fragment>
                                                 <Grid item>
@@ -163,8 +202,12 @@ class InterviewView extends Component {
 
                                     {
                                         isCreation ? (
-                                            <Grid item>
-                                                <button onClick={() => requestInterview(interview)}>Request interview</button>
+                                            <Grid item xs={12}>
+                                                <Grid container justify="flex-end">
+                                                    <Grid item>
+                                                        <Button onClick={() => requestInterview(interview)}>Request interview</Button>
+                                                    </Grid>
+                                                </Grid>
                                             </Grid>
                                         ) : (null)
                                     }
