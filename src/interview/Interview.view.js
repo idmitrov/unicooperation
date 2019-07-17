@@ -22,13 +22,15 @@ import { grid } from '../app/App.constants';
 import { DateTimePicker } from '@material-ui/pickers';
 
 import {
+    archiveInterview,
     fetchInterview,
     setInterview,
     changeInterviewProp,
     requestInterview,
     saveInterview,
     answerInterview,
-    completeInterview
+    completeInterview,
+    resetInterview
 } from './Interview.actions';
 
 import { selectInterview } from './Interview.selector';
@@ -48,9 +50,9 @@ class InterviewView extends Component {
         };
 
         if (this.state.isRedaction || this.state.isReadonly) {
-            this.props.fetchInterview(interviewId || interviewDetailsId);
+            this.props.fetch(interviewId || interviewDetailsId);
         } else {
-            this.props.changeInterviewProp({ _id: null });
+            this.props.changeProp({ _id: null });
 
             const queryString = this.props.history.location.search;
 
@@ -60,7 +62,7 @@ class InterviewView extends Component {
                 const adId = params.get('ad');
 
                 if (candidateId && adId) {
-                    this.props.changeInterviewProp({
+                    this.props.changeProp({
                         applicant: candidateId,
                         ad: adId
                     });
@@ -75,11 +77,12 @@ class InterviewView extends Component {
         const {
             interview,
             loggedinProfile,
-            answerInterview,
-            changeInterviewProp,
-            requestInterview,
-            saveInterview,
-            completeInterview
+            answer,
+            archive,
+            changeProp,
+            request,
+            save,
+            complete
         } = this.props;
 
         return (
@@ -115,7 +118,7 @@ class InterviewView extends Component {
                                     value={interview.title || ''}
                                     fullWidth
                                     InputProps={{ readOnly: isReadonly }}
-                                    onChange={(e) => changeInterviewProp({ title: e.target.value })}
+                                    onChange={(e) => changeProp({ title: e.target.value })}
                                 />
                             </Grid>
 
@@ -144,7 +147,7 @@ class InterviewView extends Component {
                                     multiline
                                     rows="5"
                                     InputProps={{ readOnly: isReadonly }}
-                                    onChange={(e) => changeInterviewProp({ description: e.target.value })}
+                                    onChange={(e) => changeProp({ description: e.target.value })}
                                 />
                             </Grid>
 
@@ -154,7 +157,7 @@ class InterviewView extends Component {
                                         isReadonly && interview.applicant === loggedinProfile? (
                                             <Fragment>
                                                 <Grid item>
-                                                    <Button onClick={() => answerInterview(interview, false)}>
+                                                    <Button onClick={() => answer(interview, false)}>
                                                         Cancel
                                                     </Button>
                                                 </Grid>
@@ -162,7 +165,7 @@ class InterviewView extends Component {
                                                 {
                                                     !interview.accepted ? (
                                                         <Grid item>
-                                                            <Button onClick={() => answerInterview(interview, true)}>
+                                                            <Button onClick={() => answer(interview, true)}>
                                                                 Acceppt
                                                             </Button>
                                                         </Grid>
@@ -190,7 +193,7 @@ class InterviewView extends Component {
                                                                                     inputProps={{id: 'interview-succeeded'}}
                                                                                     fullWidth
                                                                                     onChange={(e) => {
-                                                                                        completeInterview(interview._id, e.target.value);
+                                                                                        complete(interview._id, e.target.value);
                                                                                     }}>
                                                                                     <MenuItem value={true}>Passed</MenuItem>
                                                                                     <MenuItem value={false}>Not passed</MenuItem>
@@ -204,12 +207,12 @@ class InterviewView extends Component {
                                                                                     <Button>Create cooperation</Button>
                                                                                 </Grid>
                                                                             ) : (
-                                                                                <Button>Archive interview</Button>
+                                                                                <Button onClick={() => archive(interview._id)}>Archive interview</Button>
                                                                             )
                                                                         }
                                                                     </Grid>
                                                                 ) : (
-                                                                    <Button>
+                                                                    <Button onClick={() => archive(interview._id)}>
                                                                         {
                                                                             interview.rejected ? 'Archive interview' : 'Cancel interview'
                                                                         }
@@ -233,7 +236,7 @@ class InterviewView extends Component {
                                                 </Grid>
 
                                                 <Grid item>
-                                                    <IconButton onClick={() => saveInterview(interview)}>
+                                                    <IconButton onClick={() => save(interview)}>
                                                         <Save/>
                                                     </IconButton>
                                                 </Grid>
@@ -246,7 +249,7 @@ class InterviewView extends Component {
                                             <Grid item xs={12}>
                                                 <Grid container justify="flex-end">
                                                     <Grid item>
-                                                        <Button onClick={() => requestInterview(interview)}>Request interview</Button>
+                                                        <Button onClick={() => request(interview)}>Request interview</Button>
                                                     </Grid>
                                                 </Grid>
                                             </Grid>
@@ -271,10 +274,10 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        changeInterviewProp(prop) {
+        changeProp(prop) {
             return dispatch(changeInterviewProp(prop));
         },
-        saveInterview(interview) {
+        save(interview) {
             return dispatch(saveInterview(interview))
                 .then((savedInterview) => {
                     history.push('/interview/list');
@@ -282,7 +285,7 @@ const mapDispatchToProps = (dispatch) => {
                     return dispatch(setInterview(savedInterview));
                 });
         },
-        requestInterview(interview) {
+        request(interview) {
             return dispatch(requestInterview(interview))
                 .then((createdInterview) => {
                     history.push('/interview/list');
@@ -290,13 +293,13 @@ const mapDispatchToProps = (dispatch) => {
                     return dispatch(setInterview(createdInterview));
                 });
         },
-        fetchInterview(interviewId) {
+        fetch(interviewId) {
             return dispatch(fetchInterview(interviewId))
                 .then((interview) => {
                     return dispatch(setInterview(interview));
                 });
         },
-        answerInterview(interview, accepted) {
+        answer(interview, accepted) {
             if (interview.rejected === false) {
                 return dispatch(answerInterview(interview, accepted))
                     .then((answeredInterview) => {
@@ -308,10 +311,18 @@ const mapDispatchToProps = (dispatch) => {
                     });
             }
         },
-        completeInterview(interviewId, succeeded) {
+        complete(interviewId, succeeded) {
             return dispatch(completeInterview(interviewId, succeeded))
                 .then((completedInterview) => {
                     return dispatch(setInterview(completedInterview));
+                });
+        },
+        archive(interviewId) {
+            return dispatch(archiveInterview(interviewId))
+                .then(() => {
+                    history.push('/interview/list');
+
+                    return dispatch(resetInterview());
                 });
         }
     };

@@ -1,4 +1,8 @@
 export default {
+    archive: {
+        endpoint: 'interview/{interviewId}',
+        method: 'DELETE'
+    },
     complete: {
         endpoint: 'interview/complete',
         method: 'POST'

@@ -4,12 +4,33 @@ export const interviewActionTypes = {
     fetchInterview: 'INTERVIEW_FETCH',
     saveInterview: 'INTERVIEW_SAVE',
     setInterview: 'INTERVIEW_SET',
+    resetInterview: 'INTERVIEW_SET',
     answerInterview: 'INTERVIEW_ANSWER',
     completeInterview: 'INTERVIEW_COMPLETE',
+    archiveInterview: 'INTERVIEW_ARCHIVE',
     changeInterviewProp: 'INTERVIEW_PROP_SET',
     fetchMineInterviews: 'INTERVIEW_MINE_FETCH',
     setInterviewsList: 'INTERVIEW_LIST_SET'
 };
+
+export const resetInterview = () => (dispatch) => {
+    const action = { type: interviewActionTypes.resetInterview };
+
+    return dispatch(action);
+}
+
+export const archiveInterview = (interviewId) => (dispatch) => {
+    const action = {
+        type: interviewActionTypes.archiveInterview,
+        payload: { interviewId },
+        api: {
+            endpoint: interviewEndpoints.archive.endpoint.replace('{interviewId}', interviewId),
+            method: interviewEndpoints.archive.method
+        }
+    };
+
+    return dispatch(action);
+}
 
 export const completeInterview = (interviewId, succeeded) => (dispatch) => {
     const action = {
