@@ -4,7 +4,7 @@ export const interviewActionTypes = {
     fetchInterview: 'INTERVIEW_FETCH',
     saveInterview: 'INTERVIEW_SAVE',
     setInterview: 'INTERVIEW_SET',
-    resetInterview: 'INTERVIEW_SET',
+    resetInterview: 'INTERVIEW_RESET',
     answerInterview: 'INTERVIEW_ANSWER',
     completeInterview: 'INTERVIEW_COMPLETE',
     archiveInterview: 'INTERVIEW_ARCHIVE',
