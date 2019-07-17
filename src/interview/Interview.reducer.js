@@ -1,12 +1,20 @@
 import { interviewActionTypes } from './Interview.actions';
 
+const interviewInstanceDefaults = {};
+
 const interviewDefaults = {
-    instance: {},
+    instance: interviewInstanceDefaults,
     list: []
 };
 
 export default (state = interviewDefaults, action = {}) => {
     switch (action.type) {
+        case interviewActionTypes.resetInterview: {
+            return {
+                ...state,
+                instance: interviewInstanceDefaults
+            }
+        }
         case interviewActionTypes.setInterviewsList: {
             return {
                 ...state,
