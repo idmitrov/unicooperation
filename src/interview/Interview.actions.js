@@ -13,6 +13,20 @@ export const interviewActionTypes = {
     setInterviewsList: 'INTERVIEW_LIST_SET'
 };
 
+// TODO: Extract in cooperation module
+export const createCooperation = (interviewId, studentId) => (dispatch) => {
+    const action = {
+        type: interviewActionTypes.archiveInterview,
+        payload: { interviewId, studentId },
+        api: {
+            endpoint: `cooperation`,
+            method: 'POST'
+        }
+    };
+
+    return dispatch(action);
+}
+
 export const resetInterview = () => (dispatch) => {
     const action = { type: interviewActionTypes.resetInterview };
 

@@ -30,7 +30,8 @@ import {
     saveInterview,
     answerInterview,
     completeInterview,
-    resetInterview
+    resetInterview,
+    createCooperation
 } from './Interview.actions';
 
 import { selectInterview } from './Interview.selector';
@@ -82,7 +83,8 @@ class InterviewView extends Component {
             changeProp,
             request,
             save,
-            complete
+            complete,
+            cooperate
         } = this.props;
 
         return (
@@ -204,7 +206,7 @@ class InterviewView extends Component {
                                                                         {
                                                                             interview.succeeded ? (
                                                                                 <Grid item>
-                                                                                    <Button>Create cooperation</Button>
+                                                                                    <Button onClick={() => cooperate(interview._id, interview.applicant)}>Create cooperation</Button>
                                                                                 </Grid>
                                                                             ) : (
                                                                                 <Button onClick={() => archive(interview._id)}>Archive interview</Button>
@@ -323,6 +325,14 @@ const mapDispatchToProps = (dispatch) => {
                     history.push('/interview/list');
 
                     return dispatch(resetInterview());
+                });
+        },
+        cooperate(interviewId, studentId) {
+            return dispatch(createCooperation(interviewId, studentId))
+                .then(() => {
+                    history.push('/interview/list');
+
+                    return dispatch(completeInterview(interviewId));
                 });
         }
     };
