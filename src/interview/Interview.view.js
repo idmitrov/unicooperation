@@ -6,7 +6,11 @@ import {
     IconButton,
     TextField,
     Button,
-    Typography
+    Typography,
+    MenuItem,
+    Select,
+    FormControl,
+    InputLabel
 } from '@material-ui/core';
 
 import {
@@ -23,7 +27,8 @@ import {
     changeInterviewProp,
     requestInterview,
     saveInterview,
-    answerInterview
+    answerInterview,
+    completeInterview
 } from './Interview.actions';
 
 import { selectInterview } from './Interview.selector';
@@ -73,7 +78,8 @@ class InterviewView extends Component {
             answerInterview,
             changeInterviewProp,
             requestInterview,
-            saveInterview
+            saveInterview,
+            completeInterview
         } = this.props;
 
         return (
@@ -145,7 +151,7 @@ class InterviewView extends Component {
                             <Grid item xs={12} style={{marginTop: 15}}>
                                 <Grid container justify="space-between">
                                     {
-                                        isReadonly && interview.candidate === loggedinProfile? (
+                                        isReadonly && interview.applicant === loggedinProfile? (
                                             <Fragment>
                                                 <Grid item>
                                                     <Button onClick={() => answerInterview(interview, false)}>
@@ -170,13 +176,38 @@ class InterviewView extends Component {
                                         isReadonly && interview.interviewer === loggedinProfile? (
                                             <Fragment>
                                                 <Grid item xs={12}>
-                                                    <Grid container justify="flex-end">
-                                                        <Grid item>
+                                                    <Grid container>
+                                                        <Grid item xs={12}>
                                                             {
                                                                 interview.accepted ? (
-                                                                    <Button>
-                                                                        Create coperation
-                                                                    </Button>
+                                                                    <Grid container alignItems="center" justify="space-between">
+                                                                        <Grid item>
+                                                                            <FormControl fullWidth>
+                                                                                <InputLabel htmlFor="interview-succeeded">Status</InputLabel>
+
+                                                                                <Select
+                                                                                    value={interview.succeeded}
+                                                                                    inputProps={{id: 'interview-succeeded'}}
+                                                                                    fullWidth
+                                                                                    onChange={(e) => {
+                                                                                        completeInterview(interview._id, e.target.value);
+                                                                                    }}>
+                                                                                    <MenuItem value={true}>Passed</MenuItem>
+                                                                                    <MenuItem value={false}>Not passed</MenuItem>
+                                                                                </Select>
+                                                                            </FormControl>
+                                                                        </Grid>
+
+                                                                        {
+                                                                            interview.succeeded ? (
+                                                                                <Grid item>
+                                                                                    <Button>Create cooperation</Button>
+                                                                                </Grid>
+                                                                            ) : (
+                                                                                <Button>Archive interview</Button>
+                                                                            )
+                                                                        }
+                                                                    </Grid>
                                                                 ) : (
                                                                     <Button>
                                                                         {
@@ -276,6 +307,12 @@ const mapDispatchToProps = (dispatch) => {
                         return dispatch(setInterview(answeredInterview));
                     });
             }
+        },
+        completeInterview(interviewId, succeeded) {
+            return dispatch(completeInterview(interviewId, succeeded))
+                .then((completedInterview) => {
+                    return dispatch(setInterview(completedInterview));
+                });
         }
     };
 }

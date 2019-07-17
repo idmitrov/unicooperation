@@ -1,4 +1,8 @@
 export default {
+    complete: {
+        endpoint: 'interview/complete',
+        method: 'POST'
+    },
     answer: {
         endpoint: 'interview/answer',
         method: 'POST'

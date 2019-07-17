@@ -5,10 +5,24 @@ export const interviewActionTypes = {
     saveInterview: 'INTERVIEW_SAVE',
     setInterview: 'INTERVIEW_SET',
     answerInterview: 'INTERVIEW_ANSWER',
+    completeInterview: 'INTERVIEW_COMPLETE',
     changeInterviewProp: 'INTERVIEW_PROP_SET',
     fetchMineInterviews: 'INTERVIEW_MINE_FETCH',
     setInterviewsList: 'INTERVIEW_LIST_SET'
 };
+
+export const completeInterview = (interviewId, succeeded) => (dispatch) => {
+    const action = {
+        type: interviewActionTypes.completeInterview,
+        payload: { interviewId, succeeded },
+        api: {
+            endpoint: interviewEndpoints.complete.endpoint,
+            method: interviewEndpoints.complete.method
+        }
+    };
+
+    return dispatch(action);
+}
 
 export const answerInterview = (interview, accepted) => (dispatch) => {
     const action = {
