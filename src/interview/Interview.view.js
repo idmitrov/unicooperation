@@ -332,7 +332,7 @@ const mapDispatchToProps = (dispatch) => {
                 .then(() => {
                     return dispatch(archiveInterview(interviewId));
                 })
-                .then((archivedInterview) => {
+                .then(() => {
                     history.push('/interview/list');
 
                     dispatch(resetInterview());
