@@ -33,7 +33,7 @@ export default (state = interviewDefaults, action = {}) => {
         case interviewActionTypes.setInterview: {
             return {
                 ...state,
-                instance: action.payload || interviewDefaults.instance
+                instance: action.payload || interviewInstanceDefaults
             };
         }
         default: return state;
