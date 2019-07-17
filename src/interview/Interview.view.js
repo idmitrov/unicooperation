@@ -330,9 +330,12 @@ const mapDispatchToProps = (dispatch) => {
         cooperate(interviewId, studentId) {
             return dispatch(createCooperation(interviewId, studentId))
                 .then(() => {
+                    return dispatch(archiveInterview(interviewId));
+                })
+                .then((archivedInterview) => {
                     history.push('/interview/list');
 
-                    return dispatch(completeInterview(interviewId));
+                    dispatch(resetInterview());
                 });
         }
     };
