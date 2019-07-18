@@ -42,14 +42,18 @@ class UniversitySetupView extends Component {
     }
 
     render() {
-        const { countries, createUniversitySetup } = this.props;
+        const {
+            account,
+            countries,
+            createUniversitySetup
+        } = this.props;
 
         return (
             <div>
                 <form onSubmit={(e) => {
                     e.preventDefault();
 
-                    createUniversitySetup(this.state.name, this.state.countryCode);
+                    createUniversitySetup(this.state.name, this.state.countryCode, account);
                 }}>
                     <Grid container justify="center">
                         <Grid item xs={12} md={6} lg={4}>
@@ -141,16 +145,19 @@ class UniversitySetupView extends Component {
 
 const mapStateToProps = (state) => {
     return {
+        account: state.account,
         countries: state.nomenclatures.countries
     };
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        createUniversitySetup(name, countryCode) {
+        createUniversitySetup(name, countryCode, account) {
             return dispatch(createUniversitySetup(name, countryCode))
                 .then((data) => {
-                    return dispatch(setAccount(data.account));
+                    const updatedAccount = { ...account, profile: data.account.profile };
+
+                    return dispatch(setAccount(updatedAccount));
                 });
         },
         fetchCountries() {
