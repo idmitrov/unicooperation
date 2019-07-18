@@ -1,6 +1,11 @@
 import { accountActionTypes } from './Account.actions';
+import { notify } from '../components/uni-notifier/UniNotifier.component';
 
 const __cachedAccount = JSON.parse(localStorage.getItem('uniaccount'));
+
+if (__cachedAccount) {
+    notify('account.welcome');
+}
 
 const accountReset = {
     authenticated: false,

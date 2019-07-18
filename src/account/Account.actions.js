@@ -1,3 +1,4 @@
+import { notify } from '../components/uni-notifier/UniNotifier.component.js';
 import accountEndpoints from '../account/Account.endpoints';
 
 export const accountActionTypes = {
@@ -30,6 +31,8 @@ export const authenticateAccount = (email, password) => (dispatch) => {
 }
 
 export const setAccount = (account) => (dispatch) => {
+    notify('account.welcome');
+
     localStorage.setItem('uniaccount', JSON.stringify(account));
 
     return dispatch({

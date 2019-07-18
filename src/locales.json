@@ -8,6 +8,7 @@
             "account.login.label": "Login",
             "account.register.label": "Register",
             "account.logout.label": "Logout",
+            "account.welcome": "Welcome back",
             "ads.instance.create": "Create ad",
             "ads.instance.applicationsTotal": "Applications",
             "ads.instance.showApplicants.button.label": "Show applicants",

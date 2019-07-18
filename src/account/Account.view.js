@@ -195,9 +195,7 @@ class AccountView extends Component {
 }
 
 const mapStateToProps = () => {
-    return {
-
-    };
+    return {};
 }
 
 const mapDispatchToProps = (dispatch) => {
