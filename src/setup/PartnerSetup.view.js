@@ -42,14 +42,18 @@ class PartnerSetupView extends Component {
     }
 
     render() {
-        const { countries, createPartnerSetup } = this.props;
+        const {
+            account,
+            countries,
+            createPartnerSetup
+        } = this.props;
 
         return (
             <div>
                 <form onSubmit={(e) => {
                     e.preventDefault();
 
-                    createPartnerSetup(this.state.name, this.state.countryCode);
+                    createPartnerSetup(this.state.name, this.state.countryCode, account);
                 }}>
                     <Grid container justify="center">
                         <Grid item xs={12} md={6} lg={4}>
@@ -141,16 +145,19 @@ class PartnerSetupView extends Component {
 
 const mapStateToProps = (state) => {
     return {
+        account: state.account,
         countries: state.nomenclatures.countries
     };
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        createPartnerSetup(name, countryCode) {
+        createPartnerSetup(name, countryCode, account) {
             return dispatch(createPartnerSetup(name, countryCode))
                 .then((data) => {
-                    return dispatch(setAccount(data.account));
+                    const updatedAccount = { ...account, profile: data.account.profile };
+
+                    return dispatch(setAccount(updatedAccount));
                 });
         },
         fetchCountries() {
