@@ -208,12 +208,12 @@ const mapDispatchToProps = (dispatch) => {
         },
         register(email, password, name, type) {
             return dispatch(createAccount(email, password, name, type))
-                .then((account) => {
+                .then(() => {
                     return dispatch(authenticateAccount(email, password))
-                        .then((account) => {
+                        .then((authenticatedAccount) => {
                             // TODO: Create VerifyAccount view
                             // and logic for account verification process
-                            return dispatch(setAccount(account));
+                            return dispatch(setAccount(authenticatedAccount));
                         });
                 });
         }

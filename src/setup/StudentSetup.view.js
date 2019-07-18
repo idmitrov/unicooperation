@@ -39,14 +39,19 @@ class StudentSetupView extends Component {
     }
 
     render() {
-        const { createStudentSetup, filterUniversity, universities } = this.props;
+        const {
+            account,
+            createStudentSetup,
+            filterUniversity,
+            universities
+        } = this.props;
 
         return (
             <div>
                 <form onSubmit={(e) => {
                     e.preventDefault();
 
-                    createStudentSetup(this.state.firstName, this.state.facultyId, this.state.university);
+                    createStudentSetup(this.state.firstName, this.state.facultyId, this.state.university, account);
                 }}>
                     <Grid container justify="center">
                         <Grid item xs={12} md={6} lg={4}>
@@ -156,16 +161,19 @@ class StudentSetupView extends Component {
 
 const mapStateToProps = (state) => {
     return {
+        account: state.account,
         universities: state.shared.universities
     };
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        createStudentSetup(name, facultyId, university) {
+        createStudentSetup(name, facultyId, university, account) {
             return dispatch(createStudentSetup(name, facultyId, university))
                 .then((data) => {
-                    return dispatch(setAccount(data.account));
+                    const updatedAccount = { ...account, profile: data.account.profile };
+
+                    return dispatch(setAccount(updatedAccount));
                 });
         },
         filterUniversity(name) {
