@@ -128,7 +128,7 @@ class AccountView extends Component {
                                                         <RadioGroup
                                                             name="type"
                                                             value={this.state.type}
-                                                            row
+                                                            row={window.matchMedia('(min-width: 1200px)').matches}
                                                             onChange={this.handleAccountInputChange}>
                                                             {
                                                                 Object
