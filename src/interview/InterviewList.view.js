@@ -6,7 +6,8 @@ import { Trans } from 'react-i18next';
 import {
     Grid,
     IconButton,
-    Tooltip
+    Tooltip,
+    Typography
 } from '@material-ui/core';
 
 import {
@@ -36,12 +37,18 @@ class InterviewListView extends Component {
         } = this.props;
 
         return (
-            <div className="page-row">
-                <Grid container justify="center" alignItems="flex-start">
-                    <Grid item xs={12} md={6} lg={4}>
+            <Grid container justify="center" alignItems="flex-start">
+                <Grid item xs={12} md={6} lg={4}>
+                    <div className="page-row">
+                        <Typography variant="h5">
+                            <Trans>interview.list.title</Trans>
+                        </Typography>
+                    </div>
+
+                    <div className="page-row">
                         <Grid container spacing={grid.spacing}>
                             {
-                                interviews ? (
+                                interviews && interviews.length ? (
                                     interviews.map((interview, index) => {
                                         return (
                                             <Grid item key={index} xs={12} sm={6}>
@@ -83,12 +90,16 @@ class InterviewListView extends Component {
                                             </Grid>
                                         )
                                     })
-                                ) : (null)
+                                ) : (
+                                    <Grid item>
+                                        <Trans>interview.list.noData</Trans>
+                                    </Grid>
+                                )
                             }
                         </Grid>
-                    </Grid>
+                    </div>
                 </Grid>
-            </div>
+            </Grid>
         );
     }
 }

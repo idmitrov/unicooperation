@@ -29,6 +29,8 @@
             "ads.list.item.edit": "Edit ad",
             "ads.list.item.details": "View details",
             "interview.create": "Create interview",
+            "interview.list.title": "Interviews",
+            "interview.list.noData": "There are no interviews",
             "interview.list.item.edit": "Edit interview",
             "interview.list.item.details": "View details",
             "interview.list.item.intro": "Take an action",

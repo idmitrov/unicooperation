@@ -64,8 +64,7 @@ class AdsListView extends Component {
                     <div className="ads-grid page-row">
                         <Grid container spacing={grid.spacing}>
                             {
-                                ads && ads.length ? (
-
+                                ads && !ads.length ? (
                                     ads.map((adItem, index) => {
                                         return (
                                             <Grid item xs={12} sm={6} key={index}>
@@ -108,7 +107,9 @@ class AdsListView extends Component {
                                         )
                                     })
                                 ) : (
-                                    <Trans>ads.list.noData</Trans>
+                                    <Grid item>
+                                        <Trans>ads.list.noData</Trans>
+                                    </Grid>
                                 )
                             }
                         </Grid>
