@@ -6,7 +6,8 @@ import { Trans } from 'react-i18next';
 import {
     Grid,
     IconButton,
-    Tooltip
+    Tooltip,
+    Typography
 } from '@material-ui/core';
 
 import {
@@ -54,50 +55,61 @@ class AdsListView extends Component {
         return (
             <Grid container justify="center" alignItems="flex-start">
                 <Grid item xs={12} md={6} lg={4}>
+                    <div className="page-row">
+                        <Typography variant="h5">
+                            <Trans>ads.list.title</Trans>
+                        </Typography>
+                    </div>
+
                     <div className="ads-grid page-row">
                         <Grid container spacing={grid.spacing}>
                             {
-                                ads.map((adItem, index) => {
-                                    return (
-                                        <Grid item xs={12} sm={6} key={index}>
-                                            <UniIntroCard
-                                                avatar={adItem.conver}
-                                                title={
-                                                    adItem.title.length < 17
-                                                        ? adItem.title
-                                                        : `${adItem.title.substring(0, 17)}...`
-                                                }
-                                                hoverText={
-                                                    <Trans>ads.list.item.intro</Trans>
-                                                }
-                                                actions={
-                                                    <Fragment>
-                                                        <Link to={`/ads/details/${adItem._id}`}>
-                                                            <Tooltip title={<Trans>ads.list.item.details</Trans>}>
-                                                                <IconButton className="ad-icon-button">
-                                                                    <Visibility className="ad-icon" />
-                                                                </IconButton>
-                                                            </Tooltip>
-                                                        </Link>
+                                ads && ads.length ? (
 
-                                                        {
-                                                            loggedInAccount.type === accountType.partner &&
-                                                            loggedInAccount.profile === adItem.author ? (
-                                                                <Link to={`/ads/edit/${adItem._id}`}>
-                                                                    <Tooltip title={<Trans>ads.list.item.edit</Trans>}>
-                                                                        <IconButton className="ad-icon-button">
-                                                                            <Edit className="ad-icon" />
-                                                                        </IconButton>
-                                                                    </Tooltip>
-                                                                </Link>
-                                                            ) :(null)
-                                                        }
-                                                    </Fragment>
-                                                }
-                                            />
-                                        </Grid>
-                                    )
-                                })
+                                    ads.map((adItem, index) => {
+                                        return (
+                                            <Grid item xs={12} sm={6} key={index}>
+                                                <UniIntroCard
+                                                    avatar={adItem.conver}
+                                                    title={
+                                                        adItem.title.length < 17
+                                                            ? adItem.title
+                                                            : `${adItem.title.substring(0, 17)}...`
+                                                    }
+                                                    hoverText={
+                                                        <Trans>ads.list.item.intro</Trans>
+                                                    }
+                                                    actions={
+                                                        <Fragment>
+                                                            <Link to={`/ads/details/${adItem._id}`}>
+                                                                <Tooltip title={<Trans>ads.list.item.details</Trans>}>
+                                                                    <IconButton className="ad-icon-button">
+                                                                        <Visibility className="ad-icon" />
+                                                                    </IconButton>
+                                                                </Tooltip>
+                                                            </Link>
+
+                                                            {
+                                                                loggedInAccount.type === accountType.partner &&
+                                                                loggedInAccount.profile === adItem.author ? (
+                                                                    <Link to={`/ads/edit/${adItem._id}`}>
+                                                                        <Tooltip title={<Trans>ads.list.item.edit</Trans>}>
+                                                                            <IconButton className="ad-icon-button">
+                                                                                <Edit className="ad-icon" />
+                                                                            </IconButton>
+                                                                        </Tooltip>
+                                                                    </Link>
+                                                                ) :(null)
+                                                            }
+                                                        </Fragment>
+                                                    }
+                                                />
+                                            </Grid>
+                                        )
+                                    })
+                                ) : (
+                                    <Trans>ads.list.noData</Trans>
+                                )
                             }
                         </Grid>
                     </div>

@@ -21,6 +21,8 @@
             "ads.instance.details.apply.button.label": "Apply to ad",
             "ads.instance.details.cancelApply.button.label": "Cancel application",
             "ads.instance.details.requestInterview": "Request interview",
+            "ads.list.title": "Ads",
+            "ads.list.noData": "There are no ads",
             "ads.list.item.apply": "Apply",
             "ads.list.item.intro": "Take an action",
             "ads.list.item.applied": "Applied",
