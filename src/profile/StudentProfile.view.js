@@ -169,7 +169,7 @@ class StudentProfileView extends Component {
                             </div>
 
                             <div className="page-row">
-                                <Grid container>
+                                <Grid container spacing={grid.spacing}>
                                     {/* FIRST NAME */}
                                     <Grid item xs={12} md={4}>
                                         <TextField
