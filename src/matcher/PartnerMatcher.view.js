@@ -8,7 +8,8 @@ import {
     Grid,
     IconButton,
     TextField,
-    Tooltip
+    Tooltip,
+    Typography
 } from '@material-ui/core';
 
 import {
@@ -129,6 +130,12 @@ class MatcherView extends Component {
                                 </Grid>
                             </form>
                         </AppBar>
+
+                        <div className="page-row">
+                            <Typography variant="h5">
+                                <Trans>match.title</Trans>
+                            </Typography>
+                        </div>
 
                         {
                             matches && matches.length ? (

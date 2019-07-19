@@ -60,6 +60,7 @@
             "global.save": "Save",
             "global.view": "View",
             "global.shownFromToOfTotal": "Shown from {{from}} to {{to}} of total {{total}}",
+            "match.title": "Matches",
             "match.profile.view": "View profile",
             "match.profile.interview": "Request interview",
             "match.profile.invite": "Invite to cooperation",
