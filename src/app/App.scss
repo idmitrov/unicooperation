@@ -1,13 +1,20 @@
 #logo {
     max-width: 64px;
     position: absolute;
-    z-index: 9999;
+    z-index: 9998;
     font-size: 64px;
     color: #aaa;
     left: 50%;
     top: 32px;
     transform: translateX(-50%);
     white-space: nowrap;
+}
+
+#lang {
+    position: fixed;
+    z-index: 9999;
+    bottom: 4px;
+    left: 4px;
 }
 
 #avatar {

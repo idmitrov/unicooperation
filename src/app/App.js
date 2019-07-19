@@ -22,10 +22,11 @@ import {
     PowerSettingsNew,
     ChevronLeft,
     ChevronRight,
-    WorkOutline
+    WorkOutline,
+    Language
 } from '@material-ui/icons';
 
-import { Trans } from 'react-i18next';
+import { Trans, withTranslation } from 'react-i18next';
 
 import Router, { Routes, Link } from '../utils/router';
 import history from '../utils/history';
@@ -239,6 +240,16 @@ class App extends Component {
                             ) : (null)
                         }
                     </Drawer>
+
+                    <div id="lang">
+                        <Tooltip title={<Trans>global.language</Trans>}>
+                            <Language onClick={() => {
+                                let lang = localStorage.getItem('uni-lang') === 'en-US' ? 'bg-BG' : 'en-US';
+
+                                this.props.i18n.changeLanguage(lang);
+                            }}/>
+                        </Tooltip>
+                    </div>
                 </Fragment>
             </Router>
         );
@@ -283,4 +294,7 @@ const mapDispatchToProps = (dispatch) => {
     };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(withTranslation()(App));
