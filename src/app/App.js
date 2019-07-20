@@ -23,7 +23,9 @@ import {
     ChevronLeft,
     ChevronRight,
     WorkOutline,
-    Language
+    Language,
+    EventSeat,
+    Settings,
 } from '@material-ui/icons';
 
 import { Trans, withTranslation } from 'react-i18next';
@@ -83,9 +85,9 @@ class App extends Component {
                             <AppBar position="sticky" color="inherit">
                                 <Grid container justify="center" alignItems="center">
                                     <Grid item xs={12} md={6} lg={4}>
-                                        <Grid container alignItems="center">
+                                        <Grid container alignItems="center" id="header">
                                             <Grid item sm={true}>
-                                                <Tooltip title={<Trans>global.home.label</Trans>}>
+                                                <Tooltip title={<Trans>header.home</Trans>}>
                                                     <Link className="header-button" to="/">
                                                         <Home />
                                                     </Link>
@@ -96,26 +98,62 @@ class App extends Component {
                                                 <School id="logo" />
                                             </a>
 
+
                                             <Grid item xs={true} sm="auto">
-                                                {
-                                                    account.type === accountType.student ? (
-                                                        <Tooltip title={<Trans>global.ads</Trans>}>
+                                                <Tooltip title={<Trans>header.search</Trans>}>
+                                                    <button className="header-button" onClick={toggleSearchVisiblity}>
+                                                        <Search />
+                                                    </button>
+                                                </Tooltip>
+                                            </Grid>
+
+                                            <Grid item id="menu-trigger">
+                                                <div className="header-button">
+                                                    <Avatar
+                                                        id="avatar"
+                                                        src={`${process.env.PUBLIC_URL}/avatar-default.png`}
+                                                        alt="profile avatar"
+                                                    />
+                                                </div>
+
+                                                <Grid container id="menu" justify="space-between">
+                                                    <Grid item>
+                                                        <Tooltip title={<Trans>header.profile</Trans>}>
+                                                            <Link className="header-button" to="/profile/me">
+                                                                <Avatar
+                                                                    id="avatar"
+                                                                    src={`${process.env.PUBLIC_URL}/avatar-default.png`}
+                                                                    alt="profile avatar"
+                                                                />
+                                                            </Link>
+                                                        </Tooltip>
+                                                    </Grid>
+
+                                                    <Grid item>
+                                                        <Tooltip title={<Trans>header.ads</Trans>}>
                                                             <Link className="header-button" to="/ads/list">
                                                                 <WorkOutline />
                                                             </Link>
                                                         </Tooltip>
-                                                    ) : (
-                                                        <Tooltip title={<Trans>global.search.label</Trans>}>
-                                                            <button className="header-button" onClick={toggleSearchVisiblity}>
-                                                                <Search />
-                                                            </button>
-                                                        </Tooltip>
-                                                    )
-                                                }
-                                            </Grid>
+                                                    </Grid>
 
-                                            <Grid item>
-                                                <Tooltip title={<Trans>global.profile.label</Trans>}>
+                                                    <Grid item>
+                                                        <Tooltip title={<Trans>header.interviews</Trans>}>
+                                                            <Link className="header-button" to="/interview/list">
+                                                                <EventSeat />
+                                                            </Link>
+                                                        </Tooltip>
+                                                    </Grid>
+
+                                                    <Grid item>
+                                                        <Tooltip title={<Trans>header.settings</Trans>}>
+                                                            <Link className="header-button" to="/settings">
+                                                                <Settings />
+                                                            </Link>
+                                                        </Tooltip>
+                                                    </Grid>
+                                                </Grid>
+                                                {/* <Tooltip title={<Trans>global.profile.label</Trans>}>
                                                     <Link className="header-button" to="/profile/me">
                                                         <Avatar
                                                             id="avatar"
@@ -123,7 +161,7 @@ class App extends Component {
                                                             alt="profile avatar"
                                                         />
                                                     </Link>
-                                                </Tooltip>
+                                                </Tooltip> */}
                                             </Grid>
 
                                             <Grid item>
