@@ -50,7 +50,7 @@ class SettingsView extends Component {
                                         <Language />
                                     </InputAdornment>
                                 }
-                                inputProps={{id: 'language', }}
+                                inputProps={{id: 'language' }}
                             >
                                 {
                                     languages.map((language) => {
