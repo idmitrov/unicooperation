@@ -168,7 +168,7 @@ class FeedView extends Component {
                                         <Grid item>
                                             {
                                                 isUpdateAvailable ? (
-                                                    <Tooltip title="Get latest publications">
+                                                    <Tooltip title={<Trans>feed.sync</Trans>}>
                                                         <IconButton onClick={fetchRecentPublicationsList}>
                                                             <Update />
                                                         </IconButton>
