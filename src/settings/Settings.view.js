@@ -7,13 +7,15 @@ import {
     Select,
     FormControl,
     InputLabel,
-    MenuItem
+    MenuItem,
+    InputAdornment
 } from '@material-ui/core';
 
 import { Trans, withTranslation } from 'react-i18next';
 
 import { languages } from './Settings.constants';
 import { setLanguage } from './Settings.actions';
+import { Language } from '@material-ui/icons';
 class SettingsView extends Component {
     render() {
         const {
@@ -37,13 +39,19 @@ class SettingsView extends Component {
                             </InputLabel>
 
                             <Select
-                            value={language}
-                            onChange={(e) => {
-                                this.props.i18n.changeLanguage(e.target.value);
+                                value={language}
+                                onChange={(e) => {
+                                    this.props.i18n.changeLanguage(e.target.value);
 
-                                setLanguage(e.target.value);
-                            }}
-                            inputProps={{ id: 'language' }}>
+                                    setLanguage(e.target.value);
+                                }}
+                                startAdornment={
+                                    <InputAdornment position="start">
+                                        <Language />
+                                    </InputAdornment>
+                                }
+                                inputProps={{id: 'language', }}
+                            >
                                 {
                                     languages.map((language) => {
                                         return (
