@@ -11,3 +11,7 @@ const defaults = {
 export const notify = (messageKey, options = defaults) => {
     toastr.notify(<Trans>{messageKey}</Trans>, { ...options, ...defaults });
 }
+
+export const notifyError = (messageKey, options = defaults) => {
+    toastr.notify(<Trans>{messageKey}</Trans>, { ...options, ...defaults, type: 'error' });
+}

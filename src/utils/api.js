@@ -1,6 +1,6 @@
 import appConfig from '../app/App.config';
 import { unsetAccount } from '../account/Account.actions';
-import { notify } from '../components/uni-notifier/UniNotifier.component';
+import { notify, notifyError } from '../components/uni-notifier/UniNotifier.component';
 
 export default (store) => (next) => (action) => {
     if (action.api) {
@@ -40,7 +40,10 @@ export default (store) => (next) => (action) => {
             fetch(`//${appConfig.REACT_APP_API_URL}/${action.api.endpoint}`, options)
                 .then((response) => {
                     if (!response.ok) {
-                        throw response;
+                        return response.json()
+                            .then((result) => {
+                                throw result;
+                            });
                     }
 
                     if (/application\/json/.test(response.headers.get('Content-Type'))) {
@@ -50,15 +53,11 @@ export default (store) => (next) => (action) => {
                     return response.text();
                 })
                 .then((response) => {
-                    if (response.error) {
-                        throw response;
-                    } else {
-                        if (action.api.successMessage) {
-                            console.log(action.api.successMessage);
-                        }
-
-                        resolve(response.data);
+                    if (action.api.successMessage) {
+                        notify(action.api.successMessage);
                     }
+
+                    resolve(response.data);
                 })
                 .catch((response) => {
                     let error = 'Something went wrong';
@@ -71,12 +70,14 @@ export default (store) => (next) => (action) => {
                         error = response.statusText;
                     }
 
-                    if (response.error) {
-                        error = response.error.message;
+                    if (response.errors) {
+                        error = response.errors;
 
-                        if (response.error.id) {
-                            notify(response.error.id);
-                        }
+                        response.errors.forEach((error) => {
+                            if (error.id) {
+                                notifyError(error.id);
+                            }
+                        });
                     }
 
                     return reject(error);
