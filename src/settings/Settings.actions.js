@@ -3,6 +3,8 @@ export const settingsActionTypes = {
 };
 
 export const setLanguage = (language) => (dispatch) => {
+    localStorage.setItem('uni-lang', language);
+
     const action = {
         type: settingsActionTypes.setLanguage,
         payload: language

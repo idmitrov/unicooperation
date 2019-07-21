@@ -23,7 +23,6 @@ import {
     ChevronLeft,
     ChevronRight,
     WorkOutline,
-    Language,
     EventSeat,
     Settings,
 } from '@material-ui/icons';
@@ -278,16 +277,6 @@ class App extends Component {
                             ) : (null)
                         }
                     </Drawer>
-
-                    <div id="lang">
-                        <Tooltip title={<Trans>global.language</Trans>}>
-                            <Language onClick={() => {
-                                let lang = localStorage.getItem('uni-lang') === 'en-US' ? 'bg-BG' : 'en-US';
-
-                                this.props.i18n.changeLanguage(lang);
-                            }}/>
-                        </Tooltip>
-                    </div>
                 </Fragment>
             </Router>
         );
