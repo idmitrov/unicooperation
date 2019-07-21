@@ -13,6 +13,7 @@ import matcherReducer from '../matcher/Matcher.reducer';
 import nomReducer from '../nomenclatures/Nom.reducer';
 import profileReducer from '../profile/Profile.reducer';
 import searchReducer from '../search/Search.reducer';
+import settingsReducer from '../settings/Settings.reducer';
 import sharedReducer from '../shared/shared.reducer';
 import { accountActionTypes } from '../account/Account.actions';
 
@@ -28,6 +29,7 @@ const allReducers = combineReducers({
     nomenclatures: nomReducer,
     profile: profileReducer,
     search: searchReducer,
+    settings: settingsReducer,
     shared: sharedReducer
 });
 

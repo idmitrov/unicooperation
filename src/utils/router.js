@@ -18,6 +18,7 @@ import UniversitySetupView from '../setup/UniversitySetup.view';
 import UniversityProfileView from '../profile/UniversityProfile.view';
 import InterviewView from '../interview/Interview.view';
 import InterviewListView from '../interview/InterviewList.view';
+import SettingsView from '../settings/Settings.view';
 
 export const Link = _Link;
 
@@ -183,6 +184,14 @@ export const Routes = ({ account }) => {
                 path="/interview/list"
                 component={InterviewListView}
                 allowed={authenticated && [accountType.student, accountType.partner].includes(account.type)}
+                exact
+                strict
+            />
+
+            <PrivateRoute
+                path="/settings"
+                component={SettingsView}
+                allowed={authenticated}
                 exact
                 strict
             />

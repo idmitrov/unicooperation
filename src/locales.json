@@ -92,7 +92,8 @@
             "university.summary.label": "Summary",
             "setup.university.title": "Quick university setup",
             "setup.partner.title": "Quick partner setup",
-            "setup.student.title": "Quick student setup"
+            "setup.student.title": "Quick student setup",
+            "settings.title": "Settings"
         }
     },
     "bg-BG": {
@@ -188,7 +189,8 @@
             "university.summary.label": "Резюме",
             "setup.university.title": "Бърза персонализация на университет",
             "setup.partner.title": "Бърза персонализация на партньор",
-            "setup.student.title": "Бърза персонализация на студент"
+            "setup.student.title": "Бърза персонализация на студент",
+            "settings.title": "Настройки"
         }
     }
 }
