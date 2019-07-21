@@ -1,5 +1,6 @@
 import appConfig from '../app/App.config';
 import { unsetAccount } from '../account/Account.actions';
+import { notify } from '../components/uni-notifier/UniNotifier.component';
 
 export default (store) => (next) => (action) => {
     if (action.api) {
@@ -60,15 +61,23 @@ export default (store) => (next) => (action) => {
                     }
                 })
                 .catch((response) => {
+                    let error = 'Something went wrong';
+
                     if (response.status) {
                         if (response.status === 401) {
                             store.dispatch(unsetAccount());
                         }
 
-                        return reject(response.statusText);
+                        error = response.statusText;
                     }
 
-                    const error = response.error || 'Something went wrong';
+                    if (response.error) {
+                        error = response.error.message;
+
+                        if (response.error.id) {
+                            notify(response.error.id);
+                        }
+                    }
 
                     return reject(error);
                 })
