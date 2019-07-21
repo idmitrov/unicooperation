@@ -76,6 +76,8 @@ export default (store) => (next) => (action) => {
                         response.errors.forEach((error) => {
                             if (error.id) {
                                 notifyError(error.id);
+                            } else if (error.code && error.code === 11000) {
+                                notifyError('error.duplicate');
                             }
                         });
                     }
