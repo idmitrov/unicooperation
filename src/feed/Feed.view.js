@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from '../utils/store';
+import { Trans } from 'react-i18next';
 
 import {
     AppBar,
@@ -135,13 +136,13 @@ class FeedView extends Component {
                                                     <div>
                                                         {
                                                             this.state.inputMessage && this.state.inputMessage ? (
-                                                                <Tooltip title="Submit post" placement="right">
+                                                                <Tooltip title={<Trans>feed.publishNewPost</Trans>} placement="right">
                                                                     <IconButton type="submit">
                                                                         <Send />
                                                                     </IconButton>
                                                                 </Tooltip>
                                                             ) : (
-                                                                <Tooltip title="Cancel" placement="right">
+                                                                <Tooltip title={<Trans>feed.cancelNewPost</Trans>} placement="right">
                                                                     <IconButton
                                                                         type="button"
                                                                         onClick={() => this.setState({ ...this.state, isInputExpanded: false })}>
@@ -152,7 +153,7 @@ class FeedView extends Component {
                                                         }
                                                     </div>
                                                 ) : (
-                                                    <Tooltip title="New post" placement="right">
+                                                    <Tooltip title={<Trans>feed.createNewPost</Trans>} placement="right">
                                                         <IconButton
                                                             type="button"
                                                             onClick={() => this.setState({ ...this.state, isInputExpanded: true, inputMessage: '' })}>
@@ -175,7 +176,7 @@ class FeedView extends Component {
                                                 ) : (null)
                                             }
 
-                                            <Tooltip title="Sort by" placement="left">
+                                            <Tooltip title={<Trans>feed.sort</Trans>} placement="left">
                                                 <IconButton type="button">
                                                     <Sort />
                                                 </IconButton>
@@ -198,7 +199,8 @@ class FeedView extends Component {
                                                         avatar={
                                                             <Avatar
                                                                 src={item.publisher ? item.publisher.avatar || `${process.env.PUBLIC_URL}/avatar-default.png` : null}
-                                                            /> }
+                                                            />
+                                                        }
                                                         title={item.publisher ? item.publisher.name || item.publisher.firstName : ''}
                                                         subheader={item.updatedAt}
                                                     />
@@ -210,19 +212,19 @@ class FeedView extends Component {
                                                     <CardActions>
                                                         <Grid container alignItems="center">
                                                             <Grid item xs={true}>
-                                                                <Tooltip title="Add comment" placement="top">
+                                                                <Tooltip title={<Trans>feed.item.AddComment</Trans>} placement="top">
                                                                     <IconButton>
                                                                         <AddComment />
                                                                     </IconButton>
                                                                 </Tooltip>
 
-                                                                <Tooltip title="Share" placement="top">
+                                                                <Tooltip title={<Trans>feed.item.share</Trans>} placement="top">
                                                                     <IconButton>
                                                                         <Share />
                                                                     </IconButton>
                                                                 </Tooltip>
 
-                                                                <Tooltip title="Like" placement="top">
+                                                                <Tooltip title={<Trans>feed.item.like</Trans>} placement="top">
                                                                     <IconButton>
                                                                         <ThumbUp />
                                                                     </IconButton>
