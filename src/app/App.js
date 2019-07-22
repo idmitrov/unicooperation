@@ -117,18 +117,6 @@ class App extends Component {
 
                                                 <Grid container id="menu" justify="space-between">
                                                     <Grid item>
-                                                        <Tooltip title={<Trans>header.profile</Trans>}>
-                                                            <Link className="header-button" to="/profile/me">
-                                                                <Avatar
-                                                                    id="avatar"
-                                                                    src={`${process.env.PUBLIC_URL}/avatar-default.png`}
-                                                                    alt="profile avatar"
-                                                                />
-                                                            </Link>
-                                                        </Tooltip>
-                                                    </Grid>
-
-                                                    <Grid item>
                                                         <Tooltip title={<Trans>header.ads</Trans>}>
                                                             <Link className="header-button" to="/ads/list">
                                                                 <WorkOutline />
@@ -140,6 +128,18 @@ class App extends Component {
                                                         <Tooltip title={<Trans>header.interviews</Trans>}>
                                                             <Link className="header-button" to="/interview/list">
                                                                 <EventSeat />
+                                                            </Link>
+                                                        </Tooltip>
+                                                    </Grid>
+
+                                                    <Grid item>
+                                                        <Tooltip title={<Trans>header.profile</Trans>}>
+                                                            <Link className="header-button" to="/profile/me">
+                                                                <Avatar
+                                                                    id="avatar"
+                                                                    src={`${process.env.PUBLIC_URL}/avatar-default.png`}
+                                                                    alt="profile avatar"
+                                                                />
                                                             </Link>
                                                         </Tooltip>
                                                     </Grid>
