@@ -211,6 +211,38 @@ class StudentProfileView extends Component {
                                 </Grid>
                             </div>
 
+                            {/* PROFESSIONAL SECTION */}
+                            <div className="page-row">
+                                <UniTitle>
+                                    <Trans>student.professional.label</Trans>
+                                </UniTitle>
+                            </div>
+
+                            <div className="page-row">
+                                <Grid container spacing={grid.spacing}>
+                                    <Grid item md={8}>
+                                        <TextField
+                                            name="title"
+                                            label={<Trans>student.title.label</Trans>}
+                                            value={profile.title || ''}
+                                            fullWidth
+                                            onChange={handleProfileChange}
+                                        />
+                                    </Grid>
+
+                                    <Grid item md={4}>
+                                        <TextField
+                                            name="experience"
+                                            type="number"
+                                            label={<Trans>student.experience.label</Trans>}
+                                            value={profile.experience || ''}
+                                            fullWidth
+                                            onChange={handleProfileChange}
+                                        />
+                                    </Grid>
+                                </Grid>
+                            </div>
+
                             {/* SOCIALS SECTION */}
                             <div className="page-row">
                                 <UniTitle>
@@ -298,6 +330,9 @@ class StudentProfileView extends Component {
                             <Grid item>
                                 <Typography variant="h5">
                                     {profile.firstName} {profile.middleName} {profile.lastName}
+                                </Typography>
+                                <Typography variant="overline">
+                                    {profile.title}
                                 </Typography>
                             </Grid>
                         </Grid>
