@@ -220,7 +220,7 @@ class StudentProfileView extends Component {
 
                             <div className="page-row">
                                 <Grid container spacing={grid.spacing}>
-                                    <Grid item md={8}>
+                                    <Grid item xs={12} md={8}>
                                         <TextField
                                             name="title"
                                             label={<Trans>student.title.label</Trans>}
@@ -230,7 +230,7 @@ class StudentProfileView extends Component {
                                         />
                                     </Grid>
 
-                                    <Grid item md={4}>
+                                    <Grid item xs={12} md={4}>
                                         <TextField
                                             name="experience"
                                             type="number"
