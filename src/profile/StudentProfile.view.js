@@ -115,7 +115,7 @@ class StudentProfileView extends Component {
                                     <div className={`profile-status ${profile.verified ? 'profile-status-verified' : ''}`}>
                                         <Tooltip
                                             placement="right"
-                                            title={profile.verified ? 'Verified' : 'Unverified'}>
+                                            title={<Trans>{profile.verified ? 'student.verified' : 'student.unverified'}</Trans>}>
                                             <VerifiedUser />
                                         </Tooltip>
                                     </div>
@@ -327,12 +327,33 @@ class StudentProfileView extends Component {
                     {/* PROFILE READONLY */}
                     <div className="page-row">
                         <Grid container>
-                            <Grid item>
+                            <Grid item xs={12}>
                                 <Typography variant="h5">
                                     {profile.firstName} {profile.middleName} {profile.lastName}
                                 </Typography>
+                            </Grid>
+                        </Grid>
+
+                        <Grid container justify="space-between" alignItems="center">
+                            <Grid item>
+                                <Trans>student.title.label</Trans>
+                            </Grid>
+
+                            <Grid item>
                                 <Typography variant="overline">
                                     {profile.title}
+                                </Typography>
+                            </Grid>
+                        </Grid>
+
+                        <Grid container justify="space-between" alignItems="center">
+                            <Grid item>
+                                <Trans>student.experience.label</Trans>
+                            </Grid>
+
+                            <Grid item>
+                                <Typography variant="overline">
+                                    {profile.experience}
                                 </Typography>
                             </Grid>
                         </Grid>
@@ -341,7 +362,7 @@ class StudentProfileView extends Component {
                     <div className="page-row">
                         <Grid container>
                             <Grid item>
-                                <Tooltip title={profile.linkedinUrl ? 'Visit' : 'Unavailable'} placement="top">
+                                <Tooltip title={<Trans>{profile.linkedinUrl ? 'global.visit' : 'global.unavailable'}</Trans>} placement="top">
                                     <div>
                                         <IconButton
                                             href={`https://www.linkedin.com/in/${profile.linkedinUrl}/`}
@@ -359,7 +380,7 @@ class StudentProfileView extends Component {
                             </Grid>
 
                             <Grid item>
-                                <Tooltip title={profile.facebookUrl ? 'Visit' : 'Unavailable'} placement="top">
+                                <Tooltip title={<Trans>{profile.facebookUrl ? 'global.visit' : 'global.unavailable'}</Trans>} placement="top">
                                     <div>
                                         <IconButton
                                             href={`https://www.facebook.com/${profile.facebookUrl}/`}
@@ -377,7 +398,7 @@ class StudentProfileView extends Component {
                             </Grid>
 
                             <Grid item>
-                                <Tooltip title={profile.instagramUrl ? 'Visit' : 'Unavailable'} placement="top">
+                                <Tooltip title={<Trans>{profile.instagramUrl ? 'global.visit' : 'global.unavailable'}</Trans>} placement="top">
                                     <div>
                                         <IconButton
                                             href={`https://www.instagram.com/${profile.instagramUrl}/`}
