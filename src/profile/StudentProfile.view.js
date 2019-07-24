@@ -428,7 +428,7 @@ class StudentProfileView extends Component {
                                         profile.skills.map((skill, index) => {
                                             return (
                                                 <Grid item key={index}>
-                                                    {index > profile.skills - 1 ? `${skill},` : skill}
+                                                    {index < profile.skills.length - 1 ? `${skill},` : skill}
                                                 </Grid>
                                             );
                                         })
