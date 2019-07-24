@@ -14,5 +14,9 @@ export default {
     updateMyProfile: {
         endpoint: '{profileType}/me',
         method: 'PUT'
+    },
+    createNewSkill: {
+        endpoint: 'skills',
+        method: 'POST'
     }
 }

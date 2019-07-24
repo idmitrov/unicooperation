@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component, Fragment, createRef } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { Trans } from 'react-i18next';
@@ -16,7 +16,8 @@ import {
     VerifiedUser,
     Edit,
     Save,
-    Cancel
+    Cancel,
+    Add
 } from '@material-ui/icons';
 
 import UniTitle from '../components/uni-title/UniTitle.component';
@@ -31,8 +32,12 @@ import {
     updateMyProfile,
     updateMyProfileAvatar,
     setMyProfileData,
-    toggleMyProfileReadonly
+    requestProfileSkill,
+    toggleMyProfileReadonly,
+    addProfileSkill
 } from './Profile.actions';
+
+import { filterSkills, setSkillsFilter } from '../shared/shared.actions';
 
 import './Profile.scss';
 import { selectProfile } from './Profile.selector';
@@ -49,6 +54,8 @@ class StudentProfileView extends Component {
         } else {
             this.props.getMyProfile();
         }
+
+        this.skillToAdd = createRef();
     }
 
     render() {
@@ -58,7 +65,9 @@ class StudentProfileView extends Component {
             changeProfileReadonly,
             handleProfileChange,
             handleProfileAvatarChange,
-            updateMyProfile
+            updateMyProfile,
+            suggestSkills,
+            addSuggestedSKill
         } = this.props;
 
         return (
@@ -220,6 +229,7 @@ class StudentProfileView extends Component {
 
                             <div className="page-row">
                                 <Grid container spacing={grid.spacing}>
+                                    {/* TITLE */}
                                     <Grid item xs={12} md={8}>
                                         <TextField
                                             name="title"
@@ -230,6 +240,7 @@ class StudentProfileView extends Component {
                                         />
                                     </Grid>
 
+                                    {/* EXPERIENCE */}
                                     <Grid item xs={12} md={4}>
                                         <TextField
                                             name="experience"
@@ -242,6 +253,52 @@ class StudentProfileView extends Component {
                                     </Grid>
                                 </Grid>
                             </div>
+
+                            <div className="page-row">
+                                <Grid container spacing={grid.spacing} alignItems="center">
+                                    {/* SKILLS */}
+                                    <Grid item xs={12}>
+                                        <TextField
+                                            name="suggestedSkill"
+                                            inputRef={this.skillToAdd}
+                                            label={<Trans>student.skill.label</Trans>}
+                                            type="search"
+                                            InputProps={{
+                                                startAdornment: (
+                                                    <InputAdornment
+                                                        position="start">
+                                                        <Tooltip title={<Trans>global.add</Trans>}>
+                                                            <div>
+                                                                <button onClick={() => addSuggestedSKill(this.skillToAdd.current.value)}>
+                                                                    <Add />
+                                                                </button>
+                                                            </div>
+                                                        </Tooltip>
+                                                    </InputAdornment>
+                                                )
+                                            }}
+                                            fullWidth
+                                            onChange={suggestSkills}
+                                        />
+                                    </Grid>
+                                </Grid>
+                            </div>
+
+                            {
+                                profile.skills ? (
+                                    <div className="page-row">
+                                        <Grid container>
+                                            {
+                                                profile.skills.map((skill, index) => {
+                                                    return (
+                                                        <Grid item key={index}>{`${skill}, `}</Grid>
+                                                    );
+                                                })
+                                            }
+                                        </Grid>
+                                    </div>
+                                ) : (null)
+                            }
 
                             {/* SOCIALS SECTION */}
                             <div className="page-row">
@@ -424,6 +481,7 @@ class StudentProfileView extends Component {
 
 const mapStateToProps = (state) => {
     return {
+        suggestedSkill: state.profile.suggestedSkill,
         profile: selectProfile(state)
     };
 }
@@ -458,6 +516,18 @@ const mapDispatchToProps = (dispatch) => {
             return dispatch(fetchProfile(profileType, profile))
                 .then((foundProfile) => {
                     return dispatch(setProfile(foundProfile));
+                });
+        },
+        addSuggestedSKill(skillName) {
+            return dispatch(requestProfileSkill(skillName))
+                .then((skill) => {
+                    return dispatch(addProfileSkill(skill.name));
+                });
+        },
+        suggestSkills(e) {
+            return dispatch(filterSkills(e.target.value))
+                .then((skills) => {
+                    return dispatch(setSkillsFilter(skills.list));
                 });
         }
     };

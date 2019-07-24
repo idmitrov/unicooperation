@@ -1,4 +1,5 @@
 import profileEndpoints from './Profile.endpoints';
+import { notifyError } from '../components/uni-notifier/UniNotifier.component';
 
 export const profileActionTypes = {
     fetchProfile: 'PROFILE_FETCH',
@@ -8,8 +9,56 @@ export const profileActionTypes = {
     setMyProfile: 'PROFILE_MINE_SET',
     setMyProfileData: 'PROFILE_MINE_DATA_SET',
     updateMyProfile: 'PROFILE_MINE_UPDATE',
-    toggleMyProfileReadonly: 'PROFILE_MINE_READONLY_TOGGLE'
+    toggleMyProfileReadonly: 'PROFILE_MINE_READONLY_TOGGLE',
+    createNewProfileSkill: 'PROFILE_NEW_SKILL_CREATE',
+    addProfileSkill: 'PROFILE_SKILL_ADD'
 };
+
+export const addProfileSkill = (skillName) => (dispatch, getState) => {
+    if (skillName) {
+        const profileSkillsState = getState().profile.skills || [];
+        const duplicatedSkill = profileSkillsState.find((profileSkillName) => profileSkillName.toLowerCase() === skillName.toLowerCase());
+
+        if (!duplicatedSkill) {
+            const action = {
+                type: profileActionTypes.addProfileSkill,
+                payload: skillName
+            };
+
+            return dispatch(action);
+        }
+    }
+
+    notifyError('student.skill.add.error');
+
+    return Promise.reject('Invalid profile skill to add');
+}
+
+export const requestProfileSkill = (skillName) => (dispatch, getState) => {
+    if (!skillName) {
+        notifyError('student.skill.add.error');
+
+        return Promise.reject('Invalid profile skill to request');
+    }
+
+    const skillsState = getState().shared.skills;
+    const skillToAdd = skillsState.find((skill) => skill.name.toLowerCase() === skillName.toLowerCase());
+
+    if (skillToAdd) {
+        return Promise.resolve(skillToAdd);
+    } else {
+        const action = {
+            type: profileActionTypes.createNewProfileSkill,
+            payload: { name: skillName },
+            api: {
+                endpoint: profileEndpoints.createNewSkill.endpoint,
+                method: profileEndpoints.createNewSkill.method
+            }
+        };
+
+        return dispatch(action);
+    }
+}
 
 export const followProfile = (followerProfileType, followingId) => (dispatch) => {
     return dispatch({
