@@ -416,6 +416,28 @@ class StudentProfileView extends Component {
                         </Grid>
                     </div>
 
+                    {
+                        profile.skills ? (
+                            <div className="page-row">
+                                <Grid container spacing={grid.spacing}>
+                                    <Grid item>
+                                        <Trans>student.skills.label</Trans>:
+                                    </Grid>
+
+                                    {
+                                        profile.skills.map((skill, index) => {
+                                            return (
+                                                <Grid item key={index}>
+                                                    {index > profile.skills - 1 ? `${skill},` : skill}
+                                                </Grid>
+                                            );
+                                        })
+                                    }
+                                </Grid>
+                            </div>
+                        ) : (null)
+                    }
+
                     <div className="page-row">
                         <Grid container>
                             <Grid item>
