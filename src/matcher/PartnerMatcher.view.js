@@ -9,7 +9,8 @@ import {
     IconButton,
     TextField,
     Tooltip,
-    Typography
+    Typography,
+    Chip
 } from '@material-ui/core';
 
 import {
@@ -31,7 +32,8 @@ import {
     setMatcherTotal,
     setMatcherTitle,
     changeMatcherFilter,
-    addMatcherSkill
+    addMatcherSkill,
+    deleteMatcherSkill
 } from './Matcher.actions';
 
 import { filterSkills, setSkillsFilter } from '../shared/shared.actions';
@@ -55,7 +57,9 @@ class MatcherView extends Component {
         const {
             title,
             matches,
+            skills,
             addMatcherSkill,
+            deleteMatcherSkill,
             suggestedSkills,
             setTitle,
             getMatches,
@@ -109,7 +113,29 @@ class MatcherView extends Component {
                                                         }
                                                     }}
                                                 />
+
+                                                {
+                                                    skills ? (
+                                                        <div className="page-row">
+                                                            <Grid container spacing={grid.spacingSmall}>
+                                                                {
+                                                                    skills.map((skill, index) => {
+                                                                        return (
+                                                                        <Grid item key={index}>
+                                                                            <Chip
+                                                                                label={skill}
+                                                                                onDelete={() => deleteMatcherSkill(skill)}
+                                                                            />
+                                                                        </Grid>
+                                                                        );
+                                                                    })
+                                                                }
+                                                            </Grid>
+                                                        </div>
+                                                    ) : (null)
+                                                }
                                             </Grid>
+
                                         </Grid>
                                     </div>
                                 </div>
@@ -227,6 +253,7 @@ class MatcherView extends Component {
 const mapStateToProps = (state) => {
     return {
         title: state.matcher.title,
+        skills: state.matcher.skills,
         matches: state.matcher.matches,
         suggestedSkills: state.shared.skills
     };
@@ -258,6 +285,9 @@ const mapDispatchToProps = (dispatch) => {
         },
         addMatcherSkill(skill) {
             return dispatch(addMatcherSkill(skill));
+        },
+        deleteMatcherSkill(skill) {
+            return dispatch(deleteMatcherSkill(skill));
         }
     };
 }

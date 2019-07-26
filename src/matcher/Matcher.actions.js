@@ -7,8 +7,29 @@ export const matcherActionTypes = {
     setMatcherTitle: 'MATCHER_TITLE_SET',
     setMatcherTotal: 'MATCHER_TOTAL_SET',
     changeMatcherFilter: 'MATCHER_FILTER_CHANGE',
-    addMatcherSkill: 'MATCHER_SKILL_ADD'
+    addMatcherSkill: 'MATCHER_SKILL_ADD',
+    deleteMatcherSkill: 'MATCHER_SKILL_DELETE'
 };
+
+export const deleteMatcherSkill = (skill) => (dispatch, getState) => {
+    const matcherSkills = getState().matcher.skills;
+
+    if (matcherSkills) {
+        const existingSkillIndex = matcherSkills.findIndex((matcherSkill) => matcherSkill === skill);
+
+        if (existingSkillIndex > -1) {
+            const skillsUpdate = matcherSkills.slice();
+            skillsUpdate.splice(existingSkillIndex, 1);
+
+            const action = {
+                type: matcherActionTypes.deleteMatcherSkill,
+                payload: skillsUpdate
+            };
+
+            return dispatch(action);
+        }
+    }
+}
 
 export const addMatcherSkill = (skill) => (dispatch) => {
     const action = {
@@ -69,7 +90,7 @@ export const getMatches = () => (dispatch, getState) => {
             query += `&title=${title}`;
         }
 
-        if (skills) {
+        if (skills && skills.length) {
             query += `&skills=${skills.join(',')}`;
         }
 

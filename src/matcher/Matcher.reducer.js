@@ -12,6 +12,12 @@ const matcherDefaults = {
 
 export default (state = matcherDefaults, action = {}) => {
     switch (action.type) {
+        case matcherActionTypes.deleteMatcherSkill: {
+            return {
+                ...state,
+                skills: action.payload
+            }
+        }
         case matcherActionTypes.addMatcherSkill: {
             return {
                 ...state,
