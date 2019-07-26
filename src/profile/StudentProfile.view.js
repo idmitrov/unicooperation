@@ -9,7 +9,8 @@ import {
     Tooltip,
     IconButton,
     InputAdornment,
-    Typography
+    Typography,
+    Chip
 } from '@material-ui/core';
 
 import {
@@ -287,11 +288,13 @@ class StudentProfileView extends Component {
                             {
                                 profile.skills ? (
                                     <div className="page-row">
-                                        <Grid container>
+                                        <Grid container spacing={grid.spacingSmall}>
                                             {
                                                 profile.skills.map((skill, index) => {
                                                     return (
-                                                        <Grid item key={index}>{`${skill}, `}</Grid>
+                                                        <Grid item key={index}>
+                                                            <Chip label={skill} variant="outlined" />
+                                                        </Grid>
                                                     );
                                                 })
                                             }
@@ -419,7 +422,7 @@ class StudentProfileView extends Component {
                     {
                         profile.skills ? (
                             <div className="page-row">
-                                <Grid container spacing={grid.spacing}>
+                                <Grid container spacing={grid.spacingSmall} alignItems="center">
                                     <Grid item>
                                         <Trans>student.skills.label</Trans>:
                                     </Grid>
@@ -428,7 +431,7 @@ class StudentProfileView extends Component {
                                         profile.skills.map((skill, index) => {
                                             return (
                                                 <Grid item key={index}>
-                                                    {index < profile.skills.length - 1 ? `${skill},` : skill}
+                                                    <Chip label={skill} variant="outlined" />
                                                 </Grid>
                                             );
                                         })
