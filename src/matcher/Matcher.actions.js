@@ -6,8 +6,18 @@ export const matcherActionTypes = {
     setMatches: 'MATCHER_SET',
     setMatcherTitle: 'MATCHER_TITLE_SET',
     setMatcherTotal: 'MATCHER_TOTAL_SET',
-    changeMatcherFilter: 'MATCHER_FILTER_CHANGE'
+    changeMatcherFilter: 'MATCHER_FILTER_CHANGE',
+    addMatcherSkill: 'MATCHER_SKILL_ADD'
 };
+
+export const addMatcherSkill = (skill) => (dispatch) => {
+    const action = {
+        type: matcherActionTypes.addMatcherSkill,
+        payload: skill
+    };
+
+    return dispatch(action);
+}
 
 export const changeMatcherFilter = (key, value) => (dispatch) => {
     const action = {
@@ -52,11 +62,15 @@ export const getMatches = () => (dispatch, getState) => {
     }
 
     if (accType) {
-        const { title, page, limit, experience } = matcher;
+        const { title, page, limit, experience, skills } = matcher;
         let query = `&page=${page}&limit=${limit}`;
 
         if (title) {
             query += `&title=${title}`;
+        }
+
+        if (skills) {
+            query += `&skills=${skills.join(',')}`;
         }
 
         if (experience) {

@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component, Fragment, createRef } from 'react';
 import { connect } from 'react-redux';
 import { Trans } from 'react-i18next';
 import { Link } from 'react-router-dom';
@@ -30,10 +30,14 @@ import {
     setMatches,
     setMatcherTotal,
     setMatcherTitle,
-    changeMatcherFilter
+    changeMatcherFilter,
+    addMatcherSkill
 } from './Matcher.actions';
 
+import { filterSkills, setSkillsFilter } from '../shared/shared.actions';
+
 import UniIntroCard from '../components/uni-intro-card/UniIntroCard.component';
+import UniAutocomplete from '../components/uni-autocomplete/UniAutocomplete.component';
 
 class MatcherView extends Component {
     constructor(props) {
@@ -43,6 +47,7 @@ class MatcherView extends Component {
             isInputExpanded: false
         };
 
+        this.skillsToAdd = createRef();
         this.props.getMatches();
     }
 
@@ -50,9 +55,12 @@ class MatcherView extends Component {
         const {
             title,
             matches,
+            addMatcherSkill,
+            suggestedSkills,
             setTitle,
             getMatches,
-            changeMatcherFilter
+            changeMatcherFilter,
+            fetchSkillsSuggestions
         } = this.props;
 
         return (
@@ -75,13 +83,31 @@ class MatcherView extends Component {
                             }}>
                                 <div className={`bar-input ${this.state.isInputExpanded ? 'expanded' : ''}`}>
                                     <div className="bar-input-inner">
-                                        <Grid container alignItems="center">
+                                        <Grid container alignItems="flex-start" spacing={grid.spacing}>
                                             <Grid item xs={4}>
                                                 <TextField
                                                     name="experience"
                                                     type="number"
                                                     label="Experience"
                                                     onChange={changeMatcherFilter}
+                                                />
+                                            </Grid>
+
+                                            <Grid item xs={true}>
+                                                <UniAutocomplete
+                                                    inputRef={this.skillsToAdd}
+                                                    suggestions={suggestedSkills}
+                                                    label={<Trans>student.skill.label</Trans>}
+                                                    type="search"
+                                                    fullWidth
+                                                    events={{
+                                                        change: (e) => fetchSkillsSuggestions(e.target.value),
+                                                        select: (e) => {
+                                                            this.skillsToAdd.current.value = '';
+
+                                                            addMatcherSkill(e.currentTarget.innerHTML)
+                                                        }
+                                                    }}
                                                 />
                                             </Grid>
                                         </Grid>
@@ -201,7 +227,8 @@ class MatcherView extends Component {
 const mapStateToProps = (state) => {
     return {
         title: state.matcher.title,
-        matches: state.matcher.matches
+        matches: state.matcher.matches,
+        suggestedSkills: state.shared.skills
     };
 }
 
@@ -222,6 +249,15 @@ const mapDispatchToProps = (dispatch) => {
 
                     return dispatch(setMatches(matches.list));
                 });
+        },
+        fetchSkillsSuggestions(skillName) {
+            return dispatch(filterSkills(skillName))
+                .then((skills) => {
+                    return dispatch(setSkillsFilter(skills.list));
+                })
+        },
+        addMatcherSkill(skill) {
+            return dispatch(addMatcherSkill(skill));
         }
     };
 }
