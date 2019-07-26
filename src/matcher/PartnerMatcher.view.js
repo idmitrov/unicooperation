@@ -29,7 +29,8 @@ import {
     getMatches,
     setMatches,
     setMatcherTotal,
-    setMatcherTitle
+    setMatcherTitle,
+    changeMatcherFilter
 } from './Matcher.actions';
 
 import UniIntroCard from '../components/uni-intro-card/UniIntroCard.component';
@@ -50,7 +51,8 @@ class MatcherView extends Component {
             title,
             matches,
             setTitle,
-            getMatches
+            getMatches,
+            changeMatcherFilter
         } = this.props;
 
         return (
@@ -64,6 +66,7 @@ class MatcherView extends Component {
                                 e.preventDefault();
 
                                 // TODO: Apply filter and call API with the filter
+                                getMatches();
 
                                 this.setState({
                                     ...this.state,
@@ -75,8 +78,10 @@ class MatcherView extends Component {
                                         <Grid container alignItems="center">
                                             <Grid item xs={4}>
                                                 <TextField
+                                                    name="experience"
                                                     type="number"
                                                     label="Experience"
+                                                    onChange={changeMatcherFilter}
                                                 />
                                             </Grid>
                                         </Grid>
@@ -113,11 +118,13 @@ class MatcherView extends Component {
                                     <Grid item>
                                         {
                                             this.state.isInputExpanded ? (
-                                                <Tooltip title={<Trans>global.apply</Trans>} placement="left">
-                                                    <IconButton type="button" onClick={() => this.setState({ ...this.state, isInputExpanded: false })}>
-                                                        <Done />
-                                                    </IconButton>
-                                                </Tooltip>
+                                                <div>
+                                                    <Tooltip title={<Trans>global.apply</Trans>} placement="left">
+                                                        <IconButton type="submit">
+                                                            <Done />
+                                                        </IconButton>
+                                                    </Tooltip>
+                                                </div>
                                             ) : (
                                                 <Tooltip title={<Trans>global.filter</Trans>} placement="left">
                                                     <IconButton type="button" onClick={() => this.setState({ ...this.state, isInputExpanded: true })}>
@@ -200,6 +207,11 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
+        changeMatcherFilter(e) {
+            const { name, value } = e.target;
+
+            return dispatch(changeMatcherFilter(name, value));
+        },
         setTitle(titleValue) {
             return dispatch(setMatcherTitle(titleValue));
         },

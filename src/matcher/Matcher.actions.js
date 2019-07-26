@@ -5,8 +5,18 @@ export const matcherActionTypes = {
     getMatches: 'MATCHER_GET',
     setMatches: 'MATCHER_SET',
     setMatcherTitle: 'MATCHER_TITLE_SET',
-    setMatcherTotal: 'MATCHER_TOTAL_SET'
+    setMatcherTotal: 'MATCHER_TOTAL_SET',
+    changeMatcherFilter: 'MATCHER_FILTER_CHANGE'
 };
+
+export const changeMatcherFilter = (key, value) => (dispatch) => {
+    const action = {
+        type: matcherActionTypes.changeMatcherFilter,
+        payload: { key, value }
+    };
+
+    return dispatch(action);
+}
 
 export const setMatcherTitle = (title) => (dispatch) => {
     return dispatch( {
@@ -42,8 +52,16 @@ export const getMatches = () => (dispatch, getState) => {
     }
 
     if (accType) {
-        const { title, page, limit } = matcher;
-        const query = `title=${title}&page=${page}&limit=${limit}`;
+        const { title, page, limit, experience } = matcher;
+        let query = `&page=${page}&limit=${limit}`;
+
+        if (title) {
+            query += `&title=${title}`;
+        }
+
+        if (experience) {
+            query += `&experience=${experience}`;
+        }
 
         return dispatch({
             type: matcherActionTypes.getMatches,
