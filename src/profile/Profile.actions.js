@@ -11,8 +11,30 @@ export const profileActionTypes = {
     updateMyProfile: 'PROFILE_MINE_UPDATE',
     toggleMyProfileReadonly: 'PROFILE_MINE_READONLY_TOGGLE',
     createNewProfileSkill: 'PROFILE_NEW_SKILL_CREATE',
-    addProfileSkill: 'PROFILE_SKILL_ADD'
+    addProfileSkill: 'PROFILE_SKILL_ADD',
+    removeProfileSkill: 'PROFILE_SKILL_REMOVE'
 };
+
+export const removeProfileSkill = (skillName) => (dispatch, getState) => {
+    if (skillName) {
+        const profileSkillsState = getState().profile.skills || [];
+
+        const existingSkillIndex = profileSkillsState
+            .findIndex((profileSkillName) => profileSkillName.toLowerCase() === skillName.toLowerCase());
+
+        if (existingSkillIndex > -1) {
+            const updatedSkills = profileSkillsState.slice();
+            updatedSkills.splice(existingSkillIndex, 1);
+
+            const action = {
+                type: profileActionTypes.removeProfileSkill,
+                payload: updatedSkills
+            };
+
+            return dispatch(action);
+        }
+    }
+}
 
 export const addProfileSkill = (skillName) => (dispatch, getState) => {
     if (skillName) {

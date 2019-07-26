@@ -35,7 +35,8 @@ import {
     setMyProfileData,
     requestProfileSkill,
     toggleMyProfileReadonly,
-    addProfileSkill
+    addProfileSkill,
+    removeProfileSkill
 } from './Profile.actions';
 
 import { filterSkills, setSkillsFilter } from '../shared/shared.actions';
@@ -68,7 +69,8 @@ class StudentProfileView extends Component {
             handleProfileAvatarChange,
             updateMyProfile,
             suggestSkills,
-            addSuggestedSKill
+            addProfileSkill,
+            removeProfileSkill
         } = this.props;
 
         return (
@@ -270,7 +272,7 @@ class StudentProfileView extends Component {
                                                         position="start">
                                                         <Tooltip title={<Trans>global.add</Trans>}>
                                                             <div>
-                                                                <button onClick={() => addSuggestedSKill(this.skillToAdd.current.value)}>
+                                                                <button onClick={() => addProfileSkill(this.skillToAdd.current.value)}>
                                                                     <Add />
                                                                 </button>
                                                             </div>
@@ -293,7 +295,7 @@ class StudentProfileView extends Component {
                                                 profile.skills.map((skill, index) => {
                                                     return (
                                                         <Grid item key={index}>
-                                                            <Chip label={skill} variant="outlined" />
+                                                            <Chip label={skill} variant="outlined" onDelete={() => removeProfileSkill(skill)} />
                                                         </Grid>
                                                     );
                                                 })
@@ -543,11 +545,14 @@ const mapDispatchToProps = (dispatch) => {
                     return dispatch(setProfile(foundProfile));
                 });
         },
-        addSuggestedSKill(skillName) {
+        addProfileSkill(skillName) {
             return dispatch(requestProfileSkill(skillName))
                 .then((skill) => {
                     return dispatch(addProfileSkill(skill.name));
                 });
+        },
+        removeProfileSkill(skill) {
+            return dispatch(removeProfileSkill(skill));
         },
         suggestSkills(e) {
             return dispatch(filterSkills(e.target.value))

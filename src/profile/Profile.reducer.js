@@ -6,6 +6,12 @@ const profileDefaults = {
 
 export default (state = profileDefaults, action) => {
     switch (action.type) {
+        case profileActionTypes.removeProfileSkill: {
+            return {
+                ...state,
+                skills: action.payload || []
+            };
+        }
         case profileActionTypes.addProfileSkill: {
             return {
                 ...state,
