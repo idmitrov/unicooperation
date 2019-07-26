@@ -44,6 +44,7 @@ import { filterSkills, setSkillsFilter } from '../shared/shared.actions';
 import './Profile.scss';
 import { selectProfile } from './Profile.selector';
 import { grid } from '../app/App.constants';
+import UniAutocomplete from '../components/uni-autocomplete/UniAutocomplete.component';
 
 class StudentProfileView extends Component {
     constructor(props) {
@@ -64,6 +65,7 @@ class StudentProfileView extends Component {
         const {
             match,
             profile,
+            suggestedSkills,
             changeProfileReadonly,
             handleProfileChange,
             handleProfileAvatarChange,
@@ -261,8 +263,9 @@ class StudentProfileView extends Component {
                                 <Grid container spacing={grid.spacing} alignItems="center">
                                     {/* SKILLS */}
                                     <Grid item xs={12}>
-                                        <TextField
+                                        <UniAutocomplete
                                             name="suggestedSkill"
+                                            suggestions={suggestedSkills}
                                             inputRef={this.skillToAdd}
                                             label={<Trans>student.skill.label</Trans>}
                                             type="search"
@@ -272,7 +275,10 @@ class StudentProfileView extends Component {
                                                         position="start">
                                                         <Tooltip title={<Trans>global.add</Trans>}>
                                                             <div>
-                                                                <button onClick={() => addProfileSkill(this.skillToAdd.current.value)}>
+                                                                <button onClick={() => {
+                                                                    addProfileSkill(this.skillToAdd.current.value);
+                                                                    this.skillToAdd.current.value = '';
+                                                                }}>
                                                                     <Add />
                                                                 </button>
                                                             </div>
@@ -281,7 +287,10 @@ class StudentProfileView extends Component {
                                                 )
                                             }}
                                             fullWidth
-                                            onChange={suggestSkills}
+                                            events={{
+                                                change: suggestSkills,
+                                                select: (e) => this.skillToAdd.current.value = e.currentTarget.innerHTML
+                                            }}
                                         />
                                     </Grid>
                                 </Grid>
@@ -508,7 +517,7 @@ class StudentProfileView extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        suggestedSkill: state.profile.suggestedSkill,
+        suggestedSkills: state.shared.skills,
         profile: selectProfile(state)
     };
 }
