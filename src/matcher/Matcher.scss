@@ -12,3 +12,13 @@
     }
 }
 
+header {
+    &.top-bar {
+        .bar-input {
+            &.expanded {
+                max-height: 200px;
+            }
+        }
+    }
+}
+
